@@ -1,6 +1,6 @@
 package com.anonymous.solar.client;
 
-/* Comment test */
+/* Comment test2 */
 
 import com.anonymous.solar.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
