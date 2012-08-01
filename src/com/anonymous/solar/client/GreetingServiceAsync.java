@@ -2,6 +2,7 @@ package com.anonymous.solar.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+//sdfsdf
 /**
  * The async counterpart of <code>GreetingService</code>.
  */
