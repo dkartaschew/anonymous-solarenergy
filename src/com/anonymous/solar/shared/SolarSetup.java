@@ -17,18 +17,25 @@ public class SolarSetup {
 	private SolarInverter invertor = null;
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
+	private Double locationLatitude = 0.00;
+	private Double locationLongitude = 0.00;
 	
 	public SolarSetup(){
 		
 	}
 	
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor,
-			Double wireLength, Double wireEfficiency) {
+			Double wireLength, Double wireEfficiency, Double locationLatitude,
+			Double locationLongitude) {
 		this.panels = panels;
 		this.invertor = invertor;
 		this.wireLength = wireLength;
 		this.wireEfficiency = wireEfficiency;
+		this.locationLatitude = locationLatitude;
+		this.locationLongitude = locationLongitude;
 	}
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -151,6 +158,42 @@ public class SolarSetup {
 	
 	public boolean removePanels(SolarPanels panels){
 		return this.panels.remove(panels);
+	}
+
+
+
+	/**
+	 * @return the locationLatitude
+	 */
+	public Double getLocationLatitude() {
+		return locationLatitude;
+	}
+
+
+
+	/**
+	 * @param locationLatitude the locationLatitude to set
+	 */
+	public void setLocationLatitude(Double locationLatitude) {
+		this.locationLatitude = locationLatitude;
+	}
+
+
+
+	/**
+	 * @return the locationLongitude
+	 */
+	public Double getLocationLongitude() {
+		return locationLongitude;
+	}
+
+
+
+	/**
+	 * @param locationLongitude the locationLongitude to set
+	 */
+	public void setLocationLongitude(Double locationLongitude) {
+		this.locationLongitude = locationLongitude;
 	}
 	
 }
