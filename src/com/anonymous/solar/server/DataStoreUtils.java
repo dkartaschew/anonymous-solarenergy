@@ -21,9 +21,8 @@ public class DataStoreUtils {
 	 * @param panel The panel information to be stored in the datastore
 	 */
 	public void storePanel(SolarPanel panel) {
-		Key panelKey = KeyFactory.createKey("panel", panel.getPanelName());
 		Date date = new Date();
-		Entity panelEntity = new Entity("panels", panelKey);
+		Entity panelEntity = new Entity("panels");
 		panelEntity.setProperty("panelManufacturer",
 				panel.getPanelManufacturer());
 		panelEntity.setProperty("panelManufacturerCode",
@@ -39,7 +38,6 @@ public class DataStoreUtils {
 		DatastoreService datastore = DatastoreServiceFactory
 				.getDatastoreService();
 		datastore.put(panelEntity);
-
 	}
 
 	/**
