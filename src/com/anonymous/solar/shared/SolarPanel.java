@@ -24,7 +24,7 @@ public class SolarPanel {
 	
 	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
+    private Long key;
 
 
 	@Persistent
@@ -154,7 +154,7 @@ public class SolarPanel {
 		return true;
 	}
 
-	public Key getKey() {
+	public Long getKey() {
         return key;
     }
 

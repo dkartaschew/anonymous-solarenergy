@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.jdo.annotations.Key;
 
 import com.anonymous.solar.shared.SolarPanel;
 
@@ -17,7 +16,7 @@ public class DataStoreUtils {
 	 * @param panel
 	 *            The panel information to be stored in the datastore
 	 */
-	public Key storePanel(SolarPanel panel) {
+	public Long storePanel(SolarPanel panel) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			pm.makePersistent(panel);
@@ -79,7 +78,7 @@ public class DataStoreUtils {
 		List<SolarPanel> panelArrayList = new ArrayList<SolarPanel>();
 
 		Query q = pm.newQuery(SolarPanel.class);
-		q.setOrdering("panelManufacturer asc");
+		q.setOrdering("panelManufacturer asc, panelManufacturerCode asc, panelName asc");
 
 		try {
 			panelArrayList = (List<SolarPanel>) q.execute();

@@ -108,9 +108,10 @@ public class SolarPanelsClient extends HttpServlet {
 		List<SolarPanel> panels = dsutils.getAllPanels();
 
 		String table = "<table border=\"1\">\n";
-		table += "<tr><th>Panel Name</th>";
-		table += "<th>Manufacturer</th>";
+		
+		table += "<tr><th>Manufacturer</th>";
 		table += "<th>Manufacturer Code</th>";
+		table += "<th>Panel Name</th>";
 		table += "<th>Maximum Wattage</th>";
 		table += "<th>Panel Life</th>";
 		table += "<th>Cost</th>";
@@ -118,9 +119,9 @@ public class SolarPanelsClient extends HttpServlet {
 		table += "<th>Efficiency Loss (Annual)</th>";
 		table += "<th>&nbsp;</th></tr>";
 		for (SolarPanel panel : panels) {
-			table += "<tr>\n<td>" + panel.getPanelName() + "</td>\n";
-			table += "<td>" + panel.getPanelManufacturer() + "</td>\n";
+			table += "<tr>\n<td>" + panel.getPanelManufacturer() + "</td>\n";
 			table += "<td>" + panel.getPanelManufacturerCode() + "</td>\n";
+			table += "<td>" + panel.getPanelName() + "</td>\n";
 			table += "<td>" + panel.getPanelWattage().toString() + "</td>\n";
 			table += "<td>" + panel.getPanelLifeYears().toString() + "</td>\n";
 			table += "<td>$" + panel.getPanelCost().toString() + "</td>\n";
