@@ -29,13 +29,14 @@ public class SolarPanelsClient extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getParameter("panelName") != null) {
+		if (request.getParameter(SolarPanel.PANEL_NAME) != null) {
 			SolarPanel panel = new SolarPanel();
-			panel.setPanelName(request.getParameter("panelName").toString());
-			panel.setPanelManufacturer(request
-					.getParameter("panelManufacturer").toString());
+			panel.setPanelName(request.getParameter(SolarPanel.PANEL_NAME)
+					.toString());
+			panel.setPanelManufacturer(request.getParameter(
+					SolarPanel.PANEL_MANUFACTURER).toString());
 			panel.setPanelManufacturerCode(request.getParameter(
-					"panelManufacturerCode").toString());
+					SolarPanel.PANEL_MANUFACTURER_CODE).toString());
 			dsutils.storePanel(panel);
 
 		}
@@ -44,9 +45,12 @@ public class SolarPanelsClient extends HttpServlet {
 
 	private String displaySolarPanelNewForm() {
 		String form = "<form action=\"panels.jsp\" method=\"post\">\n";
-		form += "Panel Name: <input type=\"text\" name=\"panelName\" /><br />\n";
-		form += "Panel Manufacturer: <input type=\"text\" name=\"panelManufacturer\" /><br />\n";
-		form += "Panel Code: <input type=\"text\" name=\"panelManufacturerCode\" /><br />\n";
+		form += "Panel Name: <input type=\"text\" name=\""
+				+ SolarPanel.PANEL_NAME + "\" /><br />\n";
+		form += "Panel Manufacturer: <input type=\"text\" name=\""
+				+ SolarPanel.PANEL_MANUFACTURER + "\" /><br />\n";
+		form += "Panel Code: <input type=\"text\" name=\""
+				+ SolarPanel.PANEL_MANUFACTURER_CODE + "\" /><br />\n";
 		form += "<input type=\"submit\" name=\"Submit\">\n";
 		form += "</form>\n";
 		return form;
@@ -56,13 +60,16 @@ public class SolarPanelsClient extends HttpServlet {
 		List<SolarPanel> panels = dsutils.getAllPanels();
 
 		String table = "<table  border=\"1\">\n";
+		table += "<th><td>Panel Name</td>";
+		table += "<td>Manufacturer</td>";
+		table += "<td>Manufacturer Code</td></tr>";
 		for (SolarPanel panel : panels) {
 			table += "<tr>\n<td>" + panel.getPanelName() + "</td>\n";
 			table += "<td>" + panel.getPanelManufacturer() + "</td>\n";
 			table += "<td>" + panel.getPanelManufacturerCode() + "</td>\n";
 			table += "</tr>\n";
 		}
-		table = table + "</table>\n";
+		table += "</table>\n";
 		return table;
 	}
 

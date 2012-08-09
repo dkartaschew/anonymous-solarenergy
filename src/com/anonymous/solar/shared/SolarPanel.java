@@ -4,15 +4,16 @@
 package com.anonymous.solar.shared;
 
 /**
- * Class to hold and work on Solar Installation components, namely panels themselves.
+ * Class to hold and work on Solar Installation components, namely panels
+ * themselves.
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
 public class SolarPanel {
-	
+
 	private final Double INITIAL_VALUES = 0.0;
-	
+
 	private String panelName;
 	private String panelManufacturer;
 	private String panelManufacturerCode;
@@ -21,10 +22,17 @@ public class SolarPanel {
 	private Double panelCost;
 	private Double panelRRP;
 	private Integer panelLifeYears;
-	
 
+	public static final String PANEL_NAME = "panelName";
+	public static final String PANEL_MANUFACTURER = "panelManufacturer";
+	public static final String PANEL_MANUFACTURER_CODE = "panelManufacturerCode";
+	public static final String PANEL_WATTAGE = "panelWattage";
+	public static final String PANEL_LOSS_YEAR = "panelLossYear";
+	public static final String PANEL_PANEL_COST = "panelCost";
+	public static final String PANEL_RRP = "panelRRP";
+	public static final String PANEL_LIFE_YEARS = "panelLifeYears";
 
-	public SolarPanel(){
+	public SolarPanel() {
 		panelName = new String();
 		panelManufacturer = new String();
 		panelManufacturerCode = new String();
@@ -34,8 +42,6 @@ public class SolarPanel {
 		panelRRP = INITIAL_VALUES;
 		panelLifeYears = 0;
 	}
-	
-	
 
 	public SolarPanel(String panelName, String panelManufacturer,
 			String panelManufacturerCode, Double panelWattage,
@@ -51,9 +57,9 @@ public class SolarPanel {
 		this.panelLifeYears = panelLifeYears;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -127,10 +133,6 @@ public class SolarPanel {
 		return true;
 	}
 
-
-
-
-
 	/**
 	 * @return the panelCost
 	 */
@@ -138,16 +140,12 @@ public class SolarPanel {
 		return panelCost;
 	}
 
-
-
 	/**
 	 * @return the panelLifeYears
 	 */
 	public Integer getPanelLifeYears() {
 		return panelLifeYears;
 	}
-
-
 
 	/**
 	 * @return the panelLossYear
@@ -191,7 +189,9 @@ public class SolarPanel {
 		return panelWattage;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -222,72 +222,82 @@ public class SolarPanel {
 	}
 
 	/**
-	 * @param panelCost the panelCost to set
+	 * @param panelCost
+	 *            the panelCost to set
 	 */
 	public void setPanelCost(Double panelCost) {
 		this.panelCost = panelCost;
 	}
 
 	/**
-	 * @param panelLifeYears the panelLifeYears to set
+	 * @param panelLifeYears
+	 *            the panelLifeYears to set
 	 */
 	public void setPanelLifeYears(Integer panelLifeYears) {
 		this.panelLifeYears = panelLifeYears;
 	}
 
 	/**
-	 * @param panelLossYear the panelLossYear to set
+	 * @param panelLossYear
+	 *            the panelLossYear to set
 	 */
 	public void setPanelLossYear(Double panelLossYear) {
 		this.panelLossYear = panelLossYear;
 	}
 
 	/**
-	 * @param panelManufacturer the panelManufacturer to set
+	 * @param panelManufacturer
+	 *            the panelManufacturer to set
 	 */
 	public void setPanelManufacturer(String panelManufacturer) {
 		this.panelManufacturer = panelManufacturer;
 	}
 
 	/**
-	 * @param panelManufacturerCode the panelManufacturerCode to set
+	 * @param panelManufacturerCode
+	 *            the panelManufacturerCode to set
 	 */
 	public void setPanelManufacturerCode(String panelManufacturerCode) {
 		this.panelManufacturerCode = panelManufacturerCode;
 	}
 
 	/**
-	 * @param panelName the panelName to set
+	 * @param panelName
+	 *            the panelName to set
 	 */
 	public void setPanelName(String panelName) {
 		this.panelName = panelName;
 	}
 
 	/**
-	 * @param panelRRP the panelRRP to set
+	 * @param panelRRP
+	 *            the panelRRP to set
 	 */
 	public void setPanelRRP(Double panelRRP) {
 		this.panelRRP = panelRRP;
 	}
-	
+
 	/**
-	 * @param panelWattage the panelWattage to set
+	 * @param panelWattage
+	 *            the panelWattage to set
 	 */
 	public void setPanelWattage(Double panelWattage) {
 		this.panelWattage = panelWattage;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SolarPanel [panelName="
-				+ panelName + ", panelManufacturer=" + panelManufacturer
-				+ ", panelManufacturerCode=" + panelManufacturerCode
-				+ ", panelWattage=" + panelWattage + ", panelLossYear="
-				+ panelLossYear + ", panelCost=" + panelCost + ", panelRRP="
-				+ panelRRP + ", panelLifeYears=" + panelLifeYears + "]";
+		return "SolarPanel [panelName=" + panelName + ", panelManufacturer="
+				+ panelManufacturer + ", panelManufacturerCode="
+				+ panelManufacturerCode + ", panelWattage=" + panelWattage
+				+ ", panelLossYear=" + panelLossYear + ", panelCost="
+				+ panelCost + ", panelRRP=" + panelRRP + ", panelLifeYears="
+				+ panelLifeYears + "]";
 	}
 
 }
