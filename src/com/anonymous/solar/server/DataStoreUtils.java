@@ -1,106 +1,91 @@
 package com.anonymous.solar.server;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+import javax.jdo.annotations.Key;
+
 import com.anonymous.solar.shared.SolarPanel;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public class DataStoreUtils {
 
-	private final String PANEL_ENTITY_NAME = "panels";
-	
 	/**
 	 * Store a new panel into the local datastore
-	 * @param panel The panel information to be stored in the datastore
+	 * 
+	 * @param panel
+	 *            The panel information to be stored in the datastore
 	 */
-	public void storePanel(SolarPanel panel) {
-		Date date = new Date();
-		Entity panelEntity = new Entity(PANEL_ENTITY_NAME);
-		panelEntity.setProperty(SolarPanel.PANEL_MANUFACTURER,
-				panel.getPanelManufacturer());
-		panelEntity.setProperty(SolarPanel.PANEL_MANUFACTURER_CODE,
-				panel.getPanelManufacturerCode());
-		panelEntity.setProperty(SolarPanel.PANEL_NAME, panel.getPanelName());
-		panelEntity.setProperty(SolarPanel.PANEL_WATTAGE, panel.getPanelWattage());
-		panelEntity.setProperty(SolarPanel.PANEL_LOSS_YEAR, panel.getPanelLossYear());
-		panelEntity.setProperty(SolarPanel.PANEL_PANEL_COST, panel.getPanelCost());
-		panelEntity.setProperty(SolarPanel.PANEL_RRP, panel.getPanelRRP());
-		panelEntity.setProperty(SolarPanel.PANEL_LIFE_YEARS, panel.getPanelLifeYears());
-		panelEntity.setProperty("entryDate", date);
-
-		DatastoreService datastore = DatastoreServiceFactory
-				.getDatastoreService();
-		datastore.put(panelEntity);
+	public Key storePanel(SolarPanel panel) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.makePersistent(panel);
+		} finally {
+			pm.close();
+		}
+		return panel.getKey();
 	}
 
-	/**
-	 * Convert a datastore entity that represents a solar panel into a SolarPanel object.
-	 * @param panelEntity
-	 * @return A SolarPanel object with information based on the entity.
-	 */
-	private SolarPanel convertPanelEntity(Entity panelEntity) {
-		SolarPanel panel = new SolarPanel();
-		panel.setPanelName(panelEntity.getProperty(SolarPanel.PANEL_NAME).toString());
-		panel.setPanelManufacturer(panelEntity.getProperty(SolarPanel.PANEL_MANUFACTURER)
-				.toString());
-		panel.setPanelManufacturerCode(panelEntity.getProperty(
-				SolarPanel.PANEL_MANUFACTURER_CODE).toString());
-		panel.setPanelWattage(Double.parseDouble(panelEntity.getProperty(
-				SolarPanel.PANEL_WATTAGE).toString()));
-		panel.setPanelLossYear(Double.parseDouble(panelEntity.getProperty(
-				SolarPanel.PANEL_LOSS_YEAR).toString()));
-		panel.setPanelCost(Double.parseDouble(panelEntity.getProperty(
-				SolarPanel.PANEL_PANEL_COST).toString()));
-		panel.setPanelRRP(Double.parseDouble(panelEntity
-				.getProperty(SolarPanel.PANEL_RRP).toString()));
-		panel.setPanelLifeYears(Integer.parseInt(panelEntity.getProperty(
-				SolarPanel.PANEL_LIFE_YEARS).toString()));
-		return panel;
+	public void removePanel(String panelManufacturerCode, String panelName) {
+		if ((panelManufacturerCode != null)&&(panelName != null)) {
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(SolarPanel.class);
+			q.setFilter("panelManufacturerCode == panelManufacturerCodeParam && panelName == panelNameParam");
+		    q.declareParameters("String panelManufacturerCodeParam, String panelNameParam");
+		    q.deletePersistentAll(panelManufacturerCode, panelName);
+		}
 	}
 
 	/**
 	 * Retrieve a single solar panels information based on the panel name.
-	 * @param panelName The name of the panel to retrieve from the data store.
+	 * 
+	 * @param panelName
+	 *            The name of the panel to retrieve from the data store.
 	 * @return A SolarPanel object with information based on the entity.
 	 */
+	@SuppressWarnings("unchecked")
 	public SolarPanel getPanelInformation(String panelName) {
 
-		DatastoreService datastore = DatastoreServiceFactory
-				.getDatastoreService();
-		Query query = new Query(PANEL_ENTITY_NAME).setFilter(new FilterPredicate(
-				SolarPanel.PANEL_NAME, Query.FilterOperator.EQUAL, panelName));
-		return convertPanelEntity(datastore.prepare(query).asSingleEntity());
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<SolarPanel> panelArrayList = new ArrayList<SolarPanel>();
+
+		Query q = pm.newQuery(SolarPanel.class);
+		q.setFilter("panelName == panelNameParam");
+	    q.declareParameters("String panelNameParam");
+		q.setOrdering("panelManufacturer asc");
+
+		try {
+			panelArrayList = (List<SolarPanel>) q.execute(panelName);
+			if(panelArrayList.isEmpty()){
+				return null;
+			}
+			return panelArrayList.get(0);
+		} finally {
+			q.closeAll();
+		}
 	}
 
 	/**
-	 * Retrieve a list of all solar panels that are available within the datastore.
+	 * Retrieve a list of all solar panels that are available within the
+	 * datastore.
+	 * 
 	 * @return A List of SolarPanels.
 	 */
+	@SuppressWarnings("unchecked")
 	public List<SolarPanel> getAllPanels() {
 
-		ArrayList<SolarPanel> panelArrayList = new ArrayList<SolarPanel>();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<SolarPanel> panelArrayList = new ArrayList<SolarPanel>();
 
-		DatastoreService datastore = DatastoreServiceFactory
-				.getDatastoreService();
-		Query query = new Query(PANEL_ENTITY_NAME).addSort(SolarPanel.PANEL_MANUFACTURER,
-				Query.SortDirection.ASCENDING);
+		Query q = pm.newQuery(SolarPanel.class);
+		q.setOrdering("panelManufacturer asc");
 
-		List<Entity> panelEntities = datastore.prepare(query).asList(
-				FetchOptions.Builder.withDefaults());
-
-		for (Entity panelEntity : panelEntities) {
-			panelArrayList.add(convertPanelEntity(panelEntity));
+		try {
+			panelArrayList = (List<SolarPanel>) q.execute();
+			return panelArrayList;
+		} finally {
+			q.closeAll();
 		}
-		return panelArrayList;
 	}
-
 }

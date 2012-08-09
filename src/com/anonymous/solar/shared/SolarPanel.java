@@ -3,6 +3,12 @@
  */
 package com.anonymous.solar.shared;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Key;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 /**
  * Class to hold and work on Solar Installation components, namely panels
  * themselves.
@@ -10,17 +16,32 @@ package com.anonymous.solar.shared;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
+
+@PersistenceCapable
 public class SolarPanel {
 
 	private final Double INITIAL_VALUES = 0.0;
+	
+	@PrimaryKey
+    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+    private Key key;
 
+
+	@Persistent
 	private String panelName;
+	@Persistent
 	private String panelManufacturer;
+	@Persistent
 	private String panelManufacturerCode;
+	@Persistent
 	private Double panelWattage;
+	@Persistent
 	private Double panelLossYear;
+	@Persistent
 	private Double panelCost;
+	@Persistent
 	private Double panelRRP;
+	@Persistent
 	private Integer panelLifeYears;
 
 	public static final String PANEL_NAME = "panelName";
@@ -133,6 +154,11 @@ public class SolarPanel {
 		return true;
 	}
 
+	public Key getKey() {
+        return key;
+    }
+
+	
 	/**
 	 * @return the panelCost
 	 */
