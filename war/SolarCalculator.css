@@ -1,6 +1,6 @@
 body {
 	font-family: Verdana, Tahoma, arial, sans-serif;
-	font-size: 12px;
+	font-size: 1em;
 	text-align: justify;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -12,11 +12,11 @@ body {
 }
 
 h1 {
-	font-size: 2em;
+	font-size: 1.5em;
 	font-weight: bold;
 	color: #777777;
-	margin: 40px 0px 70px;
-	text-align: center;
+	margin: 30px 30px 10px 30px;
+	text-align: left;
 }
 
 span.textfield {
@@ -31,13 +31,13 @@ table {
 }
 
 td,th {
-	font-size: 1em;
+	font-size: 0.9em;
 	border: 1px solid #98bf21;
 	padding: 3px 7px 2px 7px;
 }
 
 th {
-	font-size: 1.1em;
+	font-size: 1em;
 	text-align: left;
 	padding-top: 5px;
 	padding-bottom: 4px;
@@ -54,9 +54,55 @@ tr.alt td {
 	text-align: center;
 }
 
+.error {
+	text-align: center;
+	color: red;
+	font-weight: bold;
+	margin: 20px;
+}
+
 #footer {
 	clear: both;
 	margin-top: 0px;
 	padding: 0px;
 	font-size: smaller;
+}
+
+#Menu {
+	clear: both;
+	text-align: right;
+	font-size: 0.8em;
+	background-color: #A7C942;
+	-moz-border-radius: 0.7em 0em 0.7em 0em;
+	border-radius: 0.7em 0em 0.7em 0em;
+	border: 1px;
+	border-style: solid;
+	border-color: grey;
+}
+
+#Menu ul {
+	list-style: none;
+	list-style-type: none;
+	padding: 0px;
+}
+
+#Menu li {
+	display: inline-block;
+	margin: 5px 0px 5px 10px;
+	padding: 0px 10px 0px 0px;
+	border-right: #fff 1px dotted;
+}
+
+#Menu li.end {
+	border-right: 0px;
+}
+
+a {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }

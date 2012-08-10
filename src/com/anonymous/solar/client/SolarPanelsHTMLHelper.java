@@ -13,7 +13,9 @@ public class SolarPanelsHTMLHelper {
 
 	/**
 	 * Return a HTML header for inclusion in the servlets offering HTML support.
-	 * @param title The title to be displayed on the webpage.
+	 * 
+	 * @param title
+	 *            The title to be displayed on the webpage.
 	 * @return String with a complete HTML Header.
 	 */
 	public static String getHTMLHeader(String title) {
@@ -23,12 +25,17 @@ public class SolarPanelsHTMLHelper {
 				+ title
 				+ "</title>\n"
 				+ "<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />\n"
-				+ "<link href=\"SolarCalculator.css\" rel=\"stylesheet\" type=\"text/css\">\n" + "</head>\n<body>\n";
+				+ "<link href=\"SolarCalculator.css\" rel=\"stylesheet\" type=\"text/css\">\n"
+				+ "</head>\n<body>\n"
+				+ "<div id=\"Menu\">"
+				+ "<ul><li><a href=\"panels.jsp\">Panels</a></li>"
+				+ "<li class=\"end\"><a href=\"inverters.jsp\">Inverters</a></li>" + "</ul></div>\n";
 		return header;
 	}
 
 	/**
 	 * Return a HTML footer for the website.
+	 * 
 	 * @return String with a standard HTML footer.
 	 */
 	public static String getHTMLFooter() {
