@@ -94,10 +94,8 @@ public class SolarPanel {
 	 *             if: Name, Manufacturer or Manufacturer code is null, or if
 	 *             Wattage, Loss, Cost, RRP or Life is less than 0.
 	 */
-	public SolarPanel(String panelName, String panelManufacturer,
-			String panelManufacturerCode, Double panelWattage,
-			Double panelLossYear, Double panelCost, Double panelRRP,
-			Integer panelLifeYears) throws Exception {
+	public SolarPanel(String panelName, String panelManufacturer, String panelManufacturerCode, Double panelWattage,
+			Double panelLossYear, Double panelCost, Double panelRRP, Integer panelLifeYears) throws SolarPanelException {
 		setPanelName(panelName);
 		setPanelManufacturer(panelManufacturer);
 		setPanelManufacturerCode(panelManufacturerCode);
@@ -278,26 +276,14 @@ public class SolarPanel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((panelCost == null) ? 0 : panelCost.hashCode());
-		result = prime * result
-				+ ((panelLifeYears == null) ? 0 : panelLifeYears.hashCode());
-		result = prime * result
-				+ ((panelLossYear == null) ? 0 : panelLossYear.hashCode());
-		result = prime
-				* result
-				+ ((panelManufacturer == null) ? 0 : panelManufacturer
-						.hashCode());
-		result = prime
-				* result
-				+ ((panelManufacturerCode == null) ? 0 : panelManufacturerCode
-						.hashCode());
-		result = prime * result
-				+ ((panelName == null) ? 0 : panelName.hashCode());
-		result = prime * result
-				+ ((panelRRP == null) ? 0 : panelRRP.hashCode());
-		result = prime * result
-				+ ((panelWattage == null) ? 0 : panelWattage.hashCode());
+		result = prime * result + ((panelCost == null) ? 0 : panelCost.hashCode());
+		result = prime * result + ((panelLifeYears == null) ? 0 : panelLifeYears.hashCode());
+		result = prime * result + ((panelLossYear == null) ? 0 : panelLossYear.hashCode());
+		result = prime * result + ((panelManufacturer == null) ? 0 : panelManufacturer.hashCode());
+		result = prime * result + ((panelManufacturerCode == null) ? 0 : panelManufacturerCode.hashCode());
+		result = prime * result + ((panelName == null) ? 0 : panelName.hashCode());
+		result = prime * result + ((panelRRP == null) ? 0 : panelRRP.hashCode());
+		result = prime * result + ((panelWattage == null) ? 0 : panelWattage.hashCode());
 		return result;
 	}
 
@@ -309,9 +295,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the cost is null, or negative.
 	 */
-	public void setPanelCost(Double panelCost) throws Exception {
+	public void setPanelCost(Double panelCost) throws SolarPanelException {
 		if ((panelCost == null) || (panelCost.doubleValue() < 0.00)) {
-			throw new Exception("Panel cost is below 0.00");
+			throw new SolarPanelException("Panel cost is below 0.00");
 		}
 		this.panelCost = panelCost;
 	}
@@ -325,9 +311,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the life is null, or negative.
 	 */
-	public void setPanelLifeYears(Integer panelLifeYears) throws Exception {
+	public void setPanelLifeYears(Integer panelLifeYears) throws SolarPanelException {
 		if ((panelLifeYears == null) || (panelLifeYears.intValue() < 0)) {
-			throw new Exception("Panel life is below 0 years");
+			throw new SolarPanelException("Panel life is below 0 years");
 		}
 		this.panelLifeYears = panelLifeYears;
 	}
@@ -341,9 +327,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the loss is null or negative.
 	 */
-	public void setPanelLossYear(Double panelLossYear) throws Exception {
+	public void setPanelLossYear(Double panelLossYear) throws SolarPanelException {
 		if ((panelLossYear == null) || (panelLossYear.doubleValue() < 0.00)) {
-			throw new Exception("Panel Loss value is below 0.00");
+			throw new SolarPanelException("Panel Loss value is below 0.00");
 		}
 		this.panelLossYear = panelLossYear;
 	}
@@ -356,9 +342,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the string supplied is null.
 	 */
-	public void setPanelManufacturer(String panelManufacturer) throws Exception {
+	public void setPanelManufacturer(String panelManufacturer) throws SolarPanelException {
 		if ((panelManufacturer == null)) {
-			throw new Exception("Panel Manufacturer given null string");
+			throw new SolarPanelException("Panel Manufacturer given null string");
 		}
 		this.panelManufacturer = panelManufacturer;
 	}
@@ -371,11 +357,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the string supplied is null.
 	 */
-	public void setPanelManufacturerCode(String panelManufacturerCode)
-
-	throws Exception {
+	public void setPanelManufacturerCode(String panelManufacturerCode) throws SolarPanelException {
 		if ((panelManufacturerCode == null)) {
-			throw new Exception("Panel Manufacturer Code given null string");
+			throw new SolarPanelException("Panel Manufacturer Code given null string");
 		}
 		this.panelManufacturerCode = panelManufacturerCode;
 	}
@@ -388,9 +372,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the string supplied is null.
 	 */
-	public void setPanelName(String panelName) throws Exception {
+	public void setPanelName(String panelName) throws SolarPanelException {
 		if ((panelName == null)) {
-			throw new Exception("Panel Name given null string");
+			throw new SolarPanelException("Panel Name given null string");
 		}
 		this.panelName = panelName;
 	}
@@ -404,11 +388,10 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the rrp is null, a negative value, or below the cost.
 	 */
-	public void setPanelRRP(Double panelRRP) throws Exception {
+	public void setPanelRRP(Double panelRRP) throws SolarPanelException {
 		if ((panelRRP == null) || (panelRRP.doubleValue() < 0.00)
-				|| (panelRRP < this.panelCost.doubleValue())) {
-			throw new Exception(
-					"Panel RRP is below $0.00, or below the cost of the panel");
+				|| (panelRRP.doubleValue() < this.panelCost.doubleValue())) {
+			throw new SolarPanelException("Panel RRP is below $0.00, or below the cost of the panel");
 		}
 		this.panelRRP = panelRRP;
 	}
@@ -423,9 +406,9 @@ public class SolarPanel {
 	 * @throws Exception
 	 *             If the wattage is null or negative.
 	 */
-	public void setPanelWattage(Double panelWattage) throws Exception {
+	public void setPanelWattage(Double panelWattage) throws SolarPanelException {
 		if ((panelWattage == null) || (panelWattage.doubleValue() < 0.00)) {
-			throw new Exception("Panel wattage given as negative");
+			throw new SolarPanelException("Panel wattage given as negative");
 		}
 		this.panelWattage = panelWattage;
 	}
@@ -437,12 +420,10 @@ public class SolarPanel {
 	 */
 	@Override
 	public String toString() {
-		return "SolarPanel [panelName=" + panelName + ", panelManufacturer="
-				+ panelManufacturer + ", panelManufacturerCode="
-				+ panelManufacturerCode + ", panelWattage=" + panelWattage
-				+ ", panelLossYear=" + panelLossYear + ", panelCost="
-				+ panelCost + ", panelRRP=" + panelRRP + ", panelLifeYears="
-				+ panelLifeYears + "]";
+		return "SolarPanel [panelName=" + panelName + ", panelManufacturer=" + panelManufacturer
+				+ ", panelManufacturerCode=" + panelManufacturerCode + ", panelWattage=" + panelWattage
+				+ ", panelLossYear=" + panelLossYear + ", panelCost=" + panelCost + ", panelRRP=" + panelRRP
+				+ ", panelLifeYears=" + panelLifeYears + "]";
 	}
 
 }

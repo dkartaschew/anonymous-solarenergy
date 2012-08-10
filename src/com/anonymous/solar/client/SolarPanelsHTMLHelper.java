@@ -9,8 +9,7 @@ public class SolarPanelsHTMLHelper {
 				+ title
 				+ "</title>\n"
 				+ "<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\" />\n"
-				+ "<link href=\"SolarCalculator.css\" rel=\"stylesheet\" type=\"text/css\">\n" 
-				+ "</head>\n<body>\n";
+				+ "<link href=\"SolarCalculator.css\" rel=\"stylesheet\" type=\"text/css\">\n" + "</head>\n<body>\n";
 		return header;
 	}
 

@@ -4,15 +4,16 @@
 package com.anonymous.solar.shared;
 
 /**
- * Class to hold and work on Solar Installation components, namely inverters themselves.
+ * Class to hold and work on Solar Installation components, namely inverters
+ * themselves.
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
 public class SolarInverter {
-	
-private final Double INITIAL_VALUES = 0.0;
-	
+
+	private final Double INITIAL_VALUES = 0.0;
+
 	private String inverterName;
 	private String inverterManufacturer;
 	private String inverterManufacturerCode;
@@ -22,8 +23,8 @@ private final Double INITIAL_VALUES = 0.0;
 	private Double inverterCost;
 	private Double inverterRRP;
 	private Integer inverterLifeYears;
-	
-	public SolarInverter(){
+
+	public SolarInverter() {
 		inverterName = new String();
 		inverterManufacturer = new String();
 		inverterManufacturerCode = new String();
@@ -35,10 +36,9 @@ private final Double INITIAL_VALUES = 0.0;
 		inverterLifeYears = 0;
 	}
 
-	public SolarInverter(String inverterName, String inverterManufacturer,
-			String inverterManufacturerCode, Double inverterWattage,
-			Double inverterLossYear, Double inverterEfficiency,
-			Double inverterCost, Double inverterRRP, Integer inverterLifeYears) {
+	public SolarInverter(String inverterName, String inverterManufacturer, String inverterManufacturerCode,
+			Double inverterWattage, Double inverterLossYear, Double inverterEfficiency, Double inverterCost,
+			Double inverterRRP, Integer inverterLifeYears) {
 		this.inverterName = inverterName;
 		this.inverterManufacturer = inverterManufacturer;
 		this.inverterManufacturerCode = inverterManufacturerCode;
@@ -50,44 +50,30 @@ private final Double INITIAL_VALUES = 0.0;
 		this.inverterLifeYears = inverterLifeYears;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((inverterCost == null) ? 0 : inverterCost.hashCode());
-		result = prime
-				* result
-				+ ((inverterEfficiency == null) ? 0 : inverterEfficiency
-						.hashCode());
-		result = prime
-				* result
-				+ ((inverterLifeYears == null) ? 0 : inverterLifeYears
-						.hashCode());
-		result = prime
-				* result
-				+ ((inverterLossYear == null) ? 0 : inverterLossYear.hashCode());
-		result = prime
-				* result
-				+ ((inverterManufacturer == null) ? 0 : inverterManufacturer
-						.hashCode());
-		result = prime
-				* result
-				+ ((inverterManufacturerCode == null) ? 0
-						: inverterManufacturerCode.hashCode());
-		result = prime * result
-				+ ((inverterName == null) ? 0 : inverterName.hashCode());
-		result = prime * result
-				+ ((inverterRRP == null) ? 0 : inverterRRP.hashCode());
-		result = prime * result
-				+ ((inverterWattage == null) ? 0 : inverterWattage.hashCode());
+		result = prime * result + ((inverterCost == null) ? 0 : inverterCost.hashCode());
+		result = prime * result + ((inverterEfficiency == null) ? 0 : inverterEfficiency.hashCode());
+		result = prime * result + ((inverterLifeYears == null) ? 0 : inverterLifeYears.hashCode());
+		result = prime * result + ((inverterLossYear == null) ? 0 : inverterLossYear.hashCode());
+		result = prime * result + ((inverterManufacturer == null) ? 0 : inverterManufacturer.hashCode());
+		result = prime * result + ((inverterManufacturerCode == null) ? 0 : inverterManufacturerCode.hashCode());
+		result = prime * result + ((inverterName == null) ? 0 : inverterName.hashCode());
+		result = prime * result + ((inverterRRP == null) ? 0 : inverterRRP.hashCode());
+		result = prime * result + ((inverterWattage == null) ? 0 : inverterWattage.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -141,8 +127,7 @@ private final Double INITIAL_VALUES = 0.0;
 			if (other.inverterManufacturerCode != null) {
 				return false;
 			}
-		} else if (!inverterManufacturerCode
-				.equals(other.inverterManufacturerCode)) {
+		} else if (!inverterManufacturerCode.equals(other.inverterManufacturerCode)) {
 			return false;
 		}
 		if (inverterName == null) {
@@ -169,20 +154,18 @@ private final Double INITIAL_VALUES = 0.0;
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SolarInverter [inverterName=" + inverterName
-				+ ", inverterManufacturer=" + inverterManufacturer
-				+ ", inverterManufacturerCode=" + inverterManufacturerCode
-				+ ", inverterWattage=" + inverterWattage
-				+ ", inverterLossYear=" + inverterLossYear
-				+ ", inverterEfficiency=" + inverterEfficiency
-				+ ", inverterCost=" + inverterCost + ", inverterRRP="
-				+ inverterRRP + ", inverterLifeYears=" + inverterLifeYears
-				+ "]";
+		return "SolarInverter [inverterName=" + inverterName + ", inverterManufacturer=" + inverterManufacturer
+				+ ", inverterManufacturerCode=" + inverterManufacturerCode + ", inverterWattage=" + inverterWattage
+				+ ", inverterLossYear=" + inverterLossYear + ", inverterEfficiency=" + inverterEfficiency
+				+ ", inverterCost=" + inverterCost + ", inverterRRP=" + inverterRRP + ", inverterLifeYears="
+				+ inverterLifeYears + "]";
 	}
 
 	/**
@@ -193,7 +176,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterName the inverterName to set
+	 * @param inverterName
+	 *            the inverterName to set
 	 */
 	public void setInverterName(String inverterName) {
 		this.inverterName = inverterName;
@@ -207,7 +191,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterManufacturer the inverterManufacturer to set
+	 * @param inverterManufacturer
+	 *            the inverterManufacturer to set
 	 */
 	public void setInverterManufacturer(String inverterManufacturer) {
 		this.inverterManufacturer = inverterManufacturer;
@@ -221,7 +206,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterManufacturerCode the inverterManufacturerCode to set
+	 * @param inverterManufacturerCode
+	 *            the inverterManufacturerCode to set
 	 */
 	public void setInverterManufacturerCode(String inverterManufacturerCode) {
 		this.inverterManufacturerCode = inverterManufacturerCode;
@@ -235,7 +221,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterWattage the inverterWattage to set
+	 * @param inverterWattage
+	 *            the inverterWattage to set
 	 */
 	public void setInverterWattage(Double inverterWattage) {
 		this.inverterWattage = inverterWattage;
@@ -249,7 +236,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterLossYear the inverterLossYear to set
+	 * @param inverterLossYear
+	 *            the inverterLossYear to set
 	 */
 	public void setInverterLossYear(Double inverterLossYear) {
 		this.inverterLossYear = inverterLossYear;
@@ -263,7 +251,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterEfficiency the inverterEfficiency to set
+	 * @param inverterEfficiency
+	 *            the inverterEfficiency to set
 	 */
 	public void setInverterEfficiency(Double inverterEfficiency) {
 		this.inverterEfficiency = inverterEfficiency;
@@ -277,7 +266,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterCost the inverterCost to set
+	 * @param inverterCost
+	 *            the inverterCost to set
 	 */
 	public void setInverterCost(Double inverterCost) {
 		this.inverterCost = inverterCost;
@@ -291,7 +281,8 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterRRP the inverterRRP to set
+	 * @param inverterRRP
+	 *            the inverterRRP to set
 	 */
 	public void setInverterRRP(Double inverterRRP) {
 		this.inverterRRP = inverterRRP;
@@ -305,13 +296,11 @@ private final Double INITIAL_VALUES = 0.0;
 	}
 
 	/**
-	 * @param inverterLifeYears the inverterLifeYears to set
+	 * @param inverterLifeYears
+	 *            the inverterLifeYears to set
 	 */
 	public void setInverterLifeYears(Integer inverterLifeYears) {
 		this.inverterLifeYears = inverterLifeYears;
 	}
-
-	
-	
 
 }

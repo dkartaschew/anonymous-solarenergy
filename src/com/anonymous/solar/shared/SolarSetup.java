@@ -6,27 +6,27 @@ package com.anonymous.solar.shared;
 import java.util.ArrayList;
 
 /**
- * Class to hold and work on Solar Installation components, namely inverters themselves.
+ * Class to hold and work on Solar Installation components, namely inverters
+ * themselves.
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
 public class SolarSetup {
-	
+
 	private ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
 	private SolarInverter invertor = null;
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
 	private Double locationLatitude = 0.00;
 	private Double locationLongitude = 0.00;
-	
-	public SolarSetup(){
-		
+
+	public SolarSetup() {
+
 	}
-	
-	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor,
-			Double wireLength, Double wireEfficiency, Double locationLatitude,
-			Double locationLongitude) {
+
+	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
+			Double locationLatitude, Double locationLongitude) {
 		this.panels = panels;
 		this.invertor = invertor;
 		this.wireLength = wireLength;
@@ -35,26 +35,25 @@ public class SolarSetup {
 		this.locationLongitude = locationLongitude;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((invertor == null) ? 0 : invertor.hashCode());
+		result = prime * result + ((invertor == null) ? 0 : invertor.hashCode());
 		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
-		result = prime * result
-				+ ((wireEfficiency == null) ? 0 : wireEfficiency.hashCode());
-		result = prime * result
-				+ ((wireLength == null) ? 0 : wireLength.hashCode());
+		result = prime * result + ((wireEfficiency == null) ? 0 : wireEfficiency.hashCode());
+		result = prime * result + ((wireLength == null) ? 0 : wireLength.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -100,14 +99,15 @@ public class SolarSetup {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SolarSetup [panels=" + panels + ", invertor=" + invertor
-				+ ", wireLength=" + wireLength + ", wireEfficiency="
-				+ wireEfficiency + "]";
+		return "SolarSetup [panels=" + panels + ", invertor=" + invertor + ", wireLength=" + wireLength
+				+ ", wireEfficiency=" + wireEfficiency + "]";
 	}
 
 	/**
@@ -118,7 +118,8 @@ public class SolarSetup {
 	}
 
 	/**
-	 * @param invertor the invertor to set
+	 * @param invertor
+	 *            the invertor to set
 	 */
 	public void setInvertor(SolarInverter invertor) {
 		this.invertor = invertor;
@@ -132,7 +133,8 @@ public class SolarSetup {
 	}
 
 	/**
-	 * @param wireLength the wireLength to set
+	 * @param wireLength
+	 *            the wireLength to set
 	 */
 	public void setWireLength(Double wireLength) {
 		this.wireLength = wireLength;
@@ -146,21 +148,20 @@ public class SolarSetup {
 	}
 
 	/**
-	 * @param wireEfficiency the wireEfficiency to set
+	 * @param wireEfficiency
+	 *            the wireEfficiency to set
 	 */
 	public void setWireEfficiency(Double wireEfficiency) {
 		this.wireEfficiency = wireEfficiency;
 	}
-	
-	public boolean addPanels(SolarPanels panels){
+
+	public boolean addPanels(SolarPanels panels) {
 		return this.panels.add(panels);
 	}
-	
-	public boolean removePanels(SolarPanels panels){
+
+	public boolean removePanels(SolarPanels panels) {
 		return this.panels.remove(panels);
 	}
-
-
 
 	/**
 	 * @return the locationLatitude
@@ -169,16 +170,13 @@ public class SolarSetup {
 		return locationLatitude;
 	}
 
-
-
 	/**
-	 * @param locationLatitude the locationLatitude to set
+	 * @param locationLatitude
+	 *            the locationLatitude to set
 	 */
 	public void setLocationLatitude(Double locationLatitude) {
 		this.locationLatitude = locationLatitude;
 	}
-
-
 
 	/**
 	 * @return the locationLongitude
@@ -187,13 +185,12 @@ public class SolarSetup {
 		return locationLongitude;
 	}
 
-
-
 	/**
-	 * @param locationLongitude the locationLongitude to set
+	 * @param locationLongitude
+	 *            the locationLongitude to set
 	 */
 	public void setLocationLongitude(Double locationLongitude) {
 		this.locationLongitude = locationLongitude;
 	}
-	
+
 }

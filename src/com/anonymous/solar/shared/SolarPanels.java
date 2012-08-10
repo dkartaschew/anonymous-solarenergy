@@ -4,7 +4,8 @@
 package com.anonymous.solar.shared;
 
 /**
- * Class to hold and work on Solar Installation components, namely inverters themselves.
+ * Class to hold and work on Solar Installation components, namely inverters
+ * themselves.
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
@@ -15,37 +16,36 @@ public class SolarPanels {
 	private Integer panelCount = 0;
 	private Double panelDirection = 0.00;
 	private Double panelAzimuth = 0.00;
-	
-	public SolarPanels(){
+
+	public SolarPanels() {
 	}
 
-	public SolarPanels(SolarPanel panelType, Integer panelCount,
-			Double panelDirection, Double panelAzimuth) {
+	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth) {
 		this.panelType = panelType;
 		this.panelCount = panelCount;
 		this.panelDirection = panelDirection;
 		this.panelAzimuth = panelAzimuth;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((panelAzimuth == null) ? 0 : panelAzimuth.hashCode());
-		result = prime * result
-				+ ((panelCount == null) ? 0 : panelCount.hashCode());
-		result = prime * result
-				+ ((panelDirection == null) ? 0 : panelDirection.hashCode());
-		result = prime * result
-				+ ((panelType == null) ? 0 : panelType.hashCode());
+		result = prime * result + ((panelAzimuth == null) ? 0 : panelAzimuth.hashCode());
+		result = prime * result + ((panelCount == null) ? 0 : panelCount.hashCode());
+		result = prime * result + ((panelDirection == null) ? 0 : panelDirection.hashCode());
+		result = prime * result + ((panelType == null) ? 0 : panelType.hashCode());
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -91,14 +91,15 @@ public class SolarPanels {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SolarPanels [panelType=" + panelType + ", panelCount="
-				+ panelCount + ", panelDirection=" + panelDirection
-				+ ", panelAzimuth=" + panelAzimuth + "]";
+		return "SolarPanels [panelType=" + panelType + ", panelCount=" + panelCount + ", panelDirection="
+				+ panelDirection + ", panelAzimuth=" + panelAzimuth + "]";
 	}
 
 	/**
@@ -109,7 +110,8 @@ public class SolarPanels {
 	}
 
 	/**
-	 * @param panelType the panelType to set
+	 * @param panelType
+	 *            the panelType to set
 	 */
 	public void setPanelType(SolarPanel panelType) {
 		this.panelType = panelType;
@@ -123,7 +125,8 @@ public class SolarPanels {
 	}
 
 	/**
-	 * @param panelCount the panelCount to set
+	 * @param panelCount
+	 *            the panelCount to set
 	 */
 	public void setPanelCount(Integer panelCount) {
 		this.panelCount = panelCount;
@@ -137,7 +140,8 @@ public class SolarPanels {
 	}
 
 	/**
-	 * @param panelDirection the panelDirection to set
+	 * @param panelDirection
+	 *            the panelDirection to set
 	 */
 	public void setPanelDirection(Double panelDirection) {
 		this.panelDirection = panelDirection;
@@ -151,11 +155,11 @@ public class SolarPanels {
 	}
 
 	/**
-	 * @param panelAzimuth the panelAzimuth to set
+	 * @param panelAzimuth
+	 *            the panelAzimuth to set
 	 */
 	public void setPanelAzimuth(Double panelAzimuth) {
 		this.panelAzimuth = panelAzimuth;
 	}
-	
-	
+
 }

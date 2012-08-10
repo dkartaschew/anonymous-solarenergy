@@ -31,8 +31,8 @@ public class DataStoreUtils {
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(SolarPanel.class);
 			q.setFilter("panelKey == panelKeyParam");
-		    q.declareParameters("Long panelKeyParam");
-		    q.deletePersistentAll(panelKey);
+			q.declareParameters("Long panelKeyParam");
+			q.deletePersistentAll(panelKey);
 		}
 	}
 
@@ -51,12 +51,12 @@ public class DataStoreUtils {
 
 		Query q = pm.newQuery(SolarPanel.class);
 		q.setFilter("panelName == panelNameParam");
-	    q.declareParameters("String panelNameParam");
+		q.declareParameters("String panelNameParam");
 		q.setOrdering("panelManufacturer asc");
 
 		try {
 			panelArrayList = (List<SolarPanel>) q.execute(panelName);
-			if(panelArrayList.isEmpty()){
+			if (panelArrayList.isEmpty()) {
 				return null;
 			}
 			return panelArrayList.get(0);
