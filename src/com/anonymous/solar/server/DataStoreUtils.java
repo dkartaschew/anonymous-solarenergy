@@ -26,13 +26,13 @@ public class DataStoreUtils {
 		return panel.getKey();
 	}
 
-	public void removePanel(String panelManufacturerCode, String panelName) {
-		if ((panelManufacturerCode != null)&&(panelName != null)) {
+	public void removePanel(Long panelKey) {
+		if (panelKey > 0) {
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(SolarPanel.class);
-			q.setFilter("panelManufacturerCode == panelManufacturerCodeParam && panelName == panelNameParam");
-		    q.declareParameters("String panelManufacturerCodeParam, String panelNameParam");
-		    q.deletePersistentAll(panelManufacturerCode, panelName);
+			q.setFilter("panelKey == panelKeyParam");
+		    q.declareParameters("Long panelKeyParam");
+		    q.deletePersistentAll(panelKey);
 		}
 	}
 

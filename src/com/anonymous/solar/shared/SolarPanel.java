@@ -4,7 +4,6 @@
 package com.anonymous.solar.shared;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.Key;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -16,16 +15,14 @@ import javax.jdo.annotations.PrimaryKey;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
-
 @PersistenceCapable
 public class SolarPanel {
 
 	private final Double INITIAL_VALUES = 0.0;
-	
-	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Long key;
 
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long key;
 
 	@Persistent
 	private String panelName;
@@ -44,6 +41,10 @@ public class SolarPanel {
 	@Persistent
 	private Integer panelLifeYears;
 
+	/*
+	 * Default parameter names to ensure consistency among all consumers of the
+	 * class.
+	 */
 	public static final String PANEL_NAME = "panelName";
 	public static final String PANEL_MANUFACTURER = "panelManufacturer";
 	public static final String PANEL_MANUFACTURER_CODE = "panelManufacturerCode";
@@ -53,6 +54,10 @@ public class SolarPanel {
 	public static final String PANEL_RRP = "panelRRP";
 	public static final String PANEL_LIFE_YEARS = "panelLifeYears";
 
+	/**
+	 * Default constructor for class, defaults all string values to "", and all
+	 * number values to 0.00;
+	 */
 	public SolarPanel() {
 		panelName = new String();
 		panelManufacturer = new String();
@@ -64,18 +69,43 @@ public class SolarPanel {
 		panelLifeYears = 0;
 	}
 
+	/**
+	 * Deafult constructor to take all parameters in one construct.
+	 * 
+	 * @param panelName
+	 *            Name of the panel.
+	 * @param panelManufacturer
+	 *            Name of the manufacturer.
+	 * @param panelManufacturerCode
+	 *            Manufacturers code for the panel.
+	 * @param panelWattage
+	 *            Maximum output wattage under ideal conditions for the panel.
+	 * @param panelLossYear
+	 *            Expected efficiency loss (in percent) for the panel over 12
+	 *            months.
+	 * @param panelCost
+	 *            Nominal cost of the panel.
+	 * @param panelRRP
+	 *            Expected RRP cost of the panel.
+	 * @param panelLifeYears
+	 *            Expected life of the panel according to manufacturers
+	 *            specification.
+	 * @throws Exception
+	 *             if: Name, Manufacturer or Manufacturer code is null, or if
+	 *             Wattage, Loss, Cost, RRP or Life is less than 0.
+	 */
 	public SolarPanel(String panelName, String panelManufacturer,
 			String panelManufacturerCode, Double panelWattage,
 			Double panelLossYear, Double panelCost, Double panelRRP,
-			Integer panelLifeYears) {
-		this.panelName = panelName;
-		this.panelManufacturer = panelManufacturer;
-		this.panelManufacturerCode = panelManufacturerCode;
-		this.panelWattage = panelWattage;
-		this.panelLossYear = panelLossYear;
-		this.panelCost = panelCost;
-		this.panelRRP = panelRRP;
-		this.panelLifeYears = panelLifeYears;
+			Integer panelLifeYears) throws Exception {
+		setPanelName(panelName);
+		setPanelManufacturer(panelManufacturer);
+		setPanelManufacturerCode(panelManufacturerCode);
+		setPanelWattage(panelWattage);
+		setPanelLossYear(panelLossYear);
+		setPanelCost(panelCost);
+		setPanelRRP(panelRRP);
+		setPanelLifeYears(panelLifeYears);
 	}
 
 	/*
@@ -154,12 +184,19 @@ public class SolarPanel {
 		return true;
 	}
 
-	public Long getKey() {
-        return key;
-    }
-
-	
 	/**
+	 * Returns the datastore key if this panel has been stored in the GAE
+	 * datastore.
+	 * 
+	 * @return Panel Key
+	 */
+	public Long getKey() {
+		return key;
+	}
+
+	/**
+	 * Returns the nominal cost of the panel.
+	 * 
 	 * @return the panelCost
 	 */
 	public Double getPanelCost() {
@@ -167,6 +204,9 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns the expected life of the panel according to manufacturers
+	 * specification.
+	 * 
 	 * @return the panelLifeYears
 	 */
 	public Integer getPanelLifeYears() {
@@ -174,6 +214,9 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns the expected efficiency loss of the panel per 12 months under
+	 * ideal conditions.
+	 * 
 	 * @return the panelLossYear
 	 */
 	public Double getPanelLossYear() {
@@ -181,6 +224,8 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns a string containing the manufacturers name of the panel.
+	 * 
 	 * @return the panelManufacturer
 	 */
 	public String getPanelManufacturer() {
@@ -188,6 +233,8 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns a string containing the manufacturers code for the panel.
+	 * 
 	 * @return the panelManufacturerCode
 	 */
 	public String getPanelManufacturerCode() {
@@ -195,6 +242,8 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns the Descriptive name of the panel, as used by the manufacturer.
+	 * 
 	 * @return the panelName
 	 */
 	public String getPanelName() {
@@ -202,6 +251,9 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns the expected recommended retail price of the panel, to be used
+	 * within calculations.
+	 * 
 	 * @return the panelRRP
 	 */
 	public Double getPanelRRP() {
@@ -209,6 +261,8 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Returns the maximum output of the solar panel under ideal conditions.
+	 * 
 	 * @return the panelWattage
 	 */
 	public Double getPanelWattage() {
@@ -248,66 +302,131 @@ public class SolarPanel {
 	}
 
 	/**
+	 * Set the expected nominal cost of the panel.
+	 * 
 	 * @param panelCost
-	 *            the panelCost to set
+	 *            The cost of the panel in $
+	 * @throws Exception
+	 *             If the cost is null, or negative.
 	 */
-	public void setPanelCost(Double panelCost) {
+	public void setPanelCost(Double panelCost) throws Exception {
+		if ((panelCost == null) || (panelCost.doubleValue() < 0.00)) {
+			throw new Exception("Panel cost is below 0.00");
+		}
 		this.panelCost = panelCost;
 	}
 
 	/**
+	 * Set the expected life of the panel in years.
+	 * 
 	 * @param panelLifeYears
-	 *            the panelLifeYears to set
+	 *            The number of years the panel is expected to last, before
+	 *            replacement.
+	 * @throws Exception
+	 *             If the life is null, or negative.
 	 */
-	public void setPanelLifeYears(Integer panelLifeYears) {
+	public void setPanelLifeYears(Integer panelLifeYears) throws Exception {
+		if ((panelLifeYears == null) || (panelLifeYears.intValue() < 0)) {
+			throw new Exception("Panel life is below 0 years");
+		}
 		this.panelLifeYears = panelLifeYears;
 	}
 
 	/**
+	 * Set the expected efficiency loss of the panel as a percentage. eg 1.00 =
+	 * 1% loss per year.
+	 * 
 	 * @param panelLossYear
-	 *            the panelLossYear to set
+	 *            The expected efficency loss of the panel per year
+	 * @throws Exception
+	 *             If the loss is null or negative.
 	 */
-	public void setPanelLossYear(Double panelLossYear) {
+	public void setPanelLossYear(Double panelLossYear) throws Exception {
+		if ((panelLossYear == null) || (panelLossYear.doubleValue() < 0.00)) {
+			throw new Exception("Panel Loss value is below 0.00");
+		}
 		this.panelLossYear = panelLossYear;
 	}
 
 	/**
+	 * Set the manufacturers name for the panel.
+	 * 
 	 * @param panelManufacturer
-	 *            the panelManufacturer to set
+	 *            A string containing the manufacturers name.
+	 * @throws Exception
+	 *             If the string supplied is null.
 	 */
-	public void setPanelManufacturer(String panelManufacturer) {
+	public void setPanelManufacturer(String panelManufacturer) throws Exception {
+		if ((panelManufacturer == null)) {
+			throw new Exception("Panel Manufacturer given null string");
+		}
 		this.panelManufacturer = panelManufacturer;
 	}
 
 	/**
+	 * Set the Manufacturers Code for the panel.
+	 * 
 	 * @param panelManufacturerCode
-	 *            the panelManufacturerCode to set
+	 *            The code for the panel.
+	 * @throws Exception
+	 *             If the string supplied is null.
 	 */
-	public void setPanelManufacturerCode(String panelManufacturerCode) {
+	public void setPanelManufacturerCode(String panelManufacturerCode)
+
+	throws Exception {
+		if ((panelManufacturerCode == null)) {
+			throw new Exception("Panel Manufacturer Code given null string");
+		}
 		this.panelManufacturerCode = panelManufacturerCode;
 	}
 
 	/**
+	 * Set the descriptive name for the panel as given by the manufacturer
+	 * 
 	 * @param panelName
-	 *            the panelName to set
+	 *            The name of the panel
+	 * @throws Exception
+	 *             If the string supplied is null.
 	 */
-	public void setPanelName(String panelName) {
+	public void setPanelName(String panelName) throws Exception {
+		if ((panelName == null)) {
+			throw new Exception("Panel Name given null string");
+		}
 		this.panelName = panelName;
 	}
 
 	/**
+	 * Set the Recommended Retail Price of the panel, to be used within the cost
+	 * calculations.
+	 * 
 	 * @param panelRRP
-	 *            the panelRRP to set
+	 *            The rrp for the panel.
+	 * @throws Exception
+	 *             If the rrp is null, a negative value, or below the cost.
 	 */
-	public void setPanelRRP(Double panelRRP) {
+	public void setPanelRRP(Double panelRRP) throws Exception {
+		if ((panelRRP == null) || (panelRRP.doubleValue() < 0.00)
+				|| (panelRRP < this.panelCost.doubleValue())) {
+			throw new Exception(
+					"Panel RRP is below $0.00, or below the cost of the panel");
+		}
 		this.panelRRP = panelRRP;
 	}
 
 	/**
+	 * Set the expected maximum wattage output of the panel under ideal
+	 * conditions.
+	 * 
 	 * @param panelWattage
-	 *            the panelWattage to set
+	 *            the maximum expected wattage of the panel under ideal
+	 *            conditions.
+	 * @throws Exception
+	 *             If the wattage is null or negative.
 	 */
-	public void setPanelWattage(Double panelWattage) {
+	public void setPanelWattage(Double panelWattage) throws Exception {
+		if ((panelWattage == null) || (panelWattage.doubleValue() < 0.00)) {
+			throw new Exception("Panel wattage given as negative");
+		}
 		this.panelWattage = panelWattage;
 	}
 

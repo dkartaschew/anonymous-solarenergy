@@ -30,50 +30,73 @@ public class SolarPanelsClient extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Handle panel delete, else assume, new panel?
-		if (request.getParameter("delItemCode") != null) {
-			String panelManufacturerCode = request.getParameter("delItemCode").toString();
-			String panelName = request.getParameter("delItemName").toString();
-			dsutils.removePanel(panelManufacturerCode, panelName);
+		if (request.getParameter("delKey") != null) {
+			Long panelKey = Long.parseLong(request.getParameter("delKey"));
+			dsutils.removePanel(panelKey);
 		}
 
 		// Handle new panel.
 		else if (request.getParameter(SolarPanel.PANEL_NAME) != null) {
 			SolarPanel panel = new SolarPanel();
-			panel.setPanelName(request.getParameter(SolarPanel.PANEL_NAME)
-					.toString());
-			panel.setPanelManufacturer(request.getParameter(
-					SolarPanel.PANEL_MANUFACTURER).toString());
-			panel.setPanelManufacturerCode(request.getParameter(
-					SolarPanel.PANEL_MANUFACTURER_CODE).toString());
+			try {
+				panel.setPanelName(request.getParameter(SolarPanel.PANEL_NAME)
+						.toString());
+			} catch (Exception e2) {
+			}
+			try {
+				panel.setPanelManufacturer(request.getParameter(
+						SolarPanel.PANEL_MANUFACTURER).toString());
+			} catch (Exception e2) {
+			}
+			try {
+				panel.setPanelManufacturerCode(request.getParameter(
+						SolarPanel.PANEL_MANUFACTURER_CODE).toString());
+			} catch (Exception e2) {
+			}
 			try {
 				panel.setPanelWattage(Double.parseDouble(request
 						.getParameter(SolarPanel.PANEL_WATTAGE)));
 			} catch (Exception e) {
-				panel.setPanelWattage(0.00);
+				try {
+					panel.setPanelWattage(0.00);
+				} catch (Exception e1) {
+				}
 			}
 			try {
 				panel.setPanelCost(Double.parseDouble(request
 						.getParameter(SolarPanel.PANEL_PANEL_COST)));
 			} catch (Exception e) {
-				panel.setPanelCost(0.00);
+				try {
+					panel.setPanelCost(0.00);
+				} catch (Exception e1) {
+				}
 			}
 			try {
 				panel.setPanelLossYear(Double.parseDouble(request
 						.getParameter(SolarPanel.PANEL_LOSS_YEAR)));
 			} catch (Exception e) {
-				panel.setPanelLossYear(0.00);
+				try {
+					panel.setPanelLossYear(0.00);
+				} catch (Exception e1) {
+				}
 			}
 			try {
 				panel.setPanelRRP(Double.parseDouble(request
 						.getParameter(SolarPanel.PANEL_RRP)));
 			} catch (Exception e) {
-				panel.setPanelRRP(0.00);
+				try {
+					panel.setPanelRRP(0.00);
+				} catch (Exception e1) {
+				}
 			}
 			try {
 				panel.setPanelLifeYears(Integer.parseInt(request
 						.getParameter(SolarPanel.PANEL_LIFE_YEARS)));
 			} catch (Exception e) {
-				panel.setPanelLifeYears(0);
+				try {
+					panel.setPanelLifeYears(0);
+				} catch (Exception e1) {
+				}
 			}
 			dsutils.storePanel(panel);
 
@@ -108,7 +131,7 @@ public class SolarPanelsClient extends HttpServlet {
 		List<SolarPanel> panels = dsutils.getAllPanels();
 
 		String table = "<table border=\"1\">\n";
-		
+
 		table += "<tr><th>Manufacturer</th>";
 		table += "<th>Manufacturer Code</th>";
 		table += "<th>Panel Name</th>";
@@ -128,10 +151,8 @@ public class SolarPanelsClient extends HttpServlet {
 			table += "<td>$" + panel.getPanelRRP().toString() + "</td>\n";
 			table += "<td>" + panel.getPanelLossYear().toString() + "%</td>\n";
 			table += "<td><form action=\"panels.jsp\" method=\"post\">"
-					+ "<input type=\"hidden\" name=\"delItemCode\" value=\""
-					+ panel.getPanelManufacturerCode() + "\">"
-					+ "<input type=\"hidden\" name=\"delItemName\" value=\""
-					+ panel.getPanelName() + "\">"
+					+ "<input type=\"hidden\" name=\"delKey\" value=\""
+					+ panel.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";
 			table += "</tr>\n";
 		}
