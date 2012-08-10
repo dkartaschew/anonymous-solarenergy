@@ -26,6 +26,13 @@ public class DataStoreUtils {
 		return panel.getKey();
 	}
 
+	/**
+	 * Remove a panel from the datastore based on the key contained in the panel
+	 * object. (If key == 0, then object is not in the datastore.
+	 * 
+	 * @param panelKey
+	 *            Key ID of the panel to remove from the datastore.
+	 */
 	public void removePanel(Long panelKey) {
 		if (panelKey > 0) {
 			PersistenceManager pm = PMF.get().getPersistenceManager();

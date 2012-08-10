@@ -1,5 +1,14 @@
 body {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: Verdana, Tahoma, arial, sans-serif;
+	font-size: 12px;
+	text-align: justify;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 800px;
+	max-width: 1280px;
 }
 
 h1 {
@@ -16,7 +25,7 @@ span.textfield {
 }
 
 table {
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: Verdana, Tahoma, arial, sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -39,4 +48,15 @@ th {
 tr.alt td {
 	color: #000000;
 	background-color: #EAF2D3;
+}
+
+.align_center {
+	text-align: center;
+}
+
+#footer {
+	clear: both;
+	margin-top: 0px;
+	padding: 0px;
+	font-size: smaller;
 }
