@@ -37,7 +37,7 @@ public class DataStoreUtils {
 		if (panelKey > 0) {
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query q = pm.newQuery(SolarPanel.class);
-			q.setFilter("panelKey == panelKeyParam");
+			q.setFilter("key == panelKeyParam");
 			q.declareParameters("Long panelKeyParam");
 			q.deletePersistentAll(panelKey);
 		}

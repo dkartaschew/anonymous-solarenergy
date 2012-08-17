@@ -11,15 +11,7 @@
 		<url-pattern>/SolarPanelsClient</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>SolarInvertersClient</servlet-name>
-		<servlet-class>com.anonymous.solar.client.SolarInvertersClient</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>SolarInvertersClient</servlet-name>
-		<url-pattern>/SolarInvertersClient</url-pattern>
-	</servlet-mapping>
+	
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
