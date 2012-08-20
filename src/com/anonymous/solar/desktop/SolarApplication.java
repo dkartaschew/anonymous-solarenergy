@@ -12,6 +12,10 @@ package com.anonymous.solar.desktop;
 public class SolarApplication extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7786544899511067111L;
+	/**
      * Creates new form SolarApplication
      */
     public SolarApplication() {

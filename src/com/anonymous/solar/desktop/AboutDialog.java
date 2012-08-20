@@ -20,6 +20,10 @@ import javax.swing.KeyStroke;
 public class AboutDialog extends javax.swing.JDialog {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4013263006073736126L;
+	/**
      * A return status code - returned if Cancel button has been pressed
      */
     public static final int RET_CANCEL = 0;
