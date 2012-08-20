@@ -10,8 +10,7 @@
 		<servlet-name>SolarPanelsClient</servlet-name>
 		<url-pattern>/SolarPanelsClient</url-pattern>
 	</servlet-mapping>
-
-	
+		
 
 	<!-- Default page to serve -->
 	<welcome-file-list>
