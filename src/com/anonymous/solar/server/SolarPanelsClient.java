@@ -3,13 +3,16 @@
  */
 package com.anonymous.solar.server;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import com.anonymous.solar.server.*;
-import com.anonymous.solar.shared.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.anonymous.solar.shared.SolarPanel;
 
 /**
  * Servlet to handle HTML interface to the storage of panel objects in the
