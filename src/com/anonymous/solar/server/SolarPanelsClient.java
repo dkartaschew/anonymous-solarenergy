@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.anonymous.solar.client;
+package com.anonymous.solar.server;
 
 import java.io.*;
 import java.util.List;

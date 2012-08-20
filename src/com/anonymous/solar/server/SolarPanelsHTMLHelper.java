@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.anonymous.solar.client;
+package com.anonymous.solar.server;
 
 /**
  * Helper class for generating HTML output.

@@ -3,7 +3,7 @@
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>SolarPanelsClient</servlet-name>
-		<servlet-class>com.anonymous.solar.client.SolarPanelsClient</servlet-class>
+		<servlet-class>com.anonymous.solar.server.SolarPanelsClient</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

@@ -1,4 +1,4 @@
-package com.anonymous.solar.client;
+package com.anonymous.solar.server;
 
 public class SolarInverterClient {
 
