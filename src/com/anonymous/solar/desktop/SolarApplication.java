@@ -4,7 +4,7 @@
 package com.anonymous.solar.desktop;
 
 /**
- * Main Entry POint for Desktop Application
+ * Main Entry Point for Desktop Application
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
