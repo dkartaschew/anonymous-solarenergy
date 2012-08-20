@@ -1,0 +1,138 @@
+<project name="SolarPanelApplication" default="all">
+	<property name="sdk.dir" location="../appengine-java-sdk-1.7.0" />
+
+	<import file="${sdk.dir}/config/user/ant-macros.xml" />
+
+	<target name="all" depends="clean, compileWAR, compileDesktop, sleep, test, jar, deployDesktop" />
+
+	<path id="project.classpath">
+		<pathelement path="war/WEB-INF/classes" />
+		<fileset dir="war/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${sdk.dir}/lib">
+			<include name="shared/**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="war/WEB-INF/classes" quiet="true" />
+		<delete dir="test-classes" quiet="true" />
+		<delete dir="desktop" quiet="true" />
+	</target>
+
+	<target name="sleep">
+		<sleep seconds="5" />
+	</target>
+
+	<target name="test" depends="compileDesktop, compileWAR">
+		<mkdir dir="test-classes" />
+		<javac srcdir="test" destdir="test-classes"  classpathref="project.classpath">
+			<classpath>
+				<pathelement location="lib/junit.jar" />
+				<pathelement location="war/WEB-INF/classes" />
+				<pathelement location="desktop" />
+			</classpath>
+		</javac>
+		<mkdir dir="test-classes/test-results" />
+		<junit haltonfailure="no" printsummary="on">
+			<classpath>
+				<pathelement location="war/WEB-INF/classes" />
+				<pathelement location="desktop" />
+				<pathelement location="lib/junit.jar" />
+				<pathelement location="test-classes" />
+			</classpath>
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<batchtest todir="test-classes/test-results">
+				<fileset dir="test-classes" includes="**/*Test.class" />
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="jar" depends="compileDesktop">
+		<jar jarfile="SolarPanelApplication.jar" basedir="desktop">
+			<manifest>
+				<!-- Who is building this jar? -->
+				<attribute name="Built-By" value="${user.name}" />
+				<!-- Information about the program itself -->
+				<attribute name="Implementation-Vendor" value="Team Anonymous" />
+				<attribute name="Implementation-Title" value="Solar Panel Calculator" />
+				<attribute name="Implementation-Version" value="1.0.0" />
+				<attribute name="Main-Class" value="com.anonymous.solar.desktop.SolarApplication" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="deployDesktop" depends="jar">
+		<mkdir dir="deploy" />
+		<copy file="SolarPanelApplication.jar" todir="deploy"/>
+	</target>
+
+	<target name="copyjars" description="Copies the App Engine JARs to the WAR.">
+		<copy todir="war/WEB-INF/lib" flatten="true">
+			<fileset dir="${sdk.dir}/lib/user">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compileWAR" depends="copyjars" description="Compiles Java source and copies other source files to the WAR.">
+		<mkdir dir="war/WEB-INF/classes" />
+		<copy todir="war/WEB-INF/classes">
+			<fileset dir="src" excludes="src/com/anonymous/solar/desktop **/*.java **/*.png **/*.form">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<javac srcdir="src" destdir="war/WEB-INF/classes" classpathref="project.classpath" debug="on" />
+		<delete dir="war/WEB-INF/classes/com/anonymous/solar/desktop/" quiet="true" />
+	</target>
+
+	<target name="compileDesktop" description="Compiles Desktop Application.">
+		<mkdir dir="desktop" />
+		<copy todir="desktop">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<javac srcdir="src" destdir="desktop" classpathref="project.classpath" debug="on" />
+		<delete dir="desktop/com/anonymous/solar/server/" quiet="true" />
+		<delete file="desktop/log4j.properties" quiet="true" />
+		<delete dir="desktop/META-INF" quiet="true" />
+		<delete quiet="true" >
+			<fileset dir="desktop" includes="**/*.form"/>
+		</delete>
+	</target>
+
+	<target name="datanucleusenhance" depends="compileWAR" description="Performs JDO enhancement on compiled data classes.">
+		<enhance_war war="war" />
+	</target>
+
+	<target name="runserver" depends="datanucleusenhance" description="Starts the development server.">
+		<dev_appserver war="war" />
+	</target>
+
+	<target name="update" depends="datanucleusenhance" description="Uploads the application to App Engine.">
+		<appcfg action="update" war="war" />
+	</target>
+
+	<target name="update_indexes" depends="datanucleusenhance" description="Uploads just the datastore index configuration to App Engine.">
+		<appcfg action="update_indexes" war="war" />
+	</target>
+
+	<target name="rollback" depends="datanucleusenhance" description="Rolls back an interrupted application update.">
+		<appcfg action="rollback" war="war" />
+	</target>
+
+	<target name="request_logs" description="Downloads log data from App Engine for the application.">
+		<appcfg action="request_logs" war="war">
+			<options>
+				<arg value="--num_days=5" />
+			</options>
+			<args>
+				<arg value="logs.txt" />
+			</args>
+		</appcfg>
+	</target>
+
+</project>
