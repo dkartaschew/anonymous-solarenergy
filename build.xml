@@ -19,6 +19,7 @@
 		<delete dir="war/WEB-INF/classes" quiet="true" />
 		<delete dir="test-classes" quiet="true" />
 		<delete dir="desktop" quiet="true" />
+		<delete dir="deploy" quiet="true" />
 	</target>
 
 	<target name="sleep">
@@ -30,16 +31,19 @@
 		<javac srcdir="test" destdir="test-classes"  classpathref="project.classpath">
 			<classpath>
 				<pathelement location="lib/junit.jar" />
+				<pathelement location="lib/uispec4j-2.4-jdk16.jar" />
 				<pathelement location="war/WEB-INF/classes" />
 				<pathelement location="desktop" />
 			</classpath>
 		</javac>
 		<mkdir dir="test-classes/test-results" />
 		<junit haltonfailure="no" printsummary="on">
+			<jvmarg value="-Djava.awt.headless=true "/>
 			<classpath>
 				<pathelement location="war/WEB-INF/classes" />
 				<pathelement location="desktop" />
 				<pathelement location="lib/junit.jar" />
+				<pathelement location="lib/uispec4j-2.4-jdk16.jar" />
 				<pathelement location="test-classes" />
 			</classpath>
 			<formatter type="brief" usefile="false" />
