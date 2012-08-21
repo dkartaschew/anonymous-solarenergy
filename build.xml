@@ -20,6 +20,7 @@
 		<delete dir="test-classes" quiet="true" />
 		<delete dir="desktop" quiet="true" />
 		<delete dir="deploy" quiet="true" />
+		<delete file="SolarPanelApplication.jar" quiet="true" />
 	</target>
 
 	<target name="sleep">
