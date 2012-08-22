@@ -71,7 +71,7 @@
 	</target>
 
 	<target name="Androidjar" depends="compileAndroidLibrary">
-		<jar jarfile="SolarPanelLibrary.jar" basedir="desktop">
+		<jar jarfile="SolarPanelLibrary.jar" basedir="android">
 			<manifest>
 				<!-- Who is building this jar? -->
 				<attribute name="Built-By" value="${user.name}" />
