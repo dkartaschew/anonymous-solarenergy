@@ -3,7 +3,7 @@
 
 	<import file="${sdk.dir}/config/user/ant-macros.xml" />
 
-	<target name="all" depends="clean, compileWAR, compileDesktop, sleep, test, jar, deployDesktop" />
+	<target name="all" depends="clean, compileWAR, compileDesktop, sleep, test, Desktopjar, Androidjar, deploy" />
 
 	<path id="project.classpath">
 		<pathelement path="war/WEB-INF/classes" />
@@ -29,7 +29,7 @@
 
 	<target name="test" depends="compileDesktop, compileWAR">
 		<mkdir dir="test-classes" />
-		<javac srcdir="test" destdir="test-classes"  classpathref="project.classpath">
+		<javac srcdir="test" destdir="test-classes" classpathref="project.classpath">
 			<classpath>
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/uispec4j-2.4-jdk16.jar" />
@@ -39,7 +39,7 @@
 		</javac>
 		<mkdir dir="test-classes/test-results" />
 		<junit haltonfailure="no" printsummary="on">
-			<jvmarg value="-Djava.awt.headless=true "/>
+			<jvmarg value="-Djava.awt.headless=true " />
 			<classpath>
 				<pathelement location="war/WEB-INF/classes" />
 				<pathelement location="desktop" />
@@ -55,7 +55,7 @@
 		</junit>
 	</target>
 
-	<target name="jar" depends="compileDesktop">
+	<target name="Desktopjar" depends="compileDesktop">
 		<jar jarfile="SolarPanelApplication.jar" basedir="desktop">
 			<manifest>
 				<!-- Who is building this jar? -->
@@ -69,9 +69,23 @@
 		</jar>
 	</target>
 
-	<target name="deployDesktop" depends="jar">
+	<target name="Androidjar" depends="compileAndroidLibrary">
+		<jar jarfile="SolarPanelLibrary.jar" basedir="desktop">
+			<manifest>
+				<!-- Who is building this jar? -->
+				<attribute name="Built-By" value="${user.name}" />
+				<!-- Information about the program itself -->
+				<attribute name="Implementation-Vendor" value="Team Anonymous" />
+				<attribute name="Implementation-Title" value="Solar Panel Calculator" />
+				<attribute name="Implementation-Version" value="1.0.0" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="deploy" depends="Desktopjar, Androidjar">
 		<mkdir dir="deploy" />
-		<copy file="SolarPanelApplication.jar" todir="deploy"/>
+		<copy file="SolarPanelApplication.jar" todir="deploy" />
+		<copy file="SolarPanelLibrary.jar" todir="deploy" />
 	</target>
 
 	<target name="copyjars" description="Copies the App Engine JARs to the WAR.">
@@ -104,8 +118,25 @@
 		<delete dir="desktop/com/anonymous/solar/server/" quiet="true" />
 		<delete file="desktop/log4j.properties" quiet="true" />
 		<delete dir="desktop/META-INF" quiet="true" />
-		<delete quiet="true" >
-			<fileset dir="desktop" includes="**/*.form"/>
+		<delete quiet="true">
+			<fileset dir="desktop" includes="**/*.form" />
+		</delete>
+	</target>
+
+	<target name="compileAndroidLibrary" description="Compiles the client library for the Android application.">
+		<mkdir dir="android" />
+		<copy todir="android">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<javac srcdir="src" destdir="android" classpathref="project.classpath" debug="on" />
+		<delete dir="android/com/anonymous/solar/server/" quiet="true" />
+		<delete dir="android/com/anonymous/solar/desktop/" quiet="true" />
+		<delete file="android/log4j.properties" quiet="true" />
+		<delete dir="android/META-INF" quiet="true" />
+		<delete quiet="true">
+			<fileset dir="android" includes="**/*.form" />
 		</delete>
 	</target>
 
