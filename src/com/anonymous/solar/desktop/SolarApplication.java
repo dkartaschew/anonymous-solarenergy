@@ -4,6 +4,7 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 /**
  * Main Entry Point for Desktop Application
@@ -32,6 +33,10 @@ public class SolarApplication extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+    	
+    	// Set minimum width to ensure our components don't get squashed.
+        setMinimumSize(new Dimension(500,700));
+        setPreferredSize(getMinimumSize());
 
         menuMain = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();

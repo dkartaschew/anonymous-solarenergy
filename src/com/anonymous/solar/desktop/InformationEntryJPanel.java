@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Dimension;
+
 /**
  * Information Entry Panel for Desktop Application
  * 
@@ -53,6 +55,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         jTableSolarPanels = new javax.swing.JTable();
         jButtonAdd = new javax.swing.JButton();
         jButtonCalculate = new javax.swing.JButton();
+        
 
         jPanelDetailsGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Details"));
         jPanelDetailsGroup.setName("Details"); // NOI18N
@@ -62,7 +65,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         jLabelSetupDescription.setText("Setup Description:");
 
         jTextAreaSetupDescription.setColumns(20);
-        jTextAreaSetupDescription.setRows(5);
+        jTextAreaSetupDescription.setRows(3);
         jScrollPaneSetupDescription.setViewportView(jTextAreaSetupDescription);
 
         jLabelLocation.setText("Location:");
@@ -164,6 +167,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
 
         jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
 
+        // TODO: Update table model as needed.
         jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
