@@ -47,6 +47,7 @@
       </Group>
     </DimensionLayout>
   </Layout>
+  
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanelDetailsGroup">
       <Properties>

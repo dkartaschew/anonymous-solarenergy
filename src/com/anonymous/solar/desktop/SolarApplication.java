@@ -102,7 +102,7 @@ public class SolarApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_menuHelpAboutActionPerformed
     
     private void menuFilePanelNewActionPerformed(java.awt.event.ActionEvent evt) {
-        AddPanel panel = new AddPanel(this, true);
+        AddNewPanel panel = new AddNewPanel(this, true);
         panel.setVisible(true);
     }
 
