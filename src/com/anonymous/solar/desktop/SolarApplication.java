@@ -41,6 +41,7 @@ public class SolarApplication extends javax.swing.JFrame {
         menuMain = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         menuFileExit = new javax.swing.JMenuItem();
+        menuFileNewPanel = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         menuHelpAbout = new javax.swing.JMenuItem();
 
@@ -58,6 +59,14 @@ public class SolarApplication extends javax.swing.JFrame {
             }
         });
         menuFile.add(menuFileExit);
+        
+        menuFileNewPanel.setText("Add Panel");
+        menuFileNewPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	menuFilePanelNewActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuFileNewPanel);
 
         menuMain.add(menuFile);
 
@@ -91,6 +100,11 @@ public class SolarApplication extends javax.swing.JFrame {
         AboutDialog dialog = new AboutDialog(this, true);
         dialog.setVisible(true);
     }//GEN-LAST:event_menuHelpAboutActionPerformed
+    
+    private void menuFilePanelNewActionPerformed(java.awt.event.ActionEvent evt) {
+        AddPanel panel = new AddPanel(this, true);
+        panel.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
@@ -134,4 +148,7 @@ public class SolarApplication extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuMain;
     private InformationEntryJPanel panelInformationEntry = new InformationEntryJPanel();
     // End of variables declaration//GEN-END:variables
+    
+    //additional variables
+    private javax.swing.JMenuItem menuFileNewPanel;
 }
