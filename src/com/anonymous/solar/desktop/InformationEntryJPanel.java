@@ -12,6 +12,10 @@ package com.anonymous.solar.desktop;
 public class InformationEntryJPanel extends javax.swing.JPanel {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3321276319902514732L;
+	/**
      * Creates new form InformationEntryJPanel
      */
     public InformationEntryJPanel() {
@@ -54,12 +58,6 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         jPanelDetailsGroup.setName("Details"); // NOI18N
 
         jLabelSetupName.setText("Setup Name:");
-
-        jTextFieldSetupName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldSetupNameActionPerformed(evt);
-            }
-        });
 
         jLabelSetupDescription.setText("Setup Description:");
 

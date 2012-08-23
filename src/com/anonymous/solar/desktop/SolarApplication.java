@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.BorderLayout;
+
 /**
  * Main Entry Point for Desktop Application
  * 
@@ -69,16 +71,9 @@ public class SolarApplication extends javax.swing.JFrame {
 
         setJMenuBar(menuMain);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
+        getContentPane().setLayout(new BorderLayout());
+        this.getContentPane().add(panelInformationEntry, BorderLayout.CENTER);
+        
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -96,7 +91,7 @@ public class SolarApplication extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the GTK+ look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -132,5 +127,6 @@ public class SolarApplication extends javax.swing.JFrame {
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpAbout;
     private javax.swing.JMenuBar menuMain;
+    private InformationEntryJPanel panelInformationEntry = new InformationEntryJPanel();
     // End of variables declaration//GEN-END:variables
 }
