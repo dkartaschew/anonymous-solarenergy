@@ -5,6 +5,7 @@
 package com.anonymous.solar.desktop;
 
 import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.server.DataStoreUtils;
 
 /**
  *
@@ -13,18 +14,12 @@ import com.anonymous.solar.shared.SolarPanel;
 public class AddNewPanel extends javax.swing.JDialog {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -729032246994174914L;
-
-	/**
      * Creates new form AddNewPanel
      */
     public AddNewPanel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
     
     /**
      * A return status code - returned if Cancel button has been pressed
@@ -34,6 +29,8 @@ public class AddNewPanel extends javax.swing.JDialog {
      * A return status code - returned if OK button has been pressed
      */
     public static final int RET_OK = 1;
+    
+    private DataStoreUtils dsutils = new DataStoreUtils();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +60,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblManufacturer = new javax.swing.JLabel();
         txtCode = new javax.swing.JTextField();
         txtManufacturer = new javax.swing.JTextField();
+        lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,45 +97,53 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         lblManufacturer.setText("Manufacturer");
 
+        //lblError.setText("E");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblName)
-                            .addGap(91, 91, 91)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblEfficiency)
-                                .addGap(72, 72, 72)
-                                .addComponent(txtEfficiency, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblManufacturer)
-                                    .addComponent(lblCode)
-                                    .addComponent(lblWattage)
-                                    .addComponent(lblLife)
-                                    .addComponent(lblCost)
-                                    .addComponent(lblRRP))
-                                .addGap(53, 53, 53)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblName)
+                                    .addGap(91, 91, 91)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtWattage, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                    .addComponent(txtCode)
-                                    .addComponent(txtManufacturer)
-                                    .addComponent(txtLife)
-                                    .addComponent(txtCost)
-                                    .addComponent(txtRRP)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCancel)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnSubmit)
-                        .addGap(75, 75, 75))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lblEfficiency)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(txtEfficiency, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblManufacturer)
+                                            .addComponent(lblCode)
+                                            .addComponent(lblWattage)
+                                            .addComponent(lblLife)
+                                            .addComponent(lblCost)
+                                            .addComponent(lblRRP))
+                                        .addGap(53, 53, 53)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtWattage, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                            .addComponent(txtCode)
+                                            .addComponent(txtManufacturer)
+                                            .addComponent(txtLife)
+                                            .addComponent(txtCost)
+                                            .addComponent(txtRRP)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnCancel)
+                                .addGap(62, 62, 62)
+                                .addComponent(btnSubmit)
+                                .addGap(75, 75, 75))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblError)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,30 +186,63 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnSubmit))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(lblError)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        doClose(RET_OK);
+        boolean success;
+    	success = submitPanelData();
+    	
+    	if(success){
+            doClose(RET_OK);
+    	} else {
+    		lblError.setText("Error! Please review your input!");
+    	}
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         doClose(RET_CANCEL);
     }//GEN-LAST:event_btnCancelActionPerformed
-    
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
     }
     
-    private boolean StoreSolarData(){
-    	return true;
-    }
+    private boolean submitPanelData(){
+    	SolarPanel panel = new SolarPanel();
+		try {
+			
+			if(txtName.getText() == "" || txtManufacturer.getText() == ""  || txtCode.getText() == ""){
+				throw new Exception();
+			}
+			
+			
+			panel.setPanelName(txtName.getText());
+			panel.setPanelManufacturer(txtManufacturer.getText());
+			panel.setPanelManufacturerCode(txtCode.getText());
+			panel.setPanelWattage(Double.parseDouble(txtWattage.getText()));
+			panel.setPanelCost(Double.parseDouble(txtCost.getText()));
+			panel.setPanelLossYear(Double.parseDouble(txtEfficiency.getText()));
+			panel.setPanelRRP(Double.parseDouble(txtRRP.getText()));
+			panel.setPanelLifeYears(Integer.parseInt(txtLife.getText()));
+			dsutils.storePanel(panel);
+			
+			return true;
 
+		} catch (Exception e) {
+			// Oops, something went wrong, let the client know.
+			return false;
+		}
+
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -215,6 +254,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblEfficiency;
+    private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblLife;
     private javax.swing.JLabel lblManufacturer;
     private javax.swing.JLabel lblName;
@@ -228,6 +268,9 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtRRP;
     private javax.swing.JTextField txtWattage;
-    private int returnStatus = RET_CANCEL;
     // End of variables declaration//GEN-END:variables
+
+   private int returnStatus = RET_CANCEL;
+
 }
+

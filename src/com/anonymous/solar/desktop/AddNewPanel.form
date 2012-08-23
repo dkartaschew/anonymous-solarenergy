@@ -23,47 +23,56 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                          <Component id="txtName" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblEfficiency" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="txtEfficiency" pref="120" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                                  <Component id="txtName" min="-2" pref="120" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblEfficiency" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="txtEfficiency" pref="120" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblManufacturer" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCode" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblWattage" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLife" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblRRP" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtWattage" pref="120" max="32767" attributes="0"/>
+                                          <Component id="txtCode" max="32767" attributes="0"/>
+                                          <Component id="txtManufacturer" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="txtLife" max="32767" attributes="0"/>
+                                          <Component id="txtCost" max="32767" attributes="0"/>
+                                          <Component id="txtRRP" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblManufacturer" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCode" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblWattage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLife" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCost" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblRRP" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtWattage" pref="120" max="32767" attributes="0"/>
-                                  <Component id="txtCode" max="32767" attributes="0"/>
-                                  <Component id="txtManufacturer" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtLife" max="32767" attributes="0"/>
-                                  <Component id="txtCost" max="32767" attributes="0"/>
-                                  <Component id="txtRRP" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblError" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -119,7 +128,9 @@
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <Component id="lblError" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -150,9 +161,6 @@
     <Component class="javax.swing.JTextField" name="txtRRP">
     </Component>
     <Component class="javax.swing.JTextField" name="txtWattage">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtWattageActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>
@@ -193,9 +201,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCode">
       <Properties>
@@ -210,6 +215,11 @@
     <Component class="javax.swing.JTextField" name="txtCode">
     </Component>
     <Component class="javax.swing.JTextField" name="txtManufacturer">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblError">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="E"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
