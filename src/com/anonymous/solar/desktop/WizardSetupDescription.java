@@ -67,7 +67,7 @@ public class WizardSetupDescription extends javax.swing.JPanel  implements Wizar
         jLabelSetupDescription.setText("Setup Description:");
 
         jTextAreaSetupDescription.setColumns(20);
-        jTextAreaSetupDescription.setRows(5);
+        jTextAreaSetupDescription.setRows(4);
         jScrollPaneSetupDescription.setViewportView(jTextAreaSetupDescription);
 
         javax.swing.GroupLayout jPanelDetailsGroupLayout = new javax.swing.GroupLayout(jPanelDetailsGroup);
@@ -82,7 +82,7 @@ public class WizardSetupDescription extends javax.swing.JPanel  implements Wizar
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDetailsGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldSetupName)
-                    .addComponent(jScrollPaneSetupDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
+                    .addComponent(jScrollPaneSetupDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelDetailsGroupLayout.setVerticalGroup(
