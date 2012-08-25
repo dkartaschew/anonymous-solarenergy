@@ -4,7 +4,6 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 /**
  * Main Entry Point for Desktop Application
@@ -23,6 +22,8 @@ public class SolarApplication extends javax.swing.JFrame {
      */
     public SolarApplication() {
         initComponents();
+        this.getContentPane().setLayout(new BorderLayout());
+        this.getContentPane().add(new Wizard(this));
     }
 
     /**
@@ -33,20 +34,16 @@ public class SolarApplication extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	
-    	// Set minimum width to ensure our components don't get squashed.
-        setMinimumSize(new Dimension(500,700));
-        setPreferredSize(getMinimumSize());
 
         menuMain = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         menuFileExit = new javax.swing.JMenuItem();
-        menuFileNewPanel = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
         menuHelpAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Solar Power Calculator");
+        setResizable(false);
 
         menuFile.setText("File");
 
@@ -59,8 +56,6 @@ public class SolarApplication extends javax.swing.JFrame {
             }
         });
         menuFile.add(menuFileExit);
-        
-        menuFile.add(menuFileNewPanel);
 
         menuMain.add(menuFile);
 
@@ -79,9 +74,16 @@ public class SolarApplication extends javax.swing.JFrame {
 
         setJMenuBar(menuMain);
 
-        getContentPane().setLayout(new BorderLayout());
-        this.getContentPane().add(panelInformationEntry, BorderLayout.CENTER);
-        
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 457, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,9 +138,5 @@ public class SolarApplication extends javax.swing.JFrame {
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuHelpAbout;
     private javax.swing.JMenuBar menuMain;
-    private InformationEntryJPanel panelInformationEntry = new InformationEntryJPanel();
     // End of variables declaration//GEN-END:variables
-    
-    //additional variables
-    private javax.swing.JMenuItem menuFileNewPanel;
 }
