@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  */
 public class Wizard extends javax.swing.JPanel {
 
-    private ArrayList<JPanel> panels = new ArrayList<>();
+    private ArrayList<JPanel> panels = new ArrayList<JPanel>();
 
     private javax.swing.JFrame parentFrame = null;
 
