@@ -162,6 +162,10 @@ public class SolarSetup {
 	public boolean removePanels(SolarPanels panels) {
 		return this.panels.remove(panels);
 	}
+	
+	public ArrayList<SolarPanels> getPanels() {
+		return panels;
+	}
 
 	/**
 	 * @return the locationLatitude
