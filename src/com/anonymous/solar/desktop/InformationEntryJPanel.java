@@ -251,15 +251,22 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
-    	AddNewPanel panel = new AddNewPanel(new JFrame(), true);
-        panel.setVisible(true);
-        SolarPanel solPanel = panel.GetPanel();
-        String data = String.valueOf("Name: " + solPanel.getPanelName() + "\n" +
-        							 "Cost: $" + solPanel.getPanelCost() + "\n" + 
-        						     "Watt: " + solPanel.getPanelWattage() + " W\n" + 
-        						     "Life: " + solPanel.getPanelLifeYears() + " years\n" +
-        						     "Effi: " + solPanel.getPanelLossYear() + "%");
-        panel.dispose();
+    	AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
+    	panelSet.setVisible(true);
+        SolarPanels solPanels = panelSet.GetPanels();
+        SolarPanel solPanel = solPanels.getPanelType();
+        
+        String data = String.valueOf(
+        		"You have orderd " + solPanels.getPanelCount() + " panels\n" +
+        		"Your panels are facing " + solPanels.getPanelDirection() +
+        		" with an azimuth of " + solPanels.getPanelAzimuth() + ".\n" +
+        		"Name: " + solPanel.getPanelName() + "\n" +
+        		"Cost: $" + solPanel.getPanelCost() + "\n" + 
+        		"Watt: " + solPanel.getPanelWattage() + " W\n" + 
+        		"Life: " + solPanel.getPanelLifeYears() + " years\n" +
+        		"Effi: " + solPanel.getPanelLossYear() + "%");
+        
+        panelSet.dispose();
         JOptionPane.showMessageDialog(new JFrame(), data );
     }
     
