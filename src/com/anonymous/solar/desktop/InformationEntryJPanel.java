@@ -5,6 +5,12 @@ package com.anonymous.solar.desktop;
 
 import java.awt.Dimension;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.SolarPanels;
+
 /**
  * Information Entry Panel for Desktop Application
  * 
@@ -14,9 +20,13 @@ import java.awt.Dimension;
 public class InformationEntryJPanel extends javax.swing.JPanel {
 
     /**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = -3321276319902514732L;
+	/*
+	 * Variable to hold all panels
+	 */
+	SolarPanels panels;
 	/**
      * Creates new form InformationEntryJPanel
      */
@@ -170,18 +180,20 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         // TODO: Update table model as needed.
         jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Cost", "Wattage", "Life", "Efficiency"
             }
         ));
         jScrollPaneSolarPanels.setViewportView(jTableSolarPanels);
 
         jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPanelInformationGroupLayout = new javax.swing.GroupLayout(jPanelPanelInformationGroup);
         jPanelPanelInformationGroup.setLayout(jPanelPanelInformationGroupLayout);
@@ -237,6 +249,35 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
                 .addGap(6, 6, 6))
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
+    	AddNewPanel panel = new AddNewPanel(new JFrame(), true);
+        panel.setVisible(true);
+        SolarPanel solPanel = panel.GetPanel();
+        String data = String.valueOf("Name: " + solPanel.getPanelName() + "\n" +
+        							 "Cost: $" + solPanel.getPanelCost() + "\n" + 
+        						     "Watt: " + solPanel.getPanelWattage() + " W\n" + 
+        						     "Life: " + solPanel.getPanelLifeYears() + " years\n" +
+        						     "Effi: " + solPanel.getPanelLossYear() + "%");
+        panel.dispose();
+        JOptionPane.showMessageDialog(new JFrame(), data );
+    }
+    
+	private void UpdateTable(){
+	    	
+	    	SolarPanels panelList = panels;
+	    	
+	    	jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
+	                new Object [][] {
+	                   
+	                },
+	                new String [] {
+	                    "Name", "Cost", "Wattage", "Life", "Efficiency"
+	                }
+	            ));
+	    	
+	    	
+	    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;

@@ -14,6 +14,7 @@ import com.anonymous.solar.server.*;
 @SuppressWarnings("serial")
 public class AddNewPanel extends javax.swing.JDialog {
 
+	SolarPanel panel;
     /**
      * Creates new form AddNewPanel
      */
@@ -213,15 +214,18 @@ public class AddNewPanel extends javax.swing.JDialog {
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
-        dispose();
+    }
+    
+    public SolarPanel GetPanel(){
+    	return panel;
     }
     
     private boolean submitPanelData(){
-    	SolarPanel panel = new SolarPanel();
+    	panel = new SolarPanel();
 		try {
 			
 			if(txtName.getText() == "" || txtManufacturer.getText() == ""  || txtCode.getText() == ""){
-				throw new Exception();
+				throw new Exception();//TODO: CHANGE EXCEPTION TYPE
 			}
 				
 			panel.setPanelName(txtName.getText());
@@ -232,7 +236,6 @@ public class AddNewPanel extends javax.swing.JDialog {
 			panel.setPanelLossYear(Double.parseDouble(txtEfficiency.getText()));
 			panel.setPanelRRP(Double.parseDouble(txtRRP.getText()));
 			panel.setPanelLifeYears(Integer.parseInt(txtLife.getText()));
-			dsutils.storePanel(panel);
 			return true;
 
 		} catch (Exception e) {
