@@ -28,15 +28,6 @@ public class AddNewPanel extends javax.swing.JDialog {
      */
 
     SolarPanels panels;
-    
-    /**
-     * A return status code - returned if Cancel button has been pressed
-     */
-    public static final int RET_CANCEL = 0;
-    /**
-     * A return status code - returned if OK button has been pressed
-     */
-    public static final int RET_OK = 1;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,8 +85,6 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Add New Solar Panel Set");
-
-        lblError.setText("E");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
         jPanel1.setToolTipText("rgdfg");
@@ -284,22 +273,20 @@ public class AddNewPanel extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        boolean success;
     	success = submitPanelData();
     	
     	if(success){
-            doClose(returnStatus);
+            doClose();
     	} else {
     		lblError.setText("Error! Please review your input!");
     	}
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        doClose(RET_CANCEL);
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void doClose(int retStatus) {
-        returnStatus = retStatus;
+    private void doClose() {
         setVisible(false);
     }
     
@@ -310,6 +297,14 @@ public class AddNewPanel extends javax.swing.JDialog {
      */
     public SolarPanels GetPanels(){
     	return panels;
+    }
+    
+    /**
+     * Get the success of the panel acquisition
+     * @return true on success, false if not
+     */
+    public boolean GetSuccess(){
+    	return success;
     }
     
     /**
@@ -387,7 +382,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JTextField txtWattage;
     // End of variables declaration//GEN-END:variables
 
-   private int returnStatus = RET_CANCEL;
+   private boolean success = false;
 
 }
 
