@@ -4,6 +4,7 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,7 +27,8 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
 	/*
 	 * Variable to hold all panels
 	 */
-	SolarPanels panels;
+	ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	/*
 	/**
      * Creates new form InformationEntryJPanel
      */
@@ -255,31 +257,44 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
     	panelSet.setVisible(true);
         SolarPanels solPanels = panelSet.GetPanels();
         SolarPanel solPanel = solPanels.getPanelType();
+        panelSet.dispose();
         
+        //Testing: output to see if panel returned data
         String data = String.valueOf(
         		"You have orderd " + solPanels.getPanelCount() + " panels\n" +
         		"Your panels are facing " + solPanels.getPanelDirection() +
-        		" with an azimuth of " + solPanels.getPanelAzimuth() + ".\n" +
-        		"Name: " + solPanel.getPanelName() + "\n" +
-        		"Cost: $" + solPanel.getPanelCost() + "\n" + 
-        		"Watt: " + solPanel.getPanelWattage() + " W\n" + 
-        		"Life: " + solPanel.getPanelLifeYears() + " years\n" +
-        		"Effi: " + solPanel.getPanelLossYear() + "%");
+        		" with an azimuth of " + solPanels.getPanelAzimuth() + ".\n\n" +
+        		"Name: \t\t" + solPanel.getPanelName() + "\n" +
+        		"Cost: \t\t$" + solPanel.getPanelCost() + "\n" + 
+        		"Watt: \t\t" + solPanel.getPanelWattage() + " W\n" + 
+        		"Life: \t\t" + solPanel.getPanelLifeYears() + " years\n" +
+        		"Effi: \t\t" + solPanel.getPanelLossYear() + "%");
+        JOptionPane.showMessageDialog(new JFrame(), data);
         
-        panelSet.dispose();
-        JOptionPane.showMessageDialog(new JFrame(), data );
+        //submit panel
+        panels.add(solPanels);
+        UpdateTable();
     }
     
 	private void UpdateTable(){
+		
+			int size = panels.size();
+			int count = 0;
+			Object[][] panelData = new Object[size][6];
 	    	
-	    	SolarPanels panelList = panels;
-	    	
+	    	for(SolarPanels panel: panels){
+	    		panelData[count][0] = panel.getPanelType().getPanelName();
+	    		panelData[count][1] = panel.getPanelType().getPanelCost();
+	    		panelData[count][2] = panel.getPanelType().getPanelWattage();
+	    		panelData[count][3] = panel.getPanelType().getPanelLifeYears();
+	    		panelData[count][4] = panel.getPanelType().getPanelLossYear();
+	    		panelData[count][5] = panel.getPanelCount();
+	    	}
+	    		
 	    	jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
-	                new Object [][] {
-	                   
-	                },
+	                panelData,
 	                new String [] {
-	                    "Name", "Cost", "Wattage", "Life", "Efficiency"
+	                    "Name", "Cost", "Wattage", "Life", "Loss %", "Number"
 	                }
 	            ));
 	    	
