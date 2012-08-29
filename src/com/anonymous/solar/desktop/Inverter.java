@@ -4,10 +4,10 @@
  */
 package com.anonymous.solar.desktop;
 
-import com.anonymous.solar.shared.SolarInverter;
-import com.anonymous.solar.shared.SolarPanels;
-
 //import com.anonymous.solar.shared.SolarPanel;
+
+import com.anonymous.solar.shared.SolarInverter;
+
 
 /**
  *
@@ -63,6 +63,8 @@ public class Inverter extends javax.swing.JDialog {
         lblLoss = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add Inverter");
+        setResizable(false);
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -81,9 +83,11 @@ public class Inverter extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Add New Inverter");
 
+        lblError.setText(".");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Data"));
-        jPanel1.setName("Inverter Details"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
+        jPanel1.setToolTipText("rgdfg");
+        jPanel1.setName("Panel Details"); // NOI18N
 
         lblName.setText("Name");
 
@@ -109,11 +113,7 @@ public class Inverter extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblLoss)
-                        .addGap(53, 53, 53)
-                        .addComponent(txtLoss))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblName)
                         .addGap(91, 91, 91)
@@ -122,12 +122,14 @@ public class Inverter extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblManufacturer)
                             .addComponent(lblCode)
-                            .addComponent(lblWattage))
+                            .addComponent(lblWattage)
+                            .addComponent(lblLoss))
                         .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtWattage)
-                            .addComponent(txtCode)
-                            .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtWattage, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCode, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtManufacturer, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(txtLoss))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLife)
@@ -140,12 +142,12 @@ public class Inverter extends javax.swing.JDialog {
                     .addComponent(txtLife)
                     .addComponent(txtCost)
                     .addComponent(txtRRP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addGap(95, 95, 95))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,44 +183,41 @@ public class Inverter extends javax.swing.JDialog {
                             .addComponent(lblWattage))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLoss))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(lblLoss)
+                    .addComponent(txtLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblError)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(316, 316, 316)
                         .addComponent(btnCancel)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSubmit))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnSubmit)))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(btnCancel)
                     .addComponent(lblError))
-                .addGap(7, 7, 7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("sdfsdf");
@@ -226,35 +225,6 @@ public class Inverter extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    /**
-     * Acquire the value of the 'SolarInverter' created. Should only be 
-     * called once the inverter is closed
-     * @return 'SolarInverter' created 
-     */
-    public SolarInverter GetInverter(){
-    	return inverter;
-    }
-    
-    /**
-     * Get the success of the inverter acquisition
-     * @return true on success, false if not
-     */
-    public boolean GetSuccess(){
-    	return success;
-    }
-    
-    public void LoadInverter(SolarInverter oldInverter){
-    	txtName.setText(oldInverter.getInverterName());
-		txtManufacturer.setText(oldInverter.getInverterManufacturer());
-		txtCode.setText(oldInverter.getInverterManufacturerCode());
-		txtWattage.setText(oldInverter.getInverterWattage().toString());
-		txtCost.setText(oldInverter.getInverterCost().toString());
-		txtLoss.setText(oldInverter.getInverterLossYear().toString());
-		txtRRP.setText(oldInverter.getInverterRRP().toString());
-		txtLife.setText(oldInverter.getInverterLifeYears().toString());
-		txtEfficiency.setText(oldInverter.getInverterEfficiency().toString());
-    }
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
     	success = submitInverterData();
@@ -274,9 +244,29 @@ public class Inverter extends javax.swing.JDialog {
         setVisible(false);
     }
     
-    /*public SolarPanel GetPanel(){
-    	return panel;
-    }*/
+    public SolarInverter GetInverter(){
+    	return inverter;
+    }
+    
+    public void LoadInverter(SolarInverter oldInverter){
+    	txtName.setText(oldInverter.getInverterName());
+		txtManufacturer.setText(oldInverter.getInverterManufacturer());
+		txtCode.setText(oldInverter.getInverterManufacturerCode());
+		txtWattage.setText(oldInverter.getInverterWattage().toString());
+		txtCost.setText(oldInverter.getInverterCost().toString());
+		txtLoss.setText(oldInverter.getInverterLossYear().toString());
+		txtRRP.setText(oldInverter.getInverterRRP().toString());
+		txtLife.setText(oldInverter.getInverterLifeYears().toString());
+		txtEfficiency.setText(oldInverter.getInverterEfficiency().toString());
+    }
+    
+    /**
+     * Get the success of the panel acquisition
+     * @return true on success, false if not
+     */
+    public boolean GetSuccess(){
+    	return success;
+    }
     
     private boolean submitInverterData(){
     	inverter = new SolarInverter();

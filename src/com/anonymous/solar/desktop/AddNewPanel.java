@@ -4,10 +4,11 @@
  */
 package com.anonymous.solar.desktop;
 
-import com.anonymous.solar.shared.SolarPanel;
-import com.anonymous.solar.shared.SolarPanels;
-
 //import com.anonymous.solar.shared.SolarPanel;
+
+import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarPanel;
+
 
 /**
  *
@@ -24,10 +25,18 @@ public class AddNewPanel extends javax.swing.JDialog {
         initComponents();
     }
     /*
-     * Solar Panels
+     * Solar Panel
      */
-
     SolarPanels panels;
+    
+    /**
+     * A return status code - returned if Cancel button has been pressed
+     */
+    public static final int RET_CANCEL = 0;
+    /**
+     * A return status code - returned if OK button has been pressed
+     */
+    public static final int RET_OK = 1;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +77,8 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblDirection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add Panel Set");
+        setResizable(false);
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +96,8 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Add New Solar Panel Set");
+
+        lblError.setText(".");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
         jPanel1.setToolTipText("rgdfg");
@@ -232,38 +245,33 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblError)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancel)
                         .addGap(18, 18, 18)
                         .addComponent(btnSubmit))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(lblError)
-                        .addGap(7, 7, 7))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSubmit)
-                            .addComponent(btnCancel))
-                        .addContainerGap())))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnCancel)
+                    .addComponent(lblError))
+                .addContainerGap(4, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("sdfsdf");
@@ -299,6 +307,20 @@ public class AddNewPanel extends javax.swing.JDialog {
     	return panels;
     }
     
+    public void LoadPanels(SolarPanels oldPanels){
+        txtName.setText(oldPanels.getPanelType().getPanelName());
+        txtManufacturer.setText(oldPanels.getPanelType().getPanelManufacturer());
+        txtCode.setText(oldPanels.getPanelType().getPanelManufacturerCode());
+        txtWattage.setText(oldPanels.getPanelType().getPanelWattage().toString());
+        txtCost.setText(oldPanels.getPanelType().getPanelCost().toString());
+        txtRRP.setText(oldPanels.getPanelType().getPanelRRP().toString());
+        txtLife.setText(oldPanels.getPanelType().getPanelLifeYears().toString());
+        txtEfficiency.setText(oldPanels.getPanelType().getPanelLossYear().toString());
+        txtDirection.setText(oldPanels.getPanelDirection().toString());
+        txtCount.setText(oldPanels.getPanelCount().toString());
+        txtAzimuth.setText(oldPanels.getPanelAzimuth().toString());
+    }
+    
     /**
      * Get the success of the panel acquisition
      * @return true on success, false if not
@@ -307,44 +329,42 @@ public class AddNewPanel extends javax.swing.JDialog {
     	return success;
     }
     
-    /**
-     * Take the values entered by the user and create a 'solarPanels'
-     * @return true on success, false if not.
-     */
     private boolean submitPanelData(){
-    	SolarPanel panel = new SolarPanel();
+        SolarPanel panel = new SolarPanel();
     	Integer panelCount;
     	Double panelDirection;
     	Double panelAzimuth;
     	
-		try {
-			
-			if(txtName.getText() == "" || txtManufacturer.getText() == ""  || txtCode.getText() == ""){
-				throw new Exception();
-			}
-			//panel data
-			panel.setPanelName(txtName.getText());
-			panel.setPanelManufacturer(txtManufacturer.getText());
-			panel.setPanelManufacturerCode(txtCode.getText());
-			panel.setPanelWattage(Double.parseDouble(txtWattage.getText()));
-			panel.setPanelCost(Double.parseDouble(txtCost.getText()));
-			panel.setPanelLossYear(Double.parseDouble(txtEfficiency.getText()));
-			panel.setPanelRRP(Double.parseDouble(txtRRP.getText()));
-			panel.setPanelLifeYears(Integer.parseInt(txtLife.getText()));
-			
-			//location data
-			panelCount = Integer.parseInt(txtCount.getText());
-			panelDirection = (Double.parseDouble(txtDirection.getText()));
-			panelAzimuth = (Double.parseDouble(txtAzimuth.getText()));
-			
-			panels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
-			
-			return true;
+        try {
+                if(txtName.getText().equals("") == true 
+                        || txtManufacturer.getText().equals("") == true  
+                        || txtCode.getText().equals("") == true){
+                        throw new Exception();
+                }
+                //panel data
+                panel.setPanelName(txtName.getText());
+                panel.setPanelManufacturer(txtManufacturer.getText());
+                panel.setPanelManufacturerCode(txtCode.getText());
+                panel.setPanelWattage(Double.parseDouble(txtWattage.getText()));
+                panel.setPanelCost(Double.parseDouble(txtCost.getText()));
+                panel.setPanelLossYear(Double.parseDouble(txtEfficiency.getText()));
+                panel.setPanelRRP(Double.parseDouble(txtRRP.getText()));
+                panel.setPanelLifeYears(Integer.parseInt(txtLife.getText()));
 
-		} catch (Exception e) {
-			// Oops, something went wrong, let the client know.
-			return false;
-		}
+                //location data
+                panelCount = Integer.parseInt(txtCount.getText());
+                panelDirection = (Double.parseDouble(txtDirection.getText()));
+                panelAzimuth = (Double.parseDouble(txtAzimuth.getText()));
+                
+                //Generate Panel(s)
+                panels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
+
+                return true;
+
+        } catch (Exception e) {
+                // Oops, something went wrong, let the client know.
+                return false;
+        }
     }
     
     /**
