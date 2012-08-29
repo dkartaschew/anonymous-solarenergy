@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -25,9 +26,11 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = -3321276319902514732L;
 	/*
-	 * Variable to hold all panels
+	 * Variable(s) to hold the solar setup details
 	 */
 	ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	SolarInverter inverter = null;
+	
 	/*
 	/**
      * Creates new form InformationEntryJPanel
@@ -67,6 +70,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         jButtonAdd = new javax.swing.JButton();
         jButtonCalculate = new javax.swing.JButton();
         
+        jTextFieldInverter.setEditable(false);
 
         jPanelDetailsGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Details"));
         jPanelDetailsGroup.setName("Details"); // NOI18N
@@ -130,6 +134,11 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         jLabelInverter.setText("Inverter:");
 
         jButtonSetInverter.setText("...");
+        jButtonSetInverter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSetInverterActionPerformed(evt);
+            }
+        });
 
         jLabelWiringLength.setText("Wiring Length:");
 
@@ -251,12 +260,59 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
+    private void jButtonSetInverterActionPerformed(java.awt.event.ActionEvent evt) {
+        Inverter invert = new Inverter(new JFrame(), true);
+        
+        if(inverter != null){
+        	invert.LoadInverter(inverter);
+        }
+        
+        invert.setVisible(true);
+        
+        JOptionPane optionPane;
+    	int response;
+    	final int YES = 0;
+    	final int NO = 1;
+        
+        boolean success = invert.GetSuccess();
+        
+        //if panel was created successfully
+        if(success){
+        	SolarInverter inverter = invert.GetInverter();
+            
+            //Let user know what they are submitting and final check
+	        String data = String.valueOf(
+	        		"Name: \t\t" + inverter.getInverterName() + "\n" +
+	        		"Cost: \t\t$" + inverter.getInverterCost() + "\n" + 
+	        		"Wattage: \t\t" + inverter.getInverterWattage() + " W\n" + 
+	        		"Life: \t\t" + inverter.getInverterLifeYears() + " years\n" +
+	        		"Efficiency: \t\t" + inverter.getInverterLossYear() + "%");
+	        
+	        optionPane = new JOptionPane(
+	        	    data,
+	        	    JOptionPane.QUESTION_MESSAGE,
+	        	    JOptionPane.DEFAULT_OPTION);
+	        
+	        response = JOptionPane.showConfirmDialog(new JFrame(), data);
+	        
+	        //submit panel if user chose yes
+	        if(response == YES){
+		        this.inverter = inverter;
+		        jTextFieldInverter.setText(inverter.getInverterName());
+		        jButtonSetInverter.setText("Edit");
+	        }
+        }
+        
+        invert.dispose();
+    }
+    
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
     	AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
     	panelSet.setVisible(true);
     	JOptionPane optionPane;
     	int response;
     	final int YES = 0;
+    	final int NO = 1;
         
         boolean success = panelSet.GetSuccess();
         
@@ -281,7 +337,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
 	        	    JOptionPane.QUESTION_MESSAGE,
 	        	    JOptionPane.DEFAULT_OPTION);
 	        
-	        response = optionPane.showConfirmDialog(new JFrame(), data);
+	        response = JOptionPane.showConfirmDialog(new JFrame(), data);
 	        
 	        //submit panel if user chose yes
 	        if(response == YES){
@@ -308,6 +364,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
 	    		panelData[count][4] = panel.getPanelType().getPanelLossYear();
 	    		panelData[count][5] = panel.getPanelCount();
 	    		panelData[count][6] = "delete";
+	    		count++;
 	    	}
 	    		
 	    	jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
