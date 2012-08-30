@@ -61,9 +61,9 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jLabelInverterDetails = new javax.swing.JLabel();
 		jPanel1 = new javax.swing.JPanel();
 		jLabelWiringLength = new javax.swing.JLabel();
-		jTextFieldWiringLength = new javax.swing.JTextField();
 		jLabelWiringEfficiency = new javax.swing.JLabel();
-		jTextFieldWiringEfficiency = new javax.swing.JTextField();
+		jSpinnerWiringLength = new javax.swing.JSpinner();
+        jSpinnerWiringEfficiency = new javax.swing.JSpinner();
 
 		jPanelElectricalGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter"));
 
@@ -132,20 +132,23 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiring"));
 
-		jLabelWiringLength.setText("Wiring Length:");
+		jLabelWiringLength.setText("Wiring Length (m):");
 
-		jLabelWiringEfficiency.setText("Wiring Efficiency:");
+		jLabelWiringEfficiency.setText("Wiring Efficiency (%):");
 		jLabelWiringEfficiency.setToolTipText("");
+		
+		jSpinnerWiringLength.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 1.0d));
+        jSpinnerWiringEfficiency.setModel(new javax.swing.SpinnerNumberModel(99.0d, 0.0d, 100.0d, 0.1d));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(jLabelWiringLength)
-								.addGap(35, 35, 35).addComponent(jTextFieldWiringLength)
+								.addGap(35, 35, 35).addComponent(jSpinnerWiringLength)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(jLabelWiringEfficiency).addGap(21, 21, 21)
-								.addComponent(jTextFieldWiringEfficiency).addContainerGap()));
+								.addComponent(jSpinnerWiringEfficiency).addContainerGap()));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						jPanel1Layout
@@ -155,12 +158,12 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 										jPanel1Layout
 												.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 												.addComponent(jLabelWiringLength)
-												.addComponent(jTextFieldWiringLength,
+												.addComponent(jSpinnerWiringLength,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.PREFERRED_SIZE)
 												.addComponent(jLabelWiringEfficiency)
-												.addComponent(jTextFieldWiringEfficiency,
+												.addComponent(jSpinnerWiringEfficiency,
 														javax.swing.GroupLayout.PREFERRED_SIZE,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
 														javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,8 +203,8 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanelElectricalGroup;
 	private javax.swing.JTextField jTextFieldInverter;
-	private javax.swing.JTextField jTextFieldWiringEfficiency;
-	private javax.swing.JTextField jTextFieldWiringLength;
+    private javax.swing.JSpinner jSpinnerWiringLength;
+    private javax.swing.JSpinner jSpinnerWiringEfficiency;
 
 	// End of variables declaration//GEN-END:variables
 
