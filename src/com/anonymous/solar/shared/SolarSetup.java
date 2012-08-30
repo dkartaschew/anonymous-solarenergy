@@ -22,7 +22,7 @@ public class SolarSetup {
 	private Double locationLongitude = 0.00;
 
 	public SolarSetup() {
-
+		
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,

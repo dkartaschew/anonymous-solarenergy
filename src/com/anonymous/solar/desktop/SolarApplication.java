@@ -60,12 +60,6 @@ public class SolarApplication extends javax.swing.JFrame {
         });
         menuFile.add(menuFileExit);
         
-        menuFileNewPanel.setText("Add Panel");
-        menuFileNewPanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	menuFilePanelNewActionPerformed(evt);
-            }
-        });
         menuFile.add(menuFileNewPanel);
 
         menuMain.add(menuFile);
@@ -101,10 +95,6 @@ public class SolarApplication extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_menuHelpAboutActionPerformed
     
-    private void menuFilePanelNewActionPerformed(java.awt.event.ActionEvent evt) {
-        AddNewPanel panel = new AddNewPanel(this, true);
-        panel.setVisible(true);
-    }
 
     /**
      * @param args the command line arguments
