@@ -68,6 +68,8 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jPanelElectricalGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter"));
 
 		jLabelInverter.setText("Inverter:");
+		
+		jTextFieldInverter.setEditable(false);
 
 		jButtonSetInverter.setText("...");
 		jButtonSetInverter.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +272,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 				this.inverter = inverter;
 				jTextFieldInverter.setText(inverter.getInverterName());
 				jButtonSetInverter.setText("Edit");
-				jLabelInverterDetails.setText(inverter.toString());
+				jLabelInverterDetails.setText(inverter.toString(true));
 				
 			}
 		}
