@@ -5,12 +5,19 @@
 package com.anonymous.solar.desktop;
 
 /**
- *
- * @author darran
+ * Main Entry Point for Wizard Panels.
+ * 
+ * @author 07627505 Darran Kartaschew
+ * @version 1.0
  */
 public class WizardStart extends javax.swing.JPanel implements WizardPanel {
 
-    private final String title = "";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3384417351508564096L;
+
+	private final String title = "";
 
     private Wizard parent = null;
 

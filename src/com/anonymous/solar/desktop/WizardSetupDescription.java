@@ -1,16 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package com.anonymous.solar.desktop;
 
 /**
- *
- * @author darran
+ * Main Entry Point for Desktop Application
+ * 
+ * @author 07627505 Darran Kartaschew
+ * @version 1.0
  */
 public class WizardSetupDescription extends javax.swing.JPanel  implements WizardPanel {
 
-    private final String title = "Setup Description";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3202275394899767280L;
+	private final String title = "Setup Description";
         private Wizard parent = null;
     
     /**

@@ -1,16 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package com.anonymous.solar.desktop;
 
 /**
- *
- * @author darran
+ * The final panel to be displayed.
+ * 
+ * @author 07627505 Darran Kartaschew
+ * @version 1.0
  */
 public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
 
-    private final String title = "Complete";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9052872454152237596L;
+	private final String title = "Complete";
     private Wizard parent = null;
     
     /**

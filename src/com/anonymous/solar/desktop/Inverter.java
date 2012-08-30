@@ -16,6 +16,8 @@ import com.anonymous.solar.shared.SolarInverter;
 @SuppressWarnings("serial")
 public class Inverter extends javax.swing.JDialog {
 
+	private boolean success = false;
+	
     /**
      * Creates new form AddNewPanel
      */
@@ -40,30 +42,31 @@ public class Inverter extends javax.swing.JDialog {
 
         btnCancel = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelInverterInformation = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
-        txtEfficiency = new javax.swing.JTextField();
         lblCost = new javax.swing.JLabel();
         lblCode = new javax.swing.JLabel();
-        lblEfficiency = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        lblLife = new javax.swing.JLabel();
-        lblWattage = new javax.swing.JLabel();
-        txtCost = new javax.swing.JTextField();
         lblRRP = new javax.swing.JLabel();
-        txtWattage = new javax.swing.JTextField();
         txtManufacturer = new javax.swing.JTextField();
-        txtRRP = new javax.swing.JTextField();
         txtCode = new javax.swing.JTextField();
-        txtLife = new javax.swing.JTextField();
         lblManufacturer = new javax.swing.JLabel();
-        txtLoss = new javax.swing.JTextField();
+        jSpinnerCost = new javax.swing.JSpinner();
+        jSpinnerRRP = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
+        lblWattage = new javax.swing.JLabel();
+        lblEfficiency = new javax.swing.JLabel();
         lblLoss = new javax.swing.JLabel();
+        lblLife = new javax.swing.JLabel();
+        jSpinnerWattage = new javax.swing.JSpinner();
+        jSpinnerLife = new javax.swing.JSpinner();
+        jSpinnerEfficiency = new javax.swing.JSpinner();
+        jSpinnerEffLossYr = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Add Inverter");
+        setTitle("Inverter Information");
+        setModal(true);
         setResizable(false);
 
         btnCancel.setText("Cancel");
@@ -80,32 +83,96 @@ public class Inverter extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Add New Inverter");
-
         lblError.setText(".");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
-        jPanel1.setToolTipText("rgdfg");
-        jPanel1.setName("Panel Details"); // NOI18N
+        jPanelInverterInformation.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Information"));
+        jPanelInverterInformation.setName("Panel Details"); // NOI18N
 
         lblName.setText("Name");
 
         lblCost.setText("Cost");
 
-        lblCode.setText("Code");
-
-        lblEfficiency.setText("Efficiency");
-
-        lblLife.setText("Life");
-
-        lblWattage.setText("Wattage");
+        lblCode.setText("Manufacturer Code");
 
         lblRRP.setText("RRP");
 
         lblManufacturer.setText("Manufacturer");
 
-        lblLoss.setText("Loss per Year");
+        jSpinnerCost.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 25000.0d, 10.0d));
+
+        jSpinnerRRP.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 25000.0d, 10.0d));
+
+        javax.swing.GroupLayout jPanelInverterInformationLayout = new javax.swing.GroupLayout(jPanelInverterInformation);
+        jPanelInverterInformation.setLayout(jPanelInverterInformationLayout);
+        jPanelInverterInformationLayout.setHorizontalGroup(
+            jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName)
+                    .addComponent(lblManufacturer)
+                    .addComponent(lblCode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                        .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                        .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(txtManufacturer))
+                        .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCost))
+                            .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblRRP)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerRRP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerCost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanelInverterInformationLayout.setVerticalGroup(
+            jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInverterInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName)
+                    .addComponent(lblCost)
+                    .addComponent(jSpinnerCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblManufacturer)
+                    .addComponent(lblRRP)
+                    .addComponent(jSpinnerRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelInverterInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCode))
+                .addGap(100, 100, 100))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Data"));
+
+        lblWattage.setText("Wattage");
+
+        lblEfficiency.setText("Rated Efficiency");
+
+        lblLoss.setText("Efficiency Loss per Year");
+
+        lblLife.setText("Expected Life");
+
+        jSpinnerWattage.setModel(new javax.swing.SpinnerNumberModel(1800.0d, 0.0d, 50000.0d, 100.0d));
+
+        jSpinnerLife.setModel(new javax.swing.SpinnerNumberModel(15, 0, 50, 5));
+
+        jSpinnerEfficiency.setModel(new javax.swing.SpinnerNumberModel(98.0d, 0.0d, 100.0d, 1.0d));
+
+        jSpinnerEffLossYr.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,114 +181,77 @@ public class Inverter extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblName)
-                        .addGap(91, 91, 91)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManufacturer)
-                            .addComponent(lblCode)
-                            .addComponent(lblWattage)
-                            .addComponent(lblLoss))
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtWattage, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCode, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtManufacturer, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(txtLoss))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLife)
-                    .addComponent(lblCost)
-                    .addComponent(lblRRP)
+                    .addComponent(lblWattage)
                     .addComponent(lblEfficiency))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtEfficiency)
-                    .addComponent(txtLife)
-                    .addComponent(txtCost)
-                    .addComponent(txtRRP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSpinnerWattage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLife))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSpinnerEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLoss)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSpinnerLife)
+                    .addComponent(jSpinnerEffLossYr, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLife))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCost))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRRP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEfficiency)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblManufacturer))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCode))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtWattage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblWattage))))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblWattage)
+                    .addComponent(jSpinnerWattage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLife)
+                    .addComponent(jSpinnerLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinnerEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEfficiency)
                     .addComponent(lblLoss)
-                    .addComponent(txtLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSpinnerEffLossYr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblError)
-                        .addGap(316, 316, 316)
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(btnCancel)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSubmit)))
-                .addGap(25, 25, 25))
+                        .addComponent(btnSubmit))
+                    .addComponent(jPanelInverterInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanelInverterInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSubmit)
-                    .addComponent(btnCancel)
-                    .addComponent(lblError))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblError)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSubmit)
+                        .addComponent(btnCancel)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("sdfsdf");
-        jPanel1.getAccessibleContext().setAccessibleDescription("");
+        jPanelInverterInformation.getAccessibleContext().setAccessibleName("sdfsdf");
+        jPanelInverterInformation.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,12 +282,12 @@ public class Inverter extends javax.swing.JDialog {
     	txtName.setText(oldInverter.getInverterName());
 		txtManufacturer.setText(oldInverter.getInverterManufacturer());
 		txtCode.setText(oldInverter.getInverterManufacturerCode());
-		txtWattage.setText(oldInverter.getInverterWattage().toString());
-		txtCost.setText(oldInverter.getInverterCost().toString());
-		txtLoss.setText(oldInverter.getInverterLossYear().toString());
-		txtRRP.setText(oldInverter.getInverterRRP().toString());
-		txtLife.setText(oldInverter.getInverterLifeYears().toString());
-		txtEfficiency.setText(oldInverter.getInverterEfficiency().toString());
+                jSpinnerWattage.setValue(oldInverter.getInverterWattage());
+                jSpinnerCost.setValue(oldInverter.getInverterCost());
+                jSpinnerEffLossYr.setValue(oldInverter.getInverterLossYear());
+                jSpinnerRRP.setValue(oldInverter.getInverterRRP());
+                jSpinnerLife.setValue(oldInverter.getInverterLifeYears());
+                jSpinnerEfficiency.setValue(oldInverter.getInverterEfficiency());
     }
     
     /**
@@ -272,19 +302,19 @@ public class Inverter extends javax.swing.JDialog {
     	inverter = new SolarInverter();
 		try {
 			
-			if(txtName.getText() == "" || txtManufacturer.getText() == ""  || txtCode.getText() == ""){
+			if(txtName.getText().equals("") == true || txtManufacturer.getText().equals("") == true  || txtCode.getText().equals("") == true){
 				throw new Exception();
 			}
 				
 			inverter.setInverterName(txtName.getText());
 			inverter.setInverterManufacturer(txtManufacturer.getText());
 			inverter.setInverterManufacturerCode(txtCode.getText());
-			inverter.setInverterWattage(Double.parseDouble(txtWattage.getText()));
-			inverter.setInverterCost(Double.parseDouble(txtCost.getText()));
-			inverter.setInverterLossYear(Double.parseDouble(txtLoss.getText()));
-			inverter.setInverterRRP(Double.parseDouble(txtRRP.getText()));
-			inverter.setInverterLifeYears(Integer.parseInt(txtLife.getText()));
-			inverter.setInverterEfficiency(Double.parseDouble(txtEfficiency.getText()));
+                        inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+			inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
+			inverter.setInverterLossYear((Double)jSpinnerEffLossYr.getModel().getValue());
+			inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
+			inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
+			inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
 			return true;
 
 		} catch (Exception e) {
@@ -293,15 +323,17 @@ public class Inverter extends javax.swing.JDialog {
 		}
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelInverterInformation;
+    private javax.swing.JSpinner jSpinnerCost;
+    private javax.swing.JSpinner jSpinnerEffLossYr;
+    private javax.swing.JSpinner jSpinnerEfficiency;
+    private javax.swing.JSpinner jSpinnerLife;
+    private javax.swing.JSpinner jSpinnerRRP;
+    private javax.swing.JSpinner jSpinnerWattage;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblEfficiency;
@@ -313,17 +345,7 @@ public class Inverter extends javax.swing.JDialog {
     private javax.swing.JLabel lblRRP;
     private javax.swing.JLabel lblWattage;
     private javax.swing.JTextField txtCode;
-    private javax.swing.JTextField txtCost;
-    private javax.swing.JTextField txtEfficiency;
-    private javax.swing.JTextField txtLife;
-    private javax.swing.JTextField txtLoss;
     private javax.swing.JTextField txtManufacturer;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtRRP;
-    private javax.swing.JTextField txtWattage;
     // End of variables declaration//GEN-END:variables
-
-   private boolean success = false;
-
 }
-

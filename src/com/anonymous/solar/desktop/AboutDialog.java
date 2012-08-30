@@ -19,6 +19,10 @@ import javax.swing.KeyStroke;
 public class AboutDialog extends javax.swing.JDialog {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3259279665599413803L;
+	/**
      * A return status code - returned if Cancel button has been pressed
      */
     public static final int RET_CANCEL = 0;
@@ -40,7 +44,12 @@ public class AboutDialog extends javax.swing.JDialog {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
         actionMap.put(cancelName, new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 8180119342541725499L;
+
+			public void actionPerformed(ActionEvent e) {
                 doClose(RET_CANCEL);
             }
         });

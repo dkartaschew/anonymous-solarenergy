@@ -1,16 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package com.anonymous.solar.desktop;
 
 /**
- *
- * @author darran
+ * Wizard Panel to display the results that come back from the server.
+ * 
+ * @author 07627505 Darran Kartaschew
+ * @version 1.0
  */
 public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     
-    private final String title = "Results";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1185924630290486108L;
+	private final String title = "Results";
     private Wizard parent = null;
     
     /**
