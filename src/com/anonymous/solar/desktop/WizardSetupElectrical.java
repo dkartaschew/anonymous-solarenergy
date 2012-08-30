@@ -58,7 +58,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jTextFieldInverter = new javax.swing.JTextField();
 		jButtonSetInverter = new javax.swing.JButton();
 		jLabelInverterHeader = new javax.swing.JLabel();
-		jLabelInverterDeatils = new javax.swing.JLabel();
+		jLabelInverterDetails = new javax.swing.JLabel();
 		jPanel1 = new javax.swing.JPanel();
 		jLabelWiringLength = new javax.swing.JLabel();
 		jTextFieldWiringLength = new javax.swing.JTextField();
@@ -78,7 +78,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 
 		jLabelInverterHeader.setText("Inverter Details:");
 
-		jLabelInverterDeatils.setText("<unknown>");
+		jLabelInverterDetails.setText("<unknown>");
 
 		javax.swing.GroupLayout jPanelElectricalGroupLayout = new javax.swing.GroupLayout(jPanelElectricalGroup);
 		jPanelElectricalGroup.setLayout(jPanelElectricalGroupLayout);
@@ -106,7 +106,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 														.addComponent(jButtonSetInverter))
 										.addGroup(
 												jPanelElectricalGroupLayout.createSequentialGroup()
-														.addComponent(jLabelInverterDeatils)
+														.addComponent(jLabelInverterDetails)
 														.addGap(0, 0, Short.MAX_VALUE))).addContainerGap()));
 		jPanelElectricalGroupLayout.setVerticalGroup(jPanelElectricalGroupLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -125,7 +125,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 						.addGroup(
 								jPanelElectricalGroupLayout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(jLabelInverterHeader).addComponent(jLabelInverterDeatils))
+										.addComponent(jLabelInverterHeader).addComponent(jLabelInverterDetails))
 						.addContainerGap(32, Short.MAX_VALUE)));
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiring"));
@@ -191,7 +191,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 
 	private javax.swing.JButton jButtonSetInverter;
 	private javax.swing.JLabel jLabelInverter;
-	private javax.swing.JLabel jLabelInverterDeatils;
+	private javax.swing.JLabel jLabelInverterDetails;
 	private javax.swing.JLabel jLabelInverterHeader;
 	private javax.swing.JLabel jLabelWiringEfficiency;
 	private javax.swing.JLabel jLabelWiringLength;
@@ -270,6 +270,8 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 				this.inverter = inverter;
 				jTextFieldInverter.setText(inverter.getInverterName());
 				jButtonSetInverter.setText("Edit");
+				jLabelInverterDetails.setText(inverter.toString());
+				
 			}
 		}
 

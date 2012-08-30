@@ -238,6 +238,7 @@ public class Wizard extends javax.swing.JPanel {
 		panels.add(new WizardStart(this));
 		// panels.add(new WizardUser(this));
 		panels.add(new WizardSetupDescription(this));
+		panels.add(new WizardUserCosts(this));
 		panels.add(new WizardSetupElectrical(this));
 		panels.add(new WizardSetupSolarPanels(this));
 		panels.add(new WizardSetupConfirmation(this));

@@ -5,6 +5,8 @@ package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JOptionPane;
+
 /**
  * Main Entry Point for Desktop Application
  * 
@@ -89,7 +91,11 @@ public class SolarApplication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFileExitActionPerformed
-        System.exit(0);
+    	int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit Confirmation",
+				JOptionPane.YES_NO_OPTION);
+		if (n == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
     }//GEN-LAST:event_menuFileExitActionPerformed
 
     private void menuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHelpAboutActionPerformed
