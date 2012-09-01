@@ -4,6 +4,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import com.anonymous.solar.shared.CustomerData;
+
 /**
  *
  * @author darran
@@ -13,6 +15,11 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         private final String title = "Customer Usage";
 
     private Wizard parent = null;
+    
+    /**
+     * Customer Data class
+     */
+    CustomerData data = null;
     
     /**
      * Creates new form WizardUserCosts
@@ -254,4 +261,19 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     public String getTitle() {
         return title;
     }
+
+	public CustomerData getCustomerData() {
+		data = new CustomerData();
+		
+		data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
+		data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
+		data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());
+		data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
+		data.setTariff13Cost((Double) jSpinnerMonthlyCostTariff2.getValue());
+		data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
+		data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
+		data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+		
+		return data;
+	}
 }

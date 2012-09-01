@@ -232,17 +232,17 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	
 	public SolarInverter getInverter(){
 		if(inverter == null){
-			return new SolarInverter();
+			return null;
 		}
 		return inverter;
 	}
 	
 	public Double getWireLength(){
-		return Double.parseDouble((String) (jSpinnerWiringLength.getValue()));
+		return (Double) (jSpinnerWiringLength.getValue());
 	}
 	
 	public Double getWireEfficiency(){
-		return Double.parseDouble((String) (jSpinnerWiringEfficiency.getValue()));
+		return (Double) (jSpinnerWiringEfficiency.getValue());
 	}
 
 	/**

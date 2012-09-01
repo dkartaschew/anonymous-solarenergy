@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -122,13 +123,14 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 
 	// End of variables declaration//GEN-END:variables
 	
-	public void setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter){
+	public void setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter, Double wireLength, 
+			Double wireEfficiency, CustomerData data){
 		String details = "";
 		int panelCount = panels.size();
 		int count = 1;
 	
 		if(panelCount == 0){
-			details += "ERROR: NO PANELS SELECTED\n";
+			details += "ERROR: NO PANELS SELECTED\n\n";
 		} else {
 			details += "You have " + panelCount + " types of panels.\n";
 			
@@ -145,12 +147,21 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 			
 		}//end if
 		
-		if(inverter.equals(new SolarInverter())){
-			details += "ERROR: NO INVERTER DETECTED";
+		if(inverter == (null)){
+			details += "ERROR: NO INVERTER DETECTED\n\n";
 		} else {
-			details += inverter.toString();
+			details += "Name: " + inverter.getInverterName() + "\n" 
+					+ "\tWire Length: " + wireLength + "\n" 
+					+ "\tWire Efficiency: " + wireEfficiency + "\n" 
+					+ "\tWattage: \t\t" + inverter.getInverterWattage() + "W\n"
+					+ "\tCost: \t\t$" + inverter.getInverterCost() + "\n"
+					+ "\tLife: \t\t" + inverter.getInverterLifeYears() + "\n"
+					+ "\tEfficiency: \t\t" + inverter.getInverterEfficiency() + "\n\n";
 		}
 		
+		//Customer details are always set, no need to check
+		details += "Customer Details\n";
+		details += data.toString("\t");
 		
 		
 		jTextAreaConfirmationDetails.setText(details);

@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -32,6 +33,9 @@ public class Wizard extends javax.swing.JPanel {
 	 */
 	private ArrayList<SolarPanels> solarPanels = new ArrayList<SolarPanels>();
 	private SolarInverter inverter= new SolarInverter();
+	private Double inverterWireLength = 0.0;
+	private Double inverterWireEfficiency = 0.0;
+	private CustomerData customerData = new CustomerData();
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -241,21 +245,29 @@ public class Wizard extends javax.swing.JPanel {
 		// Variables declaration - do not modify//GEN-BEGIN:variables
 	
 	private void UpdateDetails(){
+		final int USER_DETAILS = 2;
 		final int SOLAR_INVERT = 3;
 		final int SOLAR_PANELS = 4;
-		final int CONFIRM = 5;
+		final int CONFIRM_INFO = 5;
 		JPanel panel;
+		
+		//Solar Inverter details
+		panel = panels.get(USER_DETAILS);
+		customerData = ((WizardUserCosts) panel).getCustomerData();
 		
 		//Solar Inverter details
 		panel = panels.get(SOLAR_INVERT);
 		inverter = ((WizardSetupElectrical) panel).getInverter();
+		inverterWireLength = ((WizardSetupElectrical) panel).getWireLength();
+		inverterWireEfficiency = ((WizardSetupElectrical) panel).getWireEfficiency();
 		
 		//Solar Panel(s) details
 		panel = panels.get(SOLAR_PANELS);
 		solarPanels = ((WizardSetupSolarPanels) panel).getSolarPanels();
 		
-		panel = panels.get(CONFIRM);
-		((WizardSetupConfirmation) panel).setSetUpDetails(solarPanels, inverter);
+		panel = panels.get(CONFIRM_INFO);
+		((WizardSetupConfirmation) panel).setSetUpDetails(solarPanels, inverter, inverterWireLength, 
+				inverterWireEfficiency, customerData);
 		
 	}
 
