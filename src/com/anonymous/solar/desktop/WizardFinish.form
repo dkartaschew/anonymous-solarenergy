@@ -16,10 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="302" max="32767" attributes="0"/>
+              <Component id="jLabelFinishMsg" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -27,16 +27,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="274" max="32767" attributes="0"/>
+              <Component id="jLabelFinishMsg" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelFinishMsg">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Done, go away"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;h1&gt;Thank you&lt;/h1&gt; &lt;p&gt;Thank you for using the Solar Energy Calculator.&lt;/p&gt; &lt;p&gt;If you have any questions please do not hesitate to contact the development team.&lt;/p&gt; &lt;/html&gt;"/>
       </Properties>
     </Component>
   </SubComponents>

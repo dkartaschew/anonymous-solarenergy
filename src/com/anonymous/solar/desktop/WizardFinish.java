@@ -1,21 +1,16 @@
 /*
- * 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.anonymous.solar.desktop;
 
 /**
- * The final panel to be displayed.
- * 
- * @author 07627505 Darran Kartaschew
- * @version 1.0
+ *
+ * @author darran
  */
 public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9052872454152237596L;
-	private final String title = "Complete";
+    private final String title = "Complete";
     private Wizard parent = null;
     
     /**
@@ -43,9 +38,9 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelFinishMsg = new javax.swing.JLabel();
 
-        jLabel1.setText("Done, go away");
+        jLabelFinishMsg.setText("<html> <h1>Thank you</h1> <p>Thank you for using the Solar Energy Calculator.</p> <p>If you have any questions please do not hesitate to contact the development team.</p> </html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,19 +48,19 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addComponent(jLabelFinishMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addComponent(jLabelFinishMsg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelFinishMsg;
     // End of variables declaration//GEN-END:variables
 
 
