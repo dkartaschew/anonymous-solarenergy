@@ -36,6 +36,8 @@ public class Wizard extends javax.swing.JPanel {
 	private Double inverterWireLength = 0.0;
 	private Double inverterWireEfficiency = 0.0;
 	private CustomerData customerData = new CustomerData();
+	private String systemName;
+	private String systemDescription;
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -211,7 +213,9 @@ public class Wizard extends javax.swing.JPanel {
 		
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
-		if (wizardIndex + 1 == panels.size()) {
+		if (wizardIndex + 1 == panels.size()
+				||(wizardIndex == 5 && inverter == null)
+				||(wizardIndex == 5 && solarPanels.size() == 0)) {
 			jButtonNext.setEnabled(false);
 		}
 	}// GEN-LAST:event_jButtonNextActionPerformed
@@ -245,13 +249,19 @@ public class Wizard extends javax.swing.JPanel {
 		// Variables declaration - do not modify//GEN-BEGIN:variables
 	
 	private void UpdateDetails(){
+		final int SYS_DESCRIPT = 1;
 		final int USER_DETAILS = 2;
 		final int SOLAR_INVERT = 3;
 		final int SOLAR_PANELS = 4;
 		final int CONFIRM_INFO = 5;
 		JPanel panel;
 		
-		//Solar Inverter details
+		//Customer details
+		panel = panels.get(SYS_DESCRIPT);
+		systemName = ((WizardSetupDescription) panel).getSystemName();
+		systemDescription = ((WizardSetupDescription) panel).getDescription();
+		
+		//Customer details
 		panel = panels.get(USER_DETAILS);
 		customerData = ((WizardUserCosts) panel).getCustomerData();
 		
@@ -267,7 +277,7 @@ public class Wizard extends javax.swing.JPanel {
 		
 		panel = panels.get(CONFIRM_INFO);
 		((WizardSetupConfirmation) panel).setSetUpDetails(solarPanels, inverter, inverterWireLength, 
-				inverterWireEfficiency, customerData);
+				inverterWireEfficiency, customerData, systemName, systemDescription);
 		
 	}
 

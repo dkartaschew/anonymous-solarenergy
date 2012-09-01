@@ -123,11 +123,15 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 
 	// End of variables declaration//GEN-END:variables
 	
-	public void setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter, Double wireLength, 
-			Double wireEfficiency, CustomerData data){
+	public boolean setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter, Double wireLength, 
+			Double wireEfficiency, CustomerData data, String sysName, String sysDescription){
+		boolean acceptable = true;
 		String details = "";
 		int panelCount = panels.size();
 		int count = 1;
+		
+		details += "SYSTEM NAME: " + sysName + "\n\n";
+		details += "DESCRIPTION: \n" + sysDescription + "\n\n";
 	
 		if(panelCount == 0){
 			details += "ERROR: NO PANELS SELECTED\n\n";
@@ -165,7 +169,7 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 		
 		
 		jTextAreaConfirmationDetails.setText(details);
-		
+		return acceptable;
 	}
 
 	/**

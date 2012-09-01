@@ -239,4 +239,12 @@ public class WizardSetupDescription extends javax.swing.JPanel  implements Wizar
     public String getTitle() {
         return title;
     }
+
+	public String getSystemName() {
+		return jTextFieldSetupName.getText();
+	}
+
+	public String getDescription() {
+		return jTextAreaSetupDescription.getText();
+	}
 }
