@@ -229,6 +229,21 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	public boolean callbackDispose() {
 		return true;
 	}
+	
+	public SolarInverter getInverter(){
+		if(inverter == null){
+			return new SolarInverter();
+		}
+		return inverter;
+	}
+	
+	public Double getWireLength(){
+		return Double.parseDouble((String) (jSpinnerWiringLength.getValue()));
+	}
+	
+	public Double getWireEfficiency(){
+		return Double.parseDouble((String) (jSpinnerWiringEfficiency.getValue()));
+	}
 
 	/**
 	 * Return the title to be used for this wizard panel;

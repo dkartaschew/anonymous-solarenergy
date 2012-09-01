@@ -5,8 +5,14 @@ package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.anonymous.solar.shared.SolarInverter;
+import com.anonymous.solar.shared.SolarPanels;
 
 /**
  * Main Entry Point for the wizard interface for the Desktop Application
@@ -20,6 +26,12 @@ public class Wizard extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8415093022775319312L;
+	
+	/**
+	 * Variables to hold all the solar panel, inverter and client data
+	 */
+	private ArrayList<SolarPanels> solarPanels = new ArrayList<SolarPanels>();
+	private SolarInverter inverter= new SolarInverter();
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -190,6 +202,9 @@ public class Wizard extends javax.swing.JPanel {
 				setWizardPanel(++wizardIndex);
 			}
 		}
+		
+		UpdateDetails();
+		
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
 		if (wizardIndex + 1 == panels.size()) {
@@ -212,13 +227,37 @@ public class Wizard extends javax.swing.JPanel {
 			if (changePanel) {
 				setWizardPanel(--wizardIndex);
 			}
+			
+			
 		}
+		
+		UpdateDetails();
+		
 		jButtonNext.setEnabled(true);
 		if (wizardIndex == 0) {
 			jButtonBack.setVisible(false);
 		}
 	}// GEN-LAST:event_jButtonBackActionPerformed
 		// Variables declaration - do not modify//GEN-BEGIN:variables
+	
+	private void UpdateDetails(){
+		final int SOLAR_INVERT = 3;
+		final int SOLAR_PANELS = 4;
+		final int CONFIRM = 5;
+		JPanel panel;
+		
+		//Solar Inverter details
+		panel = panels.get(SOLAR_INVERT);
+		inverter = ((WizardSetupElectrical) panel).getInverter();
+		
+		//Solar Panel(s) details
+		panel = panels.get(SOLAR_PANELS);
+		solarPanels = ((WizardSetupSolarPanels) panel).getSolarPanels();
+		
+		panel = panels.get(CONFIRM);
+		((WizardSetupConfirmation) panel).setSetUpDetails(solarPanels, inverter);
+		
+	}
 
 	private javax.swing.JButton jButtonBack;
 	private javax.swing.JButton jButtonClose;
@@ -235,15 +274,15 @@ public class Wizard extends javax.swing.JPanel {
 	 * Wizard
 	 */
 	private void initWizardPanels() {
-		panels.add(new WizardStart(this));
+		panels.add(new WizardStart(this));//0
 		// panels.add(new WizardUser(this));
-		panels.add(new WizardSetupDescription(this));
-		panels.add(new WizardUserCosts(this));
-		panels.add(new WizardSetupElectrical(this));
-		panels.add(new WizardSetupSolarPanels(this));
-		panels.add(new WizardSetupConfirmation(this));
-		panels.add(new WizardResults(this));
-		panels.add(new WizardFinish(this));
+		panels.add(new WizardSetupDescription(this));//1
+		panels.add(new WizardUserCosts(this));//2
+		panels.add(new WizardSetupElectrical(this));//3
+		panels.add(new WizardSetupSolarPanels(this));//4
+		panels.add(new WizardSetupConfirmation(this));//5
+		panels.add(new WizardResults(this));//6
+		panels.add(new WizardFinish(this));//7
 
 		// Set to show the first panel.
 		setWizardPanel(wizardIndex);

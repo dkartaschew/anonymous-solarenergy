@@ -153,6 +153,11 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	public String getTitle() {
 		return title;
 	}
+	
+	public ArrayList<SolarPanels> getSolarPanels(){
+		
+		return panels;
+	}
 
 	/**
 	 * Event handler to operate the Add Button to include a solar panel within the setup.

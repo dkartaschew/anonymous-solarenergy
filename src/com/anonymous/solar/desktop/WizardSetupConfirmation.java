@@ -3,6 +3,14 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import com.anonymous.solar.shared.SolarInverter;
+import com.anonymous.solar.shared.SolarPanels;
+
 /**
  * Panel for the wizard that displays the contents of the SolarSetup class, and
  * will stop the user from proceeding if any information is missing.
@@ -25,6 +33,7 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 	public WizardSetupConfirmation(Wizard parent) {
 		initComponents();
 		this.parent = parent;
+		
 	}
 
 	/**
@@ -112,6 +121,41 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 	private javax.swing.JTextArea jTextAreaConfirmationDetails;
 
 	// End of variables declaration//GEN-END:variables
+	
+	public void setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter){
+		String details = "";
+		int panelCount = panels.size();
+		int count = 1;
+	
+		if(panelCount == 0){
+			details += "ERROR: NO PANELS SELECTED\n";
+		} else {
+			details += "You have " + panelCount + " types of panels.\n";
+			
+			for(SolarPanels panel : panels){
+				details += "\t" + count + ". " + panel.getPanelCount() + " units of " 
+				+ panel.getPanelType().getPanelName() + "\n"
+				+ "\tDirection: \t\t" + panel.getPanelDirection() + "\n"
+				+ "\tCost per unit: \t\t$" + panel.getPanelType().getPanelCost() + "\n"
+				+ "\tWattage: \t\t" + panel.getPanelType().getPanelWattage() + "\n"
+				+ "\tLife: \t\t" + panel.getPanelType().getPanelLifeYears() + "\n\n";
+				
+				count++;			
+			}
+			
+		}//end if
+		
+		if(inverter.equals(new SolarInverter())){
+			details += "ERROR: NO INVERTER DETECTED";
+		} else {
+			details += inverter.toString();
+		}
+		
+		
+		
+		jTextAreaConfirmationDetails.setText(details);
+		
+	}
 
 	/**
 	 * Callback method used by the parent panel to notify this panel that we
