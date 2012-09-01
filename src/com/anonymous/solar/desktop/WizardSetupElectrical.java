@@ -281,9 +281,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 					+ "Life: \t\t" + inverter.getInverterLifeYears() + " years\n" + "Efficiency: \t\t"
 					+ inverter.getInverterLossYear() + "%");
 
-			optionPane = new JOptionPane(data, JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION);
-
-			response = JOptionPane.showConfirmDialog(new JFrame(), data);
+			response = JOptionPane.showConfirmDialog(new JFrame(), data, "Submit Inverter", JOptionPane.YES_NO_OPTION);
 
 			// submit panel if user chose yes
 			if (response == YES) {

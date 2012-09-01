@@ -297,6 +297,10 @@ public class Inverter extends javax.swing.JDialog {
 			if(txtName.getText().equals("") == true || txtManufacturer.getText().equals("") == true  || txtCode.getText().equals("") == true){
 				throw new Exception();
 			}
+			
+			if((Double)jSpinnerCost.getModel().getValue() == 0){
+            	throw new Exception();
+            }
 				
 			inverter.setInverterName(txtName.getText());
 			inverter.setInverterManufacturer(txtManufacturer.getText());

@@ -166,7 +166,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
 		AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
 		panelSet.setVisible(true);
-		JOptionPane optionPane;
 		int response;
 		final int YES = 0;
 		final int NO = 1;
@@ -186,9 +185,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 					+ " W\n" + "Life: \t\t" + solPanel.getPanelLifeYears() + " years\n" + "Efficiency: \t\t"
 					+ solPanel.getPanelLossYear() + "%");
 
-			optionPane = new JOptionPane(data, JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION);
-
-			response = JOptionPane.showConfirmDialog(new JFrame(), data);
+			response = JOptionPane.showConfirmDialog(new JFrame(), data, "Submit Data", JOptionPane.YES_NO_OPTION);
 
 			// submit panel if user chose yes
 			if (response == YES) {

@@ -215,7 +215,9 @@ public class Wizard extends javax.swing.JPanel {
 		jButtonBack.setEnabled(true);
 		if (wizardIndex + 1 == panels.size()
 				||(wizardIndex == 5 && inverter == null)
-				||(wizardIndex == 5 && solarPanels.size() == 0)) {
+				||(wizardIndex == 5 && solarPanels.size() == 0)
+				||(wizardIndex == 5 && systemName != null && systemName.length() == 0)
+				||(wizardIndex == 5 && systemDescription != null && systemDescription.length() == 0)) {
 			jButtonNext.setEnabled(false);
 		}
 	}// GEN-LAST:event_jButtonNextActionPerformed

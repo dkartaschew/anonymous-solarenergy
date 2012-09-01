@@ -6,6 +6,7 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import com.anonymous.solar.shared.EmptyStringException;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -357,7 +358,15 @@ public class AddNewPanel extends javax.swing.JDialog {
                 if(txtName.getText().equals("") == true 
                         || txtManufacturer.getText().equals("") == true  
                         || txtCode.getText().equals("") == true){
-                        throw new Exception();
+                        throw new EmptyStringException();
+                }
+                
+                if((Double)jSpinnerCost.getModel().getValue() == 0){
+                	throw new Exception();
+                }
+                
+                if((Double)jSpinnerPanelCount.getModel().getValue() == 0){
+                	throw new Exception();
                 }
                 //panel data
                 panel.setPanelName(txtName.getText());
@@ -378,7 +387,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                 panels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
 
                 return true;
-
+        	
         } catch (Exception e) {
                 // Oops, something went wrong, let the client know.
                 return false;

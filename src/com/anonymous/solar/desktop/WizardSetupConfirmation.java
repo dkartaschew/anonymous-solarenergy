@@ -130,11 +130,20 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 		int panelCount = panels.size();
 		int count = 1;
 		
-		details += "SYSTEM NAME: " + sysName + "\n\n";
-		details += "DESCRIPTION: \n" + sysDescription + "\n\n";
-	
+		if(sysName != null && sysName.length() == 0){
+			details += "ERROR: NO NAME DETECTED\n\n";
+		} else {
+			details += "SYSTEM NAME: " + sysName + "\n\n";
+		}
+		
+		if(sysDescription != null && sysDescription.length() == 0){
+			details += "ERROR: NO DESCRIPTION DETECTED\n\n";
+		} else {
+			details += "DESCRIPTION: \n" + sysDescription + "\n\n";
+		}
+		
 		if(panelCount == 0){
-			details += "ERROR: NO PANELS SELECTED\n\n";
+			details += "ERROR: NO PANELS DETECTED\n\n";
 		} else {
 			details += "You have " + panelCount + " types of panels.\n";
 			
