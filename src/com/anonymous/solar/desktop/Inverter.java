@@ -6,6 +6,8 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import javax.swing.JFrame;
+
 import com.anonymous.solar.shared.SolarInverter;
 
 
@@ -20,7 +22,7 @@ public class Inverter extends javax.swing.JDialog {
      * Creates new form AddNewPanel
      */
     public Inverter(WizardSetupElectrical parent, boolean modal) {
-        super();
+        super(new JFrame(), true);
         initComponents();
         this.iParent = parent;
         LoadInverter(parent.inverter);
