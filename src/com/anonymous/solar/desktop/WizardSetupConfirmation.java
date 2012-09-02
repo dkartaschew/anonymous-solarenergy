@@ -148,7 +148,7 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 			details += "You have " + panelCount + " types of panels.\n";
 			
 			for(SolarPanels panel : panels){
-				details += "\t" + count + ". " + panel.getPanelCount() + " units of " 
+				details += "\t" + count + ") " + panel.getPanelCount() + " units of " 
 				+ panel.getPanelType().getPanelName() + "\n"
 				+ "\tDirection: \t\t" + panel.getPanelDirection() + "\n"
 				+ "\tCost per unit: \t\t$" + panel.getPanelType().getPanelCost() + "\n"
@@ -174,6 +174,9 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 		
 		//Customer details are always set, no need to check
 		details += "Customer Details\n";
+		if(data.getDailyAverageUsage() == 0 && data.getHourlyAverageUsage() == 0){
+			details += "WARNING: YOU USE NO ELECTRICITY. THIS SYSTEM IS POINTLESS\n";
+		}
 		details += data.toString("\t");
 		
 		

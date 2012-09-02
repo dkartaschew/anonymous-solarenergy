@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Main Entry Point for the wizard interface for the Desktop Application
@@ -27,6 +28,11 @@ public class Wizard extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8415093022775319312L;
+	
+	/**
+	 * Solar Setup Data
+	 */
+	private SolarSetup setup;
 	
 	/**
 	 * Variables to hold all the solar panel, inverter and client data
