@@ -193,8 +193,8 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Cost", "Wattage", "Life", "Efficiency"
-            }
+	                    "Name", "Cost", "Wattage", "Life", "Loss %", "Number", "Delete"
+	                }
         ));
         jScrollPaneSolarPanels.setViewportView(jTableSolarPanels);
 
@@ -263,8 +263,6 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
     private void jButtonSetInverterActionPerformed(java.awt.event.ActionEvent evt) {
         Inverter invert = new Inverter(new JFrame(), true);
         
-        
-        
         if(inverter != null){
         	invert.LoadInverter(inverter);
         }
@@ -310,7 +308,6 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
     	AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
-    	
     	panelSet.setVisible(true);
     	JOptionPane optionPane;
     	int response;
@@ -326,7 +323,7 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
             
             //Let user know what they are submitting and final check
 	        String data = String.valueOf(
-	        		"You have ordered " + solPanels.getPanelCount() + " panels\n" +
+	        		"You have orderd " + solPanels.getPanelCount() + " panels\n" +
 	        		"Your panels are facing " + solPanels.getPanelDirection() +
 	        		" with an azimuth of " + solPanels.getPanelAzimuth() + ".\n\n" +
 	        		"Name: \t\t" + solPanel.getPanelName() + "\n" +
