@@ -69,6 +69,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 
 		jLabelSetupName.setText("Setup Name:");
 
+		jTextFieldSetupName.setToolTipText("Enter the name of the project");
 		jTextFieldSetupName.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextFieldSetupNameActionPerformed(evt);
@@ -77,6 +78,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 
 		jLabelSetupDescription.setText("Setup Description:");
 
+		jTextAreaSetupDescription.setToolTipText("Enter a description for the project");
 		jTextAreaSetupDescription.setColumns(20);
 		jTextAreaSetupDescription.setRows(4);
 		jScrollPaneSetupDescription.setViewportView(jTextAreaSetupDescription);

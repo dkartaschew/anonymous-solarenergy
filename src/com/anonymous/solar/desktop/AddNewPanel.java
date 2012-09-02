@@ -6,6 +6,8 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import javax.swing.JOptionPane;
+
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -376,6 +378,12 @@ public class AddNewPanel extends javax.swing.JDialog {
                 
                 //Generate Panel(s)
                 newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
+                
+                JOptionPane.showMessageDialog(this,
+                		newPanels.getPanelCount().toString(),
+    					"1", JOptionPane.OK_OPTION);
+                
+                
                 this.parent.panels.add(newPanels);
                 
                 return true;

@@ -69,8 +69,10 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelDailyAvgUsage.setText("Daily Average Usage (KWh):");
 
         jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
+        jSpinnerDailyAverageUsage.setToolTipText("Enter the estimated usage of kWh per day ");
 
         jSpinnerDayTimeHourlyUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 24.0d, 1.0d));
+        jSpinnerDayTimeHourlyUsage.setToolTipText("Enter the estimated usage of kWh per hour");
 
         jLabelDayTime.setText("Day Time Hourly Usage (KWh):");
 
@@ -106,10 +108,12 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jPanelTariffGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Tariff Rates"));
 
         jSpinnerTariff11.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
+        jSpinnerTariff11.setToolTipText("Enter the cost of per kWh for tariff 11");
 
         jLabelTariff11.setText("Tariff 11 Fee");
 
         jSpinnerTariff33.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
+        jSpinnerTariff33.setToolTipText("Enter the cost per kWh for tariff 13");
 
         jLabelTariff33.setText("Tariff 33 Fee");
 
@@ -118,14 +122,18 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelUsage2.setText("Monthly Tariff 33 Cost:");
 
         jSpinnerMonthlyCostTariff1.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-
+        jSpinnerMonthlyCostTariff1.setToolTipText("Enter the monthly fee for tariff 11");
+        
         jSpinnerMonthlyCostTariff2.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-
+        jSpinnerMonthlyCostTariff2.setToolTipText("Enter the monthly fee for tariff 13");
+        
         jSpinnerFeedInFee.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.0d, 25.0d, 0.1d));
+        jSpinnerFeedInFee.setToolTipText("Enter the feed in fee per month");
 
         jLabelFeedInFee.setText("Feed in Fee");
 
         jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 500.0d, 1.0d));
+        jSpinnerTariffIncrease.setToolTipText("Enter the estimated yearly increase in tariff costs");
 
         jLabelAnnualTariffIncrease.setText("Annual Tariff Increase");
 

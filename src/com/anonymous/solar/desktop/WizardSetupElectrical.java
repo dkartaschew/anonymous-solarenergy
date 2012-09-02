@@ -71,8 +71,10 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jLabelInverter.setText("Inverter:");
 
 		jTextFieldInverter.setEditable(false);
+		jTextFieldInverter.setToolTipText("Press the button to the right to create an inverter");
 
 		jButtonSetInverter.setText("...");
+		jButtonSetInverter.setToolTipText("Select to create an inverter");
 		jButtonSetInverter.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButtonSetInverterActionPerformed(evt);
@@ -139,7 +141,9 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jLabelWiringEfficiency.setToolTipText("");
 
 		jSpinnerWiringLength.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 1.0d));
+		jSpinnerWiringLength.setToolTipText("Enter the length of the wiring to be used (in metres)");
 		jSpinnerWiringEfficiency.setModel(new javax.swing.SpinnerNumberModel(99.0d, 0.0d, 100.0d, 0.1d));
+		jSpinnerWiringEfficiency.setToolTipText("Enter the efficiency (%) of the wire used");
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
@@ -258,6 +262,8 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 			global.setWireLength((Double) jSpinnerWiringLength.getValue());
 			global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
 			global.setInverter(inverter);
+			
+			
 		}
 		return true;
 	}

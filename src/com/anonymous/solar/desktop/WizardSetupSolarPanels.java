@@ -28,16 +28,16 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 
 	private final String title = "Solar Panel Setup";
 
-	private Wizard parent = null;
+	protected Wizard wparent = null;
 
-	ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	protected ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
 
 	/**
 	 * Creates new form WizardFinish, with reference to parent
 	 */
 	public WizardSetupSolarPanels(Wizard parent) {
 		initComponents();
-		this.parent = parent;
+		this.wparent = parent;
 		UpdateTable();
 	}
 
@@ -61,7 +61,9 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		jPanelPanelInformationGroup = new javax.swing.JPanel();
 		jScrollPaneSolarPanels = new javax.swing.JScrollPane();
 		jTableSolarPanels = new javax.swing.JTable();
+		jTableSolarPanels.setToolTipText("Panel(s) display table");
 		jButtonAdd = new javax.swing.JButton();
+		jButtonAdd.setToolTipText("Select to add multiple sets of panels");
 
 		jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
 
@@ -132,7 +134,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackStart() {
-		SolarSetup global = parent.getSetup();
+		SolarSetup global = wparent.getSetup();
 		if (global != null) {
 			// Get our inverter.
 			panels = global.getPanels();
@@ -149,7 +151,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
-		if (validateInput) {
+		if (true) {
 			if (panels.size() == 0) {
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this,
@@ -159,12 +161,19 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 			}
 		}
 		// Set our parent's global data based on our form!
-		SolarSetup global = parent.getSetup();
+		SolarSetup global = wparent.getSetup();
 		if (global != null) {
 			global.getPanels().clear();
 			global.getPanels().addAll(panels);
+			
+			JOptionPane.showMessageDialog(this,
+					panels.size(),
+					"1", JOptionPane.OK_OPTION);
+            
 		}
-		return true;
+		UpdateTable();
+		return false;
+		
 	}
 
 	/**
@@ -185,10 +194,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		AddNewPanel panelSet = new AddNewPanel(this, true);
 		
 		panelSet.setVisible(true);
-		
-		JOptionPane.showMessageDialog(this,
-				"You are missing inverter details. Please enter these to continue.",
-				"Inverter Details Missing", JOptionPane.OK_OPTION);
 
 		UpdateTable();
 	}
