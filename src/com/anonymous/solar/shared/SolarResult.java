@@ -28,7 +28,7 @@ public class SolarResult {
 	}
 	
 	private void SolarSetupExceptionCheck(SolarSetup solarSetup) throws SolarResultException {
-		if (solarSetup.getInvertor() == null) {
+		if (solarSetup.getInverter() == null) {
 			throw new SolarResultException("You cannot have a null inverter");
 		}
 		if (solarSetup.getPanels() == null) {

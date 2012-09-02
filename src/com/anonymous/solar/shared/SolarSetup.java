@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SolarSetup {
 
 	private ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
-	private SolarInverter invertor = null;
+	private SolarInverter inverter = null;
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
 	private Double locationLatitude = 0.00;
@@ -31,7 +31,7 @@ public class SolarSetup {
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
 			Double locationLatitude, Double locationLongitude, CustomerData customerData, String setupName, String setupDescription) {
 		this.panels = panels;
-		this.invertor = invertor;
+		this.inverter = invertor;
 		this.wireLength = wireLength;
 		this.wireEfficiency = wireEfficiency;
 		this.locationLatitude = locationLatitude;
@@ -50,7 +50,7 @@ public class SolarSetup {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((invertor == null) ? 0 : invertor.hashCode());
+		result = prime * result + ((inverter == null) ? 0 : inverter.hashCode());
 		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
 		result = prime * result + ((wireEfficiency == null) ? 0 : wireEfficiency.hashCode());
 		result = prime * result + ((wireLength == null) ? 0 : wireLength.hashCode());
@@ -75,11 +75,11 @@ public class SolarSetup {
 			return false;
 		}
 		SolarSetup other = (SolarSetup) obj;
-		if (invertor == null) {
-			if (other.invertor != null) {
+		if (inverter == null) {
+			if (other.inverter != null) {
 				return false;
 			}
-		} else if (!invertor.equals(other.invertor)) {
+		} else if (!inverter.equals(other.inverter)) {
 			return false;
 		}
 		if (panels == null) {
@@ -170,24 +170,74 @@ public class SolarSetup {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return "SolarSetup [panels=" + panels + ", invertor=" + invertor + ", wireLength=" + wireLength
-				+ ", wireEfficiency=" + wireEfficiency + "]";
+	public String toString(){
+		String details = "<html>";
+		int panelCount = panels.size();
+		int count = 1;
+		
+		// TODO: Convert to using HTML for rendering.
+		if(setupName != null && setupName.length() == 0){
+			details += "<red>ERROR: NO NAME DETECTED</red>\n\n";
+		} else {
+			details += "<b>System Name:</b> " + setupName + "\n\n";
+		}
+		if(setupName != null){
+		details += "DESCRIPTION: \n" + setupDescription + "\n\n";
+		}
+
+		
+		if(panelCount == 0){
+			details += "ERROR: NO PANELS DETECTED\n\n";
+		} else {
+			details += "You have " + panelCount + " types of panels.\n";
+			
+			for(SolarPanels panel : panels){
+				details += "\t" + count + ") " + panel.getPanelCount() + " units of " 
+				+ panel.getPanelType().getPanelName() + "\n"
+				+ "\tDirection: \t\t" + panel.getPanelDirection() + "\n"
+				+ "\tCost per unit: \t\t$" + panel.getPanelType().getPanelCost() + "\n"
+				+ "\tWattage: \t\t" + panel.getPanelType().getPanelWattage() + "\n"
+				+ "\tLife: \t\t" + panel.getPanelType().getPanelLifeYears() + "\n\n";
+				
+				count++;			
+			}
+			
+		}//end if
+		
+		if(inverter == (null)){
+			details += "ERROR: NO INVERTER DETECTED\n\n";
+		} else {
+			details += "Name: " + inverter.getInverterName() + "\n" 
+					+ "\tWire Length: " + wireLength + "\n" 
+					+ "\tWire Efficiency: " + wireEfficiency + "\n" 
+					+ "\tWattage: \t\t" + inverter.getInverterWattage() + "W\n"
+					+ "\tCost: \t\t$" + inverter.getInverterCost() + "\n"
+					+ "\tLife: \t\t" + inverter.getInverterLifeYears() + "\n"
+					+ "\tEfficiency: \t\t" + inverter.getInverterEfficiency() + "\n\n";
+		}
+		
+		//Customer details are always set, no need to check
+		details += "Customer Details\n";
+		if(customerData.getDailyAverageUsage() == 0 && customerData.getHourlyAverageUsage() == 0){
+			details += "WARNING: YOU USE NO ELECTRICITY. THIS SYSTEM IS POINTLESS\n";
+		}
+		details += customerData.toString("\t")+"</html>";
+		return details;
 	}
 
 	/**
 	 * @return the invertor
 	 */
-	public SolarInverter getInvertor() {
-		return invertor;
+	public SolarInverter getInverter() {
+		return inverter;
 	}
 
 	/**
 	 * @param invertor
 	 *            the invertor to set
 	 */
-	public void setInvertor(SolarInverter invertor) {
-		this.invertor = invertor;
+	public void setInverter(SolarInverter invertor) {
+		this.inverter = invertor;
 	}
 
 	/**

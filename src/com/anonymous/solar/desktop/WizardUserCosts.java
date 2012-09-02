@@ -236,6 +236,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackStart() {
+    	// TODO: Add in callback to get global data.
         return true;
     }
 
@@ -248,6 +249,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
+    	// TODO: Add in callback to save global data.
         return true;
     }
 

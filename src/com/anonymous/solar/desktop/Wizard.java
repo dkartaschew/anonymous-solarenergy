@@ -25,7 +25,7 @@ public class Wizard extends javax.swing.JPanel {
 	/**
 	 * Solar Setup Data
 	 */
-	private SolarSetup setup;
+	private SolarSetup setup = new SolarSetup();
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard

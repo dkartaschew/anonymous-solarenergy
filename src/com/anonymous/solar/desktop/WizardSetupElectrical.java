@@ -220,7 +220,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
 			// Get our inverter.
-			inverter = global.getInvertor();
+			inverter = global.getInverter();
 			if (inverter != null) {
 				// set the text fields.
 				jTextFieldInverter.setText(inverter.getInverterName());
@@ -257,7 +257,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		if (global != null) {
 			global.setWireLength((Double) jSpinnerWiringLength.getValue());
 			global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
-			global.setInvertor(inverter);
+			global.setInverter(inverter);
 		}
 		return true;
 	}
@@ -305,7 +305,6 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 				jTextFieldInverter.setText(inverter.getInverterName());
 				jButtonSetInverter.setText("Edit");
 				jLabelInverterDetails.setText(inverter.toString(true));
-
 			}
 		}
 

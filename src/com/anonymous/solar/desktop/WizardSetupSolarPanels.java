@@ -4,12 +4,13 @@
  */
 package com.anonymous.solar.desktop;
 
-import com.anonymous.solar.shared.SolarPanel;
-import com.anonymous.solar.shared.SolarPanels;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Wizard Panel that displays the panels that will make up part of the solar
@@ -130,6 +131,12 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackStart() {
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			// Get our inverter.
+			panels = global.getPanels();
+			UpdateTable();
+		}
 		return true;
 	}
 
@@ -141,6 +148,21 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
+		if (validateInput) {
+			if (panels.size() == 0) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You are missing solar panel details. Please enter these to continue.",
+						"Solar Panel Configuration Information Missing", JOptionPane.OK_OPTION);
+				return false;
+			}
+		}
+		// Set our parent's global data based on our form!
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			global.getPanels().clear();
+			global.getPanels().addAll(panels);
+		}
 		return true;
 	}
 
@@ -152,11 +174,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	@Override
 	public String getTitle() {
 		return title;
-	}
-	
-	public ArrayList<SolarPanels> getSolarPanels(){
-		
-		return panels;
 	}
 
 	/**
@@ -205,7 +222,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		int size = panels.size();
 		int count = 0;
 		Object[][] panelData = new Object[size][7];
-		JButton button = new JButton();
 
 		for (SolarPanels panel : panels) {
 			panelData[count][0] = panel.getPanelType().getPanelName();

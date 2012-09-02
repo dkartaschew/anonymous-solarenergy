@@ -3,14 +3,7 @@
  */
 package com.anonymous.solar.desktop;
 
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
-import com.anonymous.solar.shared.CustomerData;
-import com.anonymous.solar.shared.SolarInverter;
-import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Panel for the wizard that displays the contents of the SolarSetup class, and
@@ -57,7 +50,7 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 		jLabelConfirmationMsg = new javax.swing.JLabel();
 		jPanel1 = new javax.swing.JPanel();
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextAreaConfirmationDetails = new javax.swing.JTextArea();
+		jTextAreaConfirmationDetails = new javax.swing.JEditorPane("text/html", "");
 
 		jLabelConfirmationMsg
 				.setText("If you are happy with the details above, please click on Next to generate a report");
@@ -65,8 +58,8 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Current Setup Details"));
 
 		jTextAreaConfirmationDetails.setEditable(false);
-		jTextAreaConfirmationDetails.setColumns(20);
-		jTextAreaConfirmationDetails.setRows(5);
+		//jTextAreaConfirmationDetails.setColumns(20);
+		//jTextAreaConfirmationDetails.setRows(5);
 		jScrollPane1.setViewportView(jTextAreaConfirmationDetails);
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -119,70 +112,11 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 	private javax.swing.JLabel jLabelConfirmationMsg;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextArea jTextAreaConfirmationDetails;
+	private javax.swing.JEditorPane jTextAreaConfirmationDetails;
 
 	// End of variables declaration//GEN-END:variables
 	
-	public boolean setSetUpDetails(ArrayList<SolarPanels> panels, SolarInverter inverter, Double wireLength, 
-			Double wireEfficiency, CustomerData data, String sysName, String sysDescription){
-		boolean acceptable = true;
-		String details = "";
-		int panelCount = panels.size();
-		int count = 1;
-		
-		if(sysName != null && sysName.length() == 0){
-			details += "ERROR: NO NAME DETECTED\n\n";
-		} else {
-			details += "SYSTEM NAME: " + sysName + "\n\n";
-		}
-		
-		if(sysDescription != null && sysDescription.length() == 0){
-			details += "ERROR: NO DESCRIPTION DETECTED\n\n";
-		} else {
-			details += "DESCRIPTION: \n" + sysDescription + "\n\n";
-		}
-		
-		if(panelCount == 0){
-			details += "ERROR: NO PANELS DETECTED\n\n";
-		} else {
-			details += "You have " + panelCount + " types of panels.\n";
-			
-			for(SolarPanels panel : panels){
-				details += "\t" + count + ") " + panel.getPanelCount() + " units of " 
-				+ panel.getPanelType().getPanelName() + "\n"
-				+ "\tDirection: \t\t" + panel.getPanelDirection() + "\n"
-				+ "\tCost per unit: \t\t$" + panel.getPanelType().getPanelCost() + "\n"
-				+ "\tWattage: \t\t" + panel.getPanelType().getPanelWattage() + "\n"
-				+ "\tLife: \t\t" + panel.getPanelType().getPanelLifeYears() + "\n\n";
-				
-				count++;			
-			}
-			
-		}//end if
-		
-		if(inverter == (null)){
-			details += "ERROR: NO INVERTER DETECTED\n\n";
-		} else {
-			details += "Name: " + inverter.getInverterName() + "\n" 
-					+ "\tWire Length: " + wireLength + "\n" 
-					+ "\tWire Efficiency: " + wireEfficiency + "\n" 
-					+ "\tWattage: \t\t" + inverter.getInverterWattage() + "W\n"
-					+ "\tCost: \t\t$" + inverter.getInverterCost() + "\n"
-					+ "\tLife: \t\t" + inverter.getInverterLifeYears() + "\n"
-					+ "\tEfficiency: \t\t" + inverter.getInverterEfficiency() + "\n\n";
-		}
-		
-		//Customer details are always set, no need to check
-		details += "Customer Details\n";
-		if(data.getDailyAverageUsage() == 0 && data.getHourlyAverageUsage() == 0){
-			details += "WARNING: YOU USE NO ELECTRICITY. THIS SYSTEM IS POINTLESS\n";
-		}
-		details += data.toString("\t");
-		
-		
-		jTextAreaConfirmationDetails.setText(details);
-		return acceptable;
-	}
+
 
 	/**
 	 * Callback method used by the parent panel to notify this panel that we
@@ -192,6 +126,11 @@ public class WizardSetupConfirmation extends javax.swing.JPanel implements Wizar
 	 */
 	@Override
 	public boolean callbackStart() {
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			jTextAreaConfirmationDetails.setText(global.toString());
+			// TODO: Add in checks to see if any invalid data, and if so, disable the NEXT button.
+		}
 		return true;
 	}
 
