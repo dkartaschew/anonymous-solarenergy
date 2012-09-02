@@ -6,7 +6,6 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
-import com.anonymous.solar.shared.EmptyStringException;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -91,7 +90,8 @@ public class AddNewPanel extends javax.swing.JDialog {
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+ 
+				btnSubmitActionPerformed(evt);
             }
         });
 
@@ -291,7 +291,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_btnSubmitActionPerformed
     	success = submitPanelData();
     	
     	if(success){
@@ -347,6 +347,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     /**
      * Submit the panel information
      * @return 
+     * @throws Exception 
      */
     private boolean submitPanelData(){
         SolarPanel panel = new SolarPanel();
@@ -355,19 +356,19 @@ public class AddNewPanel extends javax.swing.JDialog {
     	Double panelAzimuth;
     	
         try {
-                if(txtName.getText().equals("") == true 
-                        || txtManufacturer.getText().equals("") == true  
-                        || txtCode.getText().equals("") == true){
-                        throw new EmptyStringException();
-                }
-                
-                if((Double)jSpinnerCost.getModel().getValue() == 0){
-                	throw new Exception();
-                }
-                
-                if((Double)jSpinnerPanelCount.getModel().getValue() == 0){
-                	throw new Exception();
-                }
+        	if(txtName.getText().equals("") == true 
+                    || txtManufacturer.getText().equals("") == true  
+                    || txtCode.getText().equals("") == true){
+                    throw new Exception();
+            }
+            
+        	if((Double)jSpinnerCost.getModel().getValue() == 0){
+            	throw new Exception();
+            }
+            
+            if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
+            	throw new Exception();
+            }
                 //panel data
                 panel.setPanelName(txtName.getText());
                 panel.setPanelManufacturer(txtManufacturer.getText());
