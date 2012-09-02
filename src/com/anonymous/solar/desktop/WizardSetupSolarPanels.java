@@ -38,6 +38,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	public WizardSetupSolarPanels(Wizard parent) {
 		initComponents();
 		this.parent = parent;
+		UpdateTable();
 	}
 
 	/**
@@ -181,37 +182,15 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * @param evt
 	 */
 	private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
-		AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
+		AddNewPanel panelSet = new AddNewPanel(this, true);
+		
 		panelSet.setVisible(true);
-		int response;
-		final int YES = 0;
-		final int NO = 1;
+		
+		JOptionPane.showMessageDialog(this,
+				"You are missing inverter details. Please enter these to continue.",
+				"Inverter Details Missing", JOptionPane.OK_OPTION);
 
-		boolean success = panelSet.GetSuccess();
-
-		// if panel was created successfully
-		if (success) {
-			SolarPanels solPanels = panelSet.GetPanels();
-			SolarPanel solPanel = solPanels.getPanelType();
-
-			// Let user know what they are submitting and final check
-			String data = String.valueOf("You have orderd " + solPanels.getPanelCount() + " panels\n"
-					+ "Your panels are facing " + solPanels.getPanelDirection() + " with an azimuth of "
-					+ solPanels.getPanelAzimuth() + ".\n\n" + "Name: \t\t" + solPanel.getPanelName() + "\n"
-					+ "Cost: \t\t$" + solPanel.getPanelCost() + "\n" + "Wattage: \t\t" + solPanel.getPanelWattage()
-					+ " W\n" + "Life: \t\t" + solPanel.getPanelLifeYears() + " years\n" + "Efficiency: \t\t"
-					+ solPanel.getPanelLossYear() + "%");
-
-			response = JOptionPane.showConfirmDialog(new JFrame(), data, "Submit Data", JOptionPane.YES_NO_OPTION);
-
-			// submit panel if user chose yes
-			if (response == YES) {
-				panels.add(solPanels);
-				UpdateTable();
-			}
-		}
-
-		panelSet.dispose();
+		UpdateTable();
 	}
 
 	/**

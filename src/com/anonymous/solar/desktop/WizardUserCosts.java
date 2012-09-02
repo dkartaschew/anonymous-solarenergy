@@ -4,7 +4,10 @@
  */
 package com.anonymous.solar.desktop;
 
+import javax.swing.JOptionPane;
+
 import com.anonymous.solar.shared.CustomerData;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  *
@@ -16,10 +19,6 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
     private Wizard parent = null;
     
-    /**
-     * Customer Data class
-     */
-    CustomerData data = null;
     
     /**
      * Creates new form WizardUserCosts
@@ -236,7 +235,19 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackStart() {
-    	// TODO: Add in callback to get global data.
+    	SolarSetup global = parent.getSetup();
+    	CustomerData data;
+		if (global != null) {
+			data = global.getCustomerData();
+			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
+			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
+			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
+			jSpinnerTariff11.setValue(data.getTariff11Fee());
+			jSpinnerMonthlyCostTariff2.setValue(data.getTariff13Cost());
+			jSpinnerTariff33.setValue(data.getTariff13Fee());
+			jSpinnerTariffIncrease.setValue(data.getAnnualTariffIncrease());
+			jSpinnerFeedInFee.setValue(data.getFeedInFee());
+		}
         return true;
     }
 
@@ -249,9 +260,34 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
-    	// TODO: Add in callback to save global data.
-        return true;
-    }
+    	CustomerData data = new CustomerData();
+    	
+		if (validateInput) {
+			if ((((Double)jSpinnerDailyAverageUsage.getValue()) == 0) && 
+					(((Double)jSpinnerDayTimeHourlyUsage.getValue()) == 0)) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this, "Please enter either an hourly usage, a daily usage or both.",
+						"Estimated Usage Missing", JOptionPane.OK_OPTION);
+				return false;
+			}
+		}
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			
+			// Store the name and description fields.
+			data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
+			data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
+			data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());
+			data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
+			data.setTariff13Cost((Double) jSpinnerMonthlyCostTariff2.getValue());
+			data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
+			data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
+			data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+			global.setCustomerData(data);
+			
+		}
+		return true;
+	}
 
 
     /**
@@ -263,19 +299,4 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     public String getTitle() {
         return title;
     }
-
-	public CustomerData getCustomerData() {
-		data = new CustomerData();
-		
-		data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
-		data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
-		data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());
-		data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
-		data.setTariff13Cost((Double) jSpinnerMonthlyCostTariff2.getValue());
-		data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
-		data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
-		data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
-		
-		return data;
-	}
 }

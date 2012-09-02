@@ -261,92 +261,11 @@ public class InformationEntryJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void jButtonSetInverterActionPerformed(java.awt.event.ActionEvent evt) {
-        Inverter invert = new Inverter(new JFrame(), true);
         
-        if(inverter != null){
-        	invert.LoadInverter(inverter);
-        }
-        
-        invert.setVisible(true);
-        
-        JOptionPane optionPane;
-    	int response;
-    	final int YES = 0;
-    	final int NO = 1;
-        
-        boolean success = invert.GetSuccess();
-        
-        //if panel was created successfully
-        if(success){
-        	SolarInverter inverter = invert.GetInverter();
-            
-            //Let user know what they are submitting and final check
-	        String data = String.valueOf(
-	        		"Name: \t\t" + inverter.getInverterName() + "\n" +
-	        		"Cost: \t\t$" + inverter.getInverterCost() + "\n" + 
-	        		"Wattage: \t\t" + inverter.getInverterWattage() + " W\n" + 
-	        		"Life: \t\t" + inverter.getInverterLifeYears() + " years\n" +
-	        		"Efficiency: \t\t" + inverter.getInverterLossYear() + "%");
-	        
-	        optionPane = new JOptionPane(
-	        	    data,
-	        	    JOptionPane.QUESTION_MESSAGE,
-	        	    JOptionPane.DEFAULT_OPTION);
-	        
-	        response = JOptionPane.showConfirmDialog(new JFrame(), data);
-	        
-	        //submit panel if user chose yes
-	        if(response == YES){
-		        this.inverter = inverter;
-		        jTextFieldInverter.setText(inverter.getInverterName());
-		        jButtonSetInverter.setText("Edit");
-	        }
-        }
-        
-        invert.dispose();
     }
     
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
-    	AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
-    	panelSet.setVisible(true);
-    	JOptionPane optionPane;
-    	int response;
-    	final int YES = 0;
-    	final int NO = 1;
-        
-        boolean success = panelSet.GetSuccess();
-        
-        //if panel was created successfully
-        if(success){
-        	SolarPanels solPanels = panelSet.GetPanels();
-            SolarPanel solPanel = solPanels.getPanelType();
-            
-            //Let user know what they are submitting and final check
-	        String data = String.valueOf(
-	        		"You have orderd " + solPanels.getPanelCount() + " panels\n" +
-	        		"Your panels are facing " + solPanels.getPanelDirection() +
-	        		" with an azimuth of " + solPanels.getPanelAzimuth() + ".\n\n" +
-	        		"Name: \t\t" + solPanel.getPanelName() + "\n" +
-	        		"Cost: \t\t$" + solPanel.getPanelCost() + "\n" + 
-	        		"Wattage: \t\t" + solPanel.getPanelWattage() + " W\n" + 
-	        		"Life: \t\t" + solPanel.getPanelLifeYears() + " years\n" +
-	        		"Efficiency: \t\t" + solPanel.getPanelLossYear() + "%");
-	        
-	        optionPane = new JOptionPane(
-	        	    data,
-	        	    JOptionPane.QUESTION_MESSAGE,
-	        	    JOptionPane.DEFAULT_OPTION);
-	        
-	        response = JOptionPane.showConfirmDialog(new JFrame(), data);
-	        
-	        //submit panel if user chose yes
-	        if(response == YES){
-		        panels.add(solPanels);
-		        UpdateTable();
-	        }
-        }
-        
-        panelSet.dispose();
+
     }
     
 	private void UpdateTable(){

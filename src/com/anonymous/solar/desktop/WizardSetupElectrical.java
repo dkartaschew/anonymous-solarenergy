@@ -273,41 +273,14 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	}
 
 	private void jButtonSetInverterActionPerformed(java.awt.event.ActionEvent evt) {
-		Inverter invert = new Inverter(new JFrame(), true);
-
-		if (inverter != null) {
-			invert.LoadInverter(inverter);
-		}
+		Inverter invert = new Inverter(this, true);
 
 		invert.setVisible(true);
 
-		int response;
-		final int YES = 0;
-		final int NO = 1;
-
-		boolean success = invert.GetSuccess();
-
-		// if panel was created successfully
-		if (success) {
-			SolarInverter inverter = invert.GetInverter();
-
-			// Let user know what they are submitting and final check
-			String data = String.valueOf("Name: \t\t" + inverter.getInverterName() + "\n" + "Cost: \t\t$"
-					+ inverter.getInverterCost() + "\n" + "Wattage: \t\t" + inverter.getInverterWattage() + " W\n"
-					+ "Life: \t\t" + inverter.getInverterLifeYears() + " years\n" + "Efficiency: \t\t"
-					+ inverter.getInverterLossYear() + "%");
-
-			response = JOptionPane.showConfirmDialog(new JFrame(), data, "Submit Inverter", JOptionPane.YES_NO_OPTION);
-
-			// submit panel if user chose yes
-			if (response == YES) {
-				this.inverter = inverter;
-				jTextFieldInverter.setText(inverter.getInverterName());
-				jButtonSetInverter.setText("Edit");
-				jLabelInverterDetails.setText(inverter.toString(true));
-			}
+		if (inverter != null) {
+			jTextFieldInverter.setText(inverter.getInverterName());
+			jButtonSetInverter.setText("Edit");
+			jLabelInverterDetails.setText(inverter.toString(true));
 		}
-
-		invert.dispose();
 	}
 }

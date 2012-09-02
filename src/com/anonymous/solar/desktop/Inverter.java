@@ -19,14 +19,21 @@ public class Inverter extends javax.swing.JDialog {
     /**
      * Creates new form AddNewPanel
      */
-    public Inverter(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Inverter(WizardSetupElectrical parent, boolean modal) {
+        super();
         initComponents();
+        this.iParent = parent;
+        LoadInverter(parent.inverter);
     }
-    /*
+    /**
      * Solar Inverter
      */
     SolarInverter inverter;
+    
+    /**
+     * Parent
+     */
+    private WizardSetupElectrical iParent = null;
    
 
     /**
@@ -249,7 +256,7 @@ public class Inverter extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-    	success = submitInverterData();
+    	boolean success = submitInverterData();
     	
     	if(success){
             doClose();
@@ -266,29 +273,21 @@ public class Inverter extends javax.swing.JDialog {
         setVisible(false);
     }
     
-    public SolarInverter GetInverter(){
-    	return inverter;
+    private void LoadInverter(SolarInverter oldInverter){
+    	
+    	if(oldInverter != null){
+			txtName.setText(oldInverter.getInverterName());
+			txtManufacturer.setText(oldInverter.getInverterManufacturer());
+			txtCode.setText(oldInverter.getInverterManufacturerCode());
+			jSpinnerWattage.setValue(oldInverter.getInverterWattage());
+			jSpinnerCost.setValue(oldInverter.getInverterCost());
+			jSpinnerEffLossYr.setValue(oldInverter.getInverterLossYear());
+			jSpinnerRRP.setValue(oldInverter.getInverterRRP());
+			jSpinnerLife.setValue(oldInverter.getInverterLifeYears());
+			jSpinnerEfficiency.setValue(oldInverter.getInverterEfficiency());
+    	}
     }
     
-    public void LoadInverter(SolarInverter oldInverter){
-    	txtName.setText(oldInverter.getInverterName());
-		txtManufacturer.setText(oldInverter.getInverterManufacturer());
-		txtCode.setText(oldInverter.getInverterManufacturerCode());
-                jSpinnerWattage.setValue(oldInverter.getInverterWattage());
-                jSpinnerCost.setValue(oldInverter.getInverterCost());
-                jSpinnerEffLossYr.setValue(oldInverter.getInverterLossYear());
-                jSpinnerRRP.setValue(oldInverter.getInverterRRP());
-                jSpinnerLife.setValue(oldInverter.getInverterLifeYears());
-                jSpinnerEfficiency.setValue(oldInverter.getInverterEfficiency());
-    }
-    
-    /**
-     * Get the success of the panel acquisition
-     * @return true on success, false if not
-     */
-    public boolean GetSuccess(){
-    	return success;
-    }
     
     private boolean submitInverterData(){
     	inverter = new SolarInverter();
@@ -305,12 +304,13 @@ public class Inverter extends javax.swing.JDialog {
 			inverter.setInverterName(txtName.getText());
 			inverter.setInverterManufacturer(txtManufacturer.getText());
 			inverter.setInverterManufacturerCode(txtCode.getText());
-                        inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+            inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 			inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
 			inverter.setInverterLossYear((Double)jSpinnerEffLossYr.getModel().getValue());
 			inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
 			inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
 			inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
+			this.iParent.inverter = inverter;
 			return true;
 
 		} catch (Exception e) {
@@ -349,6 +349,5 @@ public class Inverter extends javax.swing.JDialog {
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-   private boolean success = false;
 
 }
