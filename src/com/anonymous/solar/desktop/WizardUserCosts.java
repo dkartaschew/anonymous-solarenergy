@@ -247,7 +247,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      * @return true is ok to move.
      */
     @Override
-    public boolean callbackDispose() {
+    public boolean callbackDispose(boolean validateInput) {
         return true;
     }
 

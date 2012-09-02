@@ -20,19 +20,25 @@ public class SolarSetup {
 	private Double wireEfficiency = 100.00;
 	private Double locationLatitude = 0.00;
 	private Double locationLongitude = 0.00;
+	private CustomerData customerData = new CustomerData();
+	private String setupName = null;
+	private String setupDescription = null;
 
 	public SolarSetup() {
-		
+
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
-			Double locationLatitude, Double locationLongitude) {
+			Double locationLatitude, Double locationLongitude, CustomerData customerData, String setupName, String setupDescription) {
 		this.panels = panels;
 		this.invertor = invertor;
 		this.wireLength = wireLength;
 		this.wireEfficiency = wireEfficiency;
 		this.locationLatitude = locationLatitude;
 		this.locationLongitude = locationLongitude;
+		this.customerData = customerData;
+		this.setupName = setupName;
+		this.setupDescription = setupDescription;
 	}
 
 	/*
@@ -48,6 +54,7 @@ public class SolarSetup {
 		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
 		result = prime * result + ((wireEfficiency == null) ? 0 : wireEfficiency.hashCode());
 		result = prime * result + ((wireLength == null) ? 0 : wireLength.hashCode());
+		result = prime * result + ((customerData == null) ? 0 : customerData.hashCode());
 		return result;
 	}
 
@@ -96,7 +103,65 @@ public class SolarSetup {
 		} else if (!wireLength.equals(other.wireLength)) {
 			return false;
 		}
+
+		if (customerData == null) {
+			if (other.customerData != null) {
+				return false;
+			}
+		} else if (!customerData.equals(other.customerData)) {
+			return false;
+		}
 		return true;
+	}
+
+	/**
+	 * get the object that holds the customer data.
+	 * 
+	 * @return
+	 */
+	public CustomerData getCustomerData() {
+		return customerData;
+	}
+
+	/**
+	 * Set the object that will hold the customer data.
+	 * 
+	 * @param customerData
+	 */
+	public void setCustomerData(CustomerData customerData) {
+		this.customerData = customerData;
+	}
+
+	/**
+	 * getter for setup name
+	 * @return
+	 */
+	public String getSetupName() {
+		return setupName;
+	}
+
+	/**
+	 * setter for setup name
+	 * @param setupName
+	 */
+	public void setSetupName(String setupName) {
+		this.setupName = setupName;
+	}
+
+	/**
+	 * getter for setup description
+	 * @return
+	 */
+	public String getSetupDescription() {
+		return setupDescription;
+	}
+
+	/**
+	 * setter for setup description.
+	 * @param setupDescription
+	 */
+	public void setSetupDescription(String setupDescription) {
+		this.setupDescription = setupDescription;
 	}
 
 	/*
@@ -162,7 +227,7 @@ public class SolarSetup {
 	public boolean removePanels(SolarPanels panels) {
 		return this.panels.remove(panels);
 	}
-	
+
 	public ArrayList<SolarPanels> getPanels() {
 		return panels;
 	}

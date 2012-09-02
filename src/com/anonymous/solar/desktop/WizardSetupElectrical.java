@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarInverter;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Wizard Panel that displays the electrical setup for the solar setup.
@@ -63,12 +64,12 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		jLabelWiringLength = new javax.swing.JLabel();
 		jLabelWiringEfficiency = new javax.swing.JLabel();
 		jSpinnerWiringLength = new javax.swing.JSpinner();
-        jSpinnerWiringEfficiency = new javax.swing.JSpinner();
+		jSpinnerWiringEfficiency = new javax.swing.JSpinner();
 
 		jPanelElectricalGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter"));
 
 		jLabelInverter.setText("Inverter:");
-		
+
 		jTextFieldInverter.setEditable(false);
 
 		jButtonSetInverter.setText("...");
@@ -136,9 +137,9 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 
 		jLabelWiringEfficiency.setText("Wiring Efficiency (%):");
 		jLabelWiringEfficiency.setToolTipText("");
-		
+
 		jSpinnerWiringLength.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 1000.0d, 1.0d));
-        jSpinnerWiringEfficiency.setModel(new javax.swing.SpinnerNumberModel(99.0d, 0.0d, 100.0d, 0.1d));
+		jSpinnerWiringEfficiency.setModel(new javax.swing.SpinnerNumberModel(99.0d, 0.0d, 100.0d, 0.1d));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
@@ -203,8 +204,8 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanelElectricalGroup;
 	private javax.swing.JTextField jTextFieldInverter;
-    private javax.swing.JSpinner jSpinnerWiringLength;
-    private javax.swing.JSpinner jSpinnerWiringEfficiency;
+	private javax.swing.JSpinner jSpinnerWiringLength;
+	private javax.swing.JSpinner jSpinnerWiringEfficiency;
 
 	// End of variables declaration//GEN-END:variables
 
@@ -216,6 +217,20 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	 */
 	@Override
 	public boolean callbackStart() {
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			// Get our inverter.
+			inverter = global.getInvertor();
+			if (inverter != null) {
+				// set the text fields.
+				jTextFieldInverter.setText(inverter.getInverterName());
+				jButtonSetInverter.setText("Edit");
+				jLabelInverterDetails.setText(inverter.toString(true));
+			}
+			// Set the wiring length, etc.
+			jSpinnerWiringLength.setValue(global.getWireLength());
+			jSpinnerWiringEfficiency.setValue(global.getWireEfficiency());
+		}
 		return true;
 	}
 
@@ -226,23 +241,25 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	 * @return true is ok to move.
 	 */
 	@Override
-	public boolean callbackDispose() {
-		return true;
-	}
-	
-	public SolarInverter getInverter(){
-		if(inverter == null){
-			return null;
+	public boolean callbackDispose(boolean validateInput) {
+
+		if (validateInput) {
+			if (inverter == null) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You are missing inverter details. Please enter these to continue.",
+						"Inverter Details Missing", JOptionPane.OK_OPTION);
+				return false;
+			}
 		}
-		return inverter;
-	}
-	
-	public Double getWireLength(){
-		return (Double) (jSpinnerWiringLength.getValue());
-	}
-	
-	public Double getWireEfficiency(){
-		return (Double) (jSpinnerWiringEfficiency.getValue());
+		// Set our parent's global data based on our form!
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			global.setWireLength((Double) jSpinnerWiringLength.getValue());
+			global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
+			global.setInvertor(inverter);
+		}
+		return true;
 	}
 
 	/**
@@ -264,7 +281,6 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 
 		invert.setVisible(true);
 
-		JOptionPane optionPane;
 		int response;
 		final int YES = 0;
 		final int NO = 1;
@@ -289,7 +305,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 				jTextFieldInverter.setText(inverter.getInverterName());
 				jButtonSetInverter.setText("Edit");
 				jLabelInverterDetails.setText(inverter.toString(true));
-				
+
 			}
 		}
 

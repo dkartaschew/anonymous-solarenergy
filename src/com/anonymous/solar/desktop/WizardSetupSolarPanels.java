@@ -140,7 +140,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * @return true is ok to move.
 	 */
 	@Override
-	public boolean callbackDispose() {
+	public boolean callbackDispose(boolean validateInput) {
 		return true;
 	}
 

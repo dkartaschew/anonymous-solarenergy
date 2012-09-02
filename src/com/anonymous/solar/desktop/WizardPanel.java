@@ -24,7 +24,7 @@ public interface WizardPanel {
 	 * @return true, if the callback succeeded, otherwise false. (false will
 	 *         rollback the operation).
 	 */
-	public boolean callbackDispose();
+	public boolean callbackDispose(boolean validateInput);
 
 	/**
 	 * Retrieve the title text that will be displayed during the operation of
