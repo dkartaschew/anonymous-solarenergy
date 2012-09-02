@@ -51,6 +51,10 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
         jLabelMainDescription = new javax.swing.JLabel();
         labelMainTitle = new javax.swing.JLabel();
         imageSolar = new javax.swing.JLabel();
+        
+        jLabelMainDescription.setName("mainDescription");
+        labelMainTitle.setName("mainTitle");
+        imageSolar.setName("imageSolar");
 
         jLabelMainDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelMainDescription.setText("<html>\n<center>\nA simple Solar Power Calculator<br>\nfor domestic installations.<br>\n<br>\n<small>Copyright 2012, Team Anonymous (QUT)<br>\nReleased under the GPL v3 license</small>\n</center>\n</html>");

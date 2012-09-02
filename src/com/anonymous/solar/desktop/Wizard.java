@@ -80,6 +80,10 @@ public class Wizard extends javax.swing.JPanel {
 		jPanelMainContent = new javax.swing.JPanel();
 		jLabelHeader = new javax.swing.JLabel();
 		jSeparator2 = new javax.swing.JSeparator();
+		
+		jButtonBack.setName("backButton");
+		jButtonNext.setName("nextButton");
+		jButtonClose.setName("closeButton");
 
 		jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/com/anonymous/solar/desktop/images/go-previous.png"))); // NOI18N
