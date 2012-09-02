@@ -54,19 +54,28 @@ public class Inverter extends javax.swing.JDialog {
         lblLoss = new javax.swing.JLabel();
         lblLife = new javax.swing.JLabel();
         jSpinnerWattage = new javax.swing.JSpinner();
+        jSpinnerWattage.setToolTipText("Enter the wattage of the inverter");
         jSpinnerLife = new javax.swing.JSpinner();
+        jSpinnerLife.setToolTipText("Enter the expected life if the inverter (in years)");
         jSpinnerEfficiency = new javax.swing.JSpinner();
+        jSpinnerEfficiency.setToolTipText("Enter the expected efficiency of the inverter (in %)");
         jSpinnerEffLossYr = new javax.swing.JSpinner();
+        jSpinnerEffLossYr.setToolTipText("Enter the expected drop in efficiency per year");
         jPanel2 = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        txtName.setToolTipText("Enter the name of the inverter");
         lblCost = new javax.swing.JLabel();
         jSpinnerCost = new javax.swing.JSpinner();
+        jSpinnerCost.setToolTipText("Enter the expected cost of the inverter");
         txtManufacturer = new javax.swing.JTextField();
+        txtManufacturer.setToolTipText("Enter the manufacturer of the inverter");
         lblManufacturer = new javax.swing.JLabel();
         lblRRP = new javax.swing.JLabel();
         jSpinnerRRP = new javax.swing.JSpinner();
+        jSpinnerRRP.setToolTipText("Enter the recommended retail price of the inverter");
         txtCode = new javax.swing.JTextField();
+        txtCode.setToolTipText("Enter the unique identifier code of the inverter");
         lblCode = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);

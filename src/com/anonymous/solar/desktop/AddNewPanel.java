@@ -62,13 +62,17 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblCode = new javax.swing.JLabel();
         lblEfficiency = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        txtName.setToolTipText("Enter a name of the panel(s)");
         lblLife = new javax.swing.JLabel();
         lblWattage = new javax.swing.JLabel();
         lblRRP = new javax.swing.JLabel();
         txtManufacturer = new javax.swing.JTextField();
+        txtManufacturer.setToolTipText("Enter the manufacturer of the panel(s)");
         txtCode = new javax.swing.JTextField();
+        txtCode.setToolTipText("Enter the unique identifier code of the panel(s)");
         lblManufacturer = new javax.swing.JLabel();
         jSpinnerLife = new javax.swing.JSpinner();
+        jSpinnerLife.setToolTipText("Enter the expected life of the panel(s)");
         jSpinnerWattage = new javax.swing.JSpinner();
         jSpinnerCost = new javax.swing.JSpinner();
         jSpinnerRRP = new javax.swing.JSpinner();
