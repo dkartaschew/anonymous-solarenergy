@@ -4,12 +4,13 @@
  */
 package com.anonymous.solar.desktop;
 
-import com.anonymous.solar.shared.SolarPanel;
-import com.anonymous.solar.shared.SolarPanels;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Wizard Panel that displays the panels that will make up part of the solar
@@ -27,16 +28,17 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 
 	private final String title = "Solar Panel Setup";
 
-	private Wizard parent = null;
+	protected Wizard wparent = null;
 
-	ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	protected ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
 
 	/**
 	 * Creates new form WizardFinish, with reference to parent
 	 */
 	public WizardSetupSolarPanels(Wizard parent) {
 		initComponents();
-		this.parent = parent;
+		this.wparent = parent;
+		UpdateTable();
 	}
 
 	/**
@@ -59,7 +61,9 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		jPanelPanelInformationGroup = new javax.swing.JPanel();
 		jScrollPaneSolarPanels = new javax.swing.JScrollPane();
 		jTableSolarPanels = new javax.swing.JTable();
+		jTableSolarPanels.setToolTipText("Panel(s) display table");
 		jButtonAdd = new javax.swing.JButton();
+		jButtonAdd.setToolTipText("Select to add multiple sets of panels");
 
 		jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
 
@@ -126,10 +130,20 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * Callback method used by the parent panel to notify this panel that we
 	 * have been given context to the user.
 	 * 
+	 * PLEASE NOTE: THIS PASSES THE REFERENCE OF THE GLOBAL'S "PANELS" INTO THE LOCAL 
+	 * COPY OF PANELS. ONCE SOMETHING UPDATES THE LOCAL DATA, IT WILL UPDATE THE GLOBAL
+	 * DATA
+	 * 
 	 * @return true is ok to move.
 	 */
 	@Override
 	public boolean callbackStart() {
+		SolarSetup global = wparent.getSetup();
+		if (global != null) {
+			// Get our inverter.
+			panels = global.getPanels();
+			UpdateTable();
+		}
 		return true;
 	}
 
@@ -140,8 +154,18 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * @return true is ok to move.
 	 */
 	@Override
-	public boolean callbackDispose() {
+	public boolean callbackDispose(boolean validateInput) {
+		if (validateInput) {
+			if (panels.size() == 0) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You are missing solar panel details. Please enter these to continue.",
+						"Solar Panel Configuration Information Missing", JOptionPane.OK_OPTION);
+				return false;
+			}
+		}
 		return true;
+		
 	}
 
 	/**
@@ -153,48 +177,17 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	public String getTitle() {
 		return title;
 	}
-	
-	public ArrayList<SolarPanels> getSolarPanels(){
-		
-		return panels;
-	}
 
 	/**
 	 * Event handler to operate the Add Button to include a solar panel within the setup.
 	 * @param evt
 	 */
 	private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
-		AddNewPanel panelSet = new AddNewPanel(new JFrame(), true);
+		AddNewPanel panelSet = new AddNewPanel(this, true);
+		
 		panelSet.setVisible(true);
-		int response;
-		final int YES = 0;
-		final int NO = 1;
 
-		boolean success = panelSet.GetSuccess();
-
-		// if panel was created successfully
-		if (success) {
-			SolarPanels solPanels = panelSet.GetPanels();
-			SolarPanel solPanel = solPanels.getPanelType();
-
-			// Let user know what they are submitting and final check
-			String data = String.valueOf("You have orderd " + solPanels.getPanelCount() + " panels\n"
-					+ "Your panels are facing " + solPanels.getPanelDirection() + " with an azimuth of "
-					+ solPanels.getPanelAzimuth() + ".\n\n" + "Name: \t\t" + solPanel.getPanelName() + "\n"
-					+ "Cost: \t\t$" + solPanel.getPanelCost() + "\n" + "Wattage: \t\t" + solPanel.getPanelWattage()
-					+ " W\n" + "Life: \t\t" + solPanel.getPanelLifeYears() + " years\n" + "Efficiency: \t\t"
-					+ solPanel.getPanelLossYear() + "%");
-
-			response = JOptionPane.showConfirmDialog(new JFrame(), data, "Submit Data", JOptionPane.YES_NO_OPTION);
-
-			// submit panel if user chose yes
-			if (response == YES) {
-				panels.add(solPanels);
-				UpdateTable();
-			}
-		}
-
-		panelSet.dispose();
+		UpdateTable();
 	}
 
 	/**
@@ -205,7 +198,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		int size = panels.size();
 		int count = 0;
 		Object[][] panelData = new Object[size][7];
-		JButton button = new JButton();
 
 		for (SolarPanels panel : panels) {
 			panelData[count][0] = panel.getPanelType().getPanelName();

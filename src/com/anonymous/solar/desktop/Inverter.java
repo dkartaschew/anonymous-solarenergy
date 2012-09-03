@@ -6,6 +6,8 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import javax.swing.JFrame;
+
 import com.anonymous.solar.shared.SolarInverter;
 
 
@@ -19,15 +21,31 @@ public class Inverter extends javax.swing.JDialog {
     /**
      * Creates new form AddNewPanel
      */
-    public Inverter(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Inverter(WizardSetupElectrical parent, boolean modal) {
+        super(new JFrame(), true);
         initComponents();
+        nameComponents();
+        this.iParent = parent;
+        LoadInverter(parent.inverter);
     }
-    /*
+    /**
      * Solar Inverter
      */
     SolarInverter inverter;
+    
+    /**
+     * Parent
+     */
+    private WizardSetupElectrical iParent = null;
    
+    private void nameComponents() {
+    	txtName.setName("TextFieldInverterName");
+    	txtManufacturer.setName("TextFieldInverterManufacturerName");
+    	txtCode.setName("TextFieldInverterManufacturerCode");
+    	
+    	jSpinnerCost.setName("SpinnerInverterCost");
+    	jSpinnerRRP.setName("SpinnerInverterRRP");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,19 +65,28 @@ public class Inverter extends javax.swing.JDialog {
         lblLoss = new javax.swing.JLabel();
         lblLife = new javax.swing.JLabel();
         jSpinnerWattage = new javax.swing.JSpinner();
+        jSpinnerWattage.setToolTipText("Enter the wattage of the inverter");
         jSpinnerLife = new javax.swing.JSpinner();
+        jSpinnerLife.setToolTipText("Enter the expected life if the inverter (in years)");
         jSpinnerEfficiency = new javax.swing.JSpinner();
+        jSpinnerEfficiency.setToolTipText("Enter the expected efficiency of the inverter (in %)");
         jSpinnerEffLossYr = new javax.swing.JSpinner();
+        jSpinnerEffLossYr.setToolTipText("Enter the expected drop in efficiency per year");
         jPanel2 = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        txtName.setToolTipText("Enter the name of the inverter");
         lblCost = new javax.swing.JLabel();
         jSpinnerCost = new javax.swing.JSpinner();
+        jSpinnerCost.setToolTipText("Enter the expected cost of the inverter");
         txtManufacturer = new javax.swing.JTextField();
+        txtManufacturer.setToolTipText("Enter the manufacturer of the inverter");
         lblManufacturer = new javax.swing.JLabel();
         lblRRP = new javax.swing.JLabel();
         jSpinnerRRP = new javax.swing.JSpinner();
+        jSpinnerRRP.setToolTipText("Enter the recommended retail price of the inverter");
         txtCode = new javax.swing.JTextField();
+        txtCode.setToolTipText("Enter the unique identifier code of the inverter");
         lblCode = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -249,7 +276,7 @@ public class Inverter extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-    	success = submitInverterData();
+    	boolean success = submitInverterData();
     	
     	if(success){
             doClose();
@@ -266,29 +293,21 @@ public class Inverter extends javax.swing.JDialog {
         setVisible(false);
     }
     
-    public SolarInverter GetInverter(){
-    	return inverter;
+    private void LoadInverter(SolarInverter oldInverter){
+    	
+    	if(oldInverter != null){
+			txtName.setText(oldInverter.getInverterName());
+			txtManufacturer.setText(oldInverter.getInverterManufacturer());
+			txtCode.setText(oldInverter.getInverterManufacturerCode());
+			jSpinnerWattage.setValue(oldInverter.getInverterWattage());
+			jSpinnerCost.setValue(oldInverter.getInverterCost());
+			jSpinnerEffLossYr.setValue(oldInverter.getInverterLossYear());
+			jSpinnerRRP.setValue(oldInverter.getInverterRRP());
+			jSpinnerLife.setValue(oldInverter.getInverterLifeYears());
+			jSpinnerEfficiency.setValue(oldInverter.getInverterEfficiency());
+    	}
     }
     
-    public void LoadInverter(SolarInverter oldInverter){
-    	txtName.setText(oldInverter.getInverterName());
-		txtManufacturer.setText(oldInverter.getInverterManufacturer());
-		txtCode.setText(oldInverter.getInverterManufacturerCode());
-                jSpinnerWattage.setValue(oldInverter.getInverterWattage());
-                jSpinnerCost.setValue(oldInverter.getInverterCost());
-                jSpinnerEffLossYr.setValue(oldInverter.getInverterLossYear());
-                jSpinnerRRP.setValue(oldInverter.getInverterRRP());
-                jSpinnerLife.setValue(oldInverter.getInverterLifeYears());
-                jSpinnerEfficiency.setValue(oldInverter.getInverterEfficiency());
-    }
-    
-    /**
-     * Get the success of the panel acquisition
-     * @return true on success, false if not
-     */
-    public boolean GetSuccess(){
-    	return success;
-    }
     
     private boolean submitInverterData(){
     	inverter = new SolarInverter();
@@ -305,12 +324,13 @@ public class Inverter extends javax.swing.JDialog {
 			inverter.setInverterName(txtName.getText());
 			inverter.setInverterManufacturer(txtManufacturer.getText());
 			inverter.setInverterManufacturerCode(txtCode.getText());
-                        inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+            inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 			inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
 			inverter.setInverterLossYear((Double)jSpinnerEffLossYr.getModel().getValue());
 			inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
 			inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
 			inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
+			this.iParent.inverter = inverter;
 			return true;
 
 		} catch (Exception e) {
@@ -349,6 +369,5 @@ public class Inverter extends javax.swing.JDialog {
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-   private boolean success = false;
 
 }

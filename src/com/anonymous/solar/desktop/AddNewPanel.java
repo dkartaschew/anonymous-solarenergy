@@ -6,6 +6,9 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -17,17 +20,21 @@ import com.anonymous.solar.shared.SolarPanels;
 @SuppressWarnings("serial")
 public class AddNewPanel extends javax.swing.JDialog {
 
+	
+	private WizardSetupSolarPanels parent;
     /**
      * Creates new form AddNewPanel
      */
-    public AddNewPanel(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public AddNewPanel(WizardSetupSolarPanels parent, boolean modal) {
+        super(new JFrame(), true);
         initComponents();
+        this.parent = parent;
+
     }
     /*
      * Solar Panel
      */
-    SolarPanels panels;
+    SolarPanels newPanels;
     
     /**
      * A return status code - returned if Cancel button has been pressed
@@ -56,13 +63,17 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblCode = new javax.swing.JLabel();
         lblEfficiency = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        txtName.setToolTipText("Enter a name of the panel(s)");
         lblLife = new javax.swing.JLabel();
         lblWattage = new javax.swing.JLabel();
         lblRRP = new javax.swing.JLabel();
         txtManufacturer = new javax.swing.JTextField();
+        txtManufacturer.setToolTipText("Enter the manufacturer of the panel(s)");
         txtCode = new javax.swing.JTextField();
+        txtCode.setToolTipText("Enter the unique identifier code of the panel(s)");
         lblManufacturer = new javax.swing.JLabel();
         jSpinnerLife = new javax.swing.JSpinner();
+        jSpinnerLife.setToolTipText("Enter the expected life of the panel(s)");
         jSpinnerWattage = new javax.swing.JSpinner();
         jSpinnerCost = new javax.swing.JSpinner();
         jSpinnerRRP = new javax.swing.JSpinner();
@@ -98,7 +109,6 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblError.setText(".");
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
-        jPanelDataGroup.setToolTipText("rgdfg");
         jPanelDataGroup.setName("Panel Details"); // NOI18N
 
         lblName.setText("Name");
@@ -292,7 +302,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_btnSubmitActionPerformed
-    	success = submitPanelData();
+    	boolean success = submitPanelData();
     	
     	if(success){
             doClose();
@@ -310,38 +320,24 @@ public class AddNewPanel extends javax.swing.JDialog {
     }
     
     /**
-     * Acquire the value of the 'SolarPanles' created. Should only be 
-     * called once the panel is closed
-     * @return 'SolarPanels' created 
-     */
-    public SolarPanels GetPanels(){
-    	return panels;
-    }
-    
-    /**
      * Load the dialog with current values.
      * @param oldPanels 
      */
-    public void LoadPanels(SolarPanels oldPanels){
-        txtName.setText(oldPanels.getPanelType().getPanelName());
-        txtManufacturer.setText(oldPanels.getPanelType().getPanelManufacturer());
-        txtCode.setText(oldPanels.getPanelType().getPanelManufacturerCode());
-        jSpinnerWattage.setValue(oldPanels.getPanelType().getPanelWattage());
-        jSpinnerCost.setValue(oldPanels.getPanelType().getPanelCost());
-        jSpinnerRRP.setValue(oldPanels.getPanelType().getPanelRRP());
-        jSpinnerLife.setValue(oldPanels.getPanelType().getPanelLifeYears());
-        jSpinnerEfficiency.setValue(oldPanels.getPanelType().getPanelLossYear());
-        jSpinnerDirection.setValue(oldPanels.getPanelDirection());
-        jSpinnerPanelCount.setValue(oldPanels.getPanelCount());
-        jSpinnerAzimuth.setValue(oldPanels.getPanelAzimuth());
-    }
-    
-    /**
-     * Get the success of the panel acquisition
-     * @return true on success, false if not
-     */
-    public boolean GetSuccess(){
-    	return success;
+    private void LoadPanels(SolarPanels oldPanels){
+    	
+    	if(oldPanels != null){
+	        txtName.setText(oldPanels.getPanelType().getPanelName());
+	        txtManufacturer.setText(oldPanels.getPanelType().getPanelManufacturer());
+	        txtCode.setText(oldPanels.getPanelType().getPanelManufacturerCode());
+	        jSpinnerWattage.setValue(oldPanels.getPanelType().getPanelWattage());
+	        jSpinnerCost.setValue(oldPanels.getPanelType().getPanelCost());
+	        jSpinnerRRP.setValue(oldPanels.getPanelType().getPanelRRP());
+	        jSpinnerLife.setValue(oldPanels.getPanelType().getPanelLifeYears());
+	        jSpinnerEfficiency.setValue(oldPanels.getPanelType().getPanelLossYear());
+	        jSpinnerDirection.setValue(oldPanels.getPanelDirection());
+	        jSpinnerPanelCount.setValue(oldPanels.getPanelCount());
+	        jSpinnerAzimuth.setValue(oldPanels.getPanelAzimuth());
+    	}
     }
     
     /**
@@ -385,8 +381,10 @@ public class AddNewPanel extends javax.swing.JDialog {
                 panelAzimuth = (Double)jSpinnerAzimuth.getModel().getValue();
                 
                 //Generate Panel(s)
-                panels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
-
+                newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
+               
+                this.parent.panels.add(newPanels);
+                
                 return true;
         	
         } catch (Exception e) {
@@ -428,8 +426,6 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JTextField txtManufacturer;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
-
-   private boolean success = false;
 
 }
 

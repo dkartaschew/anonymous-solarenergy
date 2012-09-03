@@ -28,6 +28,8 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
     public WizardStart(Wizard parent) {
         initComponents();
         this.parent = parent;
+        
+        nameComponents();
     }
 
 
@@ -36,8 +38,17 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
      */
     public WizardStart() {
         initComponents();
+        nameComponents();
     }
-
+    
+    /**
+     * Names components for GUI Testing
+     */
+    private void nameComponents() {
+    	jLabelMainDescription.setName("MainDescription");
+        labelMainTitle.setName("MainTitle");
+        imageSolar.setName("ImageSolar");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,7 +125,7 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
      * @return true is ok to move.
      */
     @Override
-    public boolean callbackDispose() {
+    public boolean callbackDispose(boolean validateInput) {
         return true;
     }
 

@@ -4,7 +4,10 @@
  */
 package com.anonymous.solar.desktop;
 
+import javax.swing.JOptionPane;
+
 import com.anonymous.solar.shared.CustomerData;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  *
@@ -16,16 +19,13 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
     private Wizard parent = null;
     
-    /**
-     * Customer Data class
-     */
-    CustomerData data = null;
     
     /**
      * Creates new form WizardUserCosts
      */
     public WizardUserCosts() {
         initComponents();
+        nameComponents();
     }
     
     /**
@@ -33,7 +33,16 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     public WizardUserCosts(Wizard parent) {
         initComponents();
+        nameComponents();
         this.parent = parent;
+    }
+    
+    /**
+     * Names components for GUI testing
+     */
+    private void nameComponents() {
+    	jSpinnerDailyAverageUsage.setName("SpinnerDailyAverageUsage");
+    	jSpinnerDayTimeHourlyUsage.setName("SpinnerDayTimeHourlyUsage");
     }
 
 
@@ -70,8 +79,10 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelDailyAvgUsage.setText("Daily Average Usage (KWh):");
 
         jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
+        jSpinnerDailyAverageUsage.setToolTipText("Enter the estimated usage of kWh per day ");
 
         jSpinnerDayTimeHourlyUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 24.0d, 1.0d));
+        jSpinnerDayTimeHourlyUsage.setToolTipText("Enter the estimated usage of kWh per hour");
 
         jLabelDayTime.setText("Day Time Hourly Usage (KWh):");
 
@@ -107,10 +118,12 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jPanelTariffGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Tariff Rates"));
 
         jSpinnerTariff11.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
+        jSpinnerTariff11.setToolTipText("Enter the cost of per kWh for tariff 11");
 
         jLabelTariff11.setText("Tariff 11 Fee");
 
         jSpinnerTariff33.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
+        jSpinnerTariff33.setToolTipText("Enter the cost per kWh for tariff 13");
 
         jLabelTariff33.setText("Tariff 33 Fee");
 
@@ -119,14 +132,18 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelUsage2.setText("Monthly Tariff 33 Cost:");
 
         jSpinnerMonthlyCostTariff1.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-
+        jSpinnerMonthlyCostTariff1.setToolTipText("Enter the monthly fee for tariff 11");
+        
         jSpinnerMonthlyCostTariff2.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-
+        jSpinnerMonthlyCostTariff2.setToolTipText("Enter the monthly fee for tariff 13");
+        
         jSpinnerFeedInFee.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.0d, 25.0d, 0.1d));
+        jSpinnerFeedInFee.setToolTipText("Enter the feed in fee per month");
 
         jLabelFeedInFee.setText("Feed in Fee");
 
         jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 500.0d, 1.0d));
+        jSpinnerTariffIncrease.setToolTipText("Enter the estimated yearly increase in tariff costs");
 
         jLabelAnnualTariffIncrease.setText("Annual Tariff Increase");
 
@@ -236,6 +253,19 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackStart() {
+    	SolarSetup global = parent.getSetup();
+    	CustomerData data;
+		if (global != null) {
+			data = global.getCustomerData();
+			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
+			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
+			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
+			jSpinnerTariff11.setValue(data.getTariff11Fee());
+			jSpinnerMonthlyCostTariff2.setValue(data.getTariff13Cost());
+			jSpinnerTariff33.setValue(data.getTariff13Fee());
+			jSpinnerTariffIncrease.setValue(data.getAnnualTariffIncrease());
+			jSpinnerFeedInFee.setValue(data.getFeedInFee());
+		}
         return true;
     }
 
@@ -247,9 +277,35 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      * @return true is ok to move.
      */
     @Override
-    public boolean callbackDispose() {
-        return true;
-    }
+    public boolean callbackDispose(boolean validateInput) {
+    	CustomerData data = new CustomerData();
+    	
+		if (validateInput) {
+			if ((((Double)jSpinnerDailyAverageUsage.getValue()) == 0) && 
+					(((Double)jSpinnerDayTimeHourlyUsage.getValue()) == 0)) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this, "Please enter either an hourly usage, a daily usage or both.",
+						"Estimated Usage Missing", JOptionPane.OK_OPTION);
+				return false;
+			}
+		}
+		SolarSetup global = parent.getSetup();
+		if (global != null) {
+			
+			// Store the name and description fields.
+			data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
+			data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
+			data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());
+			data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
+			data.setTariff13Cost((Double) jSpinnerMonthlyCostTariff2.getValue());
+			data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
+			data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
+			data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+			global.setCustomerData(data);
+			
+		}
+		return true;
+	}
 
 
     /**
@@ -261,19 +317,4 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     public String getTitle() {
         return title;
     }
-
-	public CustomerData getCustomerData() {
-		data = new CustomerData();
-		
-		data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
-		data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
-		data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());
-		data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
-		data.setTariff13Cost((Double) jSpinnerMonthlyCostTariff2.getValue());
-		data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
-		data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
-		data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
-		
-		return data;
-	}
 }

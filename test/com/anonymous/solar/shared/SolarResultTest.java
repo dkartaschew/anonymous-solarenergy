@@ -27,8 +27,8 @@ public class SolarResultTest {
 	 */
 	@Test(expected = SolarResultException.class)
 	public void nullSolarPanels() throws SolarResultException {
-		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, 0.00, 0.00);
-		setupInstance.setInvertor(testInverter);
+		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, 0.00, 0.00, null, null, null);
+		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);
 	}
 	
@@ -45,7 +45,7 @@ public class SolarResultTest {
 	@Test(expected = SolarResultException.class)
 	public void emptyPanelsArray() throws SolarResultException {
 		setupInstance = new SolarSetup();
-		setupInstance.setInvertor(testInverter);
+		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);
 	}
 

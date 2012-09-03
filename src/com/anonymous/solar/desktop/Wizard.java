@@ -5,15 +5,9 @@ package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import com.anonymous.solar.shared.CustomerData;
-import com.anonymous.solar.shared.SolarInverter;
-import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Main Entry Point for the wizard interface for the Desktop Application
@@ -27,17 +21,11 @@ public class Wizard extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8415093022775319312L;
-	
+
 	/**
-	 * Variables to hold all the solar panel, inverter and client data
+	 * Solar Setup Data
 	 */
-	private ArrayList<SolarPanels> solarPanels = new ArrayList<SolarPanels>();
-	private SolarInverter inverter= new SolarInverter();
-	private Double inverterWireLength = 0.0;
-	private Double inverterWireEfficiency = 0.0;
-	private CustomerData customerData = new CustomerData();
-	private String systemName;
-	private String systemDescription;
+	private SolarSetup setup = new SolarSetup();
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -53,6 +41,18 @@ public class Wizard extends javax.swing.JPanel {
 	 * Index into the ArrayList, so we know the current we are on.
 	 */
 	private int wizardIndex = 0;
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+
+	private javax.swing.JButton jButtonBack;
+	private javax.swing.JButton jButtonClose;
+	private javax.swing.JButton jButtonNext;
+	private javax.swing.JLabel jLabelHeader;
+	private javax.swing.JPanel jPanelMainContent;
+	private javax.swing.JSeparator jSeparator1;
+	private javax.swing.JSeparator jSeparator2;
+
+	// End of variables declaration//GEN-END:variables
 
 	/**
 	 * Creates new form Wizard
@@ -201,25 +201,15 @@ public class Wizard extends javax.swing.JPanel {
 		if (wizardIndex + 1 < panels.size()) {
 			boolean changePanel = false;
 			try {
-				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose();
+				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(true);
 			} catch (Exception e) {
 			}
 			if (changePanel) {
 				setWizardPanel(++wizardIndex);
 			}
 		}
-		
-		UpdateDetails();
-		
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
-		if (wizardIndex + 1 == panels.size()
-				||(wizardIndex == 5 && inverter == null)
-				||(wizardIndex == 5 && solarPanels.size() == 0)
-				||(wizardIndex == 5 && systemName != null && systemName.length() == 0)
-				||(wizardIndex == 5 && systemDescription != null && systemDescription.length() == 0)) {
-			jButtonNext.setEnabled(false);
-		}
 	}// GEN-LAST:event_jButtonNextActionPerformed
 
 	/**
@@ -231,82 +221,33 @@ public class Wizard extends javax.swing.JPanel {
 		if (wizardIndex > 0) {
 			boolean changePanel = false;
 			try {
-				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose();
+				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(false);
 			} catch (Exception e) {
 			}
 			if (changePanel) {
 				setWizardPanel(--wizardIndex);
 			}
-			
-			
 		}
-		
-		UpdateDetails();
-		
 		jButtonNext.setEnabled(true);
 		if (wizardIndex == 0) {
 			jButtonBack.setVisible(false);
 		}
 	}// GEN-LAST:event_jButtonBackActionPerformed
-		// Variables declaration - do not modify//GEN-BEGIN:variables
-	
-	private void UpdateDetails(){
-		final int SYS_DESCRIPT = 1;
-		final int USER_DETAILS = 2;
-		final int SOLAR_INVERT = 3;
-		final int SOLAR_PANELS = 4;
-		final int CONFIRM_INFO = 5;
-		JPanel panel;
-		
-		//Customer details
-		panel = panels.get(SYS_DESCRIPT);
-		systemName = ((WizardSetupDescription) panel).getSystemName();
-		systemDescription = ((WizardSetupDescription) panel).getDescription();
-		
-		//Customer details
-		panel = panels.get(USER_DETAILS);
-		customerData = ((WizardUserCosts) panel).getCustomerData();
-		
-		//Solar Inverter details
-		panel = panels.get(SOLAR_INVERT);
-		inverter = ((WizardSetupElectrical) panel).getInverter();
-		inverterWireLength = ((WizardSetupElectrical) panel).getWireLength();
-		inverterWireEfficiency = ((WizardSetupElectrical) panel).getWireEfficiency();
-		
-		//Solar Panel(s) details
-		panel = panels.get(SOLAR_PANELS);
-		solarPanels = ((WizardSetupSolarPanels) panel).getSolarPanels();
-		
-		panel = panels.get(CONFIRM_INFO);
-		((WizardSetupConfirmation) panel).setSetUpDetails(solarPanels, inverter, inverterWireLength, 
-				inverterWireEfficiency, customerData, systemName, systemDescription);
-		
-	}
-
-	private javax.swing.JButton jButtonBack;
-	private javax.swing.JButton jButtonClose;
-	private javax.swing.JButton jButtonNext;
-	private javax.swing.JLabel jLabelHeader;
-	private javax.swing.JPanel jPanelMainContent;
-	private javax.swing.JSeparator jSeparator1;
-	private javax.swing.JSeparator jSeparator2;
-
-	// End of variables declaration//GEN-END:variables
 
 	/**
 	 * Initialise all the panels we wish to have displayed, as part of the
 	 * Wizard
 	 */
 	private void initWizardPanels() {
-		panels.add(new WizardStart(this));//0
+		panels.add(new WizardStart(this));// 0
 		// panels.add(new WizardUser(this));
-		panels.add(new WizardSetupDescription(this));//1
-		panels.add(new WizardUserCosts(this));//2
-		panels.add(new WizardSetupElectrical(this));//3
-		panels.add(new WizardSetupSolarPanels(this));//4
-		panels.add(new WizardSetupConfirmation(this));//5
-		panels.add(new WizardResults(this));//6
-		panels.add(new WizardFinish(this));//7
+		panels.add(new WizardSetupDescription(this));// 1
+		panels.add(new WizardUserCosts(this));// 2
+		panels.add(new WizardSetupElectrical(this));// 3
+		panels.add(new WizardSetupSolarPanels(this));// 4
+		panels.add(new WizardSetupConfirmation(this));// 5
+		panels.add(new WizardResults(this));// 6
+		panels.add(new WizardFinish(this));// 7
 
 		// Set to show the first panel.
 		setWizardPanel(wizardIndex);
@@ -361,4 +302,14 @@ public class Wizard extends javax.swing.JPanel {
 	public javax.swing.JButton getNextButton() {
 		return jButtonNext;
 	}
+
+	/**
+	 * Allow client panels to get the global solar setup...
+	 * 
+	 * @return SolarSetup used to define the results.
+	 */
+	public SolarSetup getSetup() {
+		return setup;
+	}
+
 }
