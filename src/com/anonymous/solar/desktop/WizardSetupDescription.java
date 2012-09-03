@@ -27,6 +27,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	 */
 	public WizardSetupDescription(Wizard parent) {
 		initComponents();
+		nameComponents();
 		this.parent = parent;
 		// TODO: remove the following when we wish to deal with locations.
 		jPanelLocationGroup.setVisible(false);
@@ -37,8 +38,16 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	 */
 	public WizardSetupDescription() {
 		initComponents();
+		nameComponents();
 	}
-
+	
+	/**
+	 * Names components for GUI Testing
+	 */
+	private void nameComponents() {
+		jTextFieldSetupName.setName("TextFieldSetupName");
+	}
+	
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always

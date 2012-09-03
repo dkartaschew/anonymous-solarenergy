@@ -34,6 +34,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	 */
 	public WizardSetupElectrical(Wizard parent) {
 		initComponents();
+		nameComponents();
 		this.parent = parent;
 	}
 
@@ -42,6 +43,15 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	 */
 	public WizardSetupElectrical() {
 		initComponents();
+		nameComponents();
+	}
+	
+	/**
+	 * Names components for GUI Testing
+	 */
+	private void nameComponents() {
+		jTextFieldInverter.setName("TextFieldInverter");
+		jButtonSetInverter.setName("EditInverterDetails");
 	}
 
 	/**

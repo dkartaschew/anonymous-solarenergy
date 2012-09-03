@@ -28,6 +28,8 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
     public WizardStart(Wizard parent) {
         initComponents();
         this.parent = parent;
+        
+        nameComponents();
     }
 
 
@@ -36,8 +38,17 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
      */
     public WizardStart() {
         initComponents();
+        nameComponents();
     }
-
+    
+    /**
+     * Names components for GUI Testing
+     */
+    private void nameComponents() {
+    	jLabelMainDescription.setName("MainDescription");
+        labelMainTitle.setName("MainTitle");
+        imageSolar.setName("ImageSolar");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,10 +62,6 @@ public class WizardStart extends javax.swing.JPanel implements WizardPanel {
         jLabelMainDescription = new javax.swing.JLabel();
         labelMainTitle = new javax.swing.JLabel();
         imageSolar = new javax.swing.JLabel();
-        
-        jLabelMainDescription.setName("mainDescription");
-        labelMainTitle.setName("mainTitle");
-        imageSolar.setName("imageSolar");
 
         jLabelMainDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelMainDescription.setText("<html>\n<center>\nA simple Solar Power Calculator<br>\nfor domestic installations.<br>\n<br>\n<small>Copyright 2012, Team Anonymous (QUT)<br>\nReleased under the GPL v3 license</small>\n</center>\n</html>");

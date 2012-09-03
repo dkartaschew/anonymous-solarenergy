@@ -24,6 +24,7 @@ public class Inverter extends javax.swing.JDialog {
     public Inverter(WizardSetupElectrical parent, boolean modal) {
         super(new JFrame(), true);
         initComponents();
+        nameComponents();
         this.iParent = parent;
         LoadInverter(parent.inverter);
     }
@@ -37,6 +38,14 @@ public class Inverter extends javax.swing.JDialog {
      */
     private WizardSetupElectrical iParent = null;
    
+    private void nameComponents() {
+    	txtName.setName("TextFieldInverterName");
+    	txtManufacturer.setName("TextFieldInverterManufacturerName");
+    	txtCode.setName("TextFieldInverterManufacturerCode");
+    	
+    	jSpinnerCost.setName("SpinnerInverterCost");
+    	jSpinnerRRP.setName("SpinnerInverterRRP");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
