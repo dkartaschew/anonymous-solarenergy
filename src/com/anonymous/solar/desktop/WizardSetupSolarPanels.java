@@ -37,6 +37,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	public WizardSetupSolarPanels(Wizard parent) {
 		initComponents();
+		nameComponents();
 		this.wparent = parent;
 		UpdateTable();
 	}
@@ -46,6 +47,13 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	public WizardSetupSolarPanels() {
 		initComponents();
+	}
+	
+	/**
+	 * Names components for GUI testing
+	 */
+	private void nameComponents() {
+		
 	}
 
 	/**
@@ -181,7 +189,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	    if(row > -1){
 	    	
 	    	int decision = JOptionPane.showConfirmDialog(new JFrame(), "Are you sure you want to delete the panel?",
-	    			"Exit Confirmation",
+	    			"Panel Deletion Confirmation",
 					JOptionPane.YES_NO_OPTION);
 	    	
 	    	if(decision == JOptionPane.YES_OPTION){
