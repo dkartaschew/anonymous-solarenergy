@@ -63,6 +63,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
         jTableSolarPanels = new javax.swing.JTable();
         jButtonAdd = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
+        jButton1Delete = new javax.swing.JButton();
 
         jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
 
@@ -93,6 +94,14 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
             }
         });
 
+        jButton1Delete.setText("Delete");
+        jButton1Delete.setName(""); // NOI18N
+        jButton1Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1DeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelPanelInformationGroupLayout = new javax.swing.GroupLayout(jPanelPanelInformationGroup);
         jPanelPanelInformationGroup.setLayout(jPanelPanelInformationGroupLayout);
         jPanelPanelInformationGroupLayout.setHorizontalGroup(
@@ -103,6 +112,8 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
                     .addComponent(jScrollPaneSolarPanels, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPanelInformationGroupLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonEdit)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonAdd)))
@@ -116,7 +127,8 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
                 .addGap(18, 18, 18)
                 .addGroup(jPanelPanelInformationGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAdd)
-                    .addComponent(jButtonEdit))
+                    .addComponent(jButtonEdit)
+                    .addComponent(jButton1Delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -139,7 +151,6 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        // TODO add your handling code here:
         int row = jTableSolarPanels.getSelectedRow();
         
         if(row > -1){
@@ -163,7 +174,31 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
         UpdateTable();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
+    private void jButton1DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1DeleteActionPerformed
+        
+    	int row = jTableSolarPanels.getSelectedRow();
+        
+	    if(row > -1){
+	    	
+	    	int decision = JOptionPane.showConfirmDialog(new JFrame(), "Are you sure you want to delete the panel?",
+	    			"Exit Confirmation",
+					JOptionPane.YES_NO_OPTION);
+	    	
+	    	if(decision == JOptionPane.YES_OPTION){
+	    		panels.remove(row);
+	    	}
+	    	
+	        UpdateTable();
+	    } else {
+	    	JOptionPane.showMessageDialog(this,
+					"Please select a row from the table to delete an entry.",
+					"Delete Panel", JOptionPane.OK_OPTION);
+	    }
+    	
+    }//GEN-LAST:event_jButton1DeleteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1Delete;
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonEdit;
     private javax.swing.JPanel jPanelPanelInformationGroup;

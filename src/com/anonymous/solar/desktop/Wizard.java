@@ -201,7 +201,7 @@ public class Wizard extends javax.swing.JPanel {
 		if (wizardIndex + 1 < panels.size()) {
 			boolean changePanel = false;
 			try {
-				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(true);
+				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(false);
 			} catch (Exception e) {
 			}
 			if (changePanel) {
