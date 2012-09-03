@@ -1,5 +1,7 @@
 package com.anonymous.solar.shared;
 
+import java.util.ArrayList;
+
 /**
  * Class to hold the result of the solar output calculation from the server and to handle
  * any additional calculations using that result
@@ -11,10 +13,17 @@ package com.anonymous.solar.shared;
 public class SolarResult {
 
 	private SolarSetup finalSetup;
-	private double dailySavings;
+	private double averageDailySavings;
+	private double averageYearlySavings;
+	private ArrayList<Double> savingsOverYears;
+	
+	public SolarResult() {
+		
+	}
 	
 	public SolarResult(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
+		savingsOverYears = new ArrayList<Double>();
 		finalSetup = solarSetup;
 	}
 	
@@ -25,6 +34,40 @@ public class SolarResult {
 	public void setSolarSetup(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
 		finalSetup = solarSetup;
+	}
+	
+	public double getDailySavings() {
+		return averageDailySavings;
+	}
+	
+	public void setDailySavings(double newDailySavings) {
+		averageDailySavings = newDailySavings;
+	}
+	
+	public double getYearlySavings() {
+		return averageYearlySavings;
+	}
+	
+	public void setYearlySavings(double newYearlySavings) {
+		averageYearlySavings = newYearlySavings;
+	}
+	
+	public ArrayList<Double> getSavingsOverYears() {
+		return savingsOverYears;
+	}
+	
+	public void setSavingsOverYears(ArrayList<Double> newSavingsOverYears) {
+		savingsOverYears = newSavingsOverYears;
+	}
+	
+	public double getCumulativeSavings(int year) {
+		double cumulativeSavings = 0;
+		
+		for (int i = 0; i < year; i++) {
+			cumulativeSavings = cumulativeSavings + savingsOverYears.get(i);
+		}
+		
+		return cumulativeSavings;
 	}
 	
 	private void SolarSetupExceptionCheck(SolarSetup solarSetup) throws SolarResultException {

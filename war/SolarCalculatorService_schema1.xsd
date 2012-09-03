@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="calculateDailySavings" type="tns:calculateDailySavings"/>
+
+  <xs:element name="calculateDailySavingsResponse" type="tns:calculateDailySavingsResponse"/>
+
+  <xs:element name="calculateYearlySavings" type="tns:calculateYearlySavings"/>
+
+  <xs:element name="calculateYearlySavingsOverTime" type="tns:calculateYearlySavingsOverTime"/>
+
+  <xs:element name="calculateYearlySavingsOverTimeResponse" type="tns:calculateYearlySavingsOverTimeResponse"/>
+
+  <xs:element name="calculateYearlySavingsResponse" type="tns:calculateYearlySavingsResponse"/>
+
+  <xs:complexType name="calculateYearlySavings">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:solarResult" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarResult">
+    <xs:sequence>
+      <xs:element name="dailySavings" type="xs:double"/>
+      <xs:element name="savingsOverYears" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="solarSetup" type="tns:solarSetup" minOccurs="0"/>
+      <xs:element name="yearlySavings" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarSetup">
+    <xs:sequence>
+      <xs:element name="customerData" type="tns:customerData" minOccurs="0"/>
+      <xs:element name="inverter" type="tns:solarInverter" minOccurs="0"/>
+      <xs:element name="locationLatitude" type="xs:double" minOccurs="0"/>
+      <xs:element name="locationLongitude" type="xs:double" minOccurs="0"/>
+      <xs:element name="setupDescription" type="xs:string" minOccurs="0"/>
+      <xs:element name="setupName" type="xs:string" minOccurs="0"/>
+      <xs:element name="wireEfficiency" type="xs:double" minOccurs="0"/>
+      <xs:element name="wireLength" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="customerData">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="solarInverter">
+    <xs:sequence>
+      <xs:element name="inverterCost" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterEfficiency" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterLifeYears" type="xs:int" minOccurs="0"/>
+      <xs:element name="inverterLossYear" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterManufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterManufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterName" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterRRP" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterWattage" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="calculateYearlySavingsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:solarResult" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="calculateYearlySavingsOverTime">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:solarResult" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="calculateYearlySavingsOverTimeResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:solarResult" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="calculateDailySavings">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:solarResult" minOccurs="0"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="calculateDailySavingsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:solarResult" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

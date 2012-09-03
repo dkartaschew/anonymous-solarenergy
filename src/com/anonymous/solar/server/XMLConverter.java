@@ -38,13 +38,13 @@ public class XMLConverter {
 		return file;
 	}
 	
-	public <T> Object convertXMLToObject(File file, Class<T> cl) {
-		Object returnObject = null;
+	public <T> Class<T> convertXMLToObject(File file, Class<T> cl) {
+		Class<T> returnObject = null;
 		
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(cl);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			returnObject = (Object) jaxbUnmarshaller.unmarshal(file);
+			returnObject = (Class<T>) jaxbUnmarshaller.unmarshal(file);
 		} catch (JAXBException e) {
 		}
 		
