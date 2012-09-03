@@ -28,7 +28,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         super();
         initComponents();
         this.parent = parent;
-
+        this.setModal(true);
     }
     /*
      * Solar Panel
