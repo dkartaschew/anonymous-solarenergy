@@ -22,14 +22,20 @@ public class AddNewPanel extends javax.swing.JDialog {
 
 	
 	private WizardSetupSolarPanels parent;
+	private int location = -1;
     /**
      * Creates new form AddNewPanel
      */
-    public AddNewPanel(WizardSetupSolarPanels parent, boolean modal) {
+    public AddNewPanel(WizardSetupSolarPanels parent, boolean modal, Integer location) {
         super(new JFrame(), true);
         initComponents();
         this.parent = parent;
         this.setModal(true);
+        
+        if(location != null){
+        	this.location = location;
+        	LoadPanels(this.parent.panels.get(location));
+        }
     }
     /*
      * Solar Panel
@@ -383,7 +389,14 @@ public class AddNewPanel extends javax.swing.JDialog {
                 //Generate Panel(s)
                 newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
                
-                this.parent.panels.add(newPanels);
+                //location set, update panel
+                if(location > -1){
+                	this.parent.panels.remove(location);
+                	this.parent.panels.add(location, newPanels);
+                } else {
+                //else, add the new panel to the end of the list
+                	this.parent.panels.add(newPanels);
+                }
                 
                 return true;
         	

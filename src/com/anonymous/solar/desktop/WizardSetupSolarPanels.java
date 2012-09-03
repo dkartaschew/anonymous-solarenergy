@@ -55,76 +55,121 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jPanelPanelInformationGroup = new javax.swing.JPanel();
-		jScrollPaneSolarPanels = new javax.swing.JScrollPane();
-		jTableSolarPanels = new javax.swing.JTable();
-		jTableSolarPanels.setToolTipText("Panel(s) display table");
-		jButtonAdd = new javax.swing.JButton();
-		jButtonAdd.setToolTipText("Select to add multiple sets of panels");
+        jPanelPanelInformationGroup = new javax.swing.JPanel();
+        jScrollPaneSolarPanels = new javax.swing.JScrollPane();
+        jTableSolarPanels = new javax.swing.JTable();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
 
-		jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
+        jPanelPanelInformationGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Information"));
 
-		jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { null, null, null, null,
-				null } }, new String[] { "Name", "Cost", "Wattage", "Life", "Efficiency" }));
-		jScrollPaneSolarPanels.setViewportView(jTableSolarPanels);
+        jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPaneSolarPanels.setViewportView(jTableSolarPanels);
 
-		jButtonAdd.setText("Add");
-		jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonAddActionPerformed(evt);
-			}
-		});
+        jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout jPanelPanelInformationGroupLayout = new javax.swing.GroupLayout(
-				jPanelPanelInformationGroup);
-		jPanelPanelInformationGroup.setLayout(jPanelPanelInformationGroupLayout);
-		jPanelPanelInformationGroupLayout.setHorizontalGroup(jPanelPanelInformationGroupLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				jPanelPanelInformationGroupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								jPanelPanelInformationGroupLayout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(jScrollPaneSolarPanels, javax.swing.GroupLayout.DEFAULT_SIZE,
-												340, Short.MAX_VALUE)
-										.addGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING,
-												jPanelPanelInformationGroupLayout.createSequentialGroup()
-														.addGap(0, 0, Short.MAX_VALUE).addComponent(jButtonAdd)))
-						.addContainerGap()));
-		jPanelPanelInformationGroupLayout.setVerticalGroup(jPanelPanelInformationGroupLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				jPanelPanelInformationGroupLayout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jScrollPaneSolarPanels, javax.swing.GroupLayout.DEFAULT_SIZE, 186,
-								Short.MAX_VALUE).addGap(18, 18, 18).addComponent(jButtonAdd).addContainerGap()));
+        jButtonEdit.setText("Edit");
+        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jPanelPanelInformationGroup, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jPanelPanelInformationGroup, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
-	}// </editor-fold>//GEN-END:initComponents
-		// Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.GroupLayout jPanelPanelInformationGroupLayout = new javax.swing.GroupLayout(jPanelPanelInformationGroup);
+        jPanelPanelInformationGroup.setLayout(jPanelPanelInformationGroupLayout);
+        jPanelPanelInformationGroupLayout.setHorizontalGroup(
+            jPanelPanelInformationGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPanelInformationGroupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelPanelInformationGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneSolarPanels, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPanelInformationGroupLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonEdit)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAdd)))
+                .addContainerGap())
+        );
+        jPanelPanelInformationGroupLayout.setVerticalGroup(
+            jPanelPanelInformationGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPanelInformationGroupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPaneSolarPanels, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelPanelInformationGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdd)
+                    .addComponent(jButtonEdit))
+                .addContainerGap())
+        );
 
-	private javax.swing.JButton jButtonAdd;
-	private javax.swing.JPanel jPanelPanelInformationGroup;
-	private javax.swing.JScrollPane jScrollPaneSolarPanels;
-	private javax.swing.JTable jTableSolarPanels;
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPanelInformationGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPanelInformationGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
-	// End of variables declaration//GEN-END:variables
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+        // TODO add your handling code here:
+        int row = jTableSolarPanels.getSelectedRow();
+        
+        if(row > -1){
+	        AddNewPanel panelSet = new AddNewPanel(this, true, row);
+	        panelSet.setVisible(true);
+	        UpdateTable();
+        } else {
+        	JOptionPane.showMessageDialog(this,
+					"Please select a row from the table to edit the value.",
+					"Edit Panels", JOptionPane.OK_OPTION);
+        }
+        
+        
+    }//GEN-LAST:event_jButtonEditActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        AddNewPanel panelSet = new AddNewPanel(this, true, null);
+		
+        panelSet.setVisible(true);
+
+        UpdateTable();
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JPanel jPanelPanelInformationGroup;
+    private javax.swing.JScrollPane jScrollPaneSolarPanels;
+    private javax.swing.JTable jTableSolarPanels;
+    // End of variables declaration//GEN-END:variables
 
 	/**
 	 * Callback method used by the parent panel to notify this panel that we
@@ -179,25 +224,13 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	}
 
 	/**
-	 * Event handler to operate the Add Button to include a solar panel within the setup.
-	 * @param evt
-	 */
-	private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {
-		AddNewPanel panelSet = new AddNewPanel(this, true);
-		
-		panelSet.setVisible(true);
-
-		UpdateTable();
-	}
-
-	/**
 	 * Update the contents of the table, with the information from the last operation.
 	 */
 	private void UpdateTable() {
 
 		int size = panels.size();
 		int count = 0;
-		Object[][] panelData = new Object[size][7];
+		Object[][] panelData = new Object[size][6];
 
 		for (SolarPanels panel : panels) {
 			panelData[count][0] = panel.getPanelType().getPanelName();
@@ -206,12 +239,11 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 			panelData[count][3] = panel.getPanelType().getPanelLifeYears();
 			panelData[count][4] = panel.getPanelType().getPanelLossYear();
 			panelData[count][5] = panel.getPanelCount();
-			panelData[count][6] = "delete";
 			count++;
 		}
 
 		jTableSolarPanels.setModel(new javax.swing.table.DefaultTableModel(panelData, new String[] { "Name", "Cost",
-				"Wattage", "Life", "Loss %", "Number", "Delete" }));
+				"Wattage", "Life", "Loss %", "Number"}));
 
 	}
 }
