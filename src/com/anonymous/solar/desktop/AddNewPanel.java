@@ -29,6 +29,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     public AddNewPanel(WizardSetupSolarPanels parent, boolean modal, Integer location) {
         super(new JFrame(), true);
         initComponents();
+        nameComponents();
         this.parent = parent;
         this.setModal(true);
         
@@ -37,6 +38,26 @@ public class AddNewPanel extends javax.swing.JDialog {
         	LoadPanels(this.parent.panels.get(location));
         }
     }
+    
+    /**
+     * Names components for GUI testing
+     */
+    private void nameComponents() {
+    	txtName.setName("TextFieldSolarPanelName");
+    	txtManufacturer.setName("TextFieldSolarPanelManufacturerName");
+    	txtCode.setName("TextFieldSolarPanelManufacturerCode");
+    	
+    	jSpinnerWattage.setName("SpinnerSolarPanelWattage");
+    	jSpinnerLife.setName("SpinnerSolarPanelLife");
+    	jSpinnerCost.setName("SpinnerSolarPanelCost");
+    	jSpinnerRRP.setName("SpinnerSolarPanelRRP");
+    	jSpinnerEfficiency.setName("SpinnerSolarPanelEfficiency");
+    	
+    	jSpinnerPanelCount.setName("SpinnerSolarPanelCount");
+    	jSpinnerAzimuth.setName("SpinnerSolarPanelAzimuth");
+    	jSpinnerDirection.setName("SpinnerSolarPanelDirection");
+    }
+    
     /*
      * Solar Panel
      */
