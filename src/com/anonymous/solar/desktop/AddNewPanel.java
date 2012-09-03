@@ -6,6 +6,7 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarPanel;
@@ -25,7 +26,7 @@ public class AddNewPanel extends javax.swing.JDialog {
      * Creates new form AddNewPanel
      */
     public AddNewPanel(WizardSetupSolarPanels parent, boolean modal) {
-        super();
+        super(new JFrame(), true);
         initComponents();
         this.parent = parent;
         this.setModal(true);
@@ -108,7 +109,6 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblError.setText(".");
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Data"));
-        jPanelDataGroup.setToolTipText("rgdfg");
         jPanelDataGroup.setName("Panel Details"); // NOI18N
 
         lblName.setText("Name");
@@ -382,12 +382,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                 
                 //Generate Panel(s)
                 newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
-                
-                JOptionPane.showMessageDialog(this,
-                		newPanels.getPanelCount().toString(),
-    					"1", JOptionPane.OK_OPTION);
-                
-                
+               
                 this.parent.panels.add(newPanels);
                 
                 return true;

@@ -130,6 +130,10 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * Callback method used by the parent panel to notify this panel that we
 	 * have been given context to the user.
 	 * 
+	 * PLEASE NOTE: THIS PASSES THE REFERENCE OF THE GLOBAL'S "PANELS" INTO THE LOCAL 
+	 * COPY OF PANELS. ONCE SOMETHING UPDATES THE LOCAL DATA, IT WILL UPDATE THE GLOBAL
+	 * DATA
+	 * 
 	 * @return true is ok to move.
 	 */
 	@Override
@@ -151,7 +155,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
-		if (true) {
+		if (validateInput) {
 			if (panels.size() == 0) {
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this,
@@ -160,19 +164,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 				return false;
 			}
 		}
-		// Set our parent's global data based on our form!
-		SolarSetup global = wparent.getSetup();
-		if (global != null) {
-			global.getPanels().clear();
-			global.getPanels().addAll(panels);
-			
-			JOptionPane.showMessageDialog(this,
-					panels.size(),
-					"1", JOptionPane.OK_OPTION);
-            
-		}
-		UpdateTable();
-		return false;
+		return true;
 		
 	}
 

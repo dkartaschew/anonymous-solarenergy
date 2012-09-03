@@ -25,6 +25,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     public WizardUserCosts() {
         initComponents();
+        nameComponents();
     }
     
     /**
@@ -32,7 +33,16 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     public WizardUserCosts(Wizard parent) {
         initComponents();
+        nameComponents();
         this.parent = parent;
+    }
+    
+    /**
+     * Names components for GUI testing
+     */
+    private void nameComponents() {
+    	jSpinnerDailyAverageUsage.setName("SpinnerDailyAverageUsage");
+    	jSpinnerDayTimeHourlyUsage.setName("SpinnerDayTimeHourlyUsage");
     }
 
 

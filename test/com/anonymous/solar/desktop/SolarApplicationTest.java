@@ -35,20 +35,34 @@ public class SolarApplicationTest extends UISpecTestCase {
 	}
 	
 	
-	
+	//
 	// WizardStart Tests
+	//
 	public void testMainTitle() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
 		
-		assertTrue(mainWindow.getTextBox("mainTitle").getText().compareTo("Solar Energy Calculator") == 0);
+		assertTrue(mainWindow.getTextBox("MainTitle").getText().compareTo("Solar Energy Calculator") == 0);
 	}
 	
 	public void testMainDescription() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
 		
-		assertTrue(mainWindow.getTextBox("mainDescription").getText().compareTo("<html>\n<center>\nA simple Solar Power Calculator<br>\nfor domestic installations.<br>\n<br>\n<small>Copyright 2012, Team Anonymous (QUT)<br>\nReleased under the GPL v3 license</small>\n</center>\n</html>") == 0);
+		assertTrue(mainWindow.getTextBox("MainDescription").getText().compareTo("<html>\n<center>\nA simple Solar Power Calculator<br>\nfor domestic installations.<br>\n<br>\n<small>Copyright 2012, Team Anonymous (QUT)<br>\nReleased under the GPL v3 license</small>\n</center>\n</html>") == 0);
+	}
+	
+	// Close Dialog Test
+	public void testCloseDialog() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+
+		WindowInterceptor.init(mainWindow.getButton("Close").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Exit Confirmation"));
+	    	      return dialog.getButton("No").triggerClick();
+	    	    }
+	    }).run();
 	}
 	
 	// Unsure about this as ImageIcon is apparently not supported by GoogleAppEngine
@@ -57,21 +71,105 @@ public class SolarApplicationTest extends UISpecTestCase {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
 		
-		assertTrue(mainWindow.getTextBox("imageSolar").iconEquals(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/solar_power_flower.jpg"))));
+		assertTrue(mainWindow.getTextBox("ImageSolar").iconEquals(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/solar_power_flower.jpg"))));
 	}*/
 	
 	
-	
+	//
 	// WizardSetupDescription Tests
+	//
 	public void testNextWithoutSetupName() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
 		
-		mainWindow.getButton("nextButton").click();
+		mainWindow.getButton("Next").click();
+		assertTrue(mainWindow.getTextBox("TextFieldSetupName").getText().compareTo("") == 0);
 
-		WindowInterceptor.init(mainWindow.getButton("nextButton").triggerClick()).process(new WindowHandler() {
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
 	    	      assertTrue(dialog.titleEquals("Setup Name Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	//
+	// WizardUserCosts Tests
+	//
+	public void testNextWithoutUsageDetails() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		mainWindow.getButton("Next").click();
+		
+		//TODO: Test Spinner value is in fact 0
+
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Estimated Usage Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	//
+	// WizardSetupElectrical Tests
+	//
+	public void testNextWithoutInverterDetails() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		mainWindow.getButton("Next").click();
+		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
+		mainWindow.getButton("Next").click();
+		
+		assertTrue(mainWindow.getTextBox("TextFieldInverter").getLabel() == null);
+
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	//
+	// WizardSetupSolarPanels Tests
+	//
+	public void testNextWithoutSolarPanels() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		mainWindow.getButton("Next").click();
+		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
+		mainWindow.getButton("Next").click();
+
+		WindowInterceptor.init(mainWindow.getButton("EditInverterDetails").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Information"));
+	    	      
+	    	      dialog.getTextBox("TextFieldInverterName").setText("TestInverterName");
+	    	      dialog.getTextBox("TextFieldInverterManufacturerName").setText("TestInverterManufacturerName");
+	    	      dialog.getTextBox("TextFieldInverterManufacturerCode").setText("TestInverterManufacturerCode");
+	    	      
+	    	      dialog.getSpinner("SpinnerInverterCost").clickForNextValue();  
+	    	      dialog.getSpinner("SpinnerInverterRRP").clickForNextValue();
+
+	    	      return dialog.getButton("Submit").triggerClick();
+	    	    }
+	    }).run();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Solar Panel Configuration Information Missing"));
 	    	      return dialog.getButton("OK").triggerClick();
 	    	    }
 	    }).run();
