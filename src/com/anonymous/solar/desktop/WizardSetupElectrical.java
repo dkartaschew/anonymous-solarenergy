@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -247,6 +249,15 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		}
 		return true;
 	}
+	
+	/**
+     * Clear all the error effects from text boxes and jSpinners
+     */
+	private void returnToWhite(){
+    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+    	jButtonSetInverter.setBackground(Color.white);
+    	jSpinnerWiringLength.setBorder(clear);
+    }
 
 	/**
 	 * Callback method used by the parent panel to notify this panel that we
@@ -256,13 +267,19 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
-
+		javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+		returnToWhite();
+    	
 		if (validateInput) {
 			if (inverter == null) {
+				jButtonSetInverter.setBackground(Color.red);
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this,
 						"You are missing inverter details. Please enter these to continue.",
 						"Inverter Details Missing", JOptionPane.OK_OPTION);
+				return false;
+			} else if(((Double)jSpinnerWiringLength.getValue()) == 0){
+				jSpinnerWiringLength.setBorder(borderError);
 				return false;
 			}
 		}

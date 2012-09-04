@@ -310,6 +310,9 @@ public class Inverter extends javax.swing.JDialog {
     	}
     }
     
+    /**
+     * Clear all the error effects from textboxes and jSpinners
+     */
     private void returnToWhite(){
     	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
     	
