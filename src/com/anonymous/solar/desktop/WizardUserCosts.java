@@ -4,6 +4,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Color;
+
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.CustomerData;
@@ -268,6 +270,17 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 		}
         return true;
     }
+    
+    /**
+     * Clear all the error effects from textboxes and jSpinners
+     */
+    private void returnToWhite(){
+    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+  
+    	jSpinnerDailyAverageUsage.setBorder(clear);
+    	jSpinnerDayTimeHourlyUsage.setBorder(clear);
+
+    }
 
 
     /**
@@ -278,11 +291,17 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+    	returnToWhite();
+    	
     	CustomerData data = new CustomerData();
     	
 		if (validateInput) {
 			if ((((Double)jSpinnerDailyAverageUsage.getValue()) == 0) && 
 					(((Double)jSpinnerDayTimeHourlyUsage.getValue()) == 0)) {
+				
+				jSpinnerDailyAverageUsage.setBorder(borderError);
+		    	jSpinnerDayTimeHourlyUsage.setBorder(borderError);
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this, "Please enter either an hourly usage, a daily usage or both.",
 						"Estimated Usage Missing", JOptionPane.OK_OPTION);

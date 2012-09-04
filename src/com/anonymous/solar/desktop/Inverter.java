@@ -311,21 +311,24 @@ public class Inverter extends javax.swing.JDialog {
     }
     
     private void returnToWhite(){
+    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+    	
     	txtName.setBackground(Color.white);
 		txtManufacturer.setBackground(Color.white);
 		txtCode.setBackground(Color.white);
 		jSpinnerWattage.setBackground(Color.white);
-		jSpinnerCost.setBackground(Color.white);
-		jSpinnerEffLossYr.setBackground(Color.white);
-		jSpinnerRRP.setBackground(Color.white);
-		jSpinnerLife.setBackground(Color.white);
-		jSpinnerEfficiency.setBackground(Color.white);
+		jSpinnerCost.setBorder(clear);
+		jSpinnerEffLossYr.setBorder(clear);
+		jSpinnerRRP.setBorder(clear);
+		jSpinnerLife.setBorder(clear);
+		jSpinnerEfficiency.setBorder(clear);
     }
     
     
     private boolean submitInverterData(){
     	inverter = new SolarInverter();
     	boolean error = false;
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
     	returnToWhite();
     	
 		try {
@@ -344,19 +347,19 @@ public class Inverter extends javax.swing.JDialog {
             } 
         	if((Double)jSpinnerCost.getModel().getValue() == 0){
         		error = true;
-        		jSpinnerCost.setBackground(Color.red);
+        		jSpinnerCost.setBorder(borderError);
             }
         	if((Double)jSpinnerRRP.getModel().getValue() == 0){
         		error = true;
-        		jSpinnerRRP.setBackground(Color.red);
+        		jSpinnerRRP.setBorder(borderError);
         	}
         	if((Double)jSpinnerCost.getModel().getValue() == 0){
         		error = true;
-        		jSpinnerCost.setBackground(Color.red);
+        		jSpinnerCost.setBorder(borderError);
         	}
         	if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
         		error = true;
-        		jSpinnerCost.setBackground(Color.red);
+        		jSpinnerCost.setBorder(borderError);
         	}
         	
             

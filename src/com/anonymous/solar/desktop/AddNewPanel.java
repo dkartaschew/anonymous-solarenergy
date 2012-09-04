@@ -370,17 +370,19 @@ public class AddNewPanel extends javax.swing.JDialog {
     }
     
     private void returnToWhite(){
+    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+    	
     	txtName.setBackground(Color.white);
         txtManufacturer.setBackground(Color.white);
         txtCode.setBackground(Color.white);
         jSpinnerWattage.setBackground(Color.white);
         jSpinnerCost.setBackground(Color.white);
         jSpinnerRRP.setBackground(Color.white);
-        jSpinnerLife.setBackground(Color.white);
-        jSpinnerEfficiency.setBackground(Color.white);
-        jSpinnerDirection.setBackground(Color.white);
-        jSpinnerPanelCount.setBackground(Color.white);
-        jSpinnerAzimuth.setBackground(Color.white);
+        jSpinnerLife.setBorder(clear);
+        jSpinnerEfficiency.setBorder(clear);
+        jSpinnerDirection.setBorder(clear);
+        jSpinnerPanelCount.setBorder(clear);
+        jSpinnerAzimuth.setBorder(clear);
     }
     
     /**
@@ -394,6 +396,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     	Double panelDirection;
     	Double panelAzimuth;
     	boolean error = false;
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
     	
     	returnToWhite();
     	
@@ -412,12 +415,12 @@ public class AddNewPanel extends javax.swing.JDialog {
             } 
         	if((Double)jSpinnerCost.getModel().getValue() == 0){
         		error = true;
-        		jSpinnerCost.setBackground(Color.red);
+        		jSpinnerCost.setBorder(borderError);
             }
             
             if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
         		error = true;
-            	jSpinnerPanelCount.setBackground(Color.red);
+            	jSpinnerPanelCount.setBorder(borderError);
             }
             
             if(error){
