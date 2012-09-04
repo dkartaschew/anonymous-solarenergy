@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Color;
+
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarSetup;
@@ -310,9 +312,12 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
+		
+		
 		if (validateInput) {
 			if ((jTextFieldSetupName.getText() == null) || (jTextFieldSetupName.getText().equals(""))) {
 				// Oops, missing data, need to handle this.
+				jTextFieldSetupName.setBackground(Color.red);
 				JOptionPane.showMessageDialog(this, "Please enter a setup name before continuing.",
 						"Setup Name Missing", JOptionPane.OK_OPTION);
 				return false;
@@ -325,6 +330,13 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 			global.setSetupDescription(jTextAreaSetupDescription.getText());
 		}
 		return true;
+	}
+	
+	/**
+	 * Reset the background color of all required fields to white.
+	 */
+	private void resetToWhite(){
+		jTextFieldSetupName.setBackground(Color.white);
 	}
 
 	/**
