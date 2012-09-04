@@ -6,6 +6,8 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -367,6 +369,20 @@ public class AddNewPanel extends javax.swing.JDialog {
     	}
     }
     
+    private void returnToWhite(){
+    	txtName.setBackground(Color.white);
+        txtManufacturer.setBackground(Color.white);
+        txtCode.setBackground(Color.white);
+        jSpinnerWattage.setBackground(Color.white);
+        jSpinnerCost.setBackground(Color.white);
+        jSpinnerRRP.setBackground(Color.white);
+        jSpinnerLife.setBackground(Color.white);
+        jSpinnerEfficiency.setBackground(Color.white);
+        jSpinnerDirection.setBackground(Color.white);
+        jSpinnerPanelCount.setBackground(Color.white);
+        jSpinnerAzimuth.setBackground(Color.white);
+    }
+    
     /**
      * Submit the panel information
      * @return 
@@ -377,19 +393,34 @@ public class AddNewPanel extends javax.swing.JDialog {
     	Integer panelCount;
     	Double panelDirection;
     	Double panelAzimuth;
+    	boolean error = false;
+    	
+    	returnToWhite();
     	
         try {
-        	if(txtName.getText().equals("") == true 
-                    || txtManufacturer.getText().equals("") == true  
-                    || txtCode.getText().equals("") == true){
-                    throw new Exception();
+        	if(txtName.getText().equals("") == true){
+        		error = true;
+        		txtName.setBackground(Color.red);
+        	}
+            if(txtManufacturer.getText().equals("") == true){
+        		error = true;
+            	txtManufacturer.setBackground(Color.red);
             }
-            
+            if(txtCode.getText().equals("") == true){
+        		error = true;
+            	txtCode.setBackground(Color.red);
+            } 
         	if((Double)jSpinnerCost.getModel().getValue() == 0){
-            	throw new Exception();
+        		error = true;
+        		jSpinnerCost.setBackground(Color.red);
             }
             
             if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
+        		error = true;
+            	jSpinnerPanelCount.setBackground(Color.red);
+            }
+            
+            if(error){
             	throw new Exception();
             }
                 //panel data

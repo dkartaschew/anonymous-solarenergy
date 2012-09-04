@@ -173,13 +173,10 @@ public class SolarSetup {
 	public String toString(){
 		String details = "<html>";
 		int panelCount = panels.size();
-		int count = 1;
-		
-		//Setup name
+
+		//Setup name and description
 		details += "<b>System Name:</b> ";
 		details += setupName + "<br /><br />";
-
-		//Setup description
 		details += "<b>System Description:</b><br />";
 		details += setupDescription + "<br /><br />";
 		

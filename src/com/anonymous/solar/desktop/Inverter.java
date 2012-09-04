@@ -6,6 +6,8 @@ package com.anonymous.solar.desktop;
 
 //import com.anonymous.solar.shared.SolarPanel;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 import com.anonymous.solar.shared.SolarInverter;
@@ -308,16 +310,57 @@ public class Inverter extends javax.swing.JDialog {
     	}
     }
     
+    private void returnToWhite(){
+    	txtName.setBackground(Color.white);
+		txtManufacturer.setBackground(Color.white);
+		txtCode.setBackground(Color.white);
+		jSpinnerWattage.setBackground(Color.white);
+		jSpinnerCost.setBackground(Color.white);
+		jSpinnerEffLossYr.setBackground(Color.white);
+		jSpinnerRRP.setBackground(Color.white);
+		jSpinnerLife.setBackground(Color.white);
+		jSpinnerEfficiency.setBackground(Color.white);
+    }
+    
     
     private boolean submitInverterData(){
     	inverter = new SolarInverter();
+    	boolean error = false;
+    	returnToWhite();
+    	
 		try {
-			
-			if(txtName.getText().equals("") == true || txtManufacturer.getText().equals("") == true  || txtCode.getText().equals("") == true){
-				throw new Exception();
-			}
-			
-			if((Double)jSpinnerCost.getModel().getValue() == 0){
+			jSpinnerCost.setBackground(Color.red);
+			if(txtName.getText().equals("") == true){
+        		error = true;
+        		txtName.setBackground(Color.red);
+        	}
+            if(txtManufacturer.getText().equals("") == true){
+        		error = true;
+            	txtManufacturer.setBackground(Color.red);
+            }
+            if(txtCode.getText().equals("") == true){
+        		error = true;
+            	txtCode.setBackground(Color.red);
+            } 
+        	if((Double)jSpinnerCost.getModel().getValue() == 0){
+        		error = true;
+        		jSpinnerCost.setBackground(Color.red);
+            }
+        	if((Double)jSpinnerRRP.getModel().getValue() == 0){
+        		error = true;
+        		jSpinnerRRP.setBackground(Color.red);
+        	}
+        	if((Double)jSpinnerCost.getModel().getValue() == 0){
+        		error = true;
+        		jSpinnerCost.setBackground(Color.red);
+        	}
+        	if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
+        		error = true;
+        		jSpinnerCost.setBackground(Color.red);
+        	}
+        	
+            
+            if(error){
             	throw new Exception();
             }
 				
