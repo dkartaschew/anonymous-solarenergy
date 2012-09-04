@@ -168,12 +168,15 @@ public class SolarInverter {
 				+ inverterLifeYears + "]";
 	}
 
-	public String toString(boolean panelLayout) {
-		if (!panelLayout) {
-			return this.toString();
+	public String toString(boolean htmlTags) {
+
+		if(htmlTags){
+			return "<html><p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
+			+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>" + "</html>";
+		} else {
+			return "<p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
+					+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>";
 		}
-		return "<html><p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
-		+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>" + "</html>";
 	}
 
 	/**

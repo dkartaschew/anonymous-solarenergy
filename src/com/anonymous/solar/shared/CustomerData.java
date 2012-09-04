@@ -181,25 +181,36 @@ public class CustomerData {
 	
 	@Override
 	public String toString(){
-		return "Daily Average: \t\t" + dailyAverageUsage + "\n"
-				+ "Hourly Average: \t" + hourlyAverageUsage + "\n"
-				+ "Tariff 11 Cost: \t\t" +  tariff11Cost + "\n"
-				+ "Tariff 11 Fee: \t\t" + tariff11Fee + "\n"
-				+ "Tariff 13 Cost: \t\t" +  tariff13Cost + "\n"
-				+ "Tariff 13 Fee: \t\t" + tariff13Fee + "\n"
-				+ "Feed In Fee: \t\t" + feedInFee + "\n"
-				+ "Annual Tariff Increase: \t" + annualTariffIncrease + "\n";
+		return "Daily Average: " + dailyAverageUsage + "<br />"
+				+ "Hourly Average: " + hourlyAverageUsage + "<br />"
+				+ "Tariff 11 Cost: " +  tariff11Cost + "<br />"
+				+ "Tariff 11 Fee: " + tariff11Fee + "<br />"
+				+ "Tariff 13 Cost: " +  tariff13Cost + "<br />"
+				+ "Tariff 13 Fee: " + tariff13Fee + "<br />"
+				+ "Feed In Fee: " + feedInFee + "<br />"
+				+ "Annual Tariff Increase: " + annualTariffIncrease + "<br />";
 	}
 	
-	public String toString(String indent){
-		return    indent + "Daily Average: \t\t" + dailyAverageUsage + "\n"
-				+ indent + "Hourly Average: \t" + hourlyAverageUsage + "\n"
-				+ indent + "Tariff 11 Cost: \t\t" +  tariff11Cost + "\n"
-				+ indent + "Tariff 11 Fee: \t\t" + tariff11Fee + "\n"
-				+ indent + "Tariff 13 Cost: \t\t" +  tariff13Cost + "\n"
-				+ indent + "Tariff 13 Fee: \t\t" + tariff13Fee + "\n"
-				+ indent + "Feed In Fee: \t\t" + feedInFee + "\n"
-				+ indent + "Annual Tariff Increase: \t" + annualTariffIncrease + "\n";
+	public String toString(boolean htmlTags){
+		String about = null;
+		
+		if(htmlTags){
+			about += "<html>";
+		}
+		
+		about += "Daily Average: " + dailyAverageUsage + "<br />"
+				 + "Hourly Average: " + hourlyAverageUsage + "<br />"
+				 + "Tariff 11 Cost: " +  tariff11Cost + "<br />"
+				 + "Tariff 11 Fee: " + tariff11Fee + "<br />"
+				 + "Tariff 13 Cost: " +  tariff13Cost + "<br />"
+				 + "Tariff 13 Fee: " + tariff13Fee + "<br />"
+				 + "Feed In Fee: " + feedInFee + "<br />"
+				 + "Annual Tariff Increase: " + annualTariffIncrease + "<br />";
+		
+		if(htmlTags){
+			about += "</html>";
+		}
+		return about;
 	}
 	
 }

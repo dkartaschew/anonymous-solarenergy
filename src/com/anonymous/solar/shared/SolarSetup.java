@@ -175,53 +175,29 @@ public class SolarSetup {
 		int panelCount = panels.size();
 		int count = 1;
 		
-		// TODO: Convert to using HTML for rendering.
-		if(setupName != null && setupName.length() == 0){
-			details += "<red>ERROR: NO NAME DETECTED</red>\n\n";
-		} else {
-			details += "<b>System Name:</b> " + setupName + "\n\n";
-		}
-		if(setupName != null){
-		details += "DESCRIPTION: \n" + setupDescription + "\n\n";
-		}
+		//Setup name
+		details += "<b>System Name:</b> ";
+		details += setupName + "<br /><br />";
 
+		//Setup description
+		details += "<b>System Description:</b><br />";
+		details += setupDescription + "<br /><br />";
 		
-		if(panelCount == 0){
-			details += "ERROR: NO PANELS DETECTED\n\n";
-		} else {
-			details += "You have " + panelCount + " types of panels.\n";
-			
-			for(SolarPanels panel : panels){
-				details += "\t" + count + ") " + panel.getPanelCount() + " units of " 
-				+ panel.getPanelType().getPanelName() + "\n"
-				+ "\tDirection: \t\t" + panel.getPanelDirection() + "\n"
-				+ "\tCost per unit: \t\t$" + panel.getPanelType().getPanelCost() + "\n"
-				+ "\tWattage: \t\t" + panel.getPanelType().getPanelWattage() + "\n"
-				+ "\tLife: \t\t" + panel.getPanelType().getPanelLifeYears() + "\n\n";
-				
-				count++;			
-			}
-			
-		}//end if
-		
-		if(inverter == (null)){
-			details += "ERROR: NO INVERTER DETECTED\n\n";
-		} else {
-			details += "Name: " + inverter.getInverterName() + "\n" 
-					+ "\tWire Length: " + wireLength + "\n" 
-					+ "\tWire Efficiency: " + wireEfficiency + "\n" 
-					+ "\tWattage: \t\t" + inverter.getInverterWattage() + "W\n"
-					+ "\tCost: \t\t$" + inverter.getInverterCost() + "\n"
-					+ "\tLife: \t\t" + inverter.getInverterLifeYears() + "\n"
-					+ "\tEfficiency: \t\t" + inverter.getInverterEfficiency() + "\n\n";
+		//Panel Data
+		details += "<b>Panel Details:</b><br />";
+		details += "You have " + panelCount + " types of panels.<br />";
+		for(SolarPanels panel : panels){
+			details += panel.getPanelType().toString(false) + "<br />";		
 		}
 		
-		//Customer details are always set, no need to check
-		details += "Customer Details\n";
-		if(customerData.getDailyAverageUsage() == 0 && customerData.getHourlyAverageUsage() == 0){
-			details += "WARNING: YOU USE NO ELECTRICITY. THIS SYSTEM IS POINTLESS\n";
-		}
-		details += customerData.toString("\t")+"</html>";
+		//Inverter details
+		details += "<b>Inverter Details</b><br />";
+		details += inverter.toString(false)+"<br />";
+		
+		//Customer details
+		details += "<b>Customer Details</b><br />";
+		details += customerData.toString(false)+"<br /></html>";
+		
 		return details;
 	}
 

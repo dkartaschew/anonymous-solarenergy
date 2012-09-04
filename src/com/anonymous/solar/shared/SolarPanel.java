@@ -425,5 +425,27 @@ public class SolarPanel {
 				+ ", panelLossYear=" + panelLossYear + ", panelCost=" + panelCost + ", panelRRP=" + panelRRP
 				+ ", panelLifeYears=" + panelLifeYears + "]";
 	}
+	
+	public String toString(boolean htmlTags){
+		if(htmlTags){
+			return "<html><b>Name: " + panelName + "</b><br />"
+					+ "Manufacturer: " + panelManufacturer + "<br />"
+					+ "Code: " + panelManufacturerCode + "<br />"
+					+ "Wattage: " + panelWattage + "<br />"
+					+ "Loss/year: " + panelLossYear + "<br />"
+					+ "Cost : $" + panelCost + "<br />"
+					+ "RRP: $" + panelRRP + "<br />"
+					+ "Life(years): " + panelLifeYears + "<br /></html>";
+		} else {
+			return "<b>Name: " + panelName + "</b><br />"
+					+ "Manufacturer: " + panelManufacturer + "<br />"
+					+ "Code: " + panelManufacturerCode + "<br />"
+					+ "Wattage: " + panelWattage + "<br />"
+					+ "Loss/year: " + panelLossYear + "<br />"
+					+ "Cost : $" + panelCost + "<br />"
+					+ "RRP: $" + panelRRP + "<br />"
+					+ "Life(years): " + panelLifeYears + "<br />";
+		}
+	}
 
 }
