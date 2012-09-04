@@ -192,7 +192,7 @@ public class CustomerData {
 	}
 	
 	public String toString(boolean htmlTags){
-		String about = null;
+		String about = "";
 		
 		if(htmlTags){
 			about += "<html>";

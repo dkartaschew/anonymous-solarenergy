@@ -174,8 +174,10 @@ public class SolarInverter {
 			return "<html><p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
 			+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>" + "</html>";
 		} else {
-			return "<p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
-					+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>";
+			return "Wattage: " + inverterWattage + "W" + "<br />" + 
+				   "Efficiency: " + inverterEfficiency + "%<br />"	+ 
+				   "Life: " + inverterLifeYears.toString() + " Years<br />" + 
+				   "RRP: $" + inverterRRP.toString() + "<br />";
 		}
 	}
 
