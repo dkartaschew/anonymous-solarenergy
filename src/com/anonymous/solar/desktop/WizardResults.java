@@ -3,6 +3,11 @@
  */
 package com.anonymous.solar.desktop;
 
+import com.anonymous.solar.shared.SolarCalculatorLocal;
+import com.anonymous.solar.shared.SolarResult;
+import com.anonymous.solar.shared.SolarResultException;
+import com.anonymous.solar.shared.SolarSetup;
+
 /**
  * Wizard Panel to display the results that come back from the server.
  * 
@@ -85,7 +90,25 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
-        return true;
+        SolarSetup global = parent.getSetup();
+        SolarResult results = null;
+        if (global != null) {
+        	try {
+				results = new SolarResult(global);
+			} catch (SolarResultException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	SolarCalculatorLocal calculator = new SolarCalculatorLocal();
+        	results = calculator.calculateDailySavings(results, 1);
+        	results = calculator.calculateYearlySavings(results, 1);
+        	results = calculator.calculateYearlySavingsOverTime(results, 10);
+        	
+        	jLabel1.setText("Daily Savings : $" + results.getDailySavings() + 
+        			"\tYearly Savings: $" + results.getYearlySavings());
+        	
+        }
+    	return true;
     }
 
     /**

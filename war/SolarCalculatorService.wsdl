@@ -70,7 +70,7 @@
   </binding>
   <service name="SolarCalculatorService">
     <port name="SolarCalculatorPort" binding="tns:SolarCalculatorPortBinding">
-      <soap:address location="anonymous-solarenergy.appspot.com/anonymous-solarenergy"/>
+      <soap:address location="REPLACE_WITH_ACTUAL_URL"/>
     </port>
   </service>
 </definitions>

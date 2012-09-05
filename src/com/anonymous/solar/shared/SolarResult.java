@@ -12,19 +12,27 @@ import java.util.ArrayList;
  */
 public class SolarResult {
 
+	private final double INITIAL_VALUE = 0.0;
+	
 	private SolarSetup finalSetup;
 	private double averageDailySavings;
 	private double averageYearlySavings;
 	private ArrayList<Double> savingsOverYears;
 	
 	public SolarResult() {
+		savingsOverYears = new ArrayList<Double>();
+		averageDailySavings = INITIAL_VALUE;
+		averageYearlySavings = INITIAL_VALUE;
 		
 	}
 	
 	public SolarResult(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
 		savingsOverYears = new ArrayList<Double>();
+		averageDailySavings = INITIAL_VALUE;
+		averageYearlySavings = INITIAL_VALUE;
 		finalSetup = solarSetup;
+		
 	}
 	
 	public SolarSetup getSolarSetup() {
