@@ -312,7 +312,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	 */
 	@Override
 	public boolean callbackDispose(boolean validateInput) {
-		
+		returnToWhite();
 		
 		if (validateInput) {
 			if ((jTextFieldSetupName.getText() == null) || (jTextFieldSetupName.getText().equals(""))) {
@@ -323,6 +323,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 				return false;
 			}
 		}
+		// reset the color.
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
 			// Store the name and description fields.
@@ -333,11 +334,12 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	}
 	
 	/**
-	 * Reset the background color of all required fields to white.
-	 */
-	private void resetToWhite(){
-		jTextFieldSetupName.setBackground(Color.white);
-	}
+     * Clear all the error effects from text boxes and jSpinners
+     */
+	private void returnToWhite(){
+    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+    	jTextFieldSetupName.setBackground(Color.white);
+    }
 
 	/**
 	 * Return the title to be used for this wizard panel;

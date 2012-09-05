@@ -298,6 +298,7 @@ public class Wizard extends javax.swing.JPanel {
 	 * Initialise the sidebar navigation buttons for use by the user.
 	 */
 	private void initSideBar(){
+		Integer buttonID = 0;
 		// Create our buttons.
 		jPanelSideBar.setLayout(new BoxLayout(jPanelSideBar, BoxLayout.PAGE_AXIS));
 		jPanelSideBar.setPreferredSize(new java.awt.Dimension(155, 0));
@@ -310,17 +311,22 @@ public class Wizard extends javax.swing.JPanel {
 			newButton.setContentAreaFilled(false);
 			newButton.setVisible(true);
 			newButton.setEnabled(false);
-
-			// TODO: Add even handler to allow switching to panels as needed.
+			newButton.setName("sidebarButton"+buttonID.toString());
+			// Add event handler to allow switching to panels as needed.
+			newButton.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	            	sideBarActionPerformed(evt);
+	            }
+	        });
 			
+			// Add button to sidebar object store.
 			sideBarButtons.add(newButton);
 			
-		}
-		// Add buttons to the panel.
-		for(JButton button: sideBarButtons){
+			// Add button to panel
 			jPanelSideBar.add(Box.createHorizontalGlue());
-			jPanelSideBar.add(button);
+			jPanelSideBar.add(newButton);
 		}
+		
 	}
 	
 	/**
@@ -335,6 +341,33 @@ public class Wizard extends javax.swing.JPanel {
 			button.setFont(button.getFont().deriveFont(java.awt.Font.PLAIN, button.getFont().getSize()));
 		}
 		activeButton.setFont(activeButton.getFont().deriveFont(java.awt.Font.BOLD, activeButton.getFont().getSize()));
+	}
+	
+	/**
+	 * Event handler for the sidebar buttons.
+	 * @param evt
+	 */
+	private void sideBarActionPerformed(java.awt.event.ActionEvent evt) {
+		// get which sidebar button was pressed.
+		JButton sourceButton = (JButton)evt.getSource();
+		int buttonID = sideBarButtons.indexOf(sourceButton);
+		if(buttonID == wizardIndex){
+			return; // do nothing if we already on the same panel
+		}
+		boolean changePanel = false;
+		try {
+			// Must validate the old panel before we leave it. (This ensures we have
+			// have valid information and avoid ways of breaking the system, by
+			// being able to bypass certain validation checks
+			changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(true);
+		} catch (Exception e) {
+		}
+		// Change to the selected panel.
+		if (changePanel) {
+			setWizardPanel(buttonID);
+			setSideBarButton(buttonID);
+			wizardIndex = buttonID;
+		}
 	}
 
 	/**
