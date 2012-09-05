@@ -42,25 +42,25 @@ public class SolarCalculatorService
         super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME);
     }
 
-    public SolarCalculatorService(WebServiceFeature... features) {
-        super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME, features);
-    }
+//    public SolarCalculatorService(WebServiceFeature... features) {
+//        super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME, features);
+//    }
 
     public SolarCalculatorService(URL wsdlLocation) {
         super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME);
     }
 
-    public SolarCalculatorService(URL wsdlLocation, WebServiceFeature... features) {
-        super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME, features);
-    }
+//    public SolarCalculatorService(URL wsdlLocation, WebServiceFeature... features) {
+//        super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME, features);
+//    }
 
     public SolarCalculatorService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public SolarCalculatorService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
-        super(wsdlLocation, serviceName, features);
-    }
+//    public SolarCalculatorService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+//        super(wsdlLocation, serviceName, features);
+//    }
 
     /**
      * 
