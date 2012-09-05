@@ -146,7 +146,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         lblCode.setText("Code");
 
-        lblEfficiency.setText("Efficiency");
+        lblEfficiency.setText("Efficiency Loss");
 
         lblLife.setText("Life");
 

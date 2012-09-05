@@ -90,4 +90,18 @@ public class SolarResult {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		String details = "<html>";
+		
+		details += "<b>Daily Savings: </b>";
+		details += averageDailySavings + "<br /><br />";
+		
+		details += "<b>Yearly Savings: </b>";
+		details += averageYearlySavings + "<br /><br />";
+		
+		details += "</html>";
+		return details;
+	}
+	
 }
