@@ -4,9 +4,16 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.border.Border;
+
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -31,6 +38,7 @@ public class Wizard extends javax.swing.JPanel {
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
 	 */
 	private ArrayList<JPanel> panels = new ArrayList<JPanel>();
+	private ArrayList<JButton> sideBarButtons = new ArrayList<JButton>();
 
 	/**
 	 * Reference to the parent frame.
@@ -42,17 +50,18 @@ public class Wizard extends javax.swing.JPanel {
 	 */
 	private int wizardIndex = 0;
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-
-	private javax.swing.JButton jButtonBack;
-	private javax.swing.JButton jButtonClose;
-	private javax.swing.JButton jButtonNext;
-	private javax.swing.JLabel jLabelHeader;
-	private javax.swing.JPanel jPanelMainContent;
-	private javax.swing.JSeparator jSeparator1;
-	private javax.swing.JSeparator jSeparator2;
-
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonNext;
+    private javax.swing.JLabel jLabelApplicationImage;
+    private javax.swing.JLabel jLabelHeader;
+    private javax.swing.JPanel jPanelMainContent;
+    private javax.swing.JPanel jPanelSideBar;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    // End of variables declaration//GEN-END:variables
 
 	/**
 	 * Creates new form Wizard
@@ -70,112 +79,134 @@ public class Wizard extends javax.swing.JPanel {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		jSeparator1 = new javax.swing.JSeparator();
-		jButtonBack = new javax.swing.JButton();
-		jButtonNext = new javax.swing.JButton();
-		jButtonClose = new javax.swing.JButton();
-		jPanelMainContent = new javax.swing.JPanel();
-		jLabelHeader = new javax.swing.JLabel();
-		jSeparator2 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButtonBack = new javax.swing.JButton();
+        jButtonNext = new javax.swing.JButton();
+        jButtonClose = new javax.swing.JButton();
+        jPanelMainContent = new javax.swing.JPanel();
+        jLabelHeader = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanelSideBar = new javax.swing.JPanel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabelApplicationImage = new javax.swing.JLabel();
 
-		jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/anonymous/solar/desktop/images/go-previous.png"))); // NOI18N
-		jButtonBack.setText("Back");
-		jButtonBack.setToolTipText("");
-		jButtonBack.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonBackActionPerformed(evt);
-			}
-		});
+        jButtonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/go-previous.png"))); // NOI18N
+        jButtonBack.setText("Back");
+        jButtonBack.setToolTipText("");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
 
-		jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/anonymous/solar/desktop/images/go-next.png"))); // NOI18N
-		jButtonNext.setText("Next");
-		jButtonNext.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonNextActionPerformed(evt);
-			}
-		});
+        jButtonNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/go-next.png"))); // NOI18N
+        jButtonNext.setText("Next");
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextActionPerformed(evt);
+            }
+        });
 
-		jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/com/anonymous/solar/desktop/images/window-close.png"))); // NOI18N
-		jButtonClose.setText("Close");
-		jButtonClose.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonCloseActionPerformed(evt);
-			}
-		});
+        jButtonClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/window-close.png"))); // NOI18N
+        jButtonClose.setText("Close");
+        jButtonClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCloseActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout jPanelMainContentLayout = new javax.swing.GroupLayout(jPanelMainContent);
-		jPanelMainContent.setLayout(jPanelMainContentLayout);
-		jPanelMainContentLayout.setHorizontalGroup(jPanelMainContentLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 616, Short.MAX_VALUE));
-		jPanelMainContentLayout.setVerticalGroup(jPanelMainContentLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 307, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanelMainContentLayout = new javax.swing.GroupLayout(jPanelMainContent);
+        jPanelMainContent.setLayout(jPanelMainContentLayout);
+        jPanelMainContentLayout.setHorizontalGroup(
+            jPanelMainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelMainContentLayout.setVerticalGroup(
+            jPanelMainContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-		jLabelHeader.setFont(jLabelHeader.getFont().deriveFont(jLabelHeader.getFont().getStyle() | java.awt.Font.BOLD,
-				jLabelHeader.getFont().getSize() + 7));
-		jLabelHeader.setText("<Header>");
+        jLabelHeader.setFont(jLabelHeader.getFont().deriveFont(jLabelHeader.getFont().getStyle() | java.awt.Font.BOLD, jLabelHeader.getFont().getSize()+7));
+        jLabelHeader.setText("<Header>");
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jPanelMainContent,
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
-														layout.createSequentialGroup()
-																.addGap(0, 0, Short.MAX_VALUE)
-																.addComponent(jButtonBack,
-																		javax.swing.GroupLayout.PREFERRED_SIZE, 90,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(
-																		javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-																.addComponent(jButtonNext,
-																		javax.swing.GroupLayout.PREFERRED_SIZE, 90,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addGap(33, 33, 33)
-																.addComponent(jButtonClose,
-																		javax.swing.GroupLayout.PREFERRED_SIZE, 90,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
-												.addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING,
-														javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-												.addComponent(jSeparator2)).addContainerGap())
-				.addGroup(
-						layout.createSequentialGroup().addGap(36, 36, 36).addComponent(jLabelHeader)
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addGap(18, 18, 18)
-								.addComponent(jLabelHeader)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jPanelMainContent, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jButtonClose).addComponent(jButtonNext)
-												.addComponent(jButtonBack)).addContainerGap()));
-	}// </editor-fold>//GEN-END:initComponents
+        jPanelSideBar.setBorder(null);
+
+        javax.swing.GroupLayout jPanelSideBarLayout = new javax.swing.GroupLayout(jPanelSideBar);
+        jPanelSideBar.setLayout(jPanelSideBarLayout);
+        jPanelSideBarLayout.setHorizontalGroup(
+            jPanelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 103, Short.MAX_VALUE)
+        );
+        jPanelSideBarLayout.setVerticalGroup(
+            jPanelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 378, Short.MAX_VALUE)
+        );
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabelApplicationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/solar.png"))); // NOI18N
+        jLabelApplicationImage.setFocusable(false);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                    .addComponent(jSeparator2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButtonClose, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabelApplicationImage)
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabelHeader)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelSideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelMainContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelHeader))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelApplicationImage)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3)
+                    .addComponent(jPanelMainContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelSideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonClose)
+                    .addComponent(jButtonNext)
+                    .addComponent(jButtonBack))
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
 	/**
 	 * Event handler for the Close Button in the main panel.
@@ -206,10 +237,16 @@ public class Wizard extends javax.swing.JPanel {
 			}
 			if (changePanel) {
 				setWizardPanel(++wizardIndex);
+				setSideBarButton(wizardIndex);
 			}
 		}
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
+		
+		// Disable the next button if we are at the end.
+		if(wizardIndex == panels.size()-1){
+			jButtonNext.setEnabled(false);
+		}
 	}// GEN-LAST:event_jButtonNextActionPerformed
 
 	/**
@@ -226,6 +263,7 @@ public class Wizard extends javax.swing.JPanel {
 			}
 			if (changePanel) {
 				setWizardPanel(--wizardIndex);
+				setSideBarButton(wizardIndex);
 			}
 		}
 		jButtonNext.setEnabled(true);
@@ -239,18 +277,64 @@ public class Wizard extends javax.swing.JPanel {
 	 * Wizard
 	 */
 	private void initWizardPanels() {
-		panels.add(new WizardStart(this));// 0
+		panels.add(new WizardStart(this));
 		// panels.add(new WizardUser(this));
-		panels.add(new WizardSetupDescription(this));// 1
-		panels.add(new WizardUserCosts(this));// 2
-		panels.add(new WizardSetupElectrical(this));// 3
-		panels.add(new WizardSetupSolarPanels(this));// 4
-		panels.add(new WizardSetupConfirmation(this));// 5
-		panels.add(new WizardResults(this));// 6
-		panels.add(new WizardFinish(this));// 7
+		panels.add(new WizardSetupDescription(this));
+		panels.add(new WizardUserCosts(this));
+		panels.add(new WizardSetupElectrical(this));
+		panels.add(new WizardSetupSolarPanels(this));
+		panels.add(new WizardSetupConfirmation(this));
+		panels.add(new WizardResults(this));
+		panels.add(new WizardFinish(this));
+		
+		// Initialise the sidebar;
+		initSideBar();
 
 		// Set to show the first panel.
 		setWizardPanel(wizardIndex);
+	}
+	
+	/**
+	 * Initialise the sidebar navigation buttons for use by the user.
+	 */
+	private void initSideBar(){
+		// Create our buttons.
+		jPanelSideBar.setLayout(new BoxLayout(jPanelSideBar, BoxLayout.PAGE_AXIS));
+		jPanelSideBar.setPreferredSize(new java.awt.Dimension(155, 0));
+		for(JPanel panel: panels){
+			javax.swing.JButton newButton = new javax.swing.JButton();
+			newButton.setFont(newButton.getFont().deriveFont(newButton.getFont().getSize()-1f));
+			newButton.setText(((WizardPanel)panel).getTitle());
+			newButton.setBorderPainted(false);
+			newButton.setOpaque(false);
+			newButton.setContentAreaFilled(false);
+			newButton.setVisible(true);
+			newButton.setEnabled(false);
+
+			// TODO: Add even handler to allow switching to panels as needed.
+			
+			sideBarButtons.add(newButton);
+			
+		}
+		// Add buttons to the panel.
+		for(JButton button: sideBarButtons){
+			jPanelSideBar.add(Box.createHorizontalGlue());
+			jPanelSideBar.add(button);
+		}
+	}
+	
+	/**
+	 * Redraw the navigation sidebar based on actions of the user
+	 * @param index The current panel index.
+	 */
+	private void setSideBarButton(int index){
+		JButton activeButton = sideBarButtons.get(index);
+		activeButton.setEnabled(true);
+		for(int i = 0; i < sideBarButtons.size(); i++){
+			JButton button = sideBarButtons.get(i);
+			button.setFont(button.getFont().deriveFont(java.awt.Font.PLAIN, button.getFont().getSize()));
+		}
+		activeButton.setFont(activeButton.getFont().deriveFont(java.awt.Font.BOLD, activeButton.getFont().getSize()));
 	}
 
 	/**
@@ -264,14 +348,20 @@ public class Wizard extends javax.swing.JPanel {
 		jPanelMainContent.setLayout(new BorderLayout());
 		jPanelMainContent.add(panels.get(index));
 		String title = ((WizardPanel) panels.get(index)).getTitle();
-		// If no title, then disable the title section of the panel.
+		// If no title, then disable the title and sidebar  section of the panel.
 		if (title.compareTo("") == 0) {
 			jLabelHeader.setVisible(false);
 			jSeparator2.setVisible(false);
+			jSeparator3.setVisible(false);
+			jLabelApplicationImage.setVisible(false);
+			jPanelSideBar.setVisible(false);
 		} else {
 			jLabelHeader.setText(title);
 			jLabelHeader.setVisible(true);
 			jSeparator2.setVisible(true);
+			jSeparator3.setVisible(true);
+			jLabelApplicationImage.setVisible(true);
+			jPanelSideBar.setVisible(true);
 		}
 		// Try to call the start handler of the panel.
 		try {
