@@ -10,5 +10,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/JMapViewer.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
