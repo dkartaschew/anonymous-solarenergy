@@ -27,7 +27,7 @@ public class SolarResultTest {
 	 */
 	@Test(expected = SolarResultException.class)
 	public void nullSolarPanels() throws SolarResultException {
-		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, 0.00, 0.00, null, null, null);
+		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, new LocationData(), null, null, null);
 		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);
 	}

@@ -18,8 +18,7 @@ public class SolarSetup {
 	private SolarInverter inverter = null;
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
-	private Double locationLatitude = 0.00;
-	private Double locationLongitude = 0.00;
+	private LocationData locationInformation = null;
 	private CustomerData customerData = new CustomerData();
 	private String setupName = null;
 	private String setupDescription = null;
@@ -29,13 +28,12 @@ public class SolarSetup {
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
-			Double locationLatitude, Double locationLongitude, CustomerData customerData, String setupName, String setupDescription) {
+			LocationData location, CustomerData customerData, String setupName, String setupDescription) {
 		this.panels = panels;
 		this.inverter = invertor;
 		this.wireLength = wireLength;
 		this.wireEfficiency = wireEfficiency;
-		this.locationLatitude = locationLatitude;
-		this.locationLongitude = locationLongitude;
+		this.locationInformation = location;
 		this.customerData = customerData;
 		this.setupName = setupName;
 		this.setupDescription = setupDescription;
@@ -180,6 +178,10 @@ public class SolarSetup {
 		details += "<b>System Description:</b><br />";
 		details += setupDescription + "<br /><br />";
 		
+		// Location information
+		details += "<b>Location:</b></br>";
+		details += locationInformation.toString(false) + "<br />";	
+		
 		//Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
@@ -255,34 +257,20 @@ public class SolarSetup {
 		return panels;
 	}
 
-	/**
-	 * @return the locationLatitude
-	 */
-	public Double getLocationLatitude() {
-		return locationLatitude;
-	}
-
-	/**
-	 * @param locationLatitude
-	 *            the locationLatitude to set
-	 */
-	public void setLocationLatitude(Double locationLatitude) {
-		this.locationLatitude = locationLatitude;
-	}
-
+	
 	/**
 	 * @return the locationLongitude
 	 */
-	public Double getLocationLongitude() {
-		return locationLongitude;
+	public LocationData getLocation() {
+		return locationInformation;
 	}
 
 	/**
 	 * @param locationLongitude
 	 *            the locationLongitude to set
 	 */
-	public void setLocationLongitude(Double locationLongitude) {
-		this.locationLongitude = locationLongitude;
+	public void setLocation(LocationData location) {
+		this.locationInformation = location;
 	}
 
 }
