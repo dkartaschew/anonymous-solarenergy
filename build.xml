@@ -13,6 +13,9 @@
 		<fileset dir="${sdk.dir}/lib">
 			<include name="shared/**/*.jar" />
 		</fileset>
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
 	</path>
 
 	<target name="clean">
@@ -58,6 +61,7 @@
 
 	<target name="Desktopjar" depends="compileDesktop">
 		<jar jarfile="SolarPanelApplication.jar" basedir="desktop">
+		<zipgroupfileset dir="lib" includes="JMapViewer.jar" />
 			<manifest>
 				<!-- Who is building this jar? -->
 				<attribute name="Built-By" value="${user.name}" />
