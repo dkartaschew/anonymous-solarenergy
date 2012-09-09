@@ -19,7 +19,7 @@ import javax.xml.ws.ResponseWrapper;
  */
 @WebService(name = "SolarCalculator", targetNamespace = "http://server.solar.anonymous.com/")
 @XmlSeeAlso({
-    ObjectFactory.class
+    LocationObjectFactory.class
 })
 public interface SolarCalculator {
 

@@ -22,7 +22,7 @@ import javax.xml.namespace.QName;
  * 
  */
 @XmlRegistry
-public class ObjectFactory {
+public class LocationObjectFactory {
 
     private final static QName _StoreLocationGetAllResponse_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationGetAllResponse");
     private final static QName _StoreLocationInformationResponse_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationInformationResponse");
@@ -33,7 +33,7 @@ public class ObjectFactory {
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.anonymous.solar.client
      * 
      */
-    public ObjectFactory() {
+    public LocationObjectFactory() {
     }
 
     /**
