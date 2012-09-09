@@ -6,5 +6,5 @@ gaeHrdEnabled=true
 gaeIsEclipseDefaultInstPath=true
 googleCloudSqlEnabled=false
 localDevMySqlEnabled=true
-ormEnhancementInclusions=test/|src/com/anonymous/solar/shared/|src/com/anonymous/solar/server/|src/com/anonymous/solar/client/
+ormEnhancementInclusions=test/|src/com/anonymous/solar/server/*.java|src/com/anonymous/solar/client/*.java|src/com/anonymous/solar/shared/*.java
 validationExclusions=src/com/anonymous/solar/desktop/
