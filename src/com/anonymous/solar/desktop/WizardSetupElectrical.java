@@ -54,6 +54,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	private void nameComponents() {
 		jTextFieldInverter.setName("TextFieldInverter");
 		jButtonSetInverter.setName("EditInverterDetails");
+		jSpinnerWiringLength.setName("SpinnerWiringLength");
 	}
 
 	/**
