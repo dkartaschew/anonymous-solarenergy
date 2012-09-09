@@ -5,10 +5,13 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.Color;
+import java.awt.List;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,6 +24,9 @@ import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.client.DoubleArray;
+import com.anonymous.solar.client.LocationInformation;
+import com.anonymous.solar.client.LocationInformationService;
 
 /**
  * 
@@ -64,7 +70,8 @@ public class LocationDialog extends javax.swing.JDialog {
 				jTableWeatherDetails.getModel().setValueAt(locWData[row][0], row, 1);
 				jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
 			}
-			jMapViewer1.setDisplayPositionByLatLon(locationData.getLatitude(), locationData.getLongitude(), jMapViewer1.getZoom());
+			jMapViewer1.setDisplayPositionByLatLon(locationData.getLatitude(), locationData.getLongitude(),
+					jMapViewer1.getZoom());
 			AddMarker(new Coordinate(locationData.getLatitude(), locationData.getLongitude()));
 		}
 
@@ -201,10 +208,10 @@ public class LocationDialog extends javax.swing.JDialog {
 
 		jButtonSave.setText("Save Details");
 		jButtonSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	jButtonSaveActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButtonSaveActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout jPanelLocationDetailsLayout = new javax.swing.GroupLayout(jPanelLocationDetails);
 		jPanelLocationDetails.setLayout(jPanelLocationDetailsLayout);
@@ -458,8 +465,8 @@ public class LocationDialog extends javax.swing.JDialog {
 		jMapViewer1.setDisplayPositionByLatLon(locData.getLatitude(), locData.getLongitude(), jMapViewer1.getZoom());
 		AddMarker(new Coordinate(locData.getLatitude(), locData.getLongitude()));
 	}// GEN-LAST:event_LocationItemStateChange
-	
-	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt){
+
+	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {
 		LocationData locData = new LocationData();
 		try {
 			locData.setLatitude(Double.valueOf(jTextFieldLatitude.getText()));
@@ -472,13 +479,33 @@ public class LocationDialog extends javax.swing.JDialog {
 			}
 			locData.setLocationWeatherData(locWDate);
 		} catch (Exception e) {
-			
+
 		}
 		loadLocationComboBox(locData);
 		jComboBoxLocationName.setSelectedIndex(jComboBoxLocationName.getComponentCount());
+		// Save location information to GAE.
+		try {
+			LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
+			com.anonymous.solar.client.LocationData soapData = new com.anonymous.solar.client.LocationData();
+			// Create object to pass!
+			soapData.setLocationName(locData.getLocationName());
+			soapData.setLatitude(locData.getLatitude());
+			soapData.setLongitude(locData.getLongitude());
+			soapData.getLocationWeatherData().clear();
+			for (int row = 0; row < 12; row++) {
+				DoubleArray dbl = new DoubleArray();
+				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
+				soapData.getLocationWeatherData().add(dbl);
+			}
+			Long result = locationSOAP.storeLocationInformation(soapData);
+			System.out.printf("Location Item stored: key = %d \n", result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	
-		// Variables declaration - do not modify//GEN-BEGIN:variables
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
 
 	private javax.swing.JButton jButtonClose;
 	private javax.swing.JButton jButtonOK;
@@ -612,6 +639,18 @@ public class LocationDialog extends javax.swing.JDialog {
 			defaultLocation.setLongitude(144.96462106704712);
 			defaultLocation.setLatitude(-37.80804628684809);
 			loadLocationComboBox(defaultLocation);
+			// Add additional locations from GAE.
+			try {
+				LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
+				ArrayList<LocationData> locData = (ArrayList) locationSOAP.storeLocationGetAll();
+				for (LocationData loc : locData) {
+					loadLocationComboBox(loc);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+
 		} catch (Exception e) {
 		}
 	}
