@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:ns1="http://jaxb.dev.java.net/array" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://jaxb.dev.java.net/array" schemaLocation="LocationInformationService_schema2.xsd"/>
+
+  <xs:element name="StoreLocationGetAll" type="tns:StoreLocationGetAll"/>
+
+  <xs:element name="StoreLocationGetAllResponse" type="tns:StoreLocationGetAllResponse"/>
+
+  <xs:element name="StoreLocationInformation" type="tns:StoreLocationInformation"/>
+
+  <xs:element name="StoreLocationInformationResponse" type="tns:StoreLocationInformationResponse"/>
+
+  <xs:complexType name="StoreLocationGetAll">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="StoreLocationGetAllResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:locationData" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="locationData">
+    <xs:sequence>
+      <xs:element name="latitude" type="xs:double" minOccurs="0"/>
+      <xs:element name="locationName" type="xs:string" minOccurs="0"/>
+      <xs:element name="locationWeatherData" type="ns1:doubleArray" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="longitude" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StoreLocationInformation">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:locationData" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StoreLocationInformationResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
