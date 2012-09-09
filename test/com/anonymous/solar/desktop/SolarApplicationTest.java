@@ -105,6 +105,14 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		mainWindow.getButton("Next").click();
 		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
 		mainWindow.getButton("Next").click();
 		
 		//TODO: Test Spinner value is in fact 0
@@ -126,6 +134,14 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		mainWindow.getButton("Next").click();
 		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
 		mainWindow.getButton("Next").click();
 		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
 		mainWindow.getButton("Next").click();
@@ -146,6 +162,14 @@ public class SolarApplicationTest extends UISpecTestCase {
 	private void gotoSetupSolarPanels(Window mainWindow) {
 		mainWindow.getButton("Next").click();
 		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
 		mainWindow.getButton("Next").click();
 		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
 		mainWindow.getButton("Next").click();
@@ -164,6 +188,8 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    	      return dialog.getButton("Submit").triggerClick();
 	    	    }
 	    }).run();
+		
+		mainWindow.getSpinner("SpinnerWiringLength").clickForNextValue();
 		
 		mainWindow.getButton("Next").click();
 	}
