@@ -73,6 +73,13 @@ public class LocationData {
      * Default Constructor;
      */
     public LocationData() {
+    	locationWeatherData = new ArrayList<DoubleArray>();
+    	for(int row = 0; row < 12; row++){
+    		DoubleArray dbl = new DoubleArray();
+    		dbl.getItem().add(0.0);
+    		dbl.getItem().add(100.0);
+    		locationWeatherData.add(dbl);
+    	}
     }
 
 

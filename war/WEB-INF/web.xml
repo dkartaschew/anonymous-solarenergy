@@ -13,13 +13,13 @@
 	
 	<!--  Location Information Servlet -->
 	<servlet>
-		<servlet-name>InformationLocation</servlet-name>
+		<servlet-name>LocationInformation</servlet-name>
 		<servlet-class>com.anonymous.solar.server.LocationInformationSOAPServerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>InformationLocation</servlet-name>
-		<url-pattern>/InformationLocation</url-pattern>
+		<servlet-name>LocationInformation</servlet-name>
+		<url-pattern>/LocationInformation</url-pattern>
 	</servlet-mapping>
 		
 

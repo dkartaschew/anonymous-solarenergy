@@ -482,7 +482,7 @@ public class LocationDialog extends javax.swing.JDialog {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		loadLocationComboBox(locData);
 		jComboBoxLocationName.setSelectedIndex(jComboBoxLocationName.getComponentCount());
@@ -495,7 +495,7 @@ public class LocationDialog extends javax.swing.JDialog {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -642,7 +642,7 @@ public class LocationDialog extends javax.swing.JDialog {
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				e.printStackTrace();
+				////e.printStackTrace();
 			}
 
 		} catch (Exception e) {

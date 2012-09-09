@@ -4,15 +4,13 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.border.Border;
 
 import com.anonymous.solar.shared.SolarSetup;
 
