@@ -19,7 +19,7 @@
 
 	<servlet-mapping>
 		<servlet-name>LocationInformation</servlet-name>
-		<url-pattern>/LocationInformation</url-pattern>
+		<url-pattern>/LocationInformationService</url-pattern>
 	</servlet-mapping>
 		
 

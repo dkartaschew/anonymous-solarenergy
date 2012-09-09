@@ -54,7 +54,7 @@
   </binding>
   <service name="LocationInformationService">
     <port name="LocationInformationPort" binding="tns:LocationInformationPortBinding">
-      <soap:address location="http://anonymous-solarenergy.appspot.com/LocationInformation"/>
+      <soap:address location="http://anonymous-solarenergy.appspot.com/LocationInformationService"/>
     </port>
   </service>
 </definitions>
