@@ -13,6 +13,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 /**
  * <p>Java class for doubleArray complex type.
  * 
@@ -34,10 +36,15 @@ import javax.jdo.annotations.PrimaryKey;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "doubleArray", namespace = "http://jaxb.dev.java.net/array", propOrder = {
+	"id",
     "item"
 })
 @PersistenceCapable
 public class DoubleArray {
+	
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key id; 
 
     @XmlElement(nillable = true)
     @Persistent

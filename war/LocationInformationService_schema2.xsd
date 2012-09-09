@@ -3,6 +3,7 @@
 
   <xs:complexType name="doubleArray" final="#all">
     <xs:sequence>
+      <xs:element name="key" type="xs:Key" minOccurs="0"/>
       <xs:element name="item" type="xs:double" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
     </xs:sequence>
   </xs:complexType>
