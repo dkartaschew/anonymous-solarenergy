@@ -8,6 +8,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 /**
  * <p>Java class for doubleArray complex type.
@@ -32,9 +36,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "doubleArray", namespace = "http://jaxb.dev.java.net/array", propOrder = {
     "item"
 })
+@PersistenceCapable
 public class DoubleArray {
 
     @XmlElement(nillable = true)
+    @Persistent
     protected List<Double> item;
 
     /**
