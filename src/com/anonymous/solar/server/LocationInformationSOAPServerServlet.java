@@ -119,16 +119,19 @@ public class LocationInformationSOAPServerServlet extends HttpServlet {
 		table += "<th>Longitude</th>";
 		table += "<th>Weather Data</th></tr>";
 		for (LocationData data : locData) {
-			table += "<tr>\n<td>" + data.getLocationName() + "</td>\n";
-			table += "<td>" + data.getLatitude().toString() + "</td>\n";
-			table += "<td>" + data.getLongitude().toString() + "</td>\n";
-			String wData = new String();
-			List<DoubleArray> weather = data.getLocationWeatherData();
-			for (DoubleArray dbl : weather) {
-				wData += "( " + dbl.getItem().get(0).toString() + ", " + dbl.getItem().get(1).toString() + " ), ";
+			if (data.getLocationName() != null && data.getLatitude() != null && data.getLongitude() != null
+					&& data.getLocationWeatherData() != null) {
+				table += "<tr>\n<td>" + data.getLocationName() + "</td>\n";
+				table += "<td>" + data.getLatitude().toString() + "</td>\n";
+				table += "<td>" + data.getLongitude().toString() + "</td>\n";
+				String wData = new String();
+				List<DoubleArray> weather = data.getLocationWeatherData();
+				for (DoubleArray dbl : weather) {
+					wData += "( " + dbl.getItem().get(0).toString() + ", " + dbl.getItem().get(1).toString() + " ), ";
+				}
+				table += "<td>" + wData + "</td>\n";
+				table += "</tr>\n";
 			}
-			table += "<td>" + wData + "</td>\n";
-			table += "</tr>\n";
 		}
 		table += "</table>\n";
 		return table;
