@@ -41,6 +41,7 @@ import javax.jdo.annotations.PrimaryKey;
     "latitude",
     "locationName",
     "locationWeatherData",
+    "locationWeatherEfficiency",
     "longitude"
 })
 @PersistenceCapable
@@ -56,7 +57,10 @@ public class LocationData {
     protected String locationName;
     @XmlElement(nillable = true)
     @Persistent
-    protected List<DoubleArray> locationWeatherData;
+    protected List<Double> locationWeatherData;
+    @XmlElement(nillable = true)
+    @Persistent
+    protected List<Double> locationWeatherEfficiency;
     @Persistent
     protected Double longitude;
 
@@ -73,12 +77,11 @@ public class LocationData {
      * Default Constructor;
      */
     public LocationData() {
-    	locationWeatherData = new ArrayList<DoubleArray>();
+    	locationWeatherData = new ArrayList<Double>();
+    	locationWeatherEfficiency = new ArrayList<Double>();
     	for(int row = 0; row < 12; row++){
-    		DoubleArray dbl = new DoubleArray();
-    		dbl.getItem().add(0.0);
-    		dbl.getItem().add(100.0);
-    		locationWeatherData.add(dbl);
+    		locationWeatherData.add(0.00);
+    		locationWeatherEfficiency.add(100.0);
     	}
     }
 
@@ -93,11 +96,12 @@ public class LocationData {
      * cloud}
      * @throws Exception
      */
-    public LocationData(Double lon, Double lat, String name, List<DoubleArray> locData) throws LocationDataException {
+    public LocationData(Double lon, Double lat, String name, List<Double> locData, List<Double> locEfficency) throws LocationDataException {
         setLongitude(lon);
         setLatitude(lat);
         setLocationName(name);
         setLocationWeatherData(locData);
+        setLocationWeatherEfficency(locEfficency);
     }
 	
 	/**
@@ -116,7 +120,7 @@ public class LocationData {
      * @param locationWeatherData
      * @throws Exception
      */
-    public void setLocationWeatherData(List<DoubleArray> locationWeatherData) throws LocationDataException {
+    public void setLocationWeatherData(List<Double> locationWeatherData) throws LocationDataException {
         if (locationWeatherData == null) {
             throw new LocationDataException("Location weather information is null");
         }
@@ -125,6 +129,23 @@ public class LocationData {
         }
 
         this.locationWeatherData = locationWeatherData;
+    }
+    
+    /**
+     * set new weather information.
+     *
+     * @param locationWeatherData
+     * @throws Exception
+     */
+    public void setLocationWeatherEfficency(List<Double> locationWeatherData) throws LocationDataException {
+        if (locationWeatherData == null) {
+            throw new LocationDataException("Location weather information is null");
+        }
+        if (locationWeatherData.size() != 12) {
+            throw new LocationDataException("Location weather information doesn't have 12mths data");
+        }
+
+        this.locationWeatherEfficiency = locationWeatherData;
     }
 	
     /**
@@ -202,11 +223,18 @@ public class LocationData {
      * 
      * 
      */
-    public List<DoubleArray> getLocationWeatherData() {
+    public List<Double> getLocationWeatherData() {
         if (locationWeatherData == null) {
-            locationWeatherData = new ArrayList<DoubleArray>();
+            locationWeatherData = new ArrayList<Double>();
         }
         return this.locationWeatherData;
+    }
+    
+    public List<Double> getLocationWeatherEfficiency() {
+        if (locationWeatherEfficiency == null) {
+        	locationWeatherEfficiency = new ArrayList<Double>();
+        }
+        return this.locationWeatherEfficiency;
     }
 
     /**
@@ -255,9 +283,9 @@ public class LocationData {
      * @return String with class information.
      */
     public String toString(boolean htmlTags) {
-        String content = "<p>Location Name: " + locationName + " </p>"
-                + "<p>Latitude: " + latitude.toString() + "%</p>"
-                + "<p>Longitude: " + longitude.toString() + " Years</p>";
+        String content = "<p>Location Name: " + locationName + " </br>"
+                + "Latitude: " + latitude.toString() + "</br>"
+                + "Longitude: " + longitude.toString() + "</p>";
         if (htmlTags) {
             return "<html>" + content + "</html>";
         } else {

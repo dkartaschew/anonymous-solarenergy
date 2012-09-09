@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import com.anonymous.solar.shared.DoubleArray;
 import com.anonymous.solar.shared.LocationData;
 
 
@@ -45,14 +44,6 @@ public class LocationObjectFactory {
      */
     public StoreLocationGetAll createStoreLocationGetAll() {
         return new StoreLocationGetAll();
-    }
-
-    /**
-     * Create an instance of {@link DoubleArray }
-     * 
-     */
-    public DoubleArray createDoubleArray() {
-        return new DoubleArray();
     }
 
     /**

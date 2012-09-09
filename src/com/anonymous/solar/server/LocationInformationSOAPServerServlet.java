@@ -17,7 +17,6 @@ import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
-import com.anonymous.solar.shared.DoubleArray;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.SolarPanel;
 
@@ -125,9 +124,9 @@ public class LocationInformationSOAPServerServlet extends HttpServlet {
 				table += "<td>" + data.getLatitude().toString() + "</td>\n";
 				table += "<td>" + data.getLongitude().toString() + "</td>\n";
 				String wData = new String();
-				List<DoubleArray> weather = data.getLocationWeatherData();
-				for (DoubleArray dbl : weather) {
-					wData += "( " + dbl.getItem().get(0).toString() + ", " + dbl.getItem().get(1).toString() + " ), ";
+				List<Double> weather = data.getLocationWeatherData();
+				for (Double dbl : weather) {
+					wData += "( " + dbl.toString() + " ), ";
 				}
 				table += "<td>" + wData + "</td>\n";
 				table += "</tr>\n";

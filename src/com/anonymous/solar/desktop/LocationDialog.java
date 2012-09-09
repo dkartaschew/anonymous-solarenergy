@@ -23,7 +23,6 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
-import com.anonymous.solar.shared.DoubleArray;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
@@ -65,8 +64,8 @@ public class LocationDialog extends javax.swing.JDialog {
 			jTextFieldLatitude.setText(locationData.getLatitude().toString());
 			jTextFieldLongitude.setText(locationData.getLongitude().toString());
 			for(int row =0; row < 12; row++){
-				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row).getItem().get(0) , row, 1);
-				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row).getItem().get(1) , row, 2);
+				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row) , row, 1);
+				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherEfficiency().get(row) , row, 2);
 			}
 			jMapViewer1.setDisplayPositionByLatLon(locationData.getLatitude(), locationData.getLongitude(),
 					jMapViewer1.getZoom());
@@ -461,8 +460,8 @@ public class LocationDialog extends javax.swing.JDialog {
 //			jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
 //		}
 		for(int row =0; row < 12; row++){
-			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row).getItem().get(0) , row, 1);
-			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row).getItem().get(1) , row, 2);
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row) , row, 1);
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherEfficiency().get(row) , row, 2);
 		}
 		jMapViewer1.setDisplayPositionByLatLon(locData.getLatitude(), locData.getLongitude(), jMapViewer1.getZoom());
 		AddMarker(new Coordinate(locData.getLatitude(), locData.getLongitude()));
@@ -474,11 +473,11 @@ public class LocationDialog extends javax.swing.JDialog {
 			locData.setLatitude(Double.valueOf(jTextFieldLatitude.getText()));
 			locData.setLongitude(Double.valueOf(jTextFieldLongitude.getText()));
 			locData.setLocationName(jTextFieldLocationName.getText());
+			locData.getLocationWeatherData().clear();
+			locData.getLocationWeatherEfficiency().clear();
 			for (int row = 0; row < 12; row++) {
-				DoubleArray dbl = new DoubleArray();
-				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
-				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
-				locData.getLocationWeatherData().add(dbl);
+				locationData.getLocationWeatherData().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				locationData.getLocationWeatherEfficiency().add((Double) jTableWeatherDetails.getValueAt(row, 2));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -655,11 +654,10 @@ public class LocationDialog extends javax.swing.JDialog {
 			locationData.setLongitude(Double.valueOf(jTextFieldLongitude.getText()));
 			locationData.setLocationName(jTextFieldLocationName.getText());
 			locationData.getLocationWeatherData().clear();
+			locationData.getLocationWeatherEfficiency().clear();
 			for (int row = 0; row < 12; row++) {
-				DoubleArray rowData = new DoubleArray();
-				rowData.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
-				rowData.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
-				locationData.getLocationWeatherData().add(rowData);
+				locationData.getLocationWeatherData().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				locationData.getLocationWeatherEfficiency().add((Double) jTableWeatherDetails.getValueAt(row, 2));
 			}
 		} catch (Exception e) {
 			return false;
