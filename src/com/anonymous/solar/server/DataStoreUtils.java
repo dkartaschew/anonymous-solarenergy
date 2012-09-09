@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.SolarPanel;
 
 public class DataStoreUtils {
@@ -90,6 +91,61 @@ public class DataStoreUtils {
 		try {
 			panelArrayList = (List<SolarPanel>) q.execute();
 			return panelArrayList;
+		} finally {
+			q.closeAll();
+		}
+	}
+	
+	/**
+	 * Store a set of Location information within the datastore.
+	 * @param locdata
+	 * @return
+	 */
+	public Long storeLocationData(LocationData locdata){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.makePersistent(locdata);
+		} finally {
+			pm.close();
+		}
+		return locdata.getKey();
+	}
+	
+	/**
+	 * Remove location information from the datastore based on the key contained in the location
+	 * object. (If key == 0, then object is not in the datastore.
+	 * 
+	 * @param locationKey
+	 *            Key ID of the location to remove from the datastore.
+	 */
+	public void removeLocationData(Long locationKey) {
+		if (locationKey > 0) {
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(LocationData.class);
+			q.setFilter("key == locationKeyParam");
+			q.declareParameters("Long locationKeyParam");
+			q.deletePersistentAll(locationKey);
+		}
+	}
+	
+	/**
+	 * Retrieve a list of all solar panels that are available within the
+	 * datastore.
+	 * 
+	 * @return A List of Locations.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LocationData> getAllLocations() {
+
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<LocationData> locationArrayList = new ArrayList<LocationData>();
+
+		Query q = pm.newQuery(LocationData.class);
+		q.setOrdering("locationName asc");
+
+		try {
+			locationArrayList = (List<LocationData>) q.execute();
+			return locationArrayList;
 		} finally {
 			q.closeAll();
 		}
