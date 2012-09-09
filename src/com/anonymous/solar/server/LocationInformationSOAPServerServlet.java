@@ -1,12 +1,14 @@
 package com.anonymous.solar.server;
 
-import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,11 +17,20 @@ import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 
+import com.anonymous.solar.shared.DoubleArray;
+import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarPanel;
+
 @SuppressWarnings("serial")
 public class LocationInformationSOAPServerServlet extends HttpServlet {
 
 	static MessageFactory messageFactory;
 	static LocationInformationSOAPHandler soapHandler;
+
+	/**
+	 * Private instance to perform various datastore actions.
+	 */
+	private DataStoreUtils dsutils = new DataStoreUtils();
 
 	static {
 		try {
@@ -69,4 +80,57 @@ public class LocationInformationSOAPServerServlet extends HttpServlet {
 		return headers;
 	}
 
+	/**
+	 * Override default doGet() method to return a complete list of panels in
+	 * the system, as well as a form to add new panels as needed.
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		PrintWriter out = response.getWriter();
+
+		// Write out the header and any error messages for the client.
+		out.print(SolarPanelsHTMLHelper.getHTMLHeader("Location Information Client"));
+		if (request.getParameter("error") != null) {
+			String errorMessage = request.getParameter("error").toString();
+			out.print("<p class=\"error\">Error: " + errorMessage + "</p>\n");
+		}
+
+		// List all the panels in the system.
+		out.print("<h1>Location Information stored within the system</h1>\n");
+		out.print(displayLocationInformation());
+
+		// Display the page footer.
+		out.print(SolarPanelsHTMLHelper.getHTMLFooter());
+	}
+
+	/**
+	 * Display all the solar panels in the datastore in a table, and include a
+	 * button to remove them as needed.
+	 * 
+	 * @return A string containing the table.
+	 */
+	private String displayLocationInformation() {
+		List<LocationData> locData = dsutils.getAllLocations();
+
+		String table = "<table border=\"1\">\n";
+
+		table += "<tr><th>Location Name</th>";
+		table += "<th>Latitude</th>";
+		table += "<th>Longitude</th>";
+		table += "<th>Weather Data</th></tr>";
+		for (LocationData data : locData) {
+			table += "<tr>\n<td>" + data.getLocationName() + "</td>\n";
+			table += "<td>" + data.getLatitude().toString() + "</td>\n";
+			table += "<td>" + data.getLongitude().toString() + "</td>\n";
+			String wData = new String();
+			List<DoubleArray> weather = data.getLocationWeatherData();
+			for (DoubleArray dbl : weather) {
+				wData += "( " + dbl.getItem().get(0).toString() + ", " + dbl.getItem().get(1).toString() + " ), ";
+			}
+			table += "<td>" + wData + "</td>\n";
+			table += "</tr>\n";
+		}
+		table += "</table>\n";
+		return table;
+	}
 }

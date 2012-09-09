@@ -1,50 +1,65 @@
+
 package com.anonymous.solar.shared;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 /**
- * Location Data Class that holds all necessary information to be utilised
- * within the solar power calculator.
- *
- * @author 07627505 Darran Kartaschew
- * @version 1.0
+ * <p>Java class for locationData complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="locationData">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="latitude" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="locationName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="locationWeatherData" type="{http://jaxb.dev.java.net/array}doubleArray" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="longitude" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "locationData", propOrder = {
+    "latitude",
+    "locationName",
+    "locationWeatherData",
+    "longitude"
+})
 @PersistenceCapable
 public class LocationData {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long key;
-
+	
 	@Persistent
-    private Double longitude = 0.00;
-
+    protected Double latitude;
 	@Persistent
-    private Double latitude = 0.00;
+    protected String locationName;
+    @XmlElement(nillable = true)
+    @Persistent
+    protected List<DoubleArray> locationWeatherData;
+    @Persistent
+    protected Double longitude;
 
-	@Persistent
-    private String locationName = "";
-
-	@Persistent
-    private Double[][] locationWeatherData = {
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0},
-        {0.0, 100.0}};
-
-	/*
+    /*
 	 * Default parameter names to ensure consistency among all consumers of the
 	 * class.
 	 */
@@ -52,8 +67,8 @@ public class LocationData {
 	public static final String LOCATION_LATITUDE = "latitude";
 	public static final String LOCATION_NAME = "locationName";
 	public static final String LOCATION_wEATHER_DATA = "locationWeatherData";
-	
-    /**
+    
+	/**
      * Default Constructor;
      */
     public LocationData() {
@@ -70,14 +85,14 @@ public class LocationData {
      * cloud}
      * @throws Exception
      */
-    public LocationData(Double lon, Double lat, String name, Double[][] locData) throws LocationDataException {
+    public LocationData(Double lon, Double lat, String name, List<DoubleArray> locData) throws LocationDataException {
         setLongitude(lon);
         setLatitude(lat);
         setLocationName(name);
         setLocationWeatherData(locData);
     }
-    
-    /**
+	
+	/**
 	 * Returns the datastore key if this panel has been stored in the GAE
 	 * datastore.
 	 * 
@@ -86,17 +101,117 @@ public class LocationData {
 	public Long getKey() {
 		return key;
 	}
+	
+	/**
+     * set new weather information.
+     *
+     * @param locationWeatherData
+     * @throws Exception
+     */
+    public void setLocationWeatherData(List<DoubleArray> locationWeatherData) throws LocationDataException {
+        if (locationWeatherData == null) {
+            throw new LocationDataException("Location weather information is null");
+        }
+        if (locationWeatherData.size() != 12) {
+            throw new LocationDataException("Location weather information doesn't have 12mths data");
+        }
 
+        this.locationWeatherData = locationWeatherData;
+    }
+	
+    /**
+     * Gets the value of the latitude property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
 
     /**
-     * Get longitude of location
+     * Set latitude of location
      *
+     * @param latitude
+     * @throws Exception
+     */
+    public void setLatitude(Double latitude) throws LocationDataException {
+        if (latitude == null) {
+            throw new LocationDataException("Latitude = null");
+        }
+        if (latitude < -90.00 || latitude > 90.00) {
+            throw new LocationDataException("Latitude is out of bounds");
+        }
+        this.latitude = latitude;
+    }
+
+    /**
+     * Gets the value of the locationName property.
+     * 
      * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLocationName() {
+        return locationName;
+    }
+
+    /**
+     * set location name.
+     *
+     * @param locationName
+     * @throws Exception
+     */
+    public void setLocationName(String locationName) throws LocationDataException {
+        if (locationName == null || locationName.length() == 0) {
+            throw new LocationDataException("Location Name is null or zero length");
+        }
+        this.locationName = locationName;
+    }
+
+    /**
+     * Gets the value of the locationWeatherData property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the locationWeatherData property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLocationWeatherData().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DoubleArray }
+     * 
+     * 
+     */
+    public List<DoubleArray> getLocationWeatherData() {
+        if (locationWeatherData == null) {
+            locationWeatherData = new ArrayList<DoubleArray>();
+        }
+        return this.locationWeatherData;
+    }
+
+    /**
+     * Gets the value of the longitude property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
     public Double getLongitude() {
         return longitude;
     }
-
 
     /**
      * Set longitude of location.
@@ -115,121 +230,6 @@ public class LocationData {
         this.longitude = longitude;
     }
 
-
-    /**
-     * Get latitude of location
-     *
-     * @return
-     */
-    public Double getLatitude() {
-        return latitude;
-    }
-
-
-    /**
-     * Set latitude of location
-     *
-     * @param latitude
-     * @throws Exception
-     */
-    public void setLatitude(Double latitude) throws LocationDataException {
-        if (latitude == null) {
-            throw new LocationDataException("Latitude = null");
-        }
-        if (latitude < -90.00 || latitude > 90.00) {
-            throw new LocationDataException("Latitude is out of bounds");
-        }
-        this.latitude = latitude;
-    }
-
-
-    /**
-     * Get location name,
-     *
-     * @return
-     */
-    public String getLocationName() {
-        return locationName;
-    }
-
-
-    /**
-     * set location name.
-     *
-     * @param locationName
-     * @throws Exception
-     */
-    public void setLocationName(String locationName) throws LocationDataException {
-        if (locationName == null || locationName.length() == 0) {
-            throw new LocationDataException("Location Name is null or zero length");
-        }
-        this.locationName = locationName;
-    }
-
-
-    /**
-     * Return weather information
-     *
-     * @return
-     */
-    public Double[][] getLocationWeatherData() {
-        return locationWeatherData;
-    }
-
-
-    /**
-     * set new weather information.
-     *
-     * @param locationWeatherData
-     * @throws Exception
-     */
-    public void setLocationWeatherData(Double[][] locationWeatherData) throws LocationDataException {
-        if (locationWeatherData == null) {
-            throw new LocationDataException("Location weather information is null");
-        }
-        if (locationWeatherData.length != 12) {
-            throw new LocationDataException("Location weather information doesn't have 12mths data");
-        }
-
-        this.locationWeatherData = locationWeatherData;
-    }
-
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + (this.longitude != null ? this.longitude.hashCode() : 0);
-        hash = 67 * hash + (this.latitude != null ? this.latitude.hashCode() : 0);
-        hash = 67 * hash + (this.locationName != null ? this.locationName.hashCode() : 0);
-        hash = 67 * hash + Arrays.deepHashCode(this.locationWeatherData);
-        return hash;
-    }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final LocationData other = (LocationData) obj;
-        if (this.longitude != other.longitude && (this.longitude == null || !this.longitude.equals(other.longitude))) {
-            return false;
-        }
-        if (this.latitude != other.latitude && (this.latitude == null || !this.latitude.equals(other.latitude))) {
-            return false;
-        }
-        if ((this.locationName == null) ? (other.locationName != null) : !this.locationName.equals(other.locationName)) {
-            return false;
-        }
-        if (!Arrays.deepEquals(this.locationWeatherData, other.locationWeatherData)) {
-            return false;
-        }
-        return true;
-    }
-
     /**
      * Basic ToString() method. DO NOT MODIFY THIS, as this is used by comboboxes for displaying location names;
      * @return 
@@ -243,7 +243,7 @@ public class LocationData {
     /**
      * Output HTML encoded strings.
      *
-     * @param htmlTags If <htnml> should be included
+     * @param htmlTags If <html> should be included
      * @return String with class information.
      */
     public String toString(boolean htmlTags) {

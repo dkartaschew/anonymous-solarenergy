@@ -6,7 +6,6 @@ package com.anonymous.solar.desktop;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import com.anonymous.solar.desktop.AboutDialog;
 
 import javax.swing.JOptionPane;
 

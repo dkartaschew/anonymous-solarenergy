@@ -1,5 +1,5 @@
 
-package com.anonymous.solar.client;
+package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
 import java.util.List;

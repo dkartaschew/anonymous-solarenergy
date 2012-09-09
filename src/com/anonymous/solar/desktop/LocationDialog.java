@@ -23,8 +23,8 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
+import com.anonymous.solar.shared.DoubleArray;
 import com.anonymous.solar.shared.LocationData;
-import com.anonymous.solar.client.DoubleArray;
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
 
@@ -456,11 +456,15 @@ public class LocationDialog extends javax.swing.JDialog {
 		jTextFieldLocationName.setText(locData.getLocationName());
 		jTextFieldLatitude.setText(locData.getLatitude().toString());
 		jTextFieldLongitude.setText(locData.getLongitude().toString());
-		Double[][] locWData = locData.getLocationWeatherData();
-		// Set the table!
-		for (int row = 0; row < 12; row++) {
-			jTableWeatherDetails.getModel().setValueAt(locWData[row][0], row, 1);
-			jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
+//		Double[][] locWData = locData.getLocationWeatherData();
+//		// Set the table!
+//		for (int row = 0; row < 12; row++) {
+//			jTableWeatherDetails.getModel().setValueAt(locWData[row][0], row, 1);
+//			jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
+//		}
+		for(int row =0; row < 12; row++){
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row).getItem().get(0) , row, 1);
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row).getItem().get(1) , row, 2);
 		}
 		jMapViewer1.setDisplayPositionByLatLon(locData.getLatitude(), locData.getLongitude(), jMapViewer1.getZoom());
 		AddMarker(new Coordinate(locData.getLatitude(), locData.getLongitude()));
@@ -472,36 +476,28 @@ public class LocationDialog extends javax.swing.JDialog {
 			locData.setLatitude(Double.valueOf(jTextFieldLatitude.getText()));
 			locData.setLongitude(Double.valueOf(jTextFieldLongitude.getText()));
 			locData.setLocationName(jTextFieldLocationName.getText());
-			Double[][] locWDate = new Double[12][2];
 			for (int row = 0; row < 12; row++) {
-				locWDate[row][0] = (Double) jTableWeatherDetails.getValueAt(row, 1);
-				locWDate[row][1] = (Double) jTableWeatherDetails.getValueAt(row, 2);
+				DoubleArray dbl = new DoubleArray();
+				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
+				locData.getLocationWeatherData().add(dbl);
 			}
-			locData.setLocationWeatherData(locWDate);
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		loadLocationComboBox(locData);
 		jComboBoxLocationName.setSelectedIndex(jComboBoxLocationName.getComponentCount());
 		// Save location information to GAE.
 		try {
 			LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
-			com.anonymous.solar.client.LocationData soapData = new com.anonymous.solar.client.LocationData();
-			// Create object to pass!
-			soapData.setLocationName(locData.getLocationName());
-			soapData.setLatitude(locData.getLatitude());
-			soapData.setLongitude(locData.getLongitude());
-			soapData.getLocationWeatherData().clear();
-			for (int row = 0; row < 12; row++) {
-				DoubleArray dbl = new DoubleArray();
-				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
-				dbl.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
-				soapData.getLocationWeatherData().add(dbl);
-			}
+			com.anonymous.solar.shared.LocationData soapData = new com.anonymous.solar.shared.LocationData();
 			Long result = locationSOAP.storeLocationInformation(soapData);
 			System.out.printf("Location Item stored: key = %d \n", result);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -642,7 +638,7 @@ public class LocationDialog extends javax.swing.JDialog {
 			// Add additional locations from GAE.
 			try {
 				LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
-				ArrayList<LocationData> locData = (ArrayList) locationSOAP.storeLocationGetAll();
+				ArrayList<LocationData> locData = (ArrayList<LocationData>) locationSOAP.storeLocationGetAll();
 				for (LocationData loc : locData) {
 					loadLocationComboBox(loc);
 				}
@@ -660,12 +656,13 @@ public class LocationDialog extends javax.swing.JDialog {
 			locationData.setLatitude(Double.valueOf(jTextFieldLatitude.getText()));
 			locationData.setLongitude(Double.valueOf(jTextFieldLongitude.getText()));
 			locationData.setLocationName(jTextFieldLocationName.getText());
-			Double[][] locWDate = new Double[12][2];
+			locationData.getLocationWeatherData().clear();
 			for (int row = 0; row < 12; row++) {
-				locWDate[row][0] = (Double) jTableWeatherDetails.getValueAt(row, 1);
-				locWDate[row][1] = (Double) jTableWeatherDetails.getValueAt(row, 2);
+				DoubleArray rowData = new DoubleArray();
+				rowData.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				rowData.getItem().add((Double) jTableWeatherDetails.getValueAt(row, 2));
+				locationData.getLocationWeatherData().add(rowData);
 			}
-			locationData.setLocationWeatherData(locWDate);
 		} catch (Exception e) {
 			return false;
 		}

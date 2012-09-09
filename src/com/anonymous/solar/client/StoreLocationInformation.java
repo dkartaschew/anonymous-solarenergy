@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.anonymous.solar.shared.LocationData;
+
 
 /**
  * <p>Java class for StoreLocationInformation complex type.
