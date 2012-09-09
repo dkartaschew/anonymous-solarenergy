@@ -5,17 +5,16 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.Color;
-import java.awt.List;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
@@ -23,9 +22,9 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 
-import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
+import com.anonymous.solar.shared.LocationData;
 
 /**
  * 
@@ -476,8 +475,8 @@ public class LocationDialog extends javax.swing.JDialog {
 			locData.getLocationWeatherData().clear();
 			locData.getLocationWeatherEfficiency().clear();
 			for (int row = 0; row < 12; row++) {
-				locationData.getLocationWeatherData().add((Double) jTableWeatherDetails.getValueAt(row, 1));
-				locationData.getLocationWeatherEfficiency().add((Double) jTableWeatherDetails.getValueAt(row, 2));
+				locData.getLocationWeatherData().add((Double) jTableWeatherDetails.getValueAt(row, 1));
+				locData.getLocationWeatherEfficiency().add((Double) jTableWeatherDetails.getValueAt(row, 2));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -488,8 +487,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		// Save location information to GAE.
 		try {
 			LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
-			com.anonymous.solar.shared.LocationData soapData = new com.anonymous.solar.shared.LocationData();
-			Long result = locationSOAP.storeLocationInformation(soapData);
+			Long result = locationSOAP.storeLocationInformation(locData);
 			System.out.printf("Location Item stored: key = %d \n", result);
 
 		} catch (Exception e) {
