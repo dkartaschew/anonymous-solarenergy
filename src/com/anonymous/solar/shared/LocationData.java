@@ -37,6 +37,7 @@ import javax.jdo.annotations.PrimaryKey;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "locationData", propOrder = {
+	"key",
     "latitude",
     "locationName",
     "locationWeatherData",

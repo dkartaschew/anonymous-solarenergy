@@ -64,11 +64,9 @@ public class LocationDialog extends javax.swing.JDialog {
 			jTextFieldLocationName.setText(locationData.getLocationName());
 			jTextFieldLatitude.setText(locationData.getLatitude().toString());
 			jTextFieldLongitude.setText(locationData.getLongitude().toString());
-			Double[][] locWData = locationData.getLocationWeatherData();
-			// Set the table!
-			for (int row = 0; row < 12; row++) {
-				jTableWeatherDetails.getModel().setValueAt(locWData[row][0], row, 1);
-				jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
+			for(int row =0; row < 12; row++){
+				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row).getItem().get(0) , row, 1);
+				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row).getItem().get(1) , row, 2);
 			}
 			jMapViewer1.setDisplayPositionByLatLon(locationData.getLatitude(), locationData.getLongitude(),
 					jMapViewer1.getZoom());
