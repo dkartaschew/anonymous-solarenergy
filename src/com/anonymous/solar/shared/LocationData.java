@@ -1,6 +1,10 @@
 package com.anonymous.solar.shared;
 
 import java.util.Arrays;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 /**
  * Location Data Class that holds all necessary information to be utilised
@@ -9,14 +13,23 @@ import java.util.Arrays;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
+@PersistenceCapable
 public class LocationData {
+	
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long key;
 
+	@Persistent
     private Double longitude = 0.00;
 
+	@Persistent
     private Double latitude = 0.00;
 
+	@Persistent
     private String locationName = "";
 
+	@Persistent
     private Double[][] locationWeatherData = {
         {0.0, 100.0},
         {0.0, 100.0},
@@ -31,7 +44,15 @@ public class LocationData {
         {0.0, 100.0},
         {0.0, 100.0}};
 
-
+	/*
+	 * Default parameter names to ensure consistency among all consumers of the
+	 * class.
+	 */
+	public static final String LOCATION_LONGITUDE = "longitude";
+	public static final String LOCATION_LATITUDE = "latitude";
+	public static final String LOCATION_NAME = "locationName";
+	public static final String LOCATION_wEATHER_DATA = "locationWeatherData";
+	
     /**
      * Default Constructor;
      */
@@ -49,12 +70,22 @@ public class LocationData {
      * cloud}
      * @throws Exception
      */
-    public LocationData(Double lon, Double lat, String name, Double[][] locData) throws Exception {
+    public LocationData(Double lon, Double lat, String name, Double[][] locData) throws LocationDataException {
         setLongitude(lon);
         setLatitude(lat);
         setLocationName(name);
         setLocationWeatherData(locData);
     }
+    
+    /**
+	 * Returns the datastore key if this panel has been stored in the GAE
+	 * datastore.
+	 * 
+	 * @return Panel Key
+	 */
+	public Long getKey() {
+		return key;
+	}
 
 
     /**
@@ -73,12 +104,12 @@ public class LocationData {
      * @param longitude
      * @throws Exception
      */
-    public void setLongitude(Double longitude) throws Exception {
+    public void setLongitude(Double longitude) throws LocationDataException {
         if (longitude == null) {
-            throw new Exception();
+            throw new LocationDataException("Longitude = null");
         }
         if (longitude < -180.00 || longitude > 180.00) {
-            throw new Exception();
+            throw new LocationDataException("Longitude out of bounds");
         }
 
         this.longitude = longitude;
@@ -101,12 +132,12 @@ public class LocationData {
      * @param latitude
      * @throws Exception
      */
-    public void setLatitude(Double latitude) throws Exception {
+    public void setLatitude(Double latitude) throws LocationDataException {
         if (latitude == null) {
-            throw new Exception();
+            throw new LocationDataException("Latitude = null");
         }
         if (latitude < -90.00 || latitude > 90.00) {
-            throw new Exception();
+            throw new LocationDataException("Latitude is out of bounds");
         }
         this.latitude = latitude;
     }
@@ -128,9 +159,9 @@ public class LocationData {
      * @param locationName
      * @throws Exception
      */
-    public void setLocationName(String locationName) throws Exception {
+    public void setLocationName(String locationName) throws LocationDataException {
         if (locationName == null || locationName.length() == 0) {
-            throw new Exception();
+            throw new LocationDataException("Location Name is null or zero length");
         }
         this.locationName = locationName;
     }
@@ -152,12 +183,12 @@ public class LocationData {
      * @param locationWeatherData
      * @throws Exception
      */
-    public void setLocationWeatherData(Double[][] locationWeatherData) throws Exception {
+    public void setLocationWeatherData(Double[][] locationWeatherData) throws LocationDataException {
         if (locationWeatherData == null) {
-            throw new Exception();
+            throw new LocationDataException("Location weather information is null");
         }
         if (locationWeatherData.length != 12) {
-            throw new Exception();
+            throw new LocationDataException("Location weather information doesn't have 12mths data");
         }
 
         this.locationWeatherData = locationWeatherData;
