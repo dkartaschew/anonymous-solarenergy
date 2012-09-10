@@ -283,9 +283,9 @@ public class LocationData {
      * @return String with class information.
      */
     public String toString(boolean htmlTags) {
-        String content = "<p>Location Name: " + locationName + " </br>"
-                + "Latitude: " + latitude.toString() + "</br>"
-                + "Longitude: " + longitude.toString() + "</p>";
+        String content = "Location Name: " + locationName + " </ br>"
+                + "Latitude: " + latitude.toString() + "</ br>"
+                + "Longitude: " + longitude.toString() + "</ br>";
         if (htmlTags) {
             return "<html>" + content + "</html>";
         } else {
