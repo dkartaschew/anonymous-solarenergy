@@ -10,19 +10,19 @@ import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Wizard Panel to display the results that come back from the server.
- * 
+ *
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
 public class WizardResults extends javax.swing.JPanel implements WizardPanel {
-    
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1185924630290486108L;
-	private final String title = "Results";
+
+    private static final long serialVersionUID = 1185924630290486108L;
+
+    private final String title = "Results";
+
     private Wizard parent = null;
-    
+
+
     /**
      * Creates new form WizardFinish, with reference to parent
      */
@@ -30,6 +30,8 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
         initComponents();
         this.parent = parent;
     }
+
+
     /**
      * Creates new form WizardResults
      */
@@ -47,77 +49,158 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	jLabelConfirmationMsg = new javax.swing.JLabel();
-		jPanel1 = new javax.swing.JPanel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextAreaConfirmationDetails = new javax.swing.JEditorPane("text/html", "");
+        jTabbedPaneResults = new javax.swing.JTabbedPane();
+        jPanelSummaryResults = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaConfirmationDetails = new javax.swing.JTextArea();
+        jPanelGraphResults = new javax.swing.JPanel();
+        jPanelGraph = new javax.swing.JPanel();
+        jPanelTableresults = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
+        jTabbedPaneResults.setName("TabResults"); // NOI18N
 
-		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Results"));
+        jPanelSummaryResults.setName("TabSummary"); // NOI18N
 
-		jTextAreaConfirmationDetails.setEditable(false);
-		//jTextAreaConfirmationDetails.setColumns(20);
-		//jTextAreaConfirmationDetails.setRows(5);
-		jScrollPane1.setViewportView(jTextAreaConfirmationDetails);
+        jTextAreaConfirmationDetails.setEditable(false);
+        jTextAreaConfirmationDetails.setName("txtAreaResults"); // NOI18N
+        jScrollPane1.setViewportView(jTextAreaConfirmationDetails);
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 0, Short.MAX_VALUE)
-				.addGroup(
-						jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443,
-												Short.MAX_VALUE).addContainerGap())));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 227, Short.MAX_VALUE)
-				.addGroup(
-						jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-								jPanel1Layout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226,
-												Short.MAX_VALUE).addContainerGap())));
+        javax.swing.GroupLayout jPanelSummaryResultsLayout = new javax.swing.GroupLayout(jPanelSummaryResults);
+        jPanelSummaryResults.setLayout(jPanelSummaryResultsLayout);
+        jPanelSummaryResultsLayout.setHorizontalGroup(
+            jPanelSummaryResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSummaryResultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelSummaryResultsLayout.setVerticalGroup(
+            jPanelSummaryResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSummaryResultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addGroup(
-												layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-														.addComponent(jLabelConfirmationMsg))
-										.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(jLabelConfirmationMsg).addContainerGap()));
-	}// </editor-fold>//GEN-END:initComponents
-		// Variables declaration - do not modify//GEN-BEGIN:variables
+        jTabbedPaneResults.addTab("Summary", jPanelSummaryResults);
 
-	private javax.swing.JLabel jLabelConfirmationMsg;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JEditorPane jTextAreaConfirmationDetails;
+        jPanelGraphResults.setName("TabGraph"); // NOI18N
 
-	// End of variables declaration//GEN-END:variables
+        jPanelGraph.setName("pnlGraph"); // NOI18N
+
+        javax.swing.GroupLayout jPanelGraphLayout = new javax.swing.GroupLayout(jPanelGraph);
+        jPanelGraph.setLayout(jPanelGraphLayout);
+        jPanelGraphLayout.setHorizontalGroup(
+            jPanelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 583, Short.MAX_VALUE)
+        );
+        jPanelGraphLayout.setVerticalGroup(
+            jPanelGraphLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelGraphResultsLayout = new javax.swing.GroupLayout(jPanelGraphResults);
+        jPanelGraphResults.setLayout(jPanelGraphResultsLayout);
+        jPanelGraphResultsLayout.setHorizontalGroup(
+            jPanelGraphResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGraphResultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelGraphResultsLayout.setVerticalGroup(
+            jPanelGraphResultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelGraphResultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPaneResults.addTab("Graphical Results", jPanelGraphResults);
+
+        jPanelTableresults.setName("TabTableResults"); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setName("tblResults"); // NOI18N
+        jScrollPane2.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanelTableresultsLayout = new javax.swing.GroupLayout(jPanelTableresults);
+        jPanelTableresults.setLayout(jPanelTableresultsLayout);
+        jPanelTableresultsLayout.setHorizontalGroup(
+            jPanelTableresultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableresultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelTableresultsLayout.setVerticalGroup(
+            jPanelTableresultsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableresultsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPaneResults.addTab("Tabulated Results", jPanelTableresults);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPaneResults)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPaneResults)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanelGraph;
+    private javax.swing.JPanel jPanelGraphResults;
+    private javax.swing.JPanel jPanelSummaryResults;
+    private javax.swing.JPanel jPanelTableresults;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPaneResults;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextAreaConfirmationDetails;
+    // End of variables declaration//GEN-END:variables
 
 
     /**
      * Callback method used by the parent panel to notify this panel that we
      * have been given context to the user.
+     *
      * @return true is ok to move.
      */
     @Override
@@ -125,37 +208,41 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
         SolarSetup global = parent.getSetup();
         SolarResult results = null;
         if (global != null) {
-        	try {
-				results = new SolarResult(global);
-			} catch (SolarResultException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	SolarCalculatorLocal calculator = new SolarCalculatorLocal();
-        	results = calculator.calculateDailySavings(results, 1);
-        	results = calculator.calculateYearlySavings(results, 1);
-        	results = calculator.calculateYearlySavingsOverTime(results, 10);
-        	
-        	jTextAreaConfirmationDetails.setText(results.toString());
-        	
+            try {
+                results = new SolarResult(global);
+            } catch (SolarResultException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            SolarCalculatorLocal calculator = new SolarCalculatorLocal();
+            results = calculator.calculateDailySavings(results, 1);
+            results = calculator.calculateYearlySavings(results, 1);
+            results = calculator.calculateYearlySavingsOverTime(results, 10);
+
+            jTextAreaConfirmationDetails.setText(results.toString());
+
         }
-    	return true;
+        return true;
     }
+
 
     /**
      * Callback method used by the parent panel to notify this panel that we
      * have requested a move away from this panel.
+     *
      * @return true is ok to move.
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
 
-    	return true;
+        return true;
     }
+
 
     /**
      * Return the title to be used for this wizard panel;
-     * @return 
+     *
+     * @return
      */
     @Override
     public String getTitle() {
