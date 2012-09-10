@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getPanels" type="tns:getPanels"/>
+
+  <xs:element name="getPanelsResponse" type="tns:getPanelsResponse"/>
+
+  <xs:element name="insertPanel" type="tns:insertPanel"/>
+
+  <xs:element name="insertPanelResponse" type="tns:insertPanelResponse"/>
+
+  <xs:complexType name="insertPanel">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="insertPanelResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPanels">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getPanelsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
