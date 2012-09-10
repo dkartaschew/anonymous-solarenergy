@@ -52,7 +52,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
         jTabbedPaneResults = new javax.swing.JTabbedPane();
         jPanelSummaryResults = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaConfirmationDetails = new javax.swing.JTextArea();
+        jTextAreaConfirmationDetails = new javax.swing.JEditorPane("text/html", "");
         jPanelGraphResults = new javax.swing.JPanel();
         jPanelGraph = new javax.swing.JPanel();
         jPanelTableresults = new javax.swing.JPanel();
@@ -193,7 +193,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPaneResults;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextAreaConfirmationDetails;
+    private javax.swing.JEditorPane jTextAreaConfirmationDetails;
     // End of variables declaration//GEN-END:variables
 
 
