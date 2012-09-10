@@ -17,7 +17,7 @@ public class SPanelAdapter {
 		return response;
 	}
 	
-	public InsertPanelResponse setPanel(InsertPanel request){
+	public InsertPanelResponse insertPanel(InsertPanel request){
 		SolarPanel store = request.getArg0();
 		boolean success = sPan.insertPanel(store);
 		InsertPanelResponse response = new InsertPanelResponse();
