@@ -36,6 +36,7 @@
 		<javac srcdir="test" destdir="test-classes" classpathref="project.classpath">
 			<classpath>
 				<pathelement location="lib/junit.jar" />
+				<pathelement location="lib/JMapViewer.jar" />
 				<pathelement location="lib/uispec4j-2.4-jdk16.jar" />
 				<pathelement location="war/WEB-INF/classes" />
 				<pathelement location="desktop" />
@@ -50,6 +51,7 @@
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/uispec4j-2.4-jdk16.jar" />
 				<pathelement location="test-classes" />
+				<pathelement location="lib/JMapViewer.jar" />
 			</classpath>
 			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
