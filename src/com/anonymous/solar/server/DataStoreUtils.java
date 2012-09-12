@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 
 public class DataStoreUtils {
@@ -93,6 +94,39 @@ public class DataStoreUtils {
 			return panelArrayList;
 		} finally {
 			q.closeAll();
+		}
+	}
+	
+	/**
+	 * Store a new inverter into the local datastore
+	 * 
+	 * @param inverter
+	 *            The inverter information to be stored in the datastore
+	 */
+	public Long storeInverter(SolarInverter inverter) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.makePersistent(inverter);
+		} finally {
+			pm.close();
+		}
+		return inverter.getKey();
+	}
+
+	/**
+	 * Remove a panel from the datastore based on the key contained in the panel
+	 * object. (If key == 0, then object is not in the datastore.
+	 * 
+	 * @param inverterKey
+	 *            Key ID of the panel to remove from the datastore.
+	 */
+	public void removeInverter(Long inverterKey) {
+		if (inverterKey > 0) {
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(SolarPanel.class);
+			q.setFilter("key == inverterKeyParam");
+			q.declareParameters("Long inverterKeyParam");
+			q.deletePersistentAll(inverterKey);
 		}
 	}
 	

@@ -3,6 +3,10 @@
  */
 package com.anonymous.solar.shared;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 /**
  * Class to hold and work on Solar Installation components, namely inverters
  * themselves.
@@ -13,6 +17,10 @@ package com.anonymous.solar.shared;
 public class SolarInverter {
 
 	private final Double INITIAL_VALUES = 0.0;
+	
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long key;
 
 	private String inverterName;
 	private String inverterManufacturer;
@@ -179,6 +187,16 @@ public class SolarInverter {
 				   "Life: " + inverterLifeYears.toString() + " Years<br />" + 
 				   "RRP: $" + inverterRRP.toString() + "<br />";
 		}
+	}
+	
+	/**
+	 * Returns the datastore key if this panel has been stored in the GAE
+	 * datastore.
+	 * 
+	 * @return Panel Key
+	 */
+	public Long getKey() {
+		return key;
 	}
 
 	/**
