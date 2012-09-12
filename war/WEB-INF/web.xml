@@ -21,6 +21,17 @@
 		<servlet-name>LocationInformation</servlet-name>
 		<url-pattern>/LocationInformationService</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Panel Information Servelet -->
+	<servlet>
+		<servlet-name>SpanelInfo</servlet-name>
+		<servlet-class>com.anonymous.solar.server.SPanelSOAPServerServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SpanelInfo</servlet-name>
+		<url-pattern>/SPanelService</url-pattern>
+	</servlet-mapping>
 		
 
 	<!-- Default page to serve -->

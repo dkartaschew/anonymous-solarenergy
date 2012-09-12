@@ -632,6 +632,7 @@ public class LocationDialog extends javax.swing.JDialog {
 			loadLocationComboBox(defaultLocation);
 			// Add additional locations from GAE.
 			try {
+				//TODO: NOTE
 				LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
 				ArrayList<LocationData> locData = (ArrayList<LocationData>) locationSOAP.storeLocationGetAll();
 				for (LocationData loc : locData) {

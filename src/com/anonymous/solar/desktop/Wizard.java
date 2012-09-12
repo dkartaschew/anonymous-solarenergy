@@ -5,6 +5,7 @@ package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,6 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.anonymous.solar.client.LocationInformation;
+import com.anonymous.solar.client.LocationInformationService;
+import com.anonymous.solar.client.SPanel;
+import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -261,6 +268,16 @@ public class Wizard extends javax.swing.JPanel {
 				setWizardPanel(++wizardIndex);
 				setSideBarButton(wizardIndex);
 			}
+			
+			
+			SPanel SPanelSOAP = new SPanelService().getSPanelPort();
+			
+			List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
+			
+			for (SolarPanel pan : panelData) {
+				JOptionPane.showMessageDialog(this, pan.getPanelName());
+			}
+			
 		}
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);

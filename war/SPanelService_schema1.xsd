@@ -10,7 +10,24 @@
   <xs:element name="insertPanelResponse" type="tns:insertPanelResponse"/>
 
   <xs:complexType name="insertPanel">
-    <xs:sequence/>
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:solarPanel" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarPanel">
+    <xs:sequence>
+    <xs:element name="INITIAL_VALUES" type="xs:double" minOccurs="0"/>
+      <xs:element name="key" type="xs:long" minOccurs="0"/>
+      <xs:element name="panelCost" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelLifeYears" type="xs:int" minOccurs="0"/>
+      <xs:element name="panelLossYear" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelManufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelManufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelName" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelRRP" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelWattage" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="insertPanelResponse">
@@ -25,7 +42,7 @@
 
   <xs:complexType name="getPanelsResponse">
     <xs:sequence>
-      <xs:element name="return" type="xs:string" minOccurs="0"/>
+      <xs:element name="return" type="tns:solarPanel" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

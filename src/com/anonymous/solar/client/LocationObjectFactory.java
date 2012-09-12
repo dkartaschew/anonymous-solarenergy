@@ -23,7 +23,7 @@ import com.anonymous.solar.shared.LocationData;
  * provided in this class.
  * 
  */
-@XmlRegistry
+//@XmlRegistry
 public class LocationObjectFactory {
 
     private final static QName _StoreLocationGetAllResponse_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationGetAllResponse");

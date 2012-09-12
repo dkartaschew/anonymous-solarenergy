@@ -18,7 +18,7 @@ import com.anonymous.solar.server.jaxws.*;
 
 public class SPanelSOAPHandler {
 	
-	private static final String NAMESPACE_URI = "http://example.com/";
+	private static final String NAMESPACE_URI = "http://server.solar.anonymous.com/";
 	private static final QName GET_ALL_PANELS = new QName(NAMESPACE_URI, "getPanels");
 	private static final QName INSERT_PANEL = new QName(NAMESPACE_URI, "insertPanel");
 
@@ -29,11 +29,7 @@ public class SPanelSOAPHandler {
 	    messageFactory = MessageFactory.newInstance();
 	    spanelAdapter = new SPanelAdapter();
 	}
-	
-	
 
-
-	
 	public SOAPMessage handleSOAPRequest(SOAPMessage request) throws SOAPException{
 		SOAPBody soapBody = request.getSOAPBody();
 	    Iterator iterator = soapBody.getChildElements();
@@ -43,10 +39,10 @@ public class SPanelSOAPHandler {
 	      if (next instanceof SOAPElement) {
 	        SOAPElement soapElement = (SOAPElement) next;
 	        QName qname = soapElement.getElementQName();
-	          if (GET_ALL_PANELS.equals(qname)) {
+	          if (INSERT_PANEL.equals(qname)) {
 	            responsePojo = handleInsertPanelRequest(soapElement);
 	            break;
-	          } else if (INSERT_PANEL.equals(qname)) {
+	          } else if (GET_ALL_PANELS.equals(qname)) {
 	            responsePojo = handleGetPanelsRequest(soapElement);
 	            break;
 	          }
