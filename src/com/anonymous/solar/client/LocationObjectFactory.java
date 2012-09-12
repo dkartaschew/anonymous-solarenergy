@@ -27,10 +27,13 @@ import com.anonymous.solar.shared.SolarPanel;
 @XmlRegistry
 public class LocationObjectFactory {
 
+	//Location
     private final static QName _StoreLocationGetAllResponse_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationGetAllResponse");
     private final static QName _StoreLocationInformationResponse_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationInformationResponse");
     private final static QName _StoreLocationInformation_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationInformation");
     private final static QName _StoreLocationGetAll_QNAME = new QName("http://server.solar.anonymous.com/", "StoreLocationGetAll");
+    
+    //Panel
     private final static QName _InsertPanelResponse_QNAME = new QName("http://server.solar.anonymous.com/", "insertPanelResponse");
     private final static QName _InsertPanel_QNAME = new QName("http://server.solar.anonymous.com/", "insertPanel");
     private final static QName _GetPanelsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "getPanelsResponse");
