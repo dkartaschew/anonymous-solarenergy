@@ -21,7 +21,7 @@ import com.anonymous.solar.shared.SolarPanel;
  */
 @WebService(name = "SPanel", targetNamespace = "http://server.solar.anonymous.com/")
 @XmlSeeAlso({
-    ObjectFactory.class
+	LocationObjectFactory.class
 })
 public interface SPanel {
 
