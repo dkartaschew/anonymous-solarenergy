@@ -98,6 +98,29 @@ public class DataStoreUtils {
 	}
 	
 	/**
+	 * Retrieve a list of all solar inverters that are available within the
+	 * datastore.
+	 * 
+	 * @return A List of SolarPanels.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<SolarInverter> getAllInverters() {
+
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<SolarInverter> panelArrayList = new ArrayList<SolarInverter>();
+
+		Query q = pm.newQuery(SolarInverter.class);
+		q.setOrdering("inverterManufacturer asc, inverterManufacturerCode asc, inverterName asc");
+
+		try {
+			panelArrayList = (List<SolarInverter>) q.execute();
+			return panelArrayList;
+		} finally {
+			q.closeAll();
+		}
+	}
+	
+	/**
 	 * Store a new inverter into the local datastore
 	 * 
 	 * @param inverter

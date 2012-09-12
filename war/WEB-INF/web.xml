@@ -2,6 +2,16 @@
 
 	<!-- Servlets -->
 	<servlet>
+		<servlet-name>SolarInverterClient</servlet-name>
+		<servlet-class>com.anonymous.solar.server.SolarInverterClient</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SolarInverterClient</servlet-name>
+		<url-pattern>/SolarInverterClient</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>SolarPanelsClient</servlet-name>
 		<servlet-class>com.anonymous.solar.server.SolarPanelsClient</servlet-class>
 	</servlet>

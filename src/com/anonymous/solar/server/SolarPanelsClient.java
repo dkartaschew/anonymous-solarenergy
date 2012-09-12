@@ -46,7 +46,7 @@ public class SolarPanelsClient extends HttpServlet {
 		}
 		
 		// List all the panels in the system.
-		out.print("<h1>Solar Panels installed within the system</h1>\n");
+		out.print("<h1>N: Solar Panels installed within the system</h1>\n");
 		out.print(displaySolarPanels());
 		
 		// Display a form to add new panel information.
