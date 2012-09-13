@@ -31,26 +31,27 @@ public class SolarInverterClient extends HttpServlet {
 		}
 
 		// Handle new panel.
-		else if (request.getParameter(SolarPanel.PANEL_NAME) != null) {
+		else if (request.getParameter(SolarInverter.INVERTER_NAME) != null) {
 			SolarInverter inverter = new SolarInverter();
 			try {
-				inverter.setInverterName(request.getParameter(SolarPanel.PANEL_NAME).toString());
-				inverter.setInverterManufacturer(request.getParameter(SolarPanel.PANEL_MANUFACTURER).toString());
-				inverter.setInverterManufacturerCode(request.getParameter(SolarPanel.PANEL_MANUFACTURER_CODE).toString());
-				inverter.setInverterWattage(Double.parseDouble(request.getParameter(SolarPanel.PANEL_WATTAGE)));
-				inverter.setInverterCost(Double.parseDouble(request.getParameter(SolarPanel.PANEL_PANEL_COST)));
-				inverter.setInverterLossYear(Double.parseDouble(request.getParameter(SolarPanel.PANEL_LOSS_YEAR)));
-				inverter.setInverterRRP(Double.parseDouble(request.getParameter(SolarPanel.PANEL_RRP)));
-				inverter.setInverterLifeYears(Integer.parseInt(request.getParameter(SolarPanel.PANEL_LIFE_YEARS)));
+				inverter.setInverterName(request.getParameter(SolarInverter.INVERTER_NAME).toString());
+				inverter.setInverterManufacturer(request.getParameter(SolarInverter.INVERTER_MANUFACTURER).toString());
+				inverter.setInverterManufacturerCode(request.getParameter(SolarInverter.INVERTER_CODE).toString());
+				inverter.setInverterWattage(Double.parseDouble(request.getParameter(SolarInverter.INVERTER_WATTAGE)));
+				inverter.setInverterCost(Double.parseDouble(request.getParameter(SolarInverter.INVERTER_COST)));
+				inverter.setInverterLossYear(Double.parseDouble(request.getParameter(SolarInverter.INVERTER_LOSS_YEAR)));
+				inverter.setInverterRRP(Double.parseDouble(request.getParameter(SolarInverter.INVERTER_RRP)));
+				inverter.setInverterLifeYears(Integer.parseInt(request.getParameter(SolarInverter.INVERTER_LIFE)));
+				inverter.setInverterEfficiency(Double.parseDouble(request.getParameter(SolarInverter.INVERTER_EFFICIENCY)));
 				dsutils.storeInverter(inverter);
 
 			} catch (Exception e) {
 				// Oops, something went wrong, let the client know.
-				response.sendRedirect("panels.jsp?error=CommitFailed");
+				response.sendRedirect("./SolarInverterClient?error=CommitFailed");
 				return;
 			}
 		}
-		response.sendRedirect("panels.jsp");
+		response.sendRedirect("./SolarInverterClient");
 	}
 
 	
@@ -107,7 +108,7 @@ public class SolarInverterClient extends HttpServlet {
 			table += "<td>$" + panel.getInverterCost().toString() + "</td>\n";
 			table += "<td>$" + panel.getInverterRRP().toString() + "</td>\n";
 			table += "<td>" + panel.getInverterLossYear().toString() + "%</td>\n";
-			table += "<td><form action=\"panels.jsp\" method=\"post\">"
+			table += "<td><form action=\"/SolarInverterClient\" method=\"post\">"
 					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + panel.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";
 			table += "</tr>\n";
@@ -122,7 +123,7 @@ public class SolarInverterClient extends HttpServlet {
 	 * @return A string containing a form
 	 */
 	private String insertSolarINVERTER() {
-		String form = "<form action=\"panels.jsp\" method=\"post\">\n";
+		String form = "<form action=\"SolarInverterClient\" method=\"post\">\n";
 		form += "<span class=\"textfield\">Inverter Name: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_NAME
 				+ "\" /><br />\n";
 		form += "<span class=\"textfield\">Inverter Manu: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_MANUFACTURER
@@ -139,7 +140,7 @@ public class SolarInverterClient extends HttpServlet {
 				+ "\" /><br />\n";
 		form += "<span class=\"textfield\">Inverter RRP: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_RRP
 				+ "\" /><br />\n";
-		form += "<span class=\"textfield\">Inverter RRP: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_LIFE
+		form += "<span class=\"textfield\">Inverter LIFE: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_LIFE
 				+ "\" /><br />\n";
 		form += "<input type=\"submit\" name=\"Submit\">\n";
 		form += "</form>\n";
