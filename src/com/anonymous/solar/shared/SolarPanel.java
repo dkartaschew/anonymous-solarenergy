@@ -467,12 +467,16 @@ public class SolarPanel {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
+	//@Override
+	/*public String toString() {
 		return "SolarPanel [panelName=" + panelName + ", panelManufacturer=" + panelManufacturer
 				+ ", panelManufacturerCode=" + panelManufacturerCode + ", panelWattage=" + panelWattage
 				+ ", panelLossYear=" + panelLossYear + ", panelCost=" + panelCost + ", panelRRP=" + panelRRP
 				+ ", panelLifeYears=" + panelLifeYears + "]";
+	}*/
+	@Override
+	public String toString(){
+		return getPanelName() + " - Cost: $" + getPanelCost() + " - Life: " + getPanelLifeYears() + " years";
 	}
 	
 	public String toString(boolean htmlTags){

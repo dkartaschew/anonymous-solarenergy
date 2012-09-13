@@ -146,7 +146,7 @@ public class DataStoreUtils {
 	public void removeInverter(Long inverterKey) {
 		if (inverterKey > 0) {
 			PersistenceManager pm = PMF.get().getPersistenceManager();
-			Query q = pm.newQuery(SolarPanel.class);
+			Query q = pm.newQuery(SolarInverter.class);
 			q.setFilter("key == inverterKeyParam");
 			q.declareParameters("Long inverterKeyParam");
 			q.deletePersistentAll(inverterKey);

@@ -264,20 +264,10 @@ public class Wizard extends javax.swing.JPanel {
 				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(true);
 			} catch (Exception e) {
 			}
-			if (changePanel) {
+			if (true) {
 				setWizardPanel(++wizardIndex);
 				setSideBarButton(wizardIndex);
 			}
-			
-			
-			SPanel SPanelSOAP = new SPanelService().getSPanelPort();
-			
-			List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
-			
-			for (SolarPanel pan : panelData) {
-				JOptionPane.showMessageDialog(this, pan.getPanelName());
-			}
-			
 		}
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);

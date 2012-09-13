@@ -27,7 +27,7 @@ public class SolarInverterClient extends HttpServlet {
 		// Handle panel delete, else assume, new panel?
 		if (request.getParameter("delKey") != null) {
 			Long invertKey = Long.parseLong(request.getParameter("delKey"));
-			dsutils.removePanel(invertKey);
+			dsutils.removeInverter(invertKey);
 		}
 
 		// Handle new panel.
@@ -47,11 +47,11 @@ public class SolarInverterClient extends HttpServlet {
 
 			} catch (Exception e) {
 				// Oops, something went wrong, let the client know.
-				response.sendRedirect("./SolarInverterClient?error=CommitFailed");
+				response.sendRedirect("inverters.jsp?error=CommitFailed");
 				return;
 			}
 		}
-		response.sendRedirect("./SolarInverterClient");
+		response.sendRedirect("inverters.jsp");
 	}
 
 	
@@ -98,6 +98,7 @@ public class SolarInverterClient extends HttpServlet {
 		table += "<th>Cost</th>";
 		table += "<th>RRP</th>";
 		table += "<th>Efficiency Loss (Annual)</th>";
+		table += "<th>Key (Annual)</th>";
 		table += "<th>&nbsp;</th></tr>";
 		for (SolarInverter panel : panels) {
 			table += "<tr>\n<td>" + panel.getInverterManufacturer() + "</td>\n";
@@ -108,7 +109,8 @@ public class SolarInverterClient extends HttpServlet {
 			table += "<td>$" + panel.getInverterCost().toString() + "</td>\n";
 			table += "<td>$" + panel.getInverterRRP().toString() + "</td>\n";
 			table += "<td>" + panel.getInverterLossYear().toString() + "%</td>\n";
-			table += "<td><form action=\"/SolarInverterClient\" method=\"post\">"
+			table += "<td>[key]" + panel.getKey().toString() + "[key]</td>\n";
+			table += "<td><form action=\"inverters.jsp\" method=\"post\">"
 					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + panel.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";
 			table += "</tr>\n";
@@ -123,7 +125,7 @@ public class SolarInverterClient extends HttpServlet {
 	 * @return A string containing a form
 	 */
 	private String insertSolarINVERTER() {
-		String form = "<form action=\"SolarInverterClient\" method=\"post\">\n";
+		String form = "<form action=\"inverters.jsp\" method=\"post\">\n";
 		form += "<span class=\"textfield\">Inverter Name: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_NAME
 				+ "\" /><br />\n";
 		form += "<span class=\"textfield\">Inverter Manu: </span><input type=\"text\" name=\"" + SolarInverter.INVERTER_MANUFACTURER
