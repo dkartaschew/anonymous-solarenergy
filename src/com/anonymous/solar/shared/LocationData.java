@@ -77,6 +77,8 @@ public class LocationData {
      * Default Constructor;
      */
     public LocationData() {
+    	latitude = 0.00;
+    	longitude = 0.00;
     	locationWeatherData = new ArrayList<Double>();
     	locationWeatherEfficiency = new ArrayList<Double>();
     	for(int row = 0; row < 12; row++){
@@ -92,9 +94,9 @@ public class LocationData {
      * @param lon Longitude (-180 > x > 180);
      * @param lat Latitude(-90 > x > 90);
      * @param name Location Name (not null or "")
-     * @param locData Array of [12]{days of cloud cover,panel efficiency when in
-     * cloud}
-     * @throws Exception
+     * @param locData List of number of days each month that has cloud cover.
+     * @param locEfficiency List of efficiency loss on days.
+     * @throws Exception if values passed are invalid, or 12mths of data not supplied.
      */
     public LocationData(Double lon, Double lat, String name, List<Double> locData, List<Double> locEfficency) throws LocationDataException {
         setLongitude(lon);
@@ -115,10 +117,10 @@ public class LocationData {
 	}
 	
 	/**
-     * set new weather information.
+     * Set new weather information, the number of days with cloud cover.
      *
-     * @param locationWeatherData
-     * @throws Exception
+     * @param locationWeatherData A List of 12 months of the number of days of cloud cover
+     * @throws Exception If the list is null or doesn't include 12 items.
      */
     public void setLocationWeatherData(List<Double> locationWeatherData) throws LocationDataException {
         if (locationWeatherData == null) {
@@ -132,10 +134,10 @@ public class LocationData {
     }
     
     /**
-     * set new weather information.
+     * Set new weather information, panel efficiency loss.
      *
-     * @param locationWeatherData
-     * @throws Exception
+     * @param locationWeatherData A List of 12 months of the number of days of cloud cover
+     * @throws Exception If the list is null or doesn't include 12 items.
      */
     public void setLocationWeatherEfficency(List<Double> locationWeatherData) throws LocationDataException {
         if (locationWeatherData == null) {
@@ -151,10 +153,7 @@ public class LocationData {
     /**
      * Gets the value of the latitude property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return latitude
      */
     public Double getLatitude() {
         return latitude;
@@ -164,7 +163,7 @@ public class LocationData {
      * Set latitude of location
      *
      * @param latitude
-     * @throws Exception
+     * @throws Exception If the latitude supplied is invalid.
      */
     public void setLatitude(Double latitude) throws LocationDataException {
         if (latitude == null) {
@@ -179,20 +178,17 @@ public class LocationData {
     /**
      * Gets the value of the locationName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return String of location name
      */
     public String getLocationName() {
         return locationName;
     }
 
     /**
-     * set location name.
+     * Set location name.
      *
      * @param locationName
-     * @throws Exception
+     * @throws Exception If the String is null, or has zero length
      */
     public void setLocationName(String locationName) throws LocationDataException {
         if (locationName == null || locationName.length() == 0) {
@@ -240,10 +236,7 @@ public class LocationData {
     /**
      * Gets the value of the longitude property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return latitude
      */
     public Double getLongitude() {
         return longitude;
@@ -253,7 +246,7 @@ public class LocationData {
      * Set longitude of location.
      *
      * @param longitude
-     * @throws Exception
+     * @throws Exception  If the longitude supplied is invalid.
      */
     public void setLongitude(Double longitude) throws LocationDataException {
         if (longitude == null) {
@@ -268,7 +261,7 @@ public class LocationData {
 
     /**
      * Basic ToString() method. DO NOT MODIFY THIS, as this is used by comboboxes for displaying location names;
-     * @return 
+     * @return  String with the location name.
      */
     @Override
     public String toString() {
@@ -283,9 +276,9 @@ public class LocationData {
      * @return String with class information.
      */
     public String toString(boolean htmlTags) {
-        String content = "Location Name: " + locationName + " </ br>"
-                + "Latitude: " + latitude.toString() + "</ br>"
-                + "Longitude: " + longitude.toString() + "</ br>";
+        String content = "Location Name: " + locationName + " <br />"
+                + "Latitude: " + latitude.toString() + "<br />"
+                + "Longitude: " + longitude.toString() + "<br />";
         if (htmlTags) {
             return "<html>" + content + "</html>";
         } else {
