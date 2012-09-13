@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
+//import com.anonymous.solar.client.SPanel;
+//import com.anonymous.solar.client.SPanelService;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanels;
 
@@ -315,16 +317,9 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Stored Panels"));
 
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jComboBox1InputMethodTextChanged(evt);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -402,18 +397,15 @@ public class AddNewPanel extends javax.swing.JDialog {
         doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-    	JOptionPane.showMessageDialog(new JFrame(), "jComboBox1ItemStateChanged");
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void jComboBox1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jComboBox1InputMethodTextChanged
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     	Object item = jComboBox1.getSelectedItem();
     	
     	if(item.getClass() == SolarPanel.class){
-    		JOptionPane.showMessageDialog(new JFrame(), "jComboBox1InputMethodTextChanged");
+    		SolarPanel panel = (SolarPanel) item;
+    		LoadPanel(panel);
     	}
-    }//GEN-LAST:event_jComboBox1InputMethodTextChanged
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void doClose() {
         setVisible(false);
@@ -437,6 +429,24 @@ public class AddNewPanel extends javax.swing.JDialog {
 	        jSpinnerDirection.setValue(oldPanels.getPanelDirection());
 	        jSpinnerPanelCount.setValue(oldPanels.getPanelCount());
 	        jSpinnerAzimuth.setValue(oldPanels.getPanelAzimuth());
+    	}
+    }
+    
+    /**
+     * Load the dialog with the details of a specific panel
+     * @param oldPanels 
+     */
+    private void LoadPanel(SolarPanel oldPanel){
+    	
+    	if(oldPanel != null){
+	        txtName.setText(oldPanel.getPanelName());
+	        txtManufacturer.setText(oldPanel.getPanelManufacturer());
+	        txtCode.setText(oldPanel.getPanelManufacturerCode());
+	        jSpinnerWattage.setValue(oldPanel.getPanelWattage());
+	        jSpinnerCost.setValue(oldPanel.getPanelCost());
+	        jSpinnerRRP.setValue(oldPanel.getPanelRRP());
+	        jSpinnerLife.setValue(oldPanel.getPanelLifeYears());
+	        jSpinnerEfficiency.setValue(oldPanel.getPanelLossYear());
     	}
     }
     
