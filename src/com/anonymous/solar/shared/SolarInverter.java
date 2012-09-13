@@ -4,6 +4,7 @@
 package com.anonymous.solar.shared;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -61,6 +62,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
+@PersistenceCapable
 public class SolarInverter {
 
 	private final Double INITIAL_VALUES = 0.0;
@@ -69,14 +71,31 @@ public class SolarInverter {
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long key;
 
+	@Persistent
 	private String inverterName;
+	
+	@Persistent
 	private String inverterManufacturer;
+	
+	@Persistent
 	private String inverterManufacturerCode;
+	
+	@Persistent
 	private Double inverterWattage;
+	
+	@Persistent
 	private Double inverterLossYear;
+	
+	@Persistent
 	private Double inverterEfficiency;
+	
+	@Persistent
 	private Double inverterCost;
+	
+	@Persistent
 	private Double inverterRRP;
+	
+	@Persistent
 	private Integer inverterLifeYears;
 
 	public SolarInverter() {
