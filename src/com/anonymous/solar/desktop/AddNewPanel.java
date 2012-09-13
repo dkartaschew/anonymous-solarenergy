@@ -17,6 +17,7 @@ import com.anonymous.solar.client.SPanelService;
 //import com.anonymous.solar.client.SPanel;
 //import com.anonymous.solar.client.SPanelService;
 import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarPanels;
 
 
@@ -140,6 +141,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         jSpinnerDirection = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
+        jButtonSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Panel Set");
@@ -340,6 +342,13 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButtonSave.setText("Save Panel");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -351,6 +360,8 @@ public class AddNewPanel extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanelPanelLocationGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancel)
@@ -373,7 +384,8 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(btnCancel)
-                    .addComponent(lblError))
+                    .addComponent(lblError)
+                    .addComponent(jButtonSave))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -407,8 +419,74 @@ public class AddNewPanel extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+    	SolarPanel panel;
+		try {
+			panel = getVerifiedPanel();
+			SPanel SPanelSOAP = new SPanelService().getSPanelPort();
+	        boolean succ = SPanelSOAP.insertPanel(panel);
+	        
+	        if(succ){
+	        	JOptionPane.showMessageDialog(new JFrame(), "Panel Saved");
+	        } else {
+	        	JOptionPane.showMessageDialog(new JFrame(), "The panel can not be saved at this point");
+	        }
+	        
+	        
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(), "This is an invalid panel");
+		}
+    	
+        
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
     private void doClose() {
         setVisible(false);
+    }
+    
+    private SolarPanel getVerifiedPanel() throws Exception{
+    	SolarPanel panel = new SolarPanel();
+    	boolean error = false;
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+    	
+    	
+    	if(txtName.getText().equals("") == true){
+    		error = true;
+    		txtName.setBackground(Color.red);
+    	}
+        if(txtManufacturer.getText().equals("") == true){
+    		error = true;
+        	txtManufacturer.setBackground(Color.red);
+        }
+        if(txtCode.getText().equals("") == true){
+    		error = true;
+        	txtCode.setBackground(Color.red);
+        } 
+    	if((Double)jSpinnerCost.getModel().getValue() == 0){
+    		error = true;
+    		jSpinnerCost.setBorder(borderError);
+        }
+        
+        if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
+    		error = true;
+        	jSpinnerPanelCount.setBorder(borderError);
+        }
+        
+        if(error){
+        	throw new SolarPanelException();
+        }
+        
+        //panel data
+        panel.setPanelName(txtName.getText());
+        panel.setPanelManufacturer(txtManufacturer.getText());
+        panel.setPanelManufacturerCode(txtCode.getText());
+        panel.setPanelWattage((Double)jSpinnerWattage.getModel().getValue());
+        panel.setPanelCost((Double)jSpinnerCost.getModel().getValue());
+        panel.setPanelLossYear((Double)jSpinnerEfficiency.getModel().getValue());
+        panel.setPanelRRP((Double)jSpinnerRRP.getModel().getValue());
+        panel.setPanelLifeYears((Integer)jSpinnerLife.getModel().getValue());
+        
+        return panel;
     }
     
     /**
@@ -485,59 +563,28 @@ public class AddNewPanel extends javax.swing.JDialog {
     	returnToWhite();
     	
         try {
-        	if(txtName.getText().equals("") == true){
-        		error = true;
-        		txtName.setBackground(Color.red);
-        	}
-            if(txtManufacturer.getText().equals("") == true){
-        		error = true;
-            	txtManufacturer.setBackground(Color.red);
-            }
-            if(txtCode.getText().equals("") == true){
-        		error = true;
-            	txtCode.setBackground(Color.red);
-            } 
-        	if((Double)jSpinnerCost.getModel().getValue() == 0){
-        		error = true;
-        		jSpinnerCost.setBorder(borderError);
-            }
-            
-            if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
-        		error = true;
-            	jSpinnerPanelCount.setBorder(borderError);
-            }
-            
-            if(error){
-            	throw new Exception();
-            }
-                //panel data
-                panel.setPanelName(txtName.getText());
-                panel.setPanelManufacturer(txtManufacturer.getText());
-                panel.setPanelManufacturerCode(txtCode.getText());
-                panel.setPanelWattage((Double)jSpinnerWattage.getModel().getValue());
-                panel.setPanelCost((Double)jSpinnerCost.getModel().getValue());
-                panel.setPanelLossYear((Double)jSpinnerEfficiency.getModel().getValue());
-                panel.setPanelRRP((Double)jSpinnerRRP.getModel().getValue());
-                panel.setPanelLifeYears((Integer)jSpinnerLife.getModel().getValue());
+            panel = getVerifiedPanel();
+            //SPanel SPanelSOAP = new SPanelService().getSPanelPort();
+                    //boolean succ = SPanelSOAP.insertPanel(panel);
 
-                //location data
-                panelCount = (Integer)jSpinnerPanelCount.getModel().getValue();
-                panelDirection = (Double)jSpinnerDirection.getModel().getValue();
-                panelAzimuth = (Double)jSpinnerAzimuth.getModel().getValue();
-                
-                //Generate Panel(s)
-                newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
-               
-                //location set, update panel
-                if(location > -1){
-                	this.parent.panels.remove(location);
-                	this.parent.panels.add(location, newPanels);
-                } else {
-                //else, add the new panel to the end of the list
-                	this.parent.panels.add(newPanels);
-                }
-                
-                return true;
+            //location data
+            panelCount = (Integer)jSpinnerPanelCount.getModel().getValue();
+            panelDirection = (Double)jSpinnerDirection.getModel().getValue();
+            panelAzimuth = (Double)jSpinnerAzimuth.getModel().getValue();
+
+            //Generate Panel(s)
+            newPanels = new SolarPanels(panel, panelCount, panelDirection, panelAzimuth);
+
+            //location set, update panel
+            if(location > -1){
+                    this.parent.panels.remove(location);
+                    this.parent.panels.add(location, newPanels);
+            } else {
+            //else, add the new panel to the end of the list
+                    this.parent.panels.add(newPanels);
+            }
+
+            return true;
         	
         } catch (Exception e) {
                 // Oops, something went wrong, let the client know.
@@ -552,6 +599,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelDataGroup;
