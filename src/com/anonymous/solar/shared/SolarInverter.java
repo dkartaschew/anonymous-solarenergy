@@ -97,7 +97,17 @@ public class SolarInverter {
 	
 	@Persistent
 	private Integer inverterLifeYears;
-
+	
+	public static final String INVERTER_NAME = "inverterName";
+	public static final String INVERTER_MANUFACTURER = "inverterManufacturer";
+	public static final String INVERTER_CODE = "inverterCode";
+	public static final String INVERTER_WATTAGE = "inverterWattage";
+	public static final String INVERTER_LOSS_YEAR = "inverterLossYear";
+	public static final String INVERTER_EFFICIENCY = "inverterEfficiency";
+	public static final String INVERTER_COST = "inverterCost";
+	public static final String INVERTER_RRP = "inverterRRP";
+	public static final String INVERTER_LIFE = "inverterLife";
+	
 	public SolarInverter() {
 		inverterName = new String();
 		inverterManufacturer = new String();
