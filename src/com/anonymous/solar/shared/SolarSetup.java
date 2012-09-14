@@ -179,7 +179,7 @@ public class SolarSetup {
 		details += setupDescription + "<br /><br />";
 		
 		// Location information
-		details += "<b>Location:</b></ br>";
+		details += "<b>Location:</b><br />";
 		details += locationInformation.toString(false) + "<br />";	
 		
 		//Panel Data
