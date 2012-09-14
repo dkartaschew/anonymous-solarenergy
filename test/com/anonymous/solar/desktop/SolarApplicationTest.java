@@ -1,6 +1,13 @@
 package com.anonymous.solar.desktop;
 
+import javax.swing.JPanel;
+
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.uispec4j.Button;
+import org.uispec4j.ComboBox;
+import org.uispec4j.Mouse;
 import org.uispec4j.Trigger;
+import org.uispec4j.UIComponent;
 import org.uispec4j.UISpec4J;
 import org.uispec4j.UISpecAdapter;
 import org.uispec4j.UISpecTestCase;
@@ -8,8 +15,6 @@ import org.uispec4j.Window;
 import org.uispec4j.interception.MainClassAdapter;
 import org.uispec4j.interception.WindowHandler;
 import org.uispec4j.interception.WindowInterceptor;
-
-import com.anonymous.solar.shared.SolarSetup;
 
 public class SolarApplicationTest extends UISpecTestCase {
 	
@@ -67,16 +72,6 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    	    }
 	    }).run();
 	}
-	
-	// Unsure about this as ImageIcon is apparently not supported by GoogleAppEngine
-	// Even though ImageIcon is clearly used elsewhere
-	/*public void testSolarImage() {
-		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
-		Window mainWindow = getMainWindow();
-		
-		assertTrue(mainWindow.getTextBox("ImageSolar").iconEquals(new javax.swing.ImageIcon(getClass().getResource("/com/anonymous/solar/desktop/images/solar_power_flower.jpg"))));
-	}*/
-	
 	
 	//
 	// WizardSetupDescription Tests
@@ -343,4 +338,158 @@ public class SolarApplicationTest extends UISpecTestCase {
 		}));
 	}
 	
+	/**
+	 * Test using the bread crumbs to navigate through the wizard.
+	 */
+	public void testWizardBreadCrumbNavigation() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		// Setup and Location pane
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		mainWindow.getButton("Next").click();
+		
+		// Inverter pane
+		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
+		
+		// Navigate back to setup name.
+		mainWindow.getButton("Setup Description").click();
+		
+		assertTrue(mainWindow.containsUIComponent(Button.class, "ButtonSetLocation"));
+		
+	}
+	
+	/**
+	 * Test using the bread crumbs to navigate through the wizard.
+	 */
+	public void testWizardBreadCrumbNavigation2() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		// Navigate back to setup name.
+		mainWindow.getButton("Setup Description").click();
+		
+		assertTrue(mainWindow.containsUIComponent(Button.class, "ButtonSetLocation"));
+		
+		mainWindow.getButton("Solar Panel Setup").click();
+		
+		assertTrue(mainWindow.containsUIComponent(Button.class, "Edit"));
+		
+	}
+	
+	/**
+	 * Test set location via the combobox in the location dialog.
+	 */
+	public void testLocationDialogSetLocation() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		// Setup and Location pane
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      
+	    	      // Check the dropdown functions.
+	    	      assertTrue(dialog.containsUIComponent(ComboBox.class, "jComboBoxLocationName"));
+	    	      
+	    	      dialog.getComboBox("jComboBoxLocationName").select("Surfers Paradise");
+	    	      assertTrue(dialog.getTextBox("jTextFieldLocationName").getText().compareTo("Surfers Paradise") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLatitude").getText().compareTo("-28.001979938258618") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLongitude").getText().compareTo("153.4299087524414") == 0);
+	    	      
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	/**
+	 * Test setting the name of the location in the text box.
+	 */
+	public void testLocationDialogSetLocation2() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		// Setup and Location pane
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      
+	    	      // Check the dropdown functions.
+	    	      assertTrue(dialog.containsUIComponent(ComboBox.class, "jComboBoxLocationName"));
+	    	      
+	    	      dialog.getComboBox("jComboBoxLocationName").select("Surfers Paradise");
+	    	      assertTrue(dialog.getTextBox("jTextFieldLocationName").getText().compareTo("Surfers Paradise") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLatitude").getText().compareTo("-28.001979938258618") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLongitude").getText().compareTo("153.4299087524414") == 0);
+	    	      
+	    	      dialog.getTextBox("jTextFieldLocationName").setText(ANOTHER_TEST_STRING);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLocationName").getText().compareTo(ANOTHER_TEST_STRING) == 0);
+	    	      
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		assertTrue(mainWindow.getTextBox("jTextFieldLocation1").getText().compareTo(ANOTHER_TEST_STRING) == 0);
+	}
+
+	
+	/**
+	 * Test setting the location by clicking on the location window
+	 */
+	public void testLocationDialogSetLocation3() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		// Setup and Location pane
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      
+	    	      // Check the dropdown functions.
+	    	      assertTrue(dialog.containsUIComponent(ComboBox.class, "jComboBoxLocationName"));
+	    	      
+	    	      dialog.getComboBox("jComboBoxLocationName").select("Surfers Paradise");
+	    	      assertTrue(dialog.getTextBox("jTextFieldLocationName").getText().compareTo("Surfers Paradise") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLatitude").getText().compareTo("-28.001979938258618") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLongitude").getText().compareTo("153.4299087524414") == 0);
+	    	      
+	    	      dialog.getTextBox("jTextFieldLocationName").setText(ANOTHER_TEST_STRING);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLocationName").getText().compareTo(ANOTHER_TEST_STRING) == 0);
+	    	      
+	    	      // Set defined map location, so our result of the click is always 100% accurate
+	    	      JMapViewer map = dialog.findSwingComponent(JMapViewer.class);
+	    	      map.setDisplayPositionByLatLon(-27.47330928257259, 153.0259519815445, 2);
+	    	      
+	    	      JPanel mapPanel = (JPanel)dialog.findSwingComponent(JMapViewer.class);
+	    	      
+	    	      // Click mouse in top left corner of map.
+	    	      Mouse.doClickInRectangle(mapPanel, new java.awt.Rectangle(1,1), false, org.uispec4j.Key.Modifier.NONE);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLatitude").getText().compareTo("16.299051014581828") == 0);
+	    	      assertTrue(dialog.getTextBox("jTextFieldLongitude").getText().compareTo("68.5546875") == 0);
+
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		assertTrue(mainWindow.getTextBox("jTextFieldLocation1").getText().compareTo(ANOTHER_TEST_STRING) == 0);
+		assertTrue(mainWindow.getTextBox("jTextFieldLatitude").getText().compareTo("16.299051014581828") == 0);
+	    assertTrue(mainWindow.getTextBox("jTextFieldLongitude").getText().compareTo("68.5546875") == 0);
+	}
 }

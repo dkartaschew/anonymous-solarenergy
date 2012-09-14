@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *
  */
 package com.anonymous.solar.desktop;
 
@@ -27,8 +26,10 @@ import com.anonymous.solar.client.LocationInformationService;
 import com.anonymous.solar.shared.LocationData;
 
 /**
+ * Location Awareness Dialog.
  * 
- * @author darran
+ * @author 07627505 Darran Kartaschew
+ * @version 1.0
  */
 public class LocationDialog extends javax.swing.JDialog {
 
@@ -51,6 +52,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		setModal(modal);
 		this.parent = parent;
 		initComponents();
+		initComponentNames();
 		SetupMapSelectionComboBox();
 		SetupMapMouseHandlers();
 		SetupTable();
@@ -62,15 +64,31 @@ public class LocationDialog extends javax.swing.JDialog {
 			jTextFieldLocationName.setText(locationData.getLocationName());
 			jTextFieldLatitude.setText(locationData.getLatitude().toString());
 			jTextFieldLongitude.setText(locationData.getLongitude().toString());
-			for(int row =0; row < 12; row++){
-				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row) , row, 1);
-				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherEfficiency().get(row) , row, 2);
+			for (int row = 0; row < 12; row++) {
+				jTableWeatherDetails.getModel().setValueAt(locationData.getLocationWeatherData().get(row), row, 1);
+				jTableWeatherDetails.getModel()
+						.setValueAt(locationData.getLocationWeatherEfficiency().get(row), row, 2);
 			}
 			jMapViewer1.setDisplayPositionByLatLon(locationData.getLatitude(), locationData.getLongitude(),
 					jMapViewer1.getZoom());
 			AddMarker(new Coordinate(locationData.getLatitude(), locationData.getLongitude()));
 		}
 
+	}
+
+	/**
+	 * Set all the names of components so they can be accessed via the testing code.
+	 */
+	private void initComponentNames() {
+		jMapViewer1.setName("jMapViewer1");
+		jButtonClose.setName("jButtonClose");
+		jButtonOK.setName("jButtonOK");
+		jComboBoxLocationName.setName("jComboBoxLocationName");
+		jTextFieldLocationName.setName("jTextFieldLocationName");
+		jTextFieldLatitude.setName("jTextFieldLatitude");
+		jTextFieldLongitude.setName("jTextFieldLongitude");
+		jTableWeatherDetails.setName("jTableWeatherDetails");
+		jButtonSave.setName("jButtonSave");
 	}
 
 	/**
@@ -409,11 +427,21 @@ public class LocationDialog extends javax.swing.JDialog {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Event handler for the Close button of the dialog.
+	 * 
+	 * @param evt
+	 */
 	private void jButtonCloseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCloseActionPerformed
 		this.setVisible(false);
 		locationData = null;
 	}// GEN-LAST:event_jButtonCloseActionPerformed
 
+	/**
+	 * Event handler for the OK button of the dialog.
+	 * 
+	 * @param evt
+	 */
 	private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonOKActionPerformed
 		boolean success = false;
 		try {
@@ -446,21 +474,23 @@ public class LocationDialog extends javax.swing.JDialog {
 		}
 	}// GEN-LAST:event_jButtonOKActionPerformed
 
+	/**
+	 * Event handler for the selection of the drop down box. This method, simple
+	 * gets the object from the drop down box and updates the text fields with
+	 * the correct data.
+	 * 
+	 * @param evt
+	 */
 	private void LocationItemStateChange(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_LocationItemStateChange
 		// Update the location panel.
 		LocationData locData = (LocationData) jComboBoxLocationName.getSelectedItem();
 		jTextFieldLocationName.setText(locData.getLocationName());
 		jTextFieldLatitude.setText(locData.getLatitude().toString());
 		jTextFieldLongitude.setText(locData.getLongitude().toString());
-//		Double[][] locWData = locData.getLocationWeatherData();
-//		// Set the table!
-//		for (int row = 0; row < 12; row++) {
-//			jTableWeatherDetails.getModel().setValueAt(locWData[row][0], row, 1);
-//			jTableWeatherDetails.getModel().setValueAt(locWData[row][1], row, 2);
-//		}
-		for(int row =0; row < 12; row++){
-			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row) , row, 1);
-			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherEfficiency().get(row) , row, 2);
+
+		for (int row = 0; row < 12; row++) {
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherData().get(row), row, 1);
+			jTableWeatherDetails.getModel().setValueAt(locData.getLocationWeatherEfficiency().get(row), row, 2);
 		}
 		jMapViewer1.setDisplayPositionByLatLon(locData.getLatitude(), locData.getLongitude(), jMapViewer1.getZoom());
 		AddMarker(new Coordinate(locData.getLatitude(), locData.getLongitude()));
@@ -480,7 +510,7 @@ public class LocationDialog extends javax.swing.JDialog {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 		loadLocationComboBox(locData);
 		jComboBoxLocationName.setSelectedIndex(jComboBoxLocationName.getComponentCount());
@@ -492,7 +522,7 @@ public class LocationDialog extends javax.swing.JDialog {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 
@@ -618,6 +648,9 @@ public class LocationDialog extends javax.swing.JDialog {
 		jMapViewer1.setMapMarkerVisible(true);
 	}
 
+	/**
+	 * Load all default locations from the user, and GAE.
+	 */
 	private void SetupLoadLocations() {
 		LocationData defaultLocation = new LocationData();
 		try {
@@ -625,14 +658,8 @@ public class LocationDialog extends javax.swing.JDialog {
 			defaultLocation.setLongitude(153.0259519815445);
 			defaultLocation.setLatitude(-27.47330928257259);
 			loadLocationComboBox(defaultLocation);
-			defaultLocation = new LocationData();
-			defaultLocation.setLocationName("Melbourne (RMIT)");
-			defaultLocation.setLongitude(144.96462106704712);
-			defaultLocation.setLatitude(-37.80804628684809);
-			loadLocationComboBox(defaultLocation);
 			// Add additional locations from GAE.
 			try {
-				//TODO: NOTE
 				LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
 				ArrayList<LocationData> locData = (ArrayList<LocationData>) locationSOAP.storeLocationGetAll();
 				for (LocationData loc : locData) {
@@ -640,13 +667,18 @@ public class LocationDialog extends javax.swing.JDialog {
 				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				////e.printStackTrace();
 			}
 
 		} catch (Exception e) {
 		}
 	}
 
+	/**
+	 * Take all values from the dialog boxes, and loads them into a class, which
+	 * is then saved back into the main global solar setup object.
+	 * 
+	 * @return true if the operation succeeded.
+	 */
 	private boolean submitLocationData() {
 		try {
 			locationData.setLatitude(Double.valueOf(jTextFieldLatitude.getText()));
@@ -664,6 +696,10 @@ public class LocationDialog extends javax.swing.JDialog {
 		return true;
 	}
 
+	/**
+	 * Adds a LocationData object as a selected item in the predefined drop downs.
+	 * @param defaultLocation
+	 */
 	private void loadLocationComboBox(LocationData defaultLocation) {
 		jComboBoxLocationName.addItem(defaultLocation);
 		jComboBoxLocationName.validate();

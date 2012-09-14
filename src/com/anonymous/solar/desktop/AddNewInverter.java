@@ -33,6 +33,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         this.iParent = parent;
         LoadInverter(parent.inverter);
         LoadInverters();
+        setTitle("Inverter Information");
     }
     
     private void LoadInverters(){

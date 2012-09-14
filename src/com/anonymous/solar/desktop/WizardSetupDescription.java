@@ -47,6 +47,10 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	private void nameComponents() {
 		jTextFieldSetupName.setName("TextFieldSetupName");
 		jButtonSetLocation1.setName("ButtonSetLocation");
+		jTextFieldLocation1.setName("jTextFieldLocation1");
+		jTextFieldLatitude.setName("jTextFieldLatitude");
+		jTextFieldLongitude.setName("jTextFieldLongitude");
+		
 	}
 
 	/**
