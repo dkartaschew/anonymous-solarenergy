@@ -42,6 +42,17 @@
 		<servlet-name>SpanelInfo</servlet-name>
 		<url-pattern>/SPanelService</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Inverter Information Servelet -->
+	<servlet>
+		<servlet-name>SInverterInfo</servlet-name>
+		<servlet-class>com.anonymous.solar.server.SInverterSOAPServerServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SInverterInfo</servlet-name>
+		<url-pattern>/SInverterService</url-pattern>
+	</servlet-mapping>
 		
 
 	<!-- Default page to serve -->

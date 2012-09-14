@@ -11,14 +11,14 @@ public class SInverterAdapter {
 	
 	private SInverter sInv = new SInverter();
 	
-	public GetInvertersResponse getPanels(){
+	public GetInvertersResponse getInverters(){
 		List<SolarInverter> invData = sInv.getInverters();
 		GetInvertersResponse response = new GetInvertersResponse();
 		response.setReturn(invData);
 		return response;
 	}
 	
-	public InsertInverterResponse insertPanel(InsertInverter request){
+	public InsertInverterResponse insertInverter(InsertInverter request){
 		SolarInverter store = request.getArg0();
 		boolean success = sInv.insertInverter(store);
 		InsertInverterResponse response = new InsertInverterResponse();
@@ -26,7 +26,7 @@ public class SInverterAdapter {
 		return response;
 	}
 	
-	public RemoveInverterResponse removePanel(RemoveInverter request){
+	public RemoveInverterResponse removeInverter(RemoveInverter request){
 		Long key = request.getArg0();
 		boolean success = sInv.removeInverter(key);
 		RemoveInverterResponse response = new RemoveInverterResponse();

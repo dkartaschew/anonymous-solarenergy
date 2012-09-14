@@ -82,11 +82,11 @@ public class SolarInverterClient extends HttpServlet {
 	}
 	
 	/**
-	 * Display all the solar panels in the datastore in a table, and include a button to remove them as needed.
+	 * Display all the solar inverters in the datastore in a table, and include a button to remove them as needed.
 	 * @return A string containing the table.
 	 */
 	private String displaySolarINVERTER() {
-		List<SolarInverter> panels = dsutils.getAllInverters();
+		List<SolarInverter> inverters = dsutils.getAllInverters();
 
 		String table = "<table border=\"1\">\n";
 
@@ -100,18 +100,18 @@ public class SolarInverterClient extends HttpServlet {
 		table += "<th>Efficiency Loss (Annual)</th>";
 		table += "<th>Key (Annual)</th>";
 		table += "<th>&nbsp;</th></tr>";
-		for (SolarInverter panel : panels) {
-			table += "<tr>\n<td>" + panel.getInverterManufacturer() + "</td>\n";
-			table += "<td>" + panel.getInverterManufacturerCode() + "</td>\n";
-			table += "<td>" + panel.getInverterName() + "</td>\n";
-			table += "<td>" + panel.getInverterWattage().toString() + "</td>\n";
-			table += "<td>" + panel.getInverterLifeYears().toString() + "</td>\n";
-			table += "<td>$" + panel.getInverterCost().toString() + "</td>\n";
-			table += "<td>$" + panel.getInverterRRP().toString() + "</td>\n";
-			table += "<td>" + panel.getInverterLossYear().toString() + "%</td>\n";
-			table += "<td>[key]" + panel.getKey().toString() + "[key]</td>\n";
+		for (SolarInverter inverter : inverters) {
+			table += "<tr>\n<td>" + inverter.getInverterManufacturer() + "</td>\n";
+			table += "<td>" + inverter.getInverterManufacturerCode() + "</td>\n";
+			table += "<td>" + inverter.getInverterName() + "</td>\n";
+			table += "<td>" + inverter.getInverterWattage().toString() + "</td>\n";
+			table += "<td>" + inverter.getInverterLifeYears().toString() + "</td>\n";
+			table += "<td>$" + inverter.getInverterCost().toString() + "</td>\n";
+			table += "<td>$" + inverter.getInverterRRP().toString() + "</td>\n";
+			table += "<td>" + inverter.getInverterLossYear().toString() + "%</td>\n";
+			table += "<td>[key]" + inverter.getKey().toString() + "[key]</td>\n";
 			table += "<td><form action=\"inverters.jsp\" method=\"post\">"
-					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + panel.getKey() + "\">"
+					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + inverter.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";
 			table += "</tr>\n";
 		}
