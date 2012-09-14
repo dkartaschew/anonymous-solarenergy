@@ -70,7 +70,7 @@
   </binding>
   <service name="SInverterService">
     <port name="SInverterPort" binding="tns:SInverterPortBinding">
-      <soap:address location="REPLACE_WITH_ACTUAL_URL"/>
+      <soap:address location="http://anonymous-solarenergy.appspot.com/SInverterService"/>
     </port>
   </service>
 </definitions>

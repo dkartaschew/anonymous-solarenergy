@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 
 
@@ -38,6 +39,125 @@ public class LocationObjectFactory {
     private final static QName _InsertPanel_QNAME = new QName("http://server.solar.anonymous.com/", "insertPanel");
     private final static QName _GetPanelsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "getPanelsResponse");
     private final static QName _GetPanels_QNAME = new QName("http://server.solar.anonymous.com/", "getPanels");
+
+    //inverter
+    private final static QName _RemoveInverterResponse_QNAME = new QName("http://server.solar.anonymous.com/", "removeInverterResponse");
+    private final static QName _GetInvertersResponse_QNAME = new QName("http://server.solar.anonymous.com/", "getInvertersResponse");
+    private final static QName _InsertInverterResponse_QNAME = new QName("http://server.solar.anonymous.com/", "insertInverterResponse");
+    private final static QName _GetInverters_QNAME = new QName("http://server.solar.anonymous.com/", "getInverters");
+    private final static QName _InsertInverter_QNAME = new QName("http://server.solar.anonymous.com/", "insertInverter");
+    private final static QName _RemoveInverter_QNAME = new QName("http://server.solar.anonymous.com/", "removeInverter");
+
+
+    /**
+     * Create an instance of {@link RemoveInverter }
+     * 
+     */
+    public RemoveInverter createRemoveInverter() {
+        return new RemoveInverter();
+    }
+
+    /**
+     * Create an instance of {@link RemoveInverterResponse }
+     * 
+     */
+    public RemoveInverterResponse createRemoveInverterResponse() {
+        return new RemoveInverterResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertInverterResponse }
+     * 
+     */
+    public InsertInverterResponse createInsertInverterResponse() {
+        return new InsertInverterResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInvertersResponse }
+     * 
+     */
+    public GetInvertersResponse createGetInvertersResponse() {
+        return new GetInvertersResponse();
+    }
+
+    /**
+     * Create an instance of {@link SolarInverter }
+     * 
+     */
+    public SolarInverter createSolarInverter() {
+        return new SolarInverter();
+    }
+
+    /**
+     * Create an instance of {@link GetInverters }
+     * 
+     */
+    public GetInverters createGetInverters() {
+        return new GetInverters();
+    }
+
+    /**
+     * Create an instance of {@link InsertInverter }
+     * 
+     */
+    public InsertInverter createInsertInverter() {
+        return new InsertInverter();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveInverterResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "removeInverterResponse")
+    public JAXBElement<RemoveInverterResponse> createRemoveInverterResponse(RemoveInverterResponse value) {
+        return new JAXBElement<RemoveInverterResponse>(_RemoveInverterResponse_QNAME, RemoveInverterResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInvertersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "getInvertersResponse")
+    public JAXBElement<GetInvertersResponse> createGetInvertersResponse(GetInvertersResponse value) {
+        return new JAXBElement<GetInvertersResponse>(_GetInvertersResponse_QNAME, GetInvertersResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertInverterResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "insertInverterResponse")
+    public JAXBElement<InsertInverterResponse> createInsertInverterResponse(InsertInverterResponse value) {
+        return new JAXBElement<InsertInverterResponse>(_InsertInverterResponse_QNAME, InsertInverterResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInverters }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "getInverters")
+    public JAXBElement<GetInverters> createGetInverters(GetInverters value) {
+        return new JAXBElement<GetInverters>(_GetInverters_QNAME, GetInverters.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertInverter }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "insertInverter")
+    public JAXBElement<InsertInverter> createInsertInverter(InsertInverter value) {
+        return new JAXBElement<InsertInverter>(_InsertInverter_QNAME, InsertInverter.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveInverter }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "removeInverter")
+    public JAXBElement<RemoveInverter> createRemoveInverter(RemoveInverter value) {
+        return new JAXBElement<RemoveInverter>(_RemoveInverter_QNAME, RemoveInverter.class, null, value);
+    }
 
 
     /**
