@@ -185,6 +185,7 @@ public class SolarSetup {
 		//Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
+		details += panelDirectionBreakdown();
 		for(SolarPanels panel : panels){
 			details += panel.getPanelType().toString(false) + "<br />";		
 		}
@@ -198,6 +199,38 @@ public class SolarSetup {
 		details += customerData.toString(false)+"<br /></html>";
 		
 		return details;
+	}
+	
+	private String panelDirectionBreakdown(){
+		double north = 0, east = 0, south = 0, west = 0;
+		double total = 0;
+		int count = 0;
+		String breakdown = "";
+		double direction = 0.0;
+		
+		for(SolarPanels panel : panels){
+			count = panel.getPanelCount();	
+			direction = panel.getPanelDirection();
+			
+			if (direction < 45 || direction > 315){
+				north += count;
+			}
+			else if(direction > 45 && direction < 135){
+				east += count;
+			}
+			else if(direction > 135 && direction < 225){
+				south += count;
+			}
+			else if(direction > 225 && direction < 315){
+				west += count;
+			}
+		}
+		total = north + east + south + west;
+		breakdown += "North Panels: " + (north / total) * 100 + "%<br />";
+		breakdown += "East Panels: " + (east / total) * 100 + "%<br />";
+		breakdown += "South Panels: " + (south / total) * 100 + "%<br />";
+		breakdown += "West Panels: " + (west / total) * 100 + "%<br />";
+		return breakdown;
 	}
 
 	/**
