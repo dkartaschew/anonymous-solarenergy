@@ -19,9 +19,9 @@ import com.anonymous.solar.server.jaxws.*;
 public class SInverterSOAPHandler {
 	
 	private static final String NAMESPACE_URI = "http://server.solar.anonymous.com/";
-	private static final QName GET_ALL_PANELS = new QName(NAMESPACE_URI, "getPanels");
-	private static final QName INSERT_PANEL = new QName(NAMESPACE_URI, "insertPanel");
-	private static final QName REMOVE_PANEL = new QName(NAMESPACE_URI, "removePanel");
+	private static final QName GET_ALL_PANELS = new QName(NAMESPACE_URI, "getInverters");
+	private static final QName INSERT_PANEL = new QName(NAMESPACE_URI, "insertInverter");
+	private static final QName REMOVE_PANEL = new QName(NAMESPACE_URI, "removeInverter");
 
 	private MessageFactory messageFactory;
 	private SInverterAdapter sInverterAdapter;

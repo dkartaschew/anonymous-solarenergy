@@ -15,9 +15,12 @@ import javax.swing.JPanel;
 
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
+import com.anonymous.solar.client.SInverter;
+import com.anonymous.solar.client.SInverterService;
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarSetup;
 
@@ -271,6 +274,15 @@ public class Wizard extends javax.swing.JPanel {
 		}
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
+		
+		
+		  SInverter SInverterSOAP = new SInverterService().getSInverterPort();
+		  
+		  List<SolarInverter> panelData = (List<SolarInverter>) SInverterSOAP.getInverters();
+		  
+		  for (SolarInverter inv : panelData) { JOptionPane.showMessageDialog(this,
+		  inv.getInverterName()); }
+		 
 
 		// Disable the next button if we are at the end.
 		if (wizardIndex == panels.size() - 1) {
