@@ -12,7 +12,10 @@ import javax.swing.JOptionPane;
 
 import com.anonymous.solar.client.SInverter;
 import com.anonymous.solar.client.SInverterService;
+import com.anonymous.solar.client.SPanel;
+import com.anonymous.solar.client.SPanelService;
 import com.anonymous.solar.shared.SolarInverter;
+import com.anonymous.solar.shared.SolarPanel;
 
 /**
  *
@@ -36,7 +39,8 @@ public class AddNewInverter extends javax.swing.JDialog {
 	    SInverter SInverterSOAP = new SInverterService().getSInverterPort();
 	    		  
 		List<SolarInverter> panelData = (List<SolarInverter>) SInverterSOAP.getInverters();
-		  
+		 
+		jComboBox1.addItem("Select a stored panel or design your own");
 		for (SolarInverter inv : panelData) { 
 			jComboBox1.addItem(inv);	
 		} 	 
@@ -317,11 +321,32 @@ public class AddNewInverter extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
+    	Object item = jComboBox1.getSelectedItem();
+
+		if (item.getClass() == SolarInverter.class) {
+			SolarInverter inverter = (SolarInverter) item;
+			LoadInverter(inverter);
+		}
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+    	SolarInverter inverter;
+		try {
+			inverter = getVerifiedInverter();
+			SInverter SInverterSOAP = new SInverterService().getSInverterPort();
+			boolean succ = SInverterSOAP.insertInverter(inverter);
 
+			if (succ) {
+				JOptionPane.showMessageDialog(new JFrame(), "Inverter Saved");
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(),
+						"The inverter can not be saved at this point");
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(new JFrame(),
+					"This is an invalid inverter!");
+		}
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -372,6 +397,59 @@ private void LoadInverter(SolarInverter oldInverter){
         jSpinnerEfficiency.setBorder(clear);
     }
     
+    private SolarInverter getVerifiedInverter() throws Exception{
+    	SolarInverter inverter = new SolarInverter();
+    	boolean error = false;
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+    	returnToWhite();
+    	
+		jSpinnerCost.setBackground(Color.red);
+		if(txtName.getText().equals("") == true){
+    		error = true;
+    		txtName.setBackground(Color.red);
+    	}
+        if(txtManufacturer.getText().equals("") == true){
+    		error = true;
+        	txtManufacturer.setBackground(Color.red);
+        }
+        if(txtCode.getText().equals("") == true){
+    		error = true;
+        	txtCode.setBackground(Color.red);
+        } 
+    	if((Double)jSpinnerCost.getModel().getValue() == 0){
+    		error = true;
+    		jSpinnerCost.setBorder(borderError);
+        }
+    	if((Double)jSpinnerRRP.getModel().getValue() == 0){
+    		error = true;
+    		jSpinnerRRP.setBorder(borderError);
+    	}
+    	if((Double)jSpinnerCost.getModel().getValue() == 0){
+    		error = true;
+    		jSpinnerCost.setBorder(borderError);
+    	}
+    	if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
+    		error = true;
+    		jSpinnerCost.setBorder(borderError);
+    	}
+    	
+        if(error){
+        	throw new Exception();
+        }
+			
+		inverter.setInverterName(txtName.getText());
+		inverter.setInverterManufacturer(txtManufacturer.getText());
+		inverter.setInverterManufacturerCode(txtCode.getText());
+        inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+		inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
+		inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
+		inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
+		inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
+		inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
+		return inverter;
+
+    }
+    
     private boolean submitInverterData(){
     	inverter = new SolarInverter();
     	boolean error = false;
@@ -379,51 +457,8 @@ private void LoadInverter(SolarInverter oldInverter){
     	returnToWhite();
     	
 		try {
-			jSpinnerCost.setBackground(Color.red);
-			if(txtName.getText().equals("") == true){
-        		error = true;
-        		txtName.setBackground(Color.red);
-        	}
-            if(txtManufacturer.getText().equals("") == true){
-        		error = true;
-            	txtManufacturer.setBackground(Color.red);
-            }
-            if(txtCode.getText().equals("") == true){
-        		error = true;
-            	txtCode.setBackground(Color.red);
-            } 
-        	if((Double)jSpinnerCost.getModel().getValue() == 0){
-        		error = true;
-        		jSpinnerCost.setBorder(borderError);
-            }
-        	if((Double)jSpinnerRRP.getModel().getValue() == 0){
-        		error = true;
-        		jSpinnerRRP.setBorder(borderError);
-        	}
-        	if((Double)jSpinnerCost.getModel().getValue() == 0){
-        		error = true;
-        		jSpinnerCost.setBorder(borderError);
-        	}
-        	if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
-        		error = true;
-        		jSpinnerCost.setBorder(borderError);
-        	}
-        	
-            
-            if(error){
-            	
-            	throw new Exception();
-            }
-				
-			inverter.setInverterName(txtName.getText());
-			inverter.setInverterManufacturer(txtManufacturer.getText());
-			inverter.setInverterManufacturerCode(txtCode.getText());
-            inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
-			inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
-			inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
-			inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
-			inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
-			inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
+	
+			inverter = getVerifiedInverter();
 			this.iParent.inverter = inverter;
 			return true;
 

@@ -669,7 +669,6 @@ public class AddNewPanel extends javax.swing.JDialog {
 	}// GEN-LAST:event_btnCancelActionPerformed
 
 	private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
-		// TODO add your handling code here:
 		Object item = jComboBox1.getSelectedItem();
 
 		if (item.getClass() == SolarPanel.class) {
