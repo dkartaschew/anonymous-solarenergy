@@ -307,7 +307,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	}
 
 	private void jButtonSetInverterActionPerformed(java.awt.event.ActionEvent evt) {
-		Inverter invert = new Inverter(this, true);
+		AddNewInverter invert = new AddNewInverter(this);
 
 		invert.setVisible(true);
 

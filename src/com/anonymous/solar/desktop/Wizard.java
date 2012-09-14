@@ -275,15 +275,6 @@ public class Wizard extends javax.swing.JPanel {
 		jButtonBack.setVisible(true);
 		jButtonBack.setEnabled(true);
 		
-		
-		  SInverter SInverterSOAP = new SInverterService().getSInverterPort();
-		  
-		  List<SolarInverter> panelData = (List<SolarInverter>) SInverterSOAP.getInverters();
-		  
-		  for (SolarInverter inv : panelData) { JOptionPane.showMessageDialog(this,
-		  inv.getInverterName()); }
-		 
-
 		// Disable the next button if we are at the end.
 		if (wizardIndex == panels.size() - 1) {
 			jButtonNext.setEnabled(false);

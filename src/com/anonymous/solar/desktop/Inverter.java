@@ -7,9 +7,13 @@ package com.anonymous.solar.desktop;
 //import com.anonymous.solar.shared.SolarPanel;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
+import com.anonymous.solar.client.SInverter;
+import com.anonymous.solar.client.SInverterService;
 import com.anonymous.solar.shared.SolarInverter;
 
 
@@ -20,6 +24,15 @@ import com.anonymous.solar.shared.SolarInverter;
 @SuppressWarnings("serial")
 public class Inverter extends javax.swing.JDialog {
 
+	/*
+	 * SInverter SInverterSOAP = new SInverterService().getSInverterPort();
+		  
+		  List<SolarInverter> panelData = (List<SolarInverter>) SInverterSOAP.getInverters();
+		  
+		  for (SolarInverter inv : panelData) { JOptionPane.showMessageDialog(this,
+		  inv.getInverterName()); }
+	 */
+	
     /**
      * Creates new form AddNewPanel
      */
