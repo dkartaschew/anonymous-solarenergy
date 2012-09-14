@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getInverters" type="tns:getInverters"/>
+
+  <xs:element name="getInvertersResponse" type="tns:getInvertersResponse"/>
+
+  <xs:element name="insertInverter" type="tns:insertInverter"/>
+
+  <xs:element name="insertInverterResponse" type="tns:insertInverterResponse"/>
+
+  <xs:element name="removeInverter" type="tns:removeInverter"/>
+
+  <xs:element name="removeInverterResponse" type="tns:removeInverterResponse"/>
+
+  <xs:complexType name="removeInverter">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="removeInverterResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="insertInverter">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:solarInverter" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarInverter">
+    <xs:sequence>
+      <xs:element name="INITIAL_VALUES" type="xs:double" minOccurs="0"/>
+      <xs:element name="key" type="xs:long" minOccurs="0"/>
+      <xs:element name="inverterCost" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterEfficiency" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterLifeYears" type="xs:int" minOccurs="0"/>
+      <xs:element name="inverterLossYear" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterManufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterManufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterName" type="xs:string" minOccurs="0"/>
+      <xs:element name="inverterRRP" type="xs:double" minOccurs="0"/>
+      <xs:element name="inverterWattage" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="insertInverterResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getInverters">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getInvertersResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:solarInverter" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
