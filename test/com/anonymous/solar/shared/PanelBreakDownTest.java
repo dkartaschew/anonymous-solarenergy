@@ -25,13 +25,32 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void direction() throws SolarPanelException{
+	public void directionAll25() throws SolarPanelException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		
-		assertTrue(breakDown.direction(), (breakDown.direction() == "sdf"));
+		assertTrue(breakDown.direction(), (breakDown.direction().compareTo("North Panels: 25.0%<br />East " + 
+				"Panels: 25.0%<br />South Panels: 25.0%<br />West Panels: 25.0%<br />") == 0));
+	}
+	
+	@Test
+	public void directionHalfHalfNS() throws SolarPanelException{
+		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
+		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
+		
+		assertTrue(breakDown.direction(), (breakDown.direction().compareTo("North Panels: 50.0%<br />East " + 
+				"Panels: 0.0%<br />South Panels: 50.0%<br />West Panels: 0.0%<br />") == 0));
+	}
+	
+	@Test
+	public void directionHalfHalfEW() throws SolarPanelException{
+		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
+		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
+		
+		assertTrue(breakDown.direction(), (breakDown.direction().compareTo("North Panels: 0.0%<br />East " + 
+				"Panels: 50.0%<br />South Panels: 0.0%<br />West Panels: 50.0%<br />") == 0));
 	}
 	
 	@Test
@@ -50,7 +69,6 @@ public class PanelBreakDownTest {
 		
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		Double wattage = breakDown.getEastPanels().get(0).getPanelType().getPanelWattage();
-		Double loss = breakDown.getEastPanels().get(0).getPanelType().getPanelLossYear();
 		
 		assertTrue("Unexcted data", (wattage == 25.0));
 	}

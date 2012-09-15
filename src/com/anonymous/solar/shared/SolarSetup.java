@@ -186,7 +186,7 @@ public class SolarSetup {
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
 		try {
-			details += panelDirectionBreakdown(10.0).direction();
+			details += panelTimeBreakdown(10.0).direction();
 		} catch (SolarPanelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -240,8 +240,13 @@ public class SolarSetup {
 	}
 	
 	
-	
-	private PanelBreakDown panelDirectionBreakdown(Double years) throws SolarPanelException{
+	/**
+	 * Calculates the quality of the panels are the specified period of time
+	 * @param years - the number of years of operation to account for
+	 * @return - A PanelBreakDown of all panels in the system.
+	 * @throws SolarPanelException
+	 */
+	private PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException{
 		PanelBreakDown breakDown = new PanelBreakDown(years);
 		
 		for(SolarPanels panelz : panels){
