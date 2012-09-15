@@ -5,6 +5,8 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.Component;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -12,6 +14,7 @@ import javax.swing.JList;
 
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.comparison.*;
 import com.anonymous.solar.shared.SolarPanel;
 
 /**
@@ -28,16 +31,17 @@ public class LoadPanel extends javax.swing.JDialog {
     public LoadPanel(AddNewPanel parent) {
         super(parent, true);
         initComponents();
-        LoadStoredPanels();
+        LoadStoredPanels(new PanelCostComparison());
         this.parent = parent;
     }
     
-    private void LoadStoredPanels(){
+    private void LoadStoredPanels(Comparator comparison){
     	SPanel SPanelSOAP = new SPanelService().getSPanelPort();
     	
 		int counter = 0;
     	
         List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
+        Collections.sort(panelData, comparison);
         
         final Object[] objs = new Object[panelData.size()];
         
@@ -297,7 +301,18 @@ public class LoadPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPanelLifetimeActionPerformed
 
     private void cmbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortByActionPerformed
-        //defg
+        String selected = (String)cmbSortBy.getSelectedItem();
+        
+        //TODO: Compare nicely
+    	if(selected == "Cost") {
+    		LoadStoredPanels(new PanelCostComparison());
+    	}else if(selected == "Wattage"){
+    		LoadStoredPanels(new PanelWattageComparison());
+    	}else if(selected == "Efficiency Loss"){
+    		LoadStoredPanels(new PanelEfficiencyComparison());
+    	}else if(selected == "Life"){
+    		LoadStoredPanels(new PanelLifeComparison());
+    	}
     }//GEN-LAST:event_cmbSortByActionPerformed
 
     private void btnLoadPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadPanelActionPerformed
@@ -312,9 +327,22 @@ public class LoadPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_lstPanelInformationValueChanged
 
     private void lstPanelInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPanelInformationMouseReleased
-        //ghi
+        SolarPanel panel = new SolarPanel();
+        panel = (SolarPanel)lstPanelInformation.getSelectedValue();
+        
+        if(panel != null){
+	        txtPanelName.setText(panel.getPanelName());
+	        txtPanelManufacturer.setText(panel.getPanelManufacturer());
+	        txtPanelManufacturerCode.setText(panel.getPanelManufacturerCode());
+	        txtPanelWattage.setText(panel.getPanelWattage().toString());
+	        txtPanelCost.setText(panel.getPanelCost().toString());
+	        txtPanelRRP.setText(panel.getPanelRRP().toString());
+	        txtPanelLifetime.setText(panel.getPanelLifeYears().toString());
+	        txtPanelEfficiencyLoss.setText(panel.getPanelLossYear().toString());
+    	}
     }//GEN-LAST:event_lstPanelInformationMouseReleased
 
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoadPanel;
     private javax.swing.JComboBox cmbSortBy;
