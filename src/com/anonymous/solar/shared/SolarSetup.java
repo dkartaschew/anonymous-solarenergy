@@ -190,6 +190,9 @@ public class SolarSetup {
 		} catch (SolarPanelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SolarPanelsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		for(SolarPanels panel : panels){
 			details += panel.getPanelType().toString(false) + "<br />";		
@@ -245,8 +248,9 @@ public class SolarSetup {
 	 * @param years - the number of years of operation to account for
 	 * @return - A PanelBreakDown of all panels in the system.
 	 * @throws SolarPanelException
+	 * @throws SolarPanelsException 
 	 */
-	public PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException{
+	public PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException, SolarPanelsException{
 		PanelBreakDown breakDown = new PanelBreakDown(years);
 		
 		for(SolarPanels panelz : panels){

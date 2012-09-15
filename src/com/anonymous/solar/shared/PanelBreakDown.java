@@ -20,7 +20,7 @@ public class PanelBreakDown {
 		return MAX_EFFICIENCY * Math.pow((1.0 - (loss / 100)), years);
 	}
 	
-	private SolarPanels degradePanel(SolarPanels oldPanel, Double years) throws SolarPanelException{
+	private SolarPanels degradePanel(SolarPanels oldPanel, Double years) throws SolarPanelException, SolarPanelsException{
 		double newEfficiency = DetermineLoss(years, oldPanel.getPanelType().getPanelLossYear());
 		double newWattage = newEfficiency / 100 * oldPanel.getPanelType().getPanelWattage();
 		SolarPanel panel = new SolarPanel();
@@ -44,7 +44,7 @@ public class PanelBreakDown {
 		return panels;
 	}
 	
-	public void AddPanels(SolarPanels panels) throws SolarPanelException{
+	public void AddPanels(SolarPanels panels) throws SolarPanelException, SolarPanelsException{
 		if (panels.getPanelDirection() < 45 || panels.getPanelDirection()  > 315){
 			AddNorthPanel(degradePanel(panels, age));
 		}

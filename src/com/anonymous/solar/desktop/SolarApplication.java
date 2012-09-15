@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import com.anonymous.solar.shared.SolarPanelsException;
+
 /**
  * Main Entry Point for Desktop Application
  * 
@@ -24,12 +26,14 @@ public class SolarApplication extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form SolarApplication
+	 * 
+	 * @throws SolarPanelsException
 	 */
 	public SolarApplication() {
 		initComponents();
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(new Wizard(this));
-		
+
 	}
 
 	/**
@@ -41,22 +45,22 @@ public class SolarApplication extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-		
+
 		menuMain = new javax.swing.JMenuBar();
 		menuFile = new javax.swing.JMenu();
 		menuFileExit = new javax.swing.JMenuItem();
 		menuHelp = new javax.swing.JMenu();
 		menuHelpAbout = new javax.swing.JMenuItem();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);				
-		
+		setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
 		// Add listener to actually handle the shutdown of the application.
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				confirmExit();
 			}
 		});
-		
+
 		setTitle("Solar Power Calculator");
 		setResizable(false);
 
@@ -101,8 +105,8 @@ public class SolarApplication extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-	
-	private void confirmExit(){
+
+	private void confirmExit() {
 		int n = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit Confirmation",
 				JOptionPane.YES_NO_OPTION);
 		if (n == JOptionPane.YES_OPTION) {
@@ -159,7 +163,9 @@ public class SolarApplication extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
+
 				new SolarApplication().setVisible(true);
+
 			}
 		});
 	}

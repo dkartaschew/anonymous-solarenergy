@@ -26,6 +26,7 @@ import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarPanels;
+import com.anonymous.solar.shared.SolarPanelsException;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -78,6 +79,7 @@ public class Wizard extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form Wizard
+	 * @throws SolarPanelsException 
 	 */
 	public Wizard(javax.swing.JFrame parent) {
 		initComponents();
@@ -91,10 +93,13 @@ public class Wizard extends javax.swing.JPanel {
 		} catch (LocationDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SolarPanelsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
-	private void LoadTestData() throws SolarPanelException, LocationDataException{
+	private void LoadTestData() throws SolarPanelException, LocationDataException, SolarPanelsException{
 		SolarPanel slow = new SolarPanel("PAN_SLOW_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 1.0, 100.0, 100.0, 30);
 		SolarPanel medium = new SolarPanel("PAN_MED_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 2.0, 100.0, 100.0, 30);
 		SolarPanel fast = new SolarPanel("PAN_FAST_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 4.0, 100.0, 100.0, 30);
