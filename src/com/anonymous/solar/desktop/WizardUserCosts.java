@@ -81,8 +81,6 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jPanelUsageGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Average Monthly Usage"));
 
         jLabelDailyAvgUsage.setText("Daily Average Usage (KWh):");
-        
-        jSpinnerMonthly.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
 
         jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
 
@@ -91,6 +89,8 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelDayTime.setText("Day Time Hourly Usage (KWh):");
 
         jLabel1.setText("Monthly Usage (KWh)");
+
+        jSpinnerMonthly.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -217,12 +217,10 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,10 +244,10 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     private javax.swing.JLabel jLabelUsage2;
     private javax.swing.JPanel jPanelTariffGroup;
     private javax.swing.JPanel jPanelUsageGroup;
-    private javax.swing.JSpinner jSpinnerMonthly;
     private javax.swing.JSpinner jSpinnerDailyAverageUsage;
     private javax.swing.JSpinner jSpinnerDayTimeHourlyUsage;
     private javax.swing.JSpinner jSpinnerFeedInFee;
+    private javax.swing.JSpinner jSpinnerMonthly;
     private javax.swing.JSpinner jSpinnerMonthlyCostTariff1;
     private javax.swing.JSpinner jSpinnerMonthlyCostTariff2;
     private javax.swing.JSpinner jSpinnerTariff11;
@@ -270,7 +268,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     	CustomerData data;
 		if (global != null) {
 			data = global.getCustomerData();
-			jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
+                        jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
 			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
 			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
 			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
@@ -297,7 +295,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
     /**
      * Callback method used by the parent panel to notify this panel that we
-     * have 	requested a move away from this panel.
+     * have requested a move away from this panel.
      *
      * @return true is ok to move.
      */
@@ -324,7 +322,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 		if (global != null) {
 			
 			// Store the name and description fields.
-			Double value = (Double) jSpinnerMonthly.getValue();
+                        Double value = (Double) jSpinnerMonthly.getValue();
 			data.setMonthlyAverageUsage(value);
 			data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
 			data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());

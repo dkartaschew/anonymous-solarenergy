@@ -466,7 +466,7 @@ public class AddNewPanel extends javax.swing.JDialog {
      * Load the dialog with the details of a specific panel
      * @param oldPanels 
      */
-    private void LoadPanel(SolarPanel oldPanel){
+    protected void LoadPanel(SolarPanel oldPanel){
     	
     	if(oldPanel != null){
 	        txtName.setText(oldPanel.getPanelName());

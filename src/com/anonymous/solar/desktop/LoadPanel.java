@@ -4,7 +4,11 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Component;
 import java.util.List;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
@@ -24,19 +28,32 @@ public class LoadPanel extends javax.swing.JDialog {
     public LoadPanel(AddNewPanel parent) {
         super(parent, true);
         initComponents();
+        LoadStoredPanels();
         this.parent = parent;
     }
     
     private void LoadStoredPanels(){
     	SPanel SPanelSOAP = new SPanelService().getSPanelPort();
-    	//lstPanelInformation
-		
+    	
+		int counter = 0;
+    	
         List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
-
-       // lstPanelInformation.add("Select a panel");
         
-       // for (SolarPanel pan : panelData) {
-               // lstPanelInformation.add
+        final Object[] objs = new Object[panelData.size()];
+        
+        
+        for (SolarPanel pan : panelData) {
+                objs[counter] = pan;
+                counter++;
+        }
+        
+        
+        lstPanelInformation.setModel(new javax.swing.AbstractListModel() {
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return objs.length; }
+            public Object getElementAt(int i) { return objs[i]; }
+        });
+        
     }
 
     /**
@@ -280,11 +297,14 @@ public class LoadPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPanelLifetimeActionPerformed
 
     private void cmbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortByActionPerformed
-        //def
+        //defg
     }//GEN-LAST:event_cmbSortByActionPerformed
 
     private void btnLoadPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadPanelActionPerformed
-        //parent.lo
+        SolarPanel panel = (SolarPanel) lstPanelInformation.getSelectedValue();
+        parent.LoadPanel(panel);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_btnLoadPanelActionPerformed
 
     private void lstPanelInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPanelInformationValueChanged
