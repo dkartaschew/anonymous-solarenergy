@@ -229,26 +229,26 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 				output += "<br />In 20 years time your inverter will be at " +
 							global.DetermineInverterLoss(20) + 
 							"% efficiency";
-				output += "<br />In 20 years time your panels will be at:";
-				PanelBreakDown breakDown = global.panelTimeBreakdown(20.0);
+				output += "<br /><br />In 20 years time your panels will be at:";
+				PanelBreakDown breakDown = global.panelTimeBreakdown();
 				for(SolarPanels panls : breakDown.getNorthPanels()){
-					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
-				+ panls.getPanelType().getPanelWattage() + "<br />";
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
+				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
 					
 				}
 				for(SolarPanels panls : breakDown.getEastPanels()){
-					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
-				+ panls.getPanelType().getPanelWattage() + "<br />";
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
+				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
 					
 				}
 				for(SolarPanels panls : breakDown.getSouthPanels()){
-					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
-				+ panls.getPanelType().getPanelWattage() + "<br />";
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
+				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
 					
 				}
 				for(SolarPanels panls : breakDown.getWestPanels()){
-					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
-				+ panls.getPanelType().getPanelWattage() + "<br />";
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
+				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
 					
 				}
 				

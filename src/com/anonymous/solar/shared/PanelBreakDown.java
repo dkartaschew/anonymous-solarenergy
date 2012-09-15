@@ -9,53 +9,22 @@ public class PanelBreakDown {
 	ArrayList<SolarPanels> eastPanels = new ArrayList<SolarPanels>();
 	ArrayList<SolarPanels> southPanels = new ArrayList<SolarPanels>();
 	ArrayList<SolarPanels> westPanels = new ArrayList<SolarPanels>();
-	Double age;
 	
-	public PanelBreakDown(Double age){
-		this.age = age;
-	}
-	
-	private double DetermineLoss(double years, double loss){	
-		final int MAX_EFFICIENCY = 100;
-		return MAX_EFFICIENCY * Math.pow((1.0 - (loss / 100)), years);
-	}
-	
-	private SolarPanels degradePanel(SolarPanels oldPanel, Double years) throws SolarPanelException, SolarPanelsException{
-		double newEfficiency = DetermineLoss(years, oldPanel.getPanelType().getPanelLossYear());
-		double newWattage = newEfficiency / 100 * oldPanel.getPanelType().getPanelWattage();
-		SolarPanel panel = new SolarPanel();
-		SolarPanels panels;
-		
-		//Set Panel
-		panel.setPanelCost(oldPanel.getPanelType().getPanelCost());
-		panel.setPanelLifeYears(oldPanel.getPanelType().getPanelLifeYears());
-		panel.setPanelLossYear(oldPanel.getPanelType().getPanelLossYear());
-		panel.setPanelManufacturer(oldPanel.getPanelType().getPanelManufacturer());
-		panel.setPanelManufacturerCode(oldPanel.getPanelType().getPanelManufacturerCode());
-		panel.setPanelName(oldPanel.getPanelType().getPanelName());
-		panel.setPanelRRP(oldPanel.getPanelType().getPanelRRP());
-		panel.setPanelWattage(newWattage);
-		
-		//Set Panels
-		panels = new SolarPanels(panel, oldPanel.getPanelCount(), oldPanel.getPanelDirection(),
-				oldPanel.getPanelAzimuth());
-		
-		//Return
-		return panels;
+	public PanelBreakDown(){
 	}
 	
 	public void AddPanels(SolarPanels panels) throws SolarPanelException, SolarPanelsException{
 		if (panels.getPanelDirection() < 45 || panels.getPanelDirection()  > 315){
-			AddNorthPanel(degradePanel(panels, age));
+			AddNorthPanel(panels);
 		}
 		else if(panels.getPanelDirection()  > 45 && panels.getPanelDirection()  < 135){
-			AddEastPanel(degradePanel(panels, age));
+			AddEastPanel(panels);
 		}
 		else if(panels.getPanelDirection()  > 135 && panels.getPanelDirection()  < 225){
-			AddSouthPanel(degradePanel(panels, age));
+			AddSouthPanel(panels);
 		}
 		else if(panels.getPanelDirection()  > 225 && panels.getPanelDirection()  < 315){
-			AddWestPanel(degradePanel(panels, age));
+			AddWestPanel(panels);
 		}
 	}
 	

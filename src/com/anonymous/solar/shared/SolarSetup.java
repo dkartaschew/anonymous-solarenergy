@@ -186,7 +186,7 @@ public class SolarSetup {
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
 		try {
-			details += panelTimeBreakdown(10.0).direction();
+			details += panelTimeBreakdown().direction();
 		} catch (SolarPanelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -250,8 +250,8 @@ public class SolarSetup {
 	 * @throws SolarPanelException
 	 * @throws SolarPanelsException 
 	 */
-	public PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException, SolarPanelsException{
-		PanelBreakDown breakDown = new PanelBreakDown(years);
+	public PanelBreakDown panelTimeBreakdown() throws SolarPanelException, SolarPanelsException{
+		PanelBreakDown breakDown = new PanelBreakDown();
 		
 		for(SolarPanels panelz : panels){
 			breakDown.AddPanels(panelz);		
