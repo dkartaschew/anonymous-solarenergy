@@ -9,6 +9,8 @@ import org.junit.Test;
 public class SolarPanelTest {
 
 	private SolarPanel instance;
+	
+	//TODO: TestToString()
 
 	@Before
 	public void setUp() throws SolarPanelException {
