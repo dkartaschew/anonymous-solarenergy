@@ -62,6 +62,8 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jSpinnerDailyAverageUsage = new javax.swing.JSpinner();
         jSpinnerDayTimeHourlyUsage = new javax.swing.JSpinner();
         jLabelDayTime = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinnerMonthly = new javax.swing.JSpinner();
         jPanelTariffGroup = new javax.swing.JPanel();
         jSpinnerTariff11 = new javax.swing.JSpinner();
         jLabelTariff11 = new javax.swing.JLabel();
@@ -79,14 +81,16 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jPanelUsageGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Average Monthly Usage"));
 
         jLabelDailyAvgUsage.setText("Daily Average Usage (KWh):");
+        
+        jSpinnerMonthly.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
 
         jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
-        jSpinnerDailyAverageUsage.setToolTipText("Enter the estimated usage of kWh per day ");
 
         jSpinnerDayTimeHourlyUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 24.0d, 1.0d));
-        jSpinnerDayTimeHourlyUsage.setToolTipText("Enter the estimated usage of kWh per hour");
 
         jLabelDayTime.setText("Day Time Hourly Usage (KWh):");
+
+        jLabel1.setText("Monthly Usage (KWh)");
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -96,12 +100,14 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
                 .addContainerGap()
                 .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDailyAvgUsage)
-                    .addComponent(jLabelDayTime))
+                    .addComponent(jLabelDayTime)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinnerDayTimeHourlyUsage, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerDailyAverageUsage, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSpinnerDayTimeHourlyUsage, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jSpinnerDailyAverageUsage, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jSpinnerMonthly))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanelUsageGroupLayout.setVerticalGroup(
             jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,18 +120,20 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
                 .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinnerDayTimeHourlyUsage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDayTime))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jSpinnerMonthly, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelTariffGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Tariff Rates"));
 
         jSpinnerTariff11.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
-        jSpinnerTariff11.setToolTipText("Enter the cost of per kWh for tariff 11");
 
         jLabelTariff11.setText("Tariff 11 Fee");
 
         jSpinnerTariff33.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 250.0d, 0.1d));
-        jSpinnerTariff33.setToolTipText("Enter the cost per kWh for tariff 13");
 
         jLabelTariff33.setText("Tariff 33 Fee");
 
@@ -134,18 +142,14 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabelUsage2.setText("Monthly Tariff 33 Cost:");
 
         jSpinnerMonthlyCostTariff1.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-        jSpinnerMonthlyCostTariff1.setToolTipText("Enter the monthly fee for tariff 11");
-        
+
         jSpinnerMonthlyCostTariff2.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
-        jSpinnerMonthlyCostTariff2.setToolTipText("Enter the monthly fee for tariff 13");
-        
+
         jSpinnerFeedInFee.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.0d, 25.0d, 0.1d));
-        jSpinnerFeedInFee.setToolTipText("Enter the feed in fee per month");
 
         jLabelFeedInFee.setText("Feed in Fee");
 
         jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 500.0d, 1.0d));
-        jSpinnerTariffIncrease.setToolTipText("Enter the estimated yearly increase in tariff costs");
 
         jLabelAnnualTariffIncrease.setText("Annual Tariff Increase");
 
@@ -161,24 +165,27 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
                     .addComponent(jLabelFeedInFee))
                 .addGap(26, 26, 26)
                 .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinnerFeedInFee, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jSpinnerFeedInFee, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(jSpinnerMonthlyCostTariff1)
                     .addComponent(jSpinnerMonthlyCostTariff2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTariffGroupLayout.createSequentialGroup()
-                        .addComponent(jLabelTariff11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinnerTariff11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTariffGroupLayout.createSequentialGroup()
-                        .addComponent(jLabelTariff33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTariffGroupLayout.createSequentialGroup()
+                    .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
+                                .addComponent(jLabelTariff11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSpinnerTariff11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
+                                .addComponent(jLabelTariff33)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelAnnualTariffIncrease)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTariffGroupLayout.setVerticalGroup(
             jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,22 +217,25 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAnnualTariffIncrease;
     private javax.swing.JLabel jLabelDailyAvgUsage;
     private javax.swing.JLabel jLabelDayTime;
@@ -236,6 +246,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     private javax.swing.JLabel jLabelUsage2;
     private javax.swing.JPanel jPanelTariffGroup;
     private javax.swing.JPanel jPanelUsageGroup;
+    private javax.swing.JSpinner jSpinnerMonthly;
     private javax.swing.JSpinner jSpinnerDailyAverageUsage;
     private javax.swing.JSpinner jSpinnerDayTimeHourlyUsage;
     private javax.swing.JSpinner jSpinnerFeedInFee;
@@ -259,6 +270,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     	CustomerData data;
 		if (global != null) {
 			data = global.getCustomerData();
+			jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
 			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
 			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
 			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
@@ -285,7 +297,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
     /**
      * Callback method used by the parent panel to notify this panel that we
-     * have requested a move away from this panel.
+     * have 	requested a move away from this panel.
      *
      * @return true is ok to move.
      */
@@ -312,6 +324,8 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 		if (global != null) {
 			
 			// Store the name and description fields.
+			Double value = (Double) jSpinnerMonthly.getValue();
+			data.setMonthlyAverageUsage(value);
 			data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
 			data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
 			data.setTariff11Cost((Double) jSpinnerMonthlyCostTariff1.getValue());

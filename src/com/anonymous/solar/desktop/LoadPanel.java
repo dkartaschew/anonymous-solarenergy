@@ -284,7 +284,7 @@ public class LoadPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbSortByActionPerformed
 
     private void btnLoadPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadPanelActionPerformed
-        parent.lo
+        //parent.lo
     }//GEN-LAST:event_btnLoadPanelActionPerformed
 
     private void lstPanelInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPanelInformationValueChanged
