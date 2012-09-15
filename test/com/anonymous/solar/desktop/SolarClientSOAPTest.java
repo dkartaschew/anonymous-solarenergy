@@ -13,7 +13,7 @@ import com.anonymous.solar.client.LocationInformationService;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.LocationDataException;
 
-public class SolarClientSOAPTests {
+public class SolarClientSOAPTest {
 
 	@Before
 	public void setUp() throws Exception {

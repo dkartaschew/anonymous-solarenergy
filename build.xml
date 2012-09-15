@@ -33,7 +33,7 @@
 
 	<target name="test" depends="compileDesktop, compileWAR, datanucleusenhance">
 		<mkdir dir="test-classes" />
-		<javac srcdir="test" destdir="test-classes" classpathref="project.classpath">
+		<javac srcdir="test" destdir="test-classes" classpathref="project.classpath" includeantruntime="false">
 			<classpath>
 				<pathelement location="lib/junit.jar" />
 				<pathelement location="lib/JMapViewer.jar" />
@@ -124,7 +124,7 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac srcdir="src" destdir="war/WEB-INF/classes" classpathref="project.classpath" debug="on" />
+		<javac srcdir="src" destdir="war/WEB-INF/classes" classpathref="project.classpath" debug="on" includeantruntime="false" />
 		<delete dir="war/WEB-INF/classes/com/anonymous/solar/desktop/" quiet="true" />
 	</target>
 
@@ -135,7 +135,7 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac srcdir="src" destdir="desktop" classpathref="project.classpath" debug="on" />
+		<javac srcdir="src" destdir="desktop" classpathref="project.classpath" debug="on" includeantruntime="false" />
 		<delete dir="desktop/com/anonymous/solar/server/" quiet="true" />
 		<delete file="desktop/log4j.properties" quiet="true" />
 		<delete dir="desktop/META-INF" quiet="true" />
@@ -151,7 +151,7 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac srcdir="src" destdir="android" classpathref="project.classpath" debug="on" />
+		<javac srcdir="src" destdir="android" classpathref="project.classpath" debug="on" includeantruntime="false"/>
 		<delete dir="android/com/anonymous/solar/server/" quiet="true" />
 		<delete dir="android/com/anonymous/solar/desktop/" quiet="true" />
 		<delete file="android/log4j.properties" quiet="true" />
