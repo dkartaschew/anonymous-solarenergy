@@ -7,6 +7,7 @@ package com.anonymous.solar.desktop;
 //import com.anonymous.solar.shared.SolarPanel;
 
 import java.awt.Color;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -14,8 +15,8 @@ import javax.swing.JOptionPane;
 
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
-//import com.anonymous.solar.client.SPanel;
-//import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.comparison.*;
+
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarPanels;
@@ -101,6 +102,8 @@ public class AddNewPanel extends javax.swing.JDialog {
 		jComboBox1.removeAllItems();
 
 		List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
+		
+		Collections.sort(panelData, new PanelLifeComparison());
 
 		jComboBox1.addItem("Select a panel");
 

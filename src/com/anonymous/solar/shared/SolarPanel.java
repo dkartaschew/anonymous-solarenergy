@@ -476,7 +476,11 @@ public class SolarPanel {
 	}*/
 	@Override
 	public String toString(){
-		return getPanelName() + " - Cost: $" + getPanelCost() + " - Life: " + getPanelLifeYears() + " years";
+		return getPanelName() + 
+				" - Cost: $" + getPanelCost() + 
+				" - Life: " + getPanelLifeYears() + " years" + 
+				" - Wattage: " + getPanelWattage() + "W" + 
+				" - Efficiency Loss: " + panelLossYear + "%";
 	}
 	
 	public String toString(boolean htmlTags){
