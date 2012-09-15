@@ -496,6 +496,10 @@ public class LocationDialog extends javax.swing.JDialog {
 		AddMarker(new Coordinate(locData.getLatitude(), locData.getLongitude()));
 	}// GEN-LAST:event_LocationItemStateChange
 
+	/**
+	 * Event Handler for saving location data to GAE
+	 * @param evt
+	 */
 	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {
 		LocationData locData = new LocationData();
 		try {
@@ -518,7 +522,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		try {
 			LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
 			Long result = locationSOAP.storeLocationInformation(locData);
-			System.out.printf("Location Item stored: key = %d \n", result);
+			//System.out.printf("Location Item stored: key = %d \n", result);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
