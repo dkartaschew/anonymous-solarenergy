@@ -19,9 +19,13 @@ import com.anonymous.solar.client.SInverter;
 import com.anonymous.solar.client.SInverterService;
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.LocationDataException;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.SolarPanelException;
+import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -79,6 +83,49 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
+		try {
+			LoadTestData();
+		} catch (SolarPanelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LocationDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void LoadTestData() throws SolarPanelException, LocationDataException{
+		SolarPanel slow = new SolarPanel("PAN_SLOW_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 1.0, 100.0, 100.0, 30);
+		SolarPanel medium = new SolarPanel("PAN_MED_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 2.0, 100.0, 100.0, 30);
+		SolarPanel fast = new SolarPanel("PAN_FAST_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 4.0, 100.0, 100.0, 30);
+		ArrayList<Double> monthData = new ArrayList<Double>();
+		for(Double i = 0.0; i < 12; i++){
+			monthData.add(i);
+		}
+		
+		//String and Double Data
+		setup.setSetupName("DEFAULT_TITLE");
+		setup.setSetupDescription("DEFAULT_DESCRIPTION");
+		setup.setWireEfficiency(15.0);
+		setup.setWireLength(15.0);
+		
+		//Panel Data
+		List<SolarPanels> panels = setup.getPanels();
+		panels.add(new SolarPanels(slow, 5, 0.0, 5.0));//NORTH
+		panels.add(new SolarPanels(medium, 5, 90.0, 5.0));//EAST
+		panels.add(new SolarPanels(fast, 5, 180.0, 5.0));//SOUTH
+		
+		//Customer Data
+		CustomerData customer = new CustomerData(11.0, 22.0, 33.0, 5.0, 0.1, 7.0, 0.2, 10.0, 1.0);
+		setup.setCustomerData(customer);
+		
+		//Location Data
+		LocationData location = new LocationData(12.314890, 23.8765430, "DEFAULT_NAME", monthData, monthData);
+		setup.setLocation(location);
+		
+		//Inverter Data
+		SolarInverter invert = new SolarInverter("DEF_TITLE", "D_MANU", "D_MANU_CODE", 100.0, 5.0, 100.0, 100.0, 100.0, 30);
+		setup.setInverter(invert);
 	}
 
 	/**
@@ -267,7 +314,7 @@ public class Wizard extends javax.swing.JPanel {
 				changePanel = ((WizardPanel) panels.get(wizardIndex)).callbackDispose(true);
 			} catch (Exception e) {
 			}
-			if (true) {
+			if (changePanel) {
 				setWizardPanel(++wizardIndex);
 				setSideBarButton(wizardIndex);
 			}

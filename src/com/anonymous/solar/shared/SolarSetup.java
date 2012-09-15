@@ -246,7 +246,7 @@ public class SolarSetup {
 	 * @return - A PanelBreakDown of all panels in the system.
 	 * @throws SolarPanelException
 	 */
-	private PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException{
+	public PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException{
 		PanelBreakDown breakDown = new PanelBreakDown(years);
 		
 		for(SolarPanels panelz : panels){

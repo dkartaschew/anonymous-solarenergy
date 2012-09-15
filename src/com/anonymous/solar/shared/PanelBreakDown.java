@@ -46,16 +46,16 @@ public class PanelBreakDown {
 	
 	public void AddPanels(SolarPanels panels) throws SolarPanelException{
 		if (panels.getPanelDirection() < 45 || panels.getPanelDirection()  > 315){
-			AddNorthPanel(panels);
+			AddNorthPanel(degradePanel(panels, age));
 		}
 		else if(panels.getPanelDirection()  > 45 && panels.getPanelDirection()  < 135){
 			AddEastPanel(degradePanel(panels, age));
 		}
 		else if(panels.getPanelDirection()  > 135 && panels.getPanelDirection()  < 225){
-			AddSouthPanel(panels);
+			AddSouthPanel(degradePanel(panels, age));
 		}
 		else if(panels.getPanelDirection()  > 225 && panels.getPanelDirection()  < 315){
-			AddWestPanel(panels);
+			AddWestPanel(degradePanel(panels, age));
 		}
 	}
 	

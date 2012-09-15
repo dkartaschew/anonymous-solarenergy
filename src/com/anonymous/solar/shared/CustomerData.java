@@ -30,6 +30,21 @@ public class CustomerData {
 		annualTariffIncrease = INITIAL_VALUES;
 	}
 	
+	public CustomerData(Double daily, Double hourly, Double monthly, Double tar11C, Double tar11F,
+			Double tar13C, Double tar13F, Double feedFee, Double tarIncrease){
+		dailyAverageUsage = daily;
+		hourlyAverageUsage = hourly;
+		monthlyAverageUsage = monthly;
+		
+		tariff11Cost = tar11C;
+		tariff11Fee = tar11F;
+		tariff13Cost = tar13C;
+		tariff13Fee = tar13F;
+		
+		feedInFee = feedFee;
+		annualTariffIncrease = tarIncrease;
+	}
+	
 	
 	/********************************************************
 	 * GETTERS
