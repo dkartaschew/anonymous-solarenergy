@@ -5,17 +5,13 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.Color;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.client.SInverter;
 import com.anonymous.solar.client.SInverterService;
-import com.anonymous.solar.client.SPanel;
-import com.anonymous.solar.client.SPanelService;
 import com.anonymous.solar.shared.SolarInverter;
-import com.anonymous.solar.shared.SolarPanel;
 
 /**
  *
@@ -32,19 +28,6 @@ public class AddNewInverter extends javax.swing.JDialog {
         initComponents();
         this.iParent = parent;
         LoadInverter(parent.inverter);
-        LoadInverters();
-        setTitle("Inverter Information");
-    }
-    
-    private void LoadInverters(){
-	    SInverter SInverterSOAP = new SInverterService().getSInverterPort();
-	    		  
-		List<SolarInverter> panelData = (List<SolarInverter>) SInverterSOAP.getInverters();
-		 
-		jComboBox1.addItem("Select a stored panel or design your own");
-		for (SolarInverter inv : panelData) { 
-			jComboBox1.addItem(inv);	
-		} 	 
     }
     
     /**
@@ -77,8 +60,6 @@ public class AddNewInverter extends javax.swing.JDialog {
         lblManufacturer = new javax.swing.JLabel();
         jSpinnerCost = new javax.swing.JSpinner();
         jSpinnerRRP = new javax.swing.JSpinner();
-        jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
         jButtonSave = new javax.swing.JButton();
         jPanelDataGroup1 = new javax.swing.JPanel();
         lblEfficiency1 = new javax.swing.JLabel();
@@ -91,6 +72,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         jSpinnerEffLossYr = new javax.swing.JSpinner();
         btnCancel = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
+        jButtonLoadInverter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -162,7 +144,7 @@ public class AddNewInverter extends javax.swing.JDialog {
                                 .addComponent(jSpinnerRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelDataGroupLayout.createSequentialGroup()
                                 .addComponent(lblCost)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblRRP)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,32 +152,7 @@ public class AddNewInverter extends javax.swing.JDialog {
                             .addComponent(lblCode)))))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Stored Inverters"));
-
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jButtonSave.setText("Save Panel");
+        jButtonSave.setText("Save Inverter");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
@@ -279,6 +236,13 @@ public class AddNewInverter extends javax.swing.JDialog {
             }
         });
 
+        jButtonLoadInverter.setText("Load Inverter");
+        jButtonLoadInverter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoadInverterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,68 +250,112 @@ public class AddNewInverter extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonSave)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSubmit))
                             .addComponent(jPanelDataGroup1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelDataGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLoadInverter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancel)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnSubmit)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDataGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDataGroup1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSubmit)
-                        .addComponent(btnCancel))
-                    .addComponent(jButtonSave))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnSubmit)
+                    .addComponent(jButtonSave)
+                    .addComponent(jButtonLoadInverter))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private SolarInverter getVerifiedInverter() throws Exception{
+        SolarInverter inverter = new SolarInverter();
+        boolean error = false;
+        javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+        returnToWhite();
+       
+	   jSpinnerCost.setBackground(Color.red);
+	   if(txtName.getText().equals("") == true){
+	        error = true;
+	        txtName.setBackground(Color.red);
+	        }
+	           if(txtManufacturer.getText().equals("") == true){
+	        error = true;
+	            txtManufacturer.setBackground(Color.red);
+	           }
+	           if(txtCode.getText().equals("") == true){
+	        error = true;
+	            txtCode.setBackground(Color.red);
+	           }
+	        if((Double)jSpinnerCost.getModel().getValue() == 0){
+	        error = true;
+	        jSpinnerCost.setBorder(borderError);
+	           }
+	        if((Double)jSpinnerRRP.getModel().getValue() == 0){
+	        error = true;
+	        jSpinnerRRP.setBorder(borderError);
+	        }
+	        if((Double)jSpinnerCost.getModel().getValue() == 0){
+	        error = true;
+	        jSpinnerCost.setBorder(borderError);
+	        }
+	        if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
+	        error = true;
+	        jSpinnerCost.setBorder(borderError);
+	        }
+	       
+	       if(error){
+	        throw new Exception();
+	       }
+	
+		   inverter.setInverterName(txtName.getText());
+		   inverter.setInverterManufacturer(txtManufacturer.getText());
+		   inverter.setInverterManufacturerCode(txtCode.getText());
+		           inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+		   inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
+		   inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
+		   inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
+		   inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
+		   inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
+		   return inverter;
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-    	Object item = jComboBox1.getSelectedItem();
-
-		if (item.getClass() == SolarInverter.class) {
-			SolarInverter inverter = (SolarInverter) item;
-			LoadInverter(inverter);
-		}
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }		
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
     	SolarInverter inverter;
-		try {
-			inverter = getVerifiedInverter();
-			SInverter SInverterSOAP = new SInverterService().getSInverterPort();
-			boolean succ = SInverterSOAP.insertInverter(inverter);
+    	try {
+    	inverter = getVerifiedInverter();
+    	SInverter SInverterSOAP = new SInverterService().getSInverterPort();
+    	boolean succ = SInverterSOAP.insertInverter(inverter);
 
-			if (succ) {
-				JOptionPane.showMessageDialog(new JFrame(), "Inverter Saved");
-			} else {
-				JOptionPane.showMessageDialog(new JFrame(),
-						"The inverter can not be saved at this point");
-			}
+    	if (succ) {
+    	JOptionPane.showMessageDialog(new JFrame(), "Inverter Saved");
+    	} else {
+    	JOptionPane.showMessageDialog(new JFrame(),
+    	"The inverter can not be saved at this point");
+    	}
 
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(new JFrame(),
-					"This is an invalid inverter!");
-		}
+    	} catch (Exception e) {
+    	JOptionPane.showMessageDialog(new JFrame(),
+    	"This is an invalid inverter!");
+    	}
+    	
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -361,6 +369,11 @@ public class AddNewInverter extends javax.swing.JDialog {
             doClose();
     	}
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void jButtonLoadInverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadInverterActionPerformed
+        LoadInverter webInverter = new LoadInverter(this);
+        webInverter.setVisible(true);
+    }//GEN-LAST:event_jButtonLoadInverterActionPerformed
     
     private void doClose() {
         setVisible(false);
@@ -398,75 +411,22 @@ private void LoadInverter(SolarInverter oldInverter){
         jSpinnerEfficiency.setBorder(clear);
     }
     
-    private SolarInverter getVerifiedInverter() throws Exception{
-    	SolarInverter inverter = new SolarInverter();
-    	boolean error = false;
-    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
-    	returnToWhite();
-    	
-		jSpinnerCost.setBackground(Color.red);
-		if(txtName.getText().equals("") == true){
-    		error = true;
-    		txtName.setBackground(Color.red);
-    	}
-        if(txtManufacturer.getText().equals("") == true){
-    		error = true;
-        	txtManufacturer.setBackground(Color.red);
-        }
-        if(txtCode.getText().equals("") == true){
-    		error = true;
-        	txtCode.setBackground(Color.red);
-        } 
-    	if((Double)jSpinnerCost.getModel().getValue() == 0){
-    		error = true;
-    		jSpinnerCost.setBorder(borderError);
-        }
-    	if((Double)jSpinnerRRP.getModel().getValue() == 0){
-    		error = true;
-    		jSpinnerRRP.setBorder(borderError);
-    	}
-    	if((Double)jSpinnerCost.getModel().getValue() == 0){
-    		error = true;
-    		jSpinnerCost.setBorder(borderError);
-    	}
-    	if((Double)jSpinnerCost.getModel().getValue() > (Double)jSpinnerRRP.getModel().getValue()){
-    		error = true;
-    		jSpinnerCost.setBorder(borderError);
-    	}
-    	
-        if(error){
-        	throw new Exception();
-        }
-			
-		inverter.setInverterName(txtName.getText());
-		inverter.setInverterManufacturer(txtManufacturer.getText());
-		inverter.setInverterManufacturerCode(txtCode.getText());
-        inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
-		inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
-		inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
-		inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
-		inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
-		inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
-		return inverter;
-
-    }
-    
     private boolean submitInverterData(){
-    	inverter = new SolarInverter();
-    	boolean error = false;
-    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
-    	returnToWhite();
-    	
-		try {
+		inverter = new SolarInverter();
+	    boolean error = false;
+	    javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+	    returnToWhite();
+	   
+	   try {
 	
-			inverter = getVerifiedInverter();
-			this.iParent.inverter = inverter;
-			return true;
-
-		} catch (Exception e) {
-			// Oops, something went wrong, let the client know.
-			return false;
-		}
+	   inverter = getVerifiedInverter();
+	   this.iParent.inverter = inverter;
+	   return true;
+	
+	   } catch (Exception e) {
+	   // Oops, something went wrong, let the client know.
+	   return false;
+	   }
     }
     
     
@@ -516,9 +476,8 @@ private void LoadInverter(SolarInverter oldInverter){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton jButtonLoadInverter;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelDataGroup;
     private javax.swing.JPanel jPanelDataGroup1;
     private javax.swing.JSpinner jSpinnerCost;
