@@ -179,13 +179,18 @@ public class SolarSetup {
 		details += setupDescription + "<br /><br />";
 		
 		// Location information
-		details += "<b>Location:</b></ br>";
+		details += "<b>Location:</b><br />";
 		details += locationInformation.toString(false) + "<br />";	
 		
 		//Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
-		details += panelDirectionBreakdown();
+		try {
+			details += panelTimeBreakdown(10.0).direction();
+		} catch (SolarPanelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(SolarPanels panel : panels){
 			details += panel.getPanelType().toString(false) + "<br />";		
 		}
@@ -214,7 +219,6 @@ public class SolarSetup {
 		
 		double currentEff = inverter.getInverterEfficiency();
 		double loss = inverter.getInverterLossYear() / 100;
-		double wattage = inverter.getInverterWattage();
 		
 		return currentEff * Math.pow((1 - loss), years);
 	}
@@ -235,37 +239,20 @@ public class SolarSetup {
 		return  first / second;
 	}
 	
-	private String panelDirectionBreakdown(){
-		double north = 0, east = 0, south = 0, west = 0;
-		double total = 0;
-		int count = 0;
-		String breakdown = "";
-			
-		double direction = 0.0;
+	
+	/**
+	 * Calculates the quality of the panels are the specified period of time
+	 * @param years - the number of years of operation to account for
+	 * @return - A PanelBreakDown of all panels in the system.
+	 * @throws SolarPanelException
+	 */
+	private PanelBreakDown panelTimeBreakdown(Double years) throws SolarPanelException{
+		PanelBreakDown breakDown = new PanelBreakDown(years);
 		
-		for(SolarPanels panel : panels){
-			count = panel.getPanelCount();	
-			direction = panel.getPanelDirection();
-			
-			if (direction < 45 || direction > 315){
-				north += count;
-			}
-			else if(direction > 45 && direction < 135){
-				east += count;
-			}
-			else if(direction > 135 && direction < 225){
-				south += count;
-			}
-			else if(direction > 225 && direction < 315){
-				west += count;
-			}
-		}
-		total = north + east + south + west;
-		breakdown += "North Panels: " + (north / total) * 100 + "%<br />";
-		breakdown += "East Panels: " + (east / total) * 100 + "%<br />";
-		breakdown += "South Panels: " + (south / total) * 100 + "%<br />";
-		breakdown += "West Panels: " + (west / total) * 100 + "%<br />";
-		return breakdown;
+		for(SolarPanels panelz : panels){
+			breakDown.AddPanels(panelz);		
+		}		
+		return breakDown;
 	}
 
 	/**

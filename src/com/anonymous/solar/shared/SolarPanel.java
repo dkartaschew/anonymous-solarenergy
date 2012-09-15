@@ -483,6 +483,39 @@ public class SolarPanel {
 				" - Efficiency Loss: " + panelLossYear + "%";
 	}
 	
+	/**
+	 * The method will get the panel efficiency at the specified number of years after use
+	 * @param years - the number of years to get data for
+	 * @return double representing the new panel efficiency
+	 * @throws Exception 
+	 */
+	public double DeterminePanelLoss(double years) throws Exception{	
+		if(years < 0){
+			throw new Exception();
+		}
+		
+		double currentEff = 100;
+		double loss = this.panelLossYear / 100;
+		
+		return currentEff * Math.pow((1 - loss), years);
+	}
+	
+	/**
+	 * Determines how long it will take for the inverter to reach a specified efficiency
+	 * @param efficiency - the efficiency the panel should reach (in percent)
+	 * @return A double representing time
+	 */
+	public double LengthUntilPanel(double newEff){
+		
+		double currEff = 100; //Percent
+		double loss = panelLossYear / 100; //in decimal
+		
+		double top = Math.log10(newEff / currEff);
+		double bottom =  Math.log10(1 - loss);
+		
+		return  top / bottom;
+	}
+	
 	public String toString(boolean htmlTags){
 		if(htmlTags){
 			return "<html><b>Name: " + panelName + "</b><br />"
