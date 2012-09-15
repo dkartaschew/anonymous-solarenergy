@@ -4,8 +4,7 @@
 package com.anonymous.solar.shared;
 
 /**
- * Class to hold and work on Solar Installation components, namely inverters
- * themselves.
+ * Class to hold a collection of Solar Panels. themselves.
  * 
  * @author 07627505 Darran Kartaschew
  * @version 1.0
@@ -17,14 +16,26 @@ public class SolarPanels {
 	private Double panelDirection = 0.00;
 	private Double panelAzimuth = 0.00;
 
+	/**
+	 * Default constructor
+	 */
 	public SolarPanels() {
 	}
 
-	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth) {
-		this.panelType = panelType;
-		this.panelCount = panelCount;
-		this.panelDirection = panelDirection;
-		this.panelAzimuth = panelAzimuth;
+	/**
+	 * Default Constructor.
+	 * @param panelType The type of panel to be part of this collection of panels
+	 * @param panelCount The number of panels in the collection
+	 * @param panelDirection The direction of the panels in the collection (0 - 360)
+	 * @param panelAzimuth The azimuth of the panels in the collection (0 - 90)
+	 * @throws SolarPanelsException
+	 */
+	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth)
+			throws SolarPanelsException {
+		setPanelType(panelType);
+		setPanelCount(panelCount);
+		setPanelDirection(panelDirection);
+		setPanelAzimuth(panelAzimuth);
 	}
 
 	/*
@@ -103,6 +114,8 @@ public class SolarPanels {
 	}
 
 	/**
+	 * Getter to return the type of panels that this group of panels holds.
+	 * 
 	 * @return the panelType
 	 */
 	public SolarPanel getPanelType() {
@@ -110,14 +123,24 @@ public class SolarPanels {
 	}
 
 	/**
+	 * Set the type pf panels that this group of panels should represent.
+	 * 
 	 * @param panelType
 	 *            the panelType to set
+	 * @throws SolarPanelException
+	 * @exception If
+	 *                the panel is null.
 	 */
-	public void setPanelType(SolarPanel panelType) {
+	public void setPanelType(SolarPanel panelType) throws SolarPanelsException {
+		if (panelType == null) {
+			throw new SolarPanelsException("The supplied panel type is null");
+		}
 		this.panelType = panelType;
 	}
 
 	/**
+	 * Get the number of panels that are contained within this group of panels.
+	 * 
 	 * @return the panelCount
 	 */
 	public Integer getPanelCount() {
@@ -125,14 +148,24 @@ public class SolarPanels {
 	}
 
 	/**
+	 * Set the number of panels that are contained within this group of panels.
+	 * 
 	 * @param panelCount
 	 *            the panelCount to set
+	 * @throws SolarPanelsException
+	 * @exception if
+	 *                the value passed is null or less than 0.
 	 */
-	public void setPanelCount(Integer panelCount) {
+	public void setPanelCount(Integer panelCount) throws SolarPanelsException {
+		if (panelCount == null || panelCount < 0) {
+			throw new SolarPanelsException("The number of solar panels is null or less than zero (0)");
+		}
 		this.panelCount = panelCount;
 	}
 
 	/**
+	 * Get the direction that the solar panels are facing.
+	 * 
 	 * @return the panelDirection
 	 */
 	public Double getPanelDirection() {
@@ -140,14 +173,28 @@ public class SolarPanels {
 	}
 
 	/**
+	 * Set the direction that the solar panels are facing.
+	 * 
 	 * @param panelDirection
 	 *            the panelDirection to set
+	 * @throws SolarPanelsException
+	 * @exception If
+	 *                the direction is null, or less than 0.00 or greater than
+	 *                360.00
 	 */
-	public void setPanelDirection(Double panelDirection) {
+	public void setPanelDirection(Double panelDirection) throws SolarPanelsException {
+		if (panelDirection == null) {
+			throw new SolarPanelsException("The direction given is null");
+		}
+		if (panelDirection < 0.00 || panelDirection > 360.0 ) {
+			throw new SolarPanelsException("The direction must be a value between 0 and 360.");
+		}
 		this.panelDirection = panelDirection;
 	}
 
 	/**
+	 * Get the panel Azimuth
+	 * 
 	 * @return the panelAzimuth
 	 */
 	public Double getPanelAzimuth() {
@@ -155,10 +202,21 @@ public class SolarPanels {
 	}
 
 	/**
+	 * Set the panel Azimuth
+	 * 
 	 * @param panelAzimuth
 	 *            the panelAzimuth to set
+	 * @throws SolarPanelsException
+	 * @exception if
+	 *                the value is null, or less than 0 or greater than 90.
 	 */
-	public void setPanelAzimuth(Double panelAzimuth) {
+	public void setPanelAzimuth(Double panelAzimuth) throws SolarPanelsException {
+		if (panelAzimuth == null) {
+			throw new SolarPanelsException("The azimuth value is null");
+		}
+		if (panelAzimuth < 0.00 || panelAzimuth > 90.0) {
+			throw new SolarPanelsException("The direction must be a value between 0 and 90.");
+		}
 		this.panelAzimuth = panelAzimuth;
 	}
 

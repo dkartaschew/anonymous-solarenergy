@@ -122,14 +122,14 @@ public class CustomerData {
 	 * Return the estimated daily average kWh usage
 	 * 
 	 */
-	public void setDailyAverageUsage(double newAverage){
+	public void setDailyAverageUsage(Double newAverage){
 		dailyAverageUsage = newAverage;
 	}
 	
 	/**
 	 * Return the estimated monthly average kWh usage
 	 */
-	public void setMonthlyAverageUsage(double newAverage){
+	public void setMonthlyAverageUsage(Double newAverage){
 		monthlyAverageUsage = newAverage;
 	}
 	
@@ -137,7 +137,7 @@ public class CustomerData {
 	 * Set the estimated hourly average kWh usage
 	 * 
 	 */
-	public void setHourlyAverageUsage(double newAverage){
+	public void setHourlyAverageUsage(Double newAverage){
 		hourlyAverageUsage = newAverage;
 	}
 	
@@ -145,7 +145,7 @@ public class CustomerData {
 	 * Set the estimated cost per kWh for Tariff 11
 	 * 
 	 */
-	public void setTariff11Cost(double newTariffCost){
+	public void setTariff11Cost(Double newTariffCost){
 		tariff11Cost = newTariffCost;
 	}
 	
@@ -153,7 +153,7 @@ public class CustomerData {
 	 * Set the estimated fee for tariff 11
 	 * 
 	 */
-	public void setTariff11Fee(double newTariffFee){
+	public void setTariff11Fee(Double newTariffFee){
 		tariff11Fee = newTariffFee;
 	}
 	
@@ -161,7 +161,7 @@ public class CustomerData {
 	 * Set the estimated cost per kWh for Tariff 13
 	 * 
 	 */
-	public void setTariff13Cost(double newTariffCost){
+	public void setTariff13Cost(Double newTariffCost){
 		tariff13Cost = newTariffCost;
 	}
 	
@@ -169,7 +169,7 @@ public class CustomerData {
 	 * Set the estimated fee for tariff 13
 	 * 
 	 */
-	public void setTariff13Fee(double newTariffFee){
+	public void setTariff13Fee(Double newTariffFee){
 		tariff13Fee = newTariffFee;
 	}
 	
@@ -177,7 +177,7 @@ public class CustomerData {
 	 * Set the estimated feed in fee
 	 * 
 	 */
-	public void setFeedInFee(double newFeedInFee){
+	public void setFeedInFee(Double newFeedInFee){
 		feedInFee = newFeedInFee;
 	}
 	
@@ -185,7 +185,7 @@ public class CustomerData {
 	 * Set the estimated increase in tariff fees
 	 * 
 	 */
-	public void setAnnualTariffIncrease(double newAnnualTariff){
+	public void setAnnualTariffIncrease(Double newAnnualTariff){
 		annualTariffIncrease = newAnnualTariff;
 	}
 	

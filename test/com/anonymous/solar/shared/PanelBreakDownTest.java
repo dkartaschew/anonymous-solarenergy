@@ -25,7 +25,7 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void directionAll25() throws SolarPanelException{
+	public void directionAll25() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
@@ -36,7 +36,7 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void directionHalfHalfNS() throws SolarPanelException{
+	public void directionHalfHalfNS() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		
@@ -45,7 +45,7 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void directionHalfHalfEW() throws SolarPanelException{
+	public void directionHalfHalfEW() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		
@@ -54,7 +54,7 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void testDegradeOnePercent() throws SolarPanelException{
+	public void testDegradeOnePercent() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		Double wattage = breakDown.getEastPanels().get(0).getPanelType().getPanelWattage();
 		Double loss = breakDown.getEastPanels().get(0).getPanelType().getPanelLossYear();
@@ -63,7 +63,7 @@ public class PanelBreakDownTest {
 	}
 	
 	@Test
-	public void testDegradeTwoYear() throws SolarPanelException{
+	public void testDegradeTwoYear() throws SolarPanelException, SolarPanelsException{
 		breakDown = new PanelBreakDown(2.0);
 		panel = new SolarPanel("Empty", "Empty", "Empty", 100.0, 50.0, 100.0, 100.0, 30);
 		
@@ -112,95 +112,95 @@ public class PanelBreakDownTest {
 	 */
 	
 	@Test
-	public void testTotalNE() throws SolarPanelException{
+	public void testTotalNE() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getTotal() == 10);
 	}
 	
 	@Test
-	public void testTotalSW() throws SolarPanelException{
+	public void testTotalSW() throws SolarPanelException, SolarPanelsException{
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getTotal() == 10);
 	}
 	
 	@Test
-	public void AddNorthDoubleNotSame() throws SolarPanelException {
+	public void AddNorthDoubleNotSame() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getNorth() == 5);
 	}
 	
 	@Test
-	public void AddEastDoubleNotSame() throws SolarPanelException {
+	public void AddEastDoubleNotSame() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getEast() == 5);
 	}
 	
 	@Test
-	public void AddSouthDoubleNotSame() throws SolarPanelException {
+	public void AddSouthDoubleNotSame() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getSouth() == 5);
 	}
 	
 	@Test
-	public void AddWestDoubleNotSame() throws SolarPanelException {
+	public void AddWestDoubleNotSame() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getWest() == 5);
 	}
 	
 	@Test
-	public void AddNorthDouble() throws SolarPanelException {
+	public void AddNorthDouble() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getNorth() == 10);
 	}
 	
 	@Test
-	public void AddEastDouble() throws SolarPanelException {
+	public void AddEastDouble() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getEast() == 10);
 	}
 	
 	@Test
-	public void AddSouthDouble() throws SolarPanelException {
+	public void AddSouthDouble() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getSouth() == 10);
 	}
 	
 	@Test
-	public void AddWestDouble() throws SolarPanelException {
+	public void AddWestDouble() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getWest() == 10);
 	}
 	
 	@Test
-	public void AddNorthSingle() throws SolarPanelException {
+	public void AddNorthSingle() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, NORTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getNorth() == 5);
 	}
 	
 	@Test
-	public void AddEastSingle() throws SolarPanelException {
+	public void AddEastSingle() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, EAST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getEast() == 5);
 	}
 	
 	@Test
-	public void AddSouthSingle() throws SolarPanelException {
+	public void AddSouthSingle() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, SOUTH, 5.0));
 		assertTrue("UnexpectedData", breakDown.getSouth() == 5);
 	}
 	
 	@Test
-	public void AddWestSingle() throws SolarPanelException {
+	public void AddWestSingle() throws SolarPanelException, SolarPanelsException {
 		breakDown.AddPanels(new SolarPanels(panel, 5, WEST, 5.0));
 		assertTrue("UnexpectedData", breakDown.getWest() == 5);
 	}

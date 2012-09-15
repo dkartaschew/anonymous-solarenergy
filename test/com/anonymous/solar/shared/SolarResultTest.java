@@ -14,7 +14,7 @@ public class SolarResultTest {
 	private SolarPanels testPanels;
 	
 	@Before
-	public void setUp() throws SolarResultException, SolarPanelException{
+	public void setUp() throws SolarResultException, SolarPanelException, SolarPanelsException{
 		testPanel = new SolarPanel("Test Panel", "TestCo", "ABC123", 15.0, 2.0, 100.0, 
 				200.0, 15);
 		testInverter = new SolarInverter("Test Panel", "TestCo", "ABC123", 15.0, 90.0, 2.0, 
