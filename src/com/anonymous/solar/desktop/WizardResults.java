@@ -3,7 +3,9 @@
  */
 package com.anonymous.solar.desktop;
 
+import com.anonymous.solar.shared.PanelBreakDown;
 import com.anonymous.solar.shared.SolarCalculatorLocal;
+import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarResult;
 import com.anonymous.solar.shared.SolarResultException;
 import com.anonymous.solar.shared.SolarSetup;
@@ -219,13 +221,37 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
             results = calculator.calculateDailySavings(results, 1);
             results = calculator.calculateYearlySavings(results, 1);
             results = calculator.calculateYearlySavingsOverTime(results, 10);
-            output += "<br />Your inverter will be at  50% efficiency in " + 
+            
+            try {
+            	output += "<br />Your inverter will be at  50% efficiency in " + 
             			global.LengthUntilInverter(50) + 
             			" years <br />";
-            try {
 				output += "<br />In 20 years time your inverter will be at " +
 							global.DetermineInverterLoss(20) + 
 							"% efficiency";
+				output += "<br />In 20 years time your panels will be at:";
+				PanelBreakDown breakDown = global.panelTimeBreakdown(20.0);
+				for(SolarPanels panls : breakDown.getNorthPanels()){
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
+				+ panls.getPanelType().getPanelWattage() + "<br />";
+					
+				}
+				for(SolarPanels panls : breakDown.getEastPanels()){
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
+				+ panls.getPanelType().getPanelWattage() + "<br />";
+					
+				}
+				for(SolarPanels panls : breakDown.getSouthPanels()){
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
+				+ panls.getPanelType().getPanelWattage() + "<br />";
+					
+				}
+				for(SolarPanels panls : breakDown.getWestPanels()){
+					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100 to " 
+				+ panls.getPanelType().getPanelWattage() + "<br />";
+					
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -268,7 +268,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     	CustomerData data;
 		if (global != null) {
 			data = global.getCustomerData();
-                        jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
+            jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
 			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
 			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
 			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
@@ -289,6 +289,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
   
     	jSpinnerDailyAverageUsage.setBorder(clear);
     	jSpinnerDayTimeHourlyUsage.setBorder(clear);
+    	jSpinnerMonthly.setBorder(clear);
 
     }
 
@@ -301,17 +302,19 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
-    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 1);
     	returnToWhite();
     	
     	CustomerData data = new CustomerData();
     	
 		if (validateInput) {
 			if ((((Double)jSpinnerDailyAverageUsage.getValue()) == 0) && 
-					(((Double)jSpinnerDayTimeHourlyUsage.getValue()) == 0)) {
+					(((Double)jSpinnerDayTimeHourlyUsage.getValue()) == 0) &&
+					(((Double)jSpinnerMonthly.getValue()) == 0)) {
 				
 				jSpinnerDailyAverageUsage.setBorder(borderError);
 		    	jSpinnerDayTimeHourlyUsage.setBorder(borderError);
+		    	jSpinnerMonthly.setBorder(borderError);
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this, "Please enter either an hourly usage, a daily usage or both.",
 						"Estimated Usage Missing", JOptionPane.OK_OPTION);

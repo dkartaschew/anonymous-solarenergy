@@ -30,6 +30,21 @@ public class CustomerData {
 		annualTariffIncrease = INITIAL_VALUES;
 	}
 	
+	public CustomerData(Double daily, Double hourly, Double monthly, Double tar11C, Double tar11F,
+			Double tar13C, Double tar13F, Double feedFee, Double tarIncrease){
+		dailyAverageUsage = daily;
+		hourlyAverageUsage = hourly;
+		monthlyAverageUsage = monthly;
+		
+		tariff11Cost = tar11C;
+		tariff11Fee = tar11F;
+		tariff13Cost = tar13C;
+		tariff13Fee = tar13F;
+		
+		feedInFee = feedFee;
+		annualTariffIncrease = tarIncrease;
+	}
+	
 	
 	/********************************************************
 	 * GETTERS
@@ -122,14 +137,14 @@ public class CustomerData {
 	 * Return the estimated daily average kWh usage
 	 * 
 	 */
-	public void setDailyAverageUsage(Double newAverage){
+	public void setDailyAverageUsage(double newAverage){
 		dailyAverageUsage = newAverage;
 	}
 	
 	/**
 	 * Return the estimated monthly average kWh usage
 	 */
-	public void setMonthlyAverageUsage(Double newAverage){
+	public void setMonthlyAverageUsage(double newAverage){
 		monthlyAverageUsage = newAverage;
 	}
 	
@@ -137,7 +152,7 @@ public class CustomerData {
 	 * Set the estimated hourly average kWh usage
 	 * 
 	 */
-	public void setHourlyAverageUsage(Double newAverage){
+	public void setHourlyAverageUsage(double newAverage){
 		hourlyAverageUsage = newAverage;
 	}
 	
@@ -145,7 +160,7 @@ public class CustomerData {
 	 * Set the estimated cost per kWh for Tariff 11
 	 * 
 	 */
-	public void setTariff11Cost(Double newTariffCost){
+	public void setTariff11Cost(double newTariffCost){
 		tariff11Cost = newTariffCost;
 	}
 	
@@ -153,7 +168,7 @@ public class CustomerData {
 	 * Set the estimated fee for tariff 11
 	 * 
 	 */
-	public void setTariff11Fee(Double newTariffFee){
+	public void setTariff11Fee(double newTariffFee){
 		tariff11Fee = newTariffFee;
 	}
 	
@@ -161,7 +176,7 @@ public class CustomerData {
 	 * Set the estimated cost per kWh for Tariff 13
 	 * 
 	 */
-	public void setTariff13Cost(Double newTariffCost){
+	public void setTariff13Cost(double newTariffCost){
 		tariff13Cost = newTariffCost;
 	}
 	
@@ -169,7 +184,7 @@ public class CustomerData {
 	 * Set the estimated fee for tariff 13
 	 * 
 	 */
-	public void setTariff13Fee(Double newTariffFee){
+	public void setTariff13Fee(double newTariffFee){
 		tariff13Fee = newTariffFee;
 	}
 	
@@ -177,7 +192,7 @@ public class CustomerData {
 	 * Set the estimated feed in fee
 	 * 
 	 */
-	public void setFeedInFee(Double newFeedInFee){
+	public void setFeedInFee(double newFeedInFee){
 		feedInFee = newFeedInFee;
 	}
 	
@@ -185,7 +200,7 @@ public class CustomerData {
 	 * Set the estimated increase in tariff fees
 	 * 
 	 */
-	public void setAnnualTariffIncrease(Double newAnnualTariff){
+	public void setAnnualTariffIncrease(double newAnnualTariff){
 		annualTariffIncrease = newAnnualTariff;
 	}
 	

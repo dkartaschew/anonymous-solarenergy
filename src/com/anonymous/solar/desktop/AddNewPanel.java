@@ -516,8 +516,8 @@ public class AddNewPanel extends javax.swing.JDialog {
                     //boolean succ = SPanelSOAP.insertPanel(panel);
             
             if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
-        		error = true;
             	jSpinnerPanelCount.setBorder(borderError);
+            	throw new SolarPanelException();
             }
 
             //location data
