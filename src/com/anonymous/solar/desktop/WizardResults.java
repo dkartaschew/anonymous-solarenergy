@@ -207,6 +207,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     public boolean callbackStart() {
         SolarSetup global = parent.getSetup();
         SolarResult results = null;
+        String output = "";
         if (global != null) {
             try {
                 results = new SolarResult(global);
@@ -218,8 +219,20 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
             results = calculator.calculateDailySavings(results, 1);
             results = calculator.calculateYearlySavings(results, 1);
             results = calculator.calculateYearlySavingsOverTime(results, 10);
+            output += "<br />Your inverter will be at  50% efficiency in " + 
+            			global.LengthUntilInverter(50) + 
+            			" years <br />";
+            try {
+				output += "<br />In 20 years time your inverter will be at " +
+							global.DetermineInverterLoss(20) + 
+							"% efficiency";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
 
-            jTextAreaConfirmationDetails.setText(results.toString());
+            jTextAreaConfirmationDetails.setText(output);
 
         }
         return true;

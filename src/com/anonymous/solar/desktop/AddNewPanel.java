@@ -375,6 +375,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 
                 if (succ) {
                         JOptionPane.showMessageDialog(new JFrame(), "Panel Saved");
+                        returnToWhite();
                 } else {
                         JOptionPane.showMessageDialog(new JFrame(),
                                         "The panel can not be saved at this point");
@@ -417,11 +418,6 @@ public class AddNewPanel extends javax.swing.JDialog {
     	if((Double)jSpinnerCost.getModel().getValue() == 0){
     		error = true;
     		jSpinnerCost.setBorder(borderError);
-        }
-        
-        if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
-    		error = true;
-        	jSpinnerPanelCount.setBorder(borderError);
         }
         
         if(error){
@@ -518,6 +514,11 @@ public class AddNewPanel extends javax.swing.JDialog {
             panel = getVerifiedPanel();
             //SPanel SPanelSOAP = new SPanelService().getSPanelPort();
                     //boolean succ = SPanelSOAP.insertPanel(panel);
+            
+            if((Integer)jSpinnerPanelCount.getModel().getValue() == 0){
+        		error = true;
+            	jSpinnerPanelCount.setBorder(borderError);
+            }
 
             //location data
             panelCount = (Integer)jSpinnerPanelCount.getModel().getValue();
