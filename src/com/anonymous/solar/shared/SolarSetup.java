@@ -179,7 +179,7 @@ public class SolarSetup {
 		details += setupDescription + "<br /><br />";
 		
 		// Location information
-		details += "<b>Location:</b><br />";
+		details += "<b>Location:</b></ br>";
 		details += locationInformation.toString(false) + "<br />";	
 		
 		//Panel Data
@@ -201,11 +201,46 @@ public class SolarSetup {
 		return details;
 	}
 	
+	/**
+	 * The method will get the inverter efficiency at the specified number of years after use
+	 * @param years - the number of years to get data for
+	 * @return double representing the new inverter efficiency
+	 * @throws Exception 
+	 */
+	public double DetermineInverterLoss(double years) throws Exception{	
+		if(years < 0){
+			throw new Exception();
+		}
+		
+		double currentEff = inverter.getInverterEfficiency();
+		double loss = inverter.getInverterLossYear() / 100;
+		double wattage = inverter.getInverterWattage();
+		
+		return currentEff * Math.pow((1 - loss), years);
+	}
+	
+	/**
+	 * Determines how long it will take for the inverter to reach a specified efficiency
+	 * @param efficiency - the efficiency the inverter should reach
+	 * @return A double representing time
+	 */
+	public double LengthUntilInverter(double newEff){
+		
+		double currEff = inverter.getInverterEfficiency();
+		double loss = inverter.getInverterLossYear() / 100;
+		
+		double first = Math.log10(newEff / currEff);
+		double second =  Math.log10(1 - loss);
+		
+		return  first / second;
+	}
+	
 	private String panelDirectionBreakdown(){
 		double north = 0, east = 0, south = 0, west = 0;
 		double total = 0;
 		int count = 0;
 		String breakdown = "";
+			
 		double direction = 0.0;
 		
 		for(SolarPanels panel : panels){

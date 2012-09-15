@@ -6,6 +6,7 @@ public class CustomerData {
 	
 	private Double dailyAverageUsage;
 	private Double hourlyAverageUsage;
+	private Double monthlyAverageUsage;
 	
 	private Double tariff11Cost;
 	private Double tariff11Fee;
@@ -18,6 +19,7 @@ public class CustomerData {
 	public CustomerData(){
 		dailyAverageUsage = INITIAL_VALUES;
 		hourlyAverageUsage = INITIAL_VALUES;
+		monthlyAverageUsage = INITIAL_VALUES;
 		
 		tariff11Cost = INITIAL_VALUES;
 		tariff11Fee = INITIAL_VALUES;
@@ -39,6 +41,15 @@ public class CustomerData {
 	 */
 	public Double getDailyAverageUsage(){
 		return dailyAverageUsage;
+	}
+	
+	/**
+	 * Return the estimated monthly average kWh usage
+	 * 
+	 * @return average daily kWh usage
+	 */
+	public Double getMonthlyAverageUsage(){
+		return monthlyAverageUsage;
 	}
 	
 	/**
@@ -110,70 +121,69 @@ public class CustomerData {
 	/**
 	 * Return the estimated daily average kWh usage
 	 * 
-	 * @return average daily kWh usage
 	 */
 	public void setDailyAverageUsage(double newAverage){
 		dailyAverageUsage = newAverage;
 	}
 	
 	/**
-	 * Return the estimated hourly average kWh usage
+	 * Return the estimated monthly average kWh usage
+	 */
+	public void setMonthlyAverageUsage(double newAverage){
+		monthlyAverageUsage = newAverage;
+	}
+	
+	/**
+	 * Set the estimated hourly average kWh usage
 	 * 
-	 * @return average daily kWh usage
 	 */
 	public void setHourlyAverageUsage(double newAverage){
 		hourlyAverageUsage = newAverage;
 	}
 	
 	/**
-	 * Return the estimated cost per kWh for Tariff 11
+	 * Set the estimated cost per kWh for Tariff 11
 	 * 
-	 * @return Tariff 11 Cost
 	 */
 	public void setTariff11Cost(double newTariffCost){
 		tariff11Cost = newTariffCost;
 	}
 	
 	/**
-	 * Return the estimated fee for tariff 11
+	 * Set the estimated fee for tariff 11
 	 * 
-	 * @return Tariff 11 Fee
 	 */
 	public void setTariff11Fee(double newTariffFee){
 		tariff11Fee = newTariffFee;
 	}
 	
 	/**
-	 * Return the estimated cost per kWh for Tariff 13
+	 * Set the estimated cost per kWh for Tariff 13
 	 * 
-	 * @return Tariff 13 Cost
 	 */
 	public void setTariff13Cost(double newTariffCost){
 		tariff13Cost = newTariffCost;
 	}
 	
 	/**
-	 * Return the estimated fee for tariff 13
+	 * Set the estimated fee for tariff 13
 	 * 
-	 * @return Tariff 13 Fee
 	 */
 	public void setTariff13Fee(double newTariffFee){
 		tariff13Fee = newTariffFee;
 	}
 	
 	/**
-	 * Return the estimated feed in fee
+	 * Set the estimated feed in fee
 	 * 
-	 * @return Fee In Fee increase
 	 */
 	public void setFeedInFee(double newFeedInFee){
 		feedInFee = newFeedInFee;
 	}
 	
 	/**
-	 * Return the estimated increase in tariff fees
+	 * Set the estimated increase in tariff fees
 	 * 
-	 * @return Annual Increase in tariff fee
 	 */
 	public void setAnnualTariffIncrease(double newAnnualTariff){
 		annualTariffIncrease = newAnnualTariff;
