@@ -21,16 +21,6 @@ import com.anonymous.solar.shared.*;
  */
 @SuppressWarnings("serial")
 public class AddNewPanel extends javax.swing.JDialog {
-
-	/*
-	 * SPanel SPanelSOAP = new SPanelService().getSPanelPort();
-			
-			List<SolarPanel> panelData = (List<SolarPanel>) SPanelSOAP.getPanels();
-			
-			for (SolarPanel pan : panelData) {
-				JOptionPane.showMessageDialog(this, pan.getPanelName());
-			}
-	 */
 	
 	private WizardSetupSolarPanels parent;
 	private int location = -1;
@@ -41,7 +31,6 @@ public class AddNewPanel extends javax.swing.JDialog {
         super(new JFrame(), true);
         initComponents();
         nameComponents();
-        //LoadStoredPanels();
         this.parent = parent;
         this.setModal(true);
         
