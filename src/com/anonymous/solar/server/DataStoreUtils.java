@@ -186,7 +186,7 @@ public class DataStoreUtils {
 	}
 	
 	/**
-	 * Retrieve a list of all solar panels that are available within the
+	 * Retrieve a list of all locations that are available within the
 	 * datastore.
 	 * 
 	 * @return A List of Locations.

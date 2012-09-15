@@ -6,7 +6,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.anonymous.solar.shared.SolarInverter;
-import com.anonymous.solar.shared.SolarPanel;
 
 @WebService
 public class SInverter {
