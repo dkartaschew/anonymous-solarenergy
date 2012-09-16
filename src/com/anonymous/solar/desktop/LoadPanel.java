@@ -33,6 +33,7 @@ public class LoadPanel extends javax.swing.JDialog {
         initComponents();
         LoadStoredPanels(new PanelCostComparison());
         this.parent = parent;
+        btnLoadPanel.setEnabled(false);
     }
     
     private void LoadStoredPanels(Comparator comparison){
@@ -90,14 +91,15 @@ public class LoadPanel extends javax.swing.JDialog {
         txtPanelRRP = new javax.swing.JTextField();
         lblPanelRRP = new javax.swing.JLabel();
         lblPanelLifetime = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         lblSortBy = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        cmbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sort By", "Cost", "Efficiency Loss", "Life", "Wattage" }));
+        cmbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cost", "Efficiency Loss", "Life", "Wattage" }));
         cmbSortBy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSortByActionPerformed(evt);
@@ -176,7 +178,12 @@ public class LoadPanel extends javax.swing.JDialog {
 
         lblPanelLifetime.setText("Lifetime:");
 
-        jButton2.setText("Cancel");
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         lblSortBy.setText("Sort By: ");
 
@@ -214,15 +221,15 @@ public class LoadPanel extends javax.swing.JDialog {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPanelLifetime)
-                                    .addComponent(lblPanelRRP))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblPanelRRP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblPanelLifetime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPanelLifetime, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPanelRRP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLoadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -282,7 +289,7 @@ public class LoadPanel extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(btnCancel)
                             .addComponent(btnLoadPanel))
                         .addContainerGap())))
         );
@@ -340,14 +347,19 @@ public class LoadPanel extends javax.swing.JDialog {
 	        txtPanelLifetime.setText(panel.getPanelLifeYears().toString());
 	        txtPanelEfficiencyLoss.setText(panel.getPanelLossYear().toString());
     	}
+        btnLoadPanel.setEnabled(true);
     }//GEN-LAST:event_lstPanelInformationMouseReleased
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLoadPanel;
     private javax.swing.JComboBox cmbSortBy;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPanelCost;
     private javax.swing.JLabel lblPanelEfficiencyLoss;

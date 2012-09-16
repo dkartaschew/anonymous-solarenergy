@@ -328,7 +328,7 @@ public class AddNewInverter extends javax.swing.JDialog {
 		   inverter.setInverterName(txtName.getText());
 		   inverter.setInverterManufacturer(txtManufacturer.getText());
 		   inverter.setInverterManufacturerCode(txtCode.getText());
-		           inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+		   inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 		   inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
 		   inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
 		   inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
@@ -380,7 +380,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         setVisible(false);
     }
     
-private void LoadInverter(SolarInverter oldInverter){
+protected void LoadInverter(SolarInverter oldInverter){
     	
     	if(oldInverter != null){
 			txtName.setText(oldInverter.getInverterName());

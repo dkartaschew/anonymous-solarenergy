@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -22,13 +23,286 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblInverterRRP" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtInverterRRP" min="-2" pref="150" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lvlInverterName" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterManufacturer" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterManufacturerCode" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterCost" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtInverterName" alignment="0" pref="150" max="32767" attributes="0"/>
+                          <Component id="txtInverterManufacturer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtInverterManufacturerCode" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtInverterCost" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnLoadInverter" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblInverterWattage" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterEfficiency" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterEfficiencyLoss" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterLifetime" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtInverterWattage" pref="150" max="32767" attributes="0"/>
+                          <Component id="txtInverterEfficiency" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtInverterLifetime" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtInverterEfficiencyLoss" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="scrPane" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblSortBy" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmbSortBy" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="scrPane" min="-2" pref="183" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cmbSortBy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSortBy" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lvlInverterName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtInverterName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblInverterManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtInverterManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblInverterManufacturerCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtInverterManufacturerCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblInverterRRP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtInverterRRP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtInverterWattage" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterWattage" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtInverterEfficiency" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterEfficiency" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtInverterLifetime" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterLifetime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtInverterEfficiencyLoss" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInverterEfficiencyLoss" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblInverterCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtInverterCost" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLoadInverter" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="scrPane">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="lstInverterInformation">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstInverterInformationValueChanged"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lvlInverterName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterManufacturer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manufacturer:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterManufacturerCode">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Code:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterRRP">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RRP:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterLifetime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Expected Life:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterEfficiencyLoss">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Efficiency Loss Per Year:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterWattage">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Wattage:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterEfficiency">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rated Efficiency:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInverterCost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cost:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCancel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLoadInverter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Load Inverter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadInverterActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterManufacturer">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterManufacturerCode">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterCost">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterRRP">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterEfficiencyLoss">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterLifetime">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterEfficiency">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInverterWattage">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbSortBy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Cost"/>
+            <StringItem index="1" value="Efficiency"/>
+            <StringItem index="2" value="Expected Life"/>
+            <StringItem index="3" value="Wattage"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbSortByActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSortBy">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sort by:"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

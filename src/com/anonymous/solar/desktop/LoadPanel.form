@@ -10,6 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -65,10 +66,10 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPanelLifetime" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPanelRRP" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPanelRRP" max="32767" attributes="0"/>
+                                  <Component id="lblPanelLifetime" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtPanelLifetime" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   <Component id="txtPanelRRP" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
@@ -76,7 +77,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnLoadPanel" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
@@ -158,7 +159,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnLoadPanel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -172,12 +173,11 @@
     <Component class="javax.swing.JComboBox" name="cmbSortBy">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Sort By"/>
-            <StringItem index="1" value="Cost"/>
-            <StringItem index="2" value="Efficiency Loss"/>
-            <StringItem index="3" value="Life"/>
-            <StringItem index="4" value="Wattage"/>
+          <StringArray count="4">
+            <StringItem index="0" value="Cost"/>
+            <StringItem index="1" value="Efficiency Loss"/>
+            <StringItem index="2" value="Life"/>
+            <StringItem index="3" value="Wattage"/>
           </StringArray>
         </Property>
       </Properties>
@@ -313,10 +313,13 @@
         <Property name="text" type="java.lang.String" value="Lifetime:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSortBy">
       <Properties>

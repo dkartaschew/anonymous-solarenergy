@@ -4,6 +4,16 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import com.anonymous.solar.client.SInverter;
+import com.anonymous.solar.client.SInverterService;
+import com.anonymous.solar.comparison.*;
+import com.anonymous.solar.shared.SolarInverter;
+import com.anonymous.solar.shared.SolarPanel;
+
 /**
  *
  * @author Thura
@@ -21,7 +31,33 @@ public class LoadInverter extends javax.swing.JDialog {
     public LoadInverter(AddNewInverter parent) {
         super(parent, true);
         initComponents();
+        LoadStoredInverters(new InverterCostComparison());
         this.parent = parent;
+        btnLoadInverter.setEnabled(false);
+    }
+    
+    private void LoadStoredInverters(Comparator comparison){
+    	SInverter SInverterSOAP = new SInverterService().getSInverterPort();
+    	
+		int counter = 0;
+    	
+        List<SolarInverter> inverterData = (List<SolarInverter>) SInverterSOAP.getInverters();
+        Collections.sort(inverterData, comparison);
+        
+        final Object[] objs = new Object[inverterData.size()];
+        
+        
+        for (SolarInverter inverter : inverterData) {
+                objs[counter] = inverter;
+                counter++;
+        }
+        
+        
+        lstInverterInformation.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() { return objs.length; }
+            public Object getElementAt(int i) { return objs[i]; }
+        });
+        
     }
 
     /**
@@ -33,22 +69,280 @@ public class LoadInverter extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrPane = new javax.swing.JScrollPane();
+        lstInverterInformation = new javax.swing.JList();
+        lvlInverterName = new javax.swing.JLabel();
+        lblInverterManufacturer = new javax.swing.JLabel();
+        lblInverterManufacturerCode = new javax.swing.JLabel();
+        lblInverterRRP = new javax.swing.JLabel();
+        lblInverterLifetime = new javax.swing.JLabel();
+        lblInverterEfficiencyLoss = new javax.swing.JLabel();
+        lblInverterWattage = new javax.swing.JLabel();
+        lblInverterEfficiency = new javax.swing.JLabel();
+        lblInverterCost = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
+        btnLoadInverter = new javax.swing.JButton();
+        txtInverterName = new javax.swing.JTextField();
+        txtInverterManufacturer = new javax.swing.JTextField();
+        txtInverterManufacturerCode = new javax.swing.JTextField();
+        txtInverterCost = new javax.swing.JTextField();
+        txtInverterRRP = new javax.swing.JTextField();
+        txtInverterEfficiencyLoss = new javax.swing.JTextField();
+        txtInverterLifetime = new javax.swing.JTextField();
+        txtInverterEfficiency = new javax.swing.JTextField();
+        txtInverterWattage = new javax.swing.JTextField();
+        cmbSortBy = new javax.swing.JComboBox();
+        lblSortBy = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+
+        lstInverterInformation.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstInverterInformationValueChanged(evt);
+            }
+        });
+        scrPane.setViewportView(lstInverterInformation);
+
+        lvlInverterName.setText("Name:");
+
+        lblInverterManufacturer.setText("Manufacturer:");
+
+        lblInverterManufacturerCode.setText("Code:");
+
+        lblInverterRRP.setText("RRP:");
+
+        lblInverterLifetime.setText("Expected Life:");
+
+        lblInverterEfficiencyLoss.setText("Efficiency Loss Per Year:");
+
+        lblInverterWattage.setText("Wattage:");
+
+        lblInverterEfficiency.setText("Rated Efficiency:");
+
+        lblInverterCost.setText("Cost:");
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        btnLoadInverter.setText("Load Inverter");
+        btnLoadInverter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadInverterActionPerformed(evt);
+            }
+        });
+
+        txtInverterName.setEditable(false);
+
+        txtInverterManufacturer.setEditable(false);
+
+        txtInverterManufacturerCode.setEditable(false);
+
+        txtInverterCost.setEditable(false);
+
+        txtInverterRRP.setEditable(false);
+
+        txtInverterEfficiencyLoss.setEditable(false);
+
+        txtInverterLifetime.setEditable(false);
+
+        txtInverterEfficiency.setEditable(false);
+
+        txtInverterWattage.setEditable(false);
+
+        cmbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cost", "Efficiency", "Expected Life", "Wattage" }));
+        cmbSortBy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSortByActionPerformed(evt);
+            }
+        });
+
+        lblSortBy.setText("Sort by:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblInverterRRP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtInverterRRP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lvlInverterName)
+                            .addComponent(lblInverterManufacturer)
+                            .addComponent(lblInverterManufacturerCode)
+                            .addComponent(lblInverterCost))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtInverterName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtInverterManufacturer)
+                            .addComponent(txtInverterManufacturerCode)
+                            .addComponent(txtInverterCost))))
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLoadInverter, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblInverterWattage)
+                            .addComponent(lblInverterEfficiency)
+                            .addComponent(lblInverterEfficiencyLoss)
+                            .addComponent(lblInverterLifetime))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtInverterWattage, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtInverterEfficiency)
+                            .addComponent(txtInverterLifetime)
+                            .addComponent(txtInverterEfficiencyLoss))
+                        .addGap(27, 27, 27))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrPane)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSortBy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrPane, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSortBy))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lvlInverterName)
+                            .addComponent(txtInverterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblInverterManufacturer)
+                            .addComponent(txtInverterManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblInverterManufacturerCode)
+                            .addComponent(txtInverterManufacturerCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblInverterRRP)
+                            .addComponent(txtInverterRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtInverterWattage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblInverterWattage))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtInverterEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblInverterEfficiency))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtInverterLifetime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblInverterLifetime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtInverterEfficiencyLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblInverterEfficiencyLoss))))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInverterCost)
+                    .addComponent(txtInverterCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnLoadInverter))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lstInverterInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstInverterInformationValueChanged
+    	SolarInverter inverter = new SolarInverter();
+        inverter = (SolarInverter)lstInverterInformation.getSelectedValue();
+        
+        if(inverter != null){
+	        txtInverterName.setText(inverter.getInverterName());
+	        txtInverterManufacturer.setText(inverter.getInverterManufacturer());
+	        txtInverterManufacturerCode.setText(inverter.getInverterManufacturerCode());
+	        txtInverterWattage.setText(inverter.getInverterWattage().toString());
+	        txtInverterCost.setText(inverter.getInverterCost().toString());
+	        txtInverterRRP.setText(inverter.getInverterRRP().toString());
+	        txtInverterLifetime.setText(inverter.getInverterLifeYears().toString());
+	        txtInverterEfficiency.setText(inverter.getInverterEfficiency().toString());
+	        txtInverterEfficiencyLoss.setText(inverter.getInverterLossYear().toString());
+    	}
+        btnLoadInverter.setEnabled(true);
+    }//GEN-LAST:event_lstInverterInformationValueChanged
+
+    private void cmbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortByActionPerformed
+    	
+    	String selected = (String)cmbSortBy.getSelectedItem();
+    	//TODO: Compare nicely
+    	if(selected == "Cost") {
+    		LoadStoredInverters(new InverterCostComparison());
+    	}else if(selected == "Wattage"){
+    		LoadStoredInverters(new InverterWattageComparison());
+    	}else if(selected == "Efficiency"){
+    		LoadStoredInverters(new InverterEfficiencyComparison());
+    	}else if(selected == "Expected Life"){
+    		LoadStoredInverters(new InverterLifeComparison());
+    	}
+    }//GEN-LAST:event_cmbSortByActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnLoadInverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadInverterActionPerformed
+    	SolarInverter inverter = (SolarInverter) lstInverterInformation.getSelectedValue();
+    	if(inverter != null) {
+	        parent.LoadInverter(inverter);
+	        this.setVisible(false);
+    	}
+    }//GEN-LAST:event_btnLoadInverterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLoadInverter;
+    private javax.swing.JComboBox cmbSortBy;
+    private javax.swing.JLabel lblInverterCost;
+    private javax.swing.JLabel lblInverterEfficiency;
+    private javax.swing.JLabel lblInverterEfficiencyLoss;
+    private javax.swing.JLabel lblInverterLifetime;
+    private javax.swing.JLabel lblInverterManufacturer;
+    private javax.swing.JLabel lblInverterManufacturerCode;
+    private javax.swing.JLabel lblInverterRRP;
+    private javax.swing.JLabel lblInverterWattage;
+    private javax.swing.JLabel lblSortBy;
+    private javax.swing.JList lstInverterInformation;
+    private javax.swing.JLabel lvlInverterName;
+    private javax.swing.JScrollPane scrPane;
+    private javax.swing.JTextField txtInverterCost;
+    private javax.swing.JTextField txtInverterEfficiency;
+    private javax.swing.JTextField txtInverterEfficiencyLoss;
+    private javax.swing.JTextField txtInverterLifetime;
+    private javax.swing.JTextField txtInverterManufacturer;
+    private javax.swing.JTextField txtInverterManufacturerCode;
+    private javax.swing.JTextField txtInverterName;
+    private javax.swing.JTextField txtInverterRRP;
+    private javax.swing.JTextField txtInverterWattage;
     // End of variables declaration//GEN-END:variables
 }
