@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.CustomerData;
+import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -325,7 +326,8 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 		if (global != null) {
 			
 			// Store the name and description fields.
-                        Double value = (Double) jSpinnerMonthly.getValue();
+            Double value = (Double) jSpinnerMonthly.getValue();
+            try {    
 			data.setMonthlyAverageUsage(value);
 			data.setDailyAverageUsage((Double) jSpinnerDailyAverageUsage.getValue());
 			data.setHourlyAverageUsage((Double) jSpinnerDayTimeHourlyUsage.getValue());
@@ -335,6 +337,9 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 			data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
 			data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
 			data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+            } catch (SolarPanelException e) {
+            	return false;
+            }
 			global.setCustomerData(data);
 			
 		}

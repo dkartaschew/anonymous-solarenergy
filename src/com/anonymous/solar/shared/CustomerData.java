@@ -135,72 +135,109 @@ public class CustomerData {
 	 ********************************************************/
 	/**
 	 * Return the estimated daily average kWh usage
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setDailyAverageUsage(Double newAverage){
+	public void setDailyAverageUsage(Double newAverage) throws SolarPanelException{
+		
+		if(newAverage == null || newAverage < 0){
+			throw new SolarPanelException();
+		}
 		dailyAverageUsage = newAverage;
 	}
 	
 	/**
 	 * Return the estimated monthly average kWh usage
+	 * @throws SolarPanelException 
 	 */
-	public void setMonthlyAverageUsage(Double newAverage){
+	public void setMonthlyAverageUsage(Double newAverage) throws SolarPanelException{
+		if(newAverage == null || newAverage < 0){
+			throw new SolarPanelException();
+		}
 		monthlyAverageUsage = newAverage;
 	}
 	
 	/**
 	 * Set the estimated hourly average kWh usage
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setHourlyAverageUsage(Double newAverage){
+	public void setHourlyAverageUsage(Double newAverage) throws SolarPanelException{
+		if(newAverage == null || newAverage < 0){
+			throw new SolarPanelException();
+		}
 		hourlyAverageUsage = newAverage;
 	}
 	
 	/**
 	 * Set the estimated cost per kWh for Tariff 11
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setTariff11Cost(Double newTariffCost){
+	public void setTariff11Cost(Double newTariffCost) throws SolarPanelException{
+		if(newTariffCost == null || newTariffCost < 0){
+			throw new SolarPanelException();
+		}
 		tariff11Cost = newTariffCost;
 	}
 	
 	/**
 	 * Set the estimated fee for tariff 11
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setTariff11Fee(Double newTariffFee){
+	public void setTariff11Fee(Double newTariffFee) throws SolarPanelException{
+		if(newTariffFee == null || newTariffFee < 0){
+			throw new SolarPanelException();
+		}
 		tariff11Fee = newTariffFee;
 	}
 	
 	/**
 	 * Set the estimated cost per kWh for Tariff 13
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setTariff13Cost(Double newTariffCost){
+	public void setTariff13Cost(Double newTariffCost) throws SolarPanelException{
+		if(newTariffCost == null || newTariffCost < 0){
+			throw new SolarPanelException();
+		}
 		tariff13Cost = newTariffCost;
 	}
 	
 	/**
 	 * Set the estimated fee for tariff 13
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setTariff13Fee(Double newTariffFee){
+	public void setTariff13Fee(Double newTariffFee) throws SolarPanelException{
+		if(newTariffFee == null || newTariffFee < 0){
+			throw new SolarPanelException();
+		}
 		tariff13Fee = newTariffFee;
 	}
 	
 	/**
 	 * Set the estimated feed in fee
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setFeedInFee(Double newFeedInFee){
+	public void setFeedInFee(Double newFeedInFee) throws SolarPanelException{
+		if(newFeedInFee == null || newFeedInFee < 0 ){
+			throw new SolarPanelException();
+		}
 		feedInFee = newFeedInFee;
 	}
 	
 	/**
 	 * Set the estimated increase in tariff fees
+	 * @throws SolarPanelException 
 	 * 
 	 */
-	public void setAnnualTariffIncrease(Double newAnnualTariff){
+	public void setAnnualTariffIncrease(Double newAnnualTariff) throws SolarPanelException{
+		if(newAnnualTariff == null || newAnnualTariff < 0){
+			throw new SolarPanelException();
+		}
 		annualTariffIncrease = newAnnualTariff;
 	}
 	
