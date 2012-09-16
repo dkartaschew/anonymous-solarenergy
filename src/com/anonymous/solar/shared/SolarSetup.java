@@ -4,6 +4,9 @@
 package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
+import java.util.List;
+
+
 
 /**
  * Class to hold and work on Solar Installation components, namely inverters
@@ -12,6 +15,10 @@ import java.util.ArrayList;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
+
+
+
+
 public class SolarSetup {
 
 	private ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
@@ -185,15 +192,15 @@ public class SolarSetup {
 		//Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
-		try {
-			details += panelTimeBreakdown().direction();
-		} catch (SolarPanelException e) {
+		//try {
+			//details += panelTimeBreakdown().direction();
+		//} catch (SolarPanelException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SolarPanelsException e) {
+		//	e.printStackTrace();
+		//} catch (SolarPanelsException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		for(SolarPanels panel : panels){
 			details += panel.getPanelType().toString(false) + "<br />";		
 		}
@@ -208,6 +215,44 @@ public class SolarSetup {
 		
 		return details;
 	}
+	
+	
+	public ArrayList<SolarPanels> GetDirectionalPanels(Direction direction){
+		ArrayList<SolarPanels> directionalPanels = new ArrayList<SolarPanels>();
+		
+		switch(direction){
+		case NORTH:
+			for(SolarPanels panelz : panels){
+			if (panelz.getPanelDirection() < 45 || panelz.getPanelDirection()  > 315){
+				directionalPanels.add(panelz);
+			}
+			}
+			break;
+		case EAST:
+			for(SolarPanels panelz : panels){
+			if(panelz.getPanelDirection()  > 45 && panelz.getPanelDirection()  < 135){
+				directionalPanels.add(panelz);
+			}
+			}
+			break;
+		case SOUTH:
+			for(SolarPanels panelz : panels){
+			if(panelz.getPanelDirection()  > 135 && panelz.getPanelDirection()  < 225){
+				directionalPanels.add(panelz);
+			}
+			}
+			break;
+		case WEST:
+			for(SolarPanels panelz : panels){
+			if(panelz.getPanelDirection()  > 225 && panelz.getPanelDirection()  < 315){
+				directionalPanels.add(panelz);
+			}
+			}
+			break;
+		}	
+		return directionalPanels;
+	}
+	
 	
 	/**
 	 * The method will get the inverter efficiency at the specified number of years after use
@@ -242,23 +287,6 @@ public class SolarSetup {
 		return  first / second;
 	}
 	
-	
-	/**
-	 * Calculates the quality of the panels are the specified period of time
-	 * @param years - the number of years of operation to account for
-	 * @return - A PanelBreakDown of all panels in the system.
-	 * @throws SolarPanelException
-	 * @throws SolarPanelsException 
-	 */
-	public PanelBreakDown panelTimeBreakdown() throws SolarPanelException, SolarPanelsException{
-		PanelBreakDown breakDown = new PanelBreakDown();
-		
-		for(SolarPanels panelz : panels){
-			breakDown.AddPanels(panelz);		
-		}		
-		return breakDown;
-	}
-
 	/**
 	 * @return the invertor
 	 */

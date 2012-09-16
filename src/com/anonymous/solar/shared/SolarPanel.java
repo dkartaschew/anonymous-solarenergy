@@ -236,6 +236,7 @@ public class SolarPanel {
 		final int MAX_EFFICIENCY = 100;
 		return MAX_EFFICIENCY * Math.pow((1.0 - (panelLossYear / 100)), years);
 	}
+	
 
 	/**
 	 * Returns the datastore key if this panel has been stored in the GAE

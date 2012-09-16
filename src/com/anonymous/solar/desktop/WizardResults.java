@@ -3,7 +3,7 @@
  */
 package com.anonymous.solar.desktop;
 
-import com.anonymous.solar.shared.PanelBreakDown;
+import com.anonymous.solar.shared.Direction;
 import com.anonymous.solar.shared.SolarCalculatorLocal;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarResult;
@@ -230,25 +230,31 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 							global.DetermineInverterLoss(20) + 
 							"% efficiency";
 				output += "<br /><br />In 20 years time your panels will be at:";
-				PanelBreakDown breakDown = global.panelTimeBreakdown();
-				for(SolarPanels panls : breakDown.getNorthPanels()){
+				for(SolarPanels panls : global.GetDirectionalPanels(Direction.NORTH)){
 					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
-				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
+					+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient";	
+					output += "<br />This panel will reach 50% efficiency in " + 
+					Math.floor(panls.getPanelType().LengthUntilPanel(50.0)) + " years<br />";
 					
 				}
-				for(SolarPanels panls : breakDown.getEastPanels()){
+				for(SolarPanels panls : global.GetDirectionalPanels(Direction.EAST)){
 					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
-				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
+					+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient";
+					output += "<br />This panel will reach 50% efficiency in " + 
+					Math.floor(panls.getPanelType().LengthUntilPanel(50.0)) + " years<br />";
 					
 				}
-				for(SolarPanels panls : breakDown.getSouthPanels()){
+				for(SolarPanels panls : global.GetDirectionalPanels(Direction.SOUTH)){
 					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
-				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
+					+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient";
+					output += "<br />This panel will reach 50% efficiency in " + 
+					Math.floor(panls.getPanelType().LengthUntilPanel(50.0)) + " years<br />";	
 					
 				}
-				for(SolarPanels panls : breakDown.getWestPanels()){
+				for(SolarPanels panls : global.GetDirectionalPanels(Direction.WEST)){
 					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to " 
-				+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";
+					+ Math.floor(panls.getPanelType().DetermineLoss(20.0)) + "% efficient<br />";output += "<br />This panel will reach 50% efficiency in " + 
+					Math.floor(panls.getPanelType().LengthUntilPanel(50.0)) + " years";
 					
 				}
 				
