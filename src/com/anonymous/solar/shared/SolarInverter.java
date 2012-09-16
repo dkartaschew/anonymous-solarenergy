@@ -244,12 +244,12 @@ public class SolarInverter {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
-		return "SolarInverter [inverterName=" + inverterName + ", inverterManufacturer=" + inverterManufacturer
-				+ ", inverterManufacturerCode=" + inverterManufacturerCode + ", inverterWattage=" + inverterWattage
-				+ ", inverterLossYear=" + inverterLossYear + ", inverterEfficiency=" + inverterEfficiency
-				+ ", inverterCost=" + inverterCost + ", inverterRRP=" + inverterRRP + ", inverterLifeYears="
-				+ inverterLifeYears + "]";
+	public String toString(){
+		return getInverterName() + 
+				" - Cost: $" + getInverterCost() + 
+				" - Life: " + getInverterLifeYears() + " years" + 
+				" - Wattage: " + getInverterWattage() + "W" + 
+				" - Efficiency Loss: " + inverterLossYear + "%";
 	}
 
 	public String toString(boolean htmlTags) {
