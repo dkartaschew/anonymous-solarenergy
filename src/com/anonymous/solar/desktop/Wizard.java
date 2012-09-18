@@ -86,18 +86,18 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
-		try {
-			LoadTestData();
-		} catch (SolarPanelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LocationDataException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SolarPanelsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			LoadTestData();
+//		} catch (SolarPanelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (LocationDataException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SolarPanelsException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	private void LoadTestData() throws SolarPanelException, LocationDataException, SolarPanelsException{

@@ -25,7 +25,7 @@ public class SolarResultTest {
 	/*
 	 * Test null values in SolarSetup when passed through SolarResult
 	 */
-	@Test(expected = SolarResultException.class)
+	@Test(expected = SolarSetupException.class)
 	public void nullSolarPanels() throws SolarResultException, SolarSetupException {
 		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, new LocationData(), null, null, null);
 		setupInstance.setInverter(testInverter);
