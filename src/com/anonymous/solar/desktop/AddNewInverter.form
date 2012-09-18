@@ -160,6 +160,7 @@
         <Component class="javax.swing.JLabel" name="lblCost">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cost"/>
+            <Property name="toolTipText" type="java.lang.String" value="Cost of Inverter"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCode">
@@ -168,13 +169,20 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtName">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Name of the inverter"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblRRP">
           <Properties>
             <Property name="text" type="java.lang.String" value="RRP"/>
+            <Property name="toolTipText" type="java.lang.String" value="Recommend Retail Price"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtManufacturer">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCode">
         </Component>

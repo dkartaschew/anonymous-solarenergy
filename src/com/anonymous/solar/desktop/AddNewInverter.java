@@ -85,6 +85,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         jButtonLoadInverter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Details"));
         jPanelDataGroup.setToolTipText("rgdfg");
@@ -93,10 +94,16 @@ public class AddNewInverter extends javax.swing.JDialog {
         lblName.setText("Name");
 
         lblCost.setText("Cost");
+        lblCost.setToolTipText("Cost of Inverter");
 
         lblCode.setText("Code");
 
+        txtName.setToolTipText("Name of the inverter");
+
         lblRRP.setText("RRP");
+        lblRRP.setToolTipText("Recommend Retail Price");
+
+        txtManufacturer.setToolTipText("");
 
         lblManufacturer.setText("Manufacturer");
 
@@ -147,15 +154,13 @@ public class AddNewInverter extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblManufacturer)))
+                                    .addComponent(lblManufacturer)
+                                    .addComponent(lblRRP)))
                             .addGroup(jPanelDataGroupLayout.createSequentialGroup()
                                 .addComponent(jSpinnerCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelDataGroupLayout.createSequentialGroup()
-                                .addComponent(lblCost)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblRRP)))
+                            .addComponent(lblCost))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
