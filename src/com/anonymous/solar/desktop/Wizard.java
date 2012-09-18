@@ -88,13 +88,7 @@ public class Wizard extends javax.swing.JPanel {
 		initWizardPanels();
 //		try {
 //			LoadTestData();
-//		} catch (SolarPanelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (LocationDataException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SolarPanelsException e) {
+//		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
