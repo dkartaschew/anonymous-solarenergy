@@ -7,10 +7,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "calculateYearlySavingsOverTimeResponse", namespace = "http://server.solar.anonymous.com/")
+@XmlRootElement(name = "calculateAllResultsResponse", namespace = "http://server.solar.anonymous.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "calculateYearlySavingsOverTimeResponse", namespace = "http://server.solar.anonymous.com/")
-public class CalculateYearlySavingsOverTimeResponse {
+@XmlType(name = "calculateAllResultsResponse", namespace = "http://server.solar.anonymous.com/")
+public class CalculateAllResultsResponse {
 
     @XmlElement(name = "return", namespace = "")
     private com.anonymous.solar.shared.SolarResult _return;

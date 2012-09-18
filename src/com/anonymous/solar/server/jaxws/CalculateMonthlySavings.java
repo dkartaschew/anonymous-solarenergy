@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "calculateYearlySavings", namespace = "http://server.solar.anonymous.com/")
+@XmlRootElement(name = "calculateMonthlySavings", namespace = "http://server.solar.anonymous.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "calculateYearlySavings", namespace = "http://server.solar.anonymous.com/", propOrder = {
+@XmlType(name = "calculateMonthlySavings", namespace = "http://server.solar.anonymous.com/", propOrder = {
     "arg0",
     "arg1"
 })
-public class CalculateYearlySavings {
+public class CalculateMonthlySavings {
 
     @XmlElement(name = "arg0", namespace = "")
     private com.anonymous.solar.shared.SolarResult arg0;

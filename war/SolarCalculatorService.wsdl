@@ -12,11 +12,23 @@
   <message name="calculateYearlySavingsOverTimeResponse">
     <part name="parameters" element="tns:calculateYearlySavingsOverTimeResponse"/>
   </message>
+  <message name="calculateAllResults">
+    <part name="parameters" element="tns:calculateAllResults"/>
+  </message>
+  <message name="calculateAllResultsResponse">
+    <part name="parameters" element="tns:calculateAllResultsResponse"/>
+  </message>
   <message name="calculateDailySavings">
     <part name="parameters" element="tns:calculateDailySavings"/>
   </message>
   <message name="calculateDailySavingsResponse">
     <part name="parameters" element="tns:calculateDailySavingsResponse"/>
+  </message>
+  <message name="calculateMonthlySavings">
+    <part name="parameters" element="tns:calculateMonthlySavings"/>
+  </message>
+  <message name="calculateMonthlySavingsResponse">
+    <part name="parameters" element="tns:calculateMonthlySavingsResponse"/>
   </message>
   <message name="calculateYearlySavings">
     <part name="parameters" element="tns:calculateYearlySavings"/>
@@ -29,9 +41,17 @@
       <input wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateYearlySavingsOverTimeRequest" message="tns:calculateYearlySavingsOverTime"/>
       <output wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateYearlySavingsOverTimeResponse" message="tns:calculateYearlySavingsOverTimeResponse"/>
     </operation>
+    <operation name="calculateAllResults">
+      <input wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateAllResultsRequest" message="tns:calculateAllResults"/>
+      <output wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateAllResultsResponse" message="tns:calculateAllResultsResponse"/>
+    </operation>
     <operation name="calculateDailySavings">
       <input wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateDailySavingsRequest" message="tns:calculateDailySavings"/>
       <output wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateDailySavingsResponse" message="tns:calculateDailySavingsResponse"/>
+    </operation>
+    <operation name="calculateMonthlySavings">
+      <input wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateMonthlySavingsRequest" message="tns:calculateMonthlySavings"/>
+      <output wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateMonthlySavingsResponse" message="tns:calculateMonthlySavingsResponse"/>
     </operation>
     <operation name="calculateYearlySavings">
       <input wsam:Action="http://server.solar.anonymous.com/SolarCalculator/calculateYearlySavingsRequest" message="tns:calculateYearlySavings"/>
@@ -49,7 +69,25 @@
         <soap:body use="literal"/>
       </output>
     </operation>
+    <operation name="calculateAllResults">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
     <operation name="calculateDailySavings">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="calculateMonthlySavings">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>
@@ -70,7 +108,7 @@
   </binding>
   <service name="SolarCalculatorService">
     <port name="SolarCalculatorPort" binding="tns:SolarCalculatorPortBinding">
-      <soap:address location="REPLACE_WITH_ACTUAL_URL"/>
+      <soap:address location="http://anonymous-solarenergy.appspot.com/SolarCalculator"/>
     </port>
   </service>
 </definitions>

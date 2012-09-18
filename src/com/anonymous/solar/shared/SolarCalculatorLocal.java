@@ -21,8 +21,9 @@ public class SolarCalculatorLocal {
 	/**
 	 * This method calculates the daily savings for a solar system.
 	 * 
-	 * @param solarResult the system that needs it's savings calculated
-	 * @return the solarResult object with the dailySavings calculation added to it.
+ * @param solarResult - the system that needs it's savings calculated
+ * @param year - the year in which to calculate the yearly savings for
+ * @return the solarResult object with the dailySavings calculation added to it.
 	 */
 @WebMethod
 public SolarResult calculateDailySavings(SolarResult solarResult, int year) {
@@ -30,8 +31,10 @@ public SolarResult calculateDailySavings(SolarResult solarResult, int year) {
 	SolarResult newSolarResult = solarResult;
 	SolarSetup solarSystem = newSolarResult.getSolarSetup();
 	CustomerData customerData = solarSystem.getCustomerData();
-	//double sunlightHours = calculateSunlightHours(solarSystem.getLocationLatitude());
-	double sunlightHours = 4.5;
+	LocationData locationInformation = solarSystem.getLocation();
+	
+	double sunlightHours = calculateSunlightHours(locationInformation.getLatitude());
+	//double sunlightHours = 4.5;
 	
 	double averageDailySolarGeneration = calculateSystemPowerOutput(solarSystem, sunlightHours, 
 			year - 1);
@@ -48,6 +51,27 @@ public SolarResult calculateDailySavings(SolarResult solarResult, int year) {
 }
 
 /**
+ * This method calculates the monthly savings for a solar system
+ * 
+ * @param solarResult - the system that needs it's savings calculated
+ * @param year - the year in which to calculate the yearly savings for
+ * @return the solarResult object with the monthlySavings calculation added to it.
+ */
+@WebMethod
+public SolarResult calculateMonthlySavings(SolarResult solarResult, int year) {
+	SolarResult newSolarResult = solarResult;
+	
+	if (newSolarResult.getDailySavings() == 0.0) {
+		newSolarResult = calculateDailySavings(newSolarResult, year);
+	}
+	
+	double monthlySavings = 30 * newSolarResult.getDailySavings();
+	newSolarResult.setMonthlySavings(monthlySavings);
+	
+	return newSolarResult;
+}
+
+/**
  * This method returns the yearly savings for a solar system.
  * 
  * @param solarResult - the system that needs it's savings calculated
@@ -57,12 +81,30 @@ public SolarResult calculateDailySavings(SolarResult solarResult, int year) {
 @WebMethod
 public SolarResult calculateYearlySavings(SolarResult solarResult, int year) {
 	SolarResult newSolarResult = solarResult;
+	SolarSetup solarSetup = solarResult.getSolarSetup();
 	
 	if (newSolarResult.getDailySavings() == 0.0) {
 		newSolarResult = calculateDailySavings(newSolarResult, year);
 	}
 	
 	double yearlySavings = 365 * newSolarResult.getDailySavings();
+	
+	ArrayList<SolarPanels> solarPanelBanksList = solarSetup.getPanels();
+	double additionalCosts = 0.0;
+	//Calculate additional costs
+	for(int i = 0; i < solarPanelBanksList.size(); i++) {
+		SolarPanels currentSolarBank = solarPanelBanksList.get(i);
+		SolarPanel panelType = currentSolarBank.getPanelType();
+		
+		additionalCosts += (year / panelType.getPanelLifeYears()) *
+				(currentSolarBank.getPanelCount() * panelType.getPanelRRP());
+		
+	}
+	
+	additionalCosts += (year / solarSetup.getInverter().getInverterLifeYears()) * 
+			solarSetup.getInverter().getInverterRRP();
+	
+	yearlySavings = yearlySavings - additionalCosts;
 	
 	newSolarResult.setYearlySavings(yearlySavings);
 	
@@ -148,17 +190,23 @@ private double calculateSolarPanelCosts(SolarSetup solarSystem) {
 private double calculateSystemPowerOutput(SolarSetup solarSystem, double daylightHours, 
 		int year) {
 	double powerOutput = 0.0;
+	//Is the year relative to the lifetime of the panel or inverter
+	int relativeYear = 0;
 	
 	ArrayList<SolarPanels> solarPanelBanksList = solarSystem.getPanels();
 	for (int i = 0; i < solarPanelBanksList.size(); i++) {
 		SolarPanels currentSolarBank = solarPanelBanksList.get(i);
 		SolarPanel panelType = currentSolarBank.getPanelType();
+		relativeYear = year % panelType.getPanelLifeYears();
+		
 		powerOutput = powerOutput + ((currentSolarBank.getPanelCount() * 
 				panelType.getPanelWattage()) * (1 - (currentSolarBank.getPanelDirection()/100)) *
-				(1 - (year * (panelType.getPanelLossYear()/100))));
+				(1 - (relativeYear * (panelType.getPanelLossYear()/100))));
 	}
 	
-	powerOutput = powerOutput * (solarSystem.getInverter().getInverterEfficiency() / 100) * 
+	relativeYear = year % solarSystem.getInverter().getInverterLifeYears();
+	powerOutput = powerOutput * ((solarSystem.getInverter().getInverterEfficiency() / 100) -
+			(relativeYear * (solarSystem.getInverter().getInverterLossYear()))) * 
 			daylightHours;
 	
 	return powerOutput;

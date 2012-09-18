@@ -26,7 +26,7 @@ public class SolarSetup {
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
 	private LocationData locationInformation = null;
-	private CustomerData customerData = new CustomerData();
+	private CustomerData customerData;// = new CustomerData();
 	private String setupName = null;
 	private String setupDescription = null;
 

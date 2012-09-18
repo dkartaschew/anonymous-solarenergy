@@ -30,6 +30,8 @@ public class SolarCalculatorSOAPHandler {
 	 private static final String NAMESPACE_URI = "http://server.solar.anonymous.com/";
 	 private static final QName CALCULATE_DAILY_SAVINGS_QNAME = new QName
 			 (NAMESPACE_URI, "calculateDailySavings");
+	 private static final QName CALCULATE_MONTHLY_SAVINGS_QNAME = new QName
+			 (NAMESPACE_URI, "calculateMonthlySavings");
 	 private static final QName CALCULATE_YEARLY_SAVINGS_QNAME = new QName
 			 (NAMESPACE_URI, "calculateYearlySavings");
 	 private static final QName CALCULATE_YEARLY_SAVINGS_OVER_TIME_QNAME = new QName

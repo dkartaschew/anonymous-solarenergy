@@ -7,25 +7,25 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "calculateYearlySavings", namespace = "http://server.solar.anonymous.com/")
+@XmlRootElement(name = "calculateAllResults", namespace = "http://server.solar.anonymous.com/")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "calculateYearlySavings", namespace = "http://server.solar.anonymous.com/", propOrder = {
+@XmlType(name = "calculateAllResults", namespace = "http://server.solar.anonymous.com/", propOrder = {
     "arg0",
     "arg1"
 })
-public class CalculateYearlySavings {
+public class CalculateAllResults {
 
     @XmlElement(name = "arg0", namespace = "")
-    private com.anonymous.solar.shared.SolarResult arg0;
+    private com.anonymous.solar.shared.SolarSetup arg0;
     @XmlElement(name = "arg1", namespace = "")
     private int arg1;
 
     /**
      * 
      * @return
-     *     returns SolarResult
+     *     returns SolarSetup
      */
-    public com.anonymous.solar.shared.SolarResult getArg0() {
+    public com.anonymous.solar.shared.SolarSetup getArg0() {
         return this.arg0;
     }
 
@@ -34,7 +34,7 @@ public class CalculateYearlySavings {
      * @param arg0
      *     the value for the arg0 property
      */
-    public void setArg0(com.anonymous.solar.shared.SolarResult arg0) {
+    public void setArg0(com.anonymous.solar.shared.SolarSetup arg0) {
         this.arg0 = arg0;
     }
 

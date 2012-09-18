@@ -16,6 +16,7 @@ public class SolarResult {
 	
 	private SolarSetup finalSetup;
 	private double averageDailySavings;
+	private double averageMonthlySavings;
 	private double averageYearlySavings;
 	private ArrayList<Double> savingsOverYears;
 	
@@ -58,6 +59,14 @@ public class SolarResult {
 	
 	public void setYearlySavings(double newYearlySavings) {
 		averageYearlySavings = newYearlySavings;
+	}
+	
+	public double getMonthlySavings() {
+		return averageMonthlySavings;
+	}
+	
+	public void setMonthlySavings(double newMonthlySavings) {
+		averageMonthlySavings = newMonthlySavings;
 	}
 	
 	public ArrayList<Double> getSavingsOverYears() {
