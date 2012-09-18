@@ -31,6 +31,7 @@ public class LoadInverter extends javax.swing.JDialog {
     public LoadInverter(AddNewInverter parent) {
         super(parent, true);
         initComponents();
+        nameComponents();
         LoadStoredInverters(new InverterCostComparison());
         this.parent = parent;
         btnLoadInverter.setEnabled(false);
@@ -58,6 +59,10 @@ public class LoadInverter extends javax.swing.JDialog {
             public Object getElementAt(int i) { return objs[i]; }
         });
         
+    }
+    
+    private void nameComponents() {
+    	lstInverterInformation.setName("lstInverterInformation");
     }
 
     /**

@@ -29,12 +29,21 @@ public class AddNewInverter extends javax.swing.JDialog {
         this.iParent = parent;
         LoadInverter(parent.inverter);
         setTitle("Inverter Information");
+        nameComponents();
     }
     
     /**
      * Solar Inverter
      */
     SolarInverter inverter;
+    
+    private void nameComponents(){
+    	txtName.setName("TextFieldInverterName");
+    	txtManufacturer.setName("TextFieldInverterManufacturerName");
+    	txtCode.setName("TextFieldInverterManufacturerCode");
+    	jSpinnerCost.setName("SpinnerInverterCost");
+    	jSpinnerRRP.setName("SpinnerInverterRRP");
+    }
     
     /**
      * Parent
@@ -76,7 +85,6 @@ public class AddNewInverter extends javax.swing.JDialog {
         jButtonLoadInverter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Details"));
         jPanelDataGroup.setToolTipText("rgdfg");
@@ -139,13 +147,15 @@ public class AddNewInverter extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblManufacturer)
-                                    .addComponent(lblRRP)))
+                                    .addComponent(lblManufacturer)))
                             .addGroup(jPanelDataGroupLayout.createSequentialGroup()
                                 .addComponent(jSpinnerCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblCost))
+                            .addGroup(jPanelDataGroupLayout.createSequentialGroup()
+                                .addComponent(lblCost)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblRRP)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,14 +305,14 @@ public class AddNewInverter extends javax.swing.JDialog {
 	        error = true;
 	        txtName.setBackground(Color.red);
 	        }
-                if(txtManufacturer.getText().equals("") == true){
-                error = true;
-                 txtManufacturer.setBackground(Color.red);
-                }
-                if(txtCode.getText().equals("") == true){
-                error = true;
-                 txtCode.setBackground(Color.red);
-                }
+	           if(txtManufacturer.getText().equals("") == true){
+	        error = true;
+	            txtManufacturer.setBackground(Color.red);
+	           }
+	           if(txtCode.getText().equals("") == true){
+	        error = true;
+	            txtCode.setBackground(Color.red);
+	           }
 	        if((Double)jSpinnerCost.getModel().getValue() == 0){
 	        error = true;
 	        jSpinnerCost.setBorder(borderError);
@@ -327,7 +337,7 @@ public class AddNewInverter extends javax.swing.JDialog {
 		   inverter.setInverterName(txtName.getText());
 		   inverter.setInverterManufacturer(txtManufacturer.getText());
 		   inverter.setInverterManufacturerCode(txtCode.getText());
-		           inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+		   inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 		   inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
 		   inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
 		   inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
