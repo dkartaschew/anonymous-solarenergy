@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:ns1="http://jaxb.dev.java.net/array" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:import namespace="http://jaxb.dev.java.net/array" schemaLocation="LocationInformationService_schema2.xsd"/>
-
   <xs:element name="StoreLocationGetAll" type="tns:StoreLocationGetAll"/>
 
   <xs:element name="StoreLocationGetAllResponse" type="tns:StoreLocationGetAllResponse"/>
