@@ -28,22 +28,12 @@ public class AddNewInverter extends javax.swing.JDialog {
         initComponents();
         this.iParent = parent;
         LoadInverter(parent.inverter);
-        setTitle("Inverter Information");
-        nameComponents();
     }
     
     /**
      * Solar Inverter
      */
     SolarInverter inverter;
-    
-    private void nameComponents(){
-    	txtName.setName("TextFieldInverterName");
-    	txtManufacturer.setName("TextFieldInverterManufacturerName");
-    	txtCode.setName("TextFieldInverterManufacturerCode");
-    	jSpinnerCost.setName("SpinnerInverterCost");
-    	jSpinnerRRP.setName("SpinnerInverterRRP");
-    }
     
     /**
      * Parent
@@ -85,6 +75,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         jButtonLoadInverter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Details"));
         jPanelDataGroup.setToolTipText("rgdfg");
@@ -305,14 +296,14 @@ public class AddNewInverter extends javax.swing.JDialog {
 	        error = true;
 	        txtName.setBackground(Color.red);
 	        }
-	           if(txtManufacturer.getText().equals("") == true){
-	        error = true;
-	            txtManufacturer.setBackground(Color.red);
-	           }
-	           if(txtCode.getText().equals("") == true){
-	        error = true;
-	            txtCode.setBackground(Color.red);
-	           }
+                if(txtManufacturer.getText().equals("") == true){
+                error = true;
+                 txtManufacturer.setBackground(Color.red);
+                }
+                if(txtCode.getText().equals("") == true){
+                error = true;
+                 txtCode.setBackground(Color.red);
+                }
 	        if((Double)jSpinnerCost.getModel().getValue() == 0){
 	        error = true;
 	        jSpinnerCost.setBorder(borderError);
@@ -337,7 +328,7 @@ public class AddNewInverter extends javax.swing.JDialog {
 		   inverter.setInverterName(txtName.getText());
 		   inverter.setInverterManufacturer(txtManufacturer.getText());
 		   inverter.setInverterManufacturerCode(txtCode.getText());
-		   inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
+		           inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 		   inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
 		   inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
 		   inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
