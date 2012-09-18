@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for calculateYearlySavings complex type.
+ * <p>Java class for calculateAllResults complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="calculateYearlySavings">
+ * &lt;complexType name="calculateAllResults">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://server.solar.anonymous.com/}solarResult" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://server.solar.anonymous.com/}solarSetup" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "calculateYearlySavings", propOrder = {
+@XmlType(name = "calculateAllResults", propOrder = {
     "arg0",
     "arg1"
 })
-public class CalculateYearlySavings {
+public class CalculateAllResults {
 
-    protected SolarResult arg0;
+    protected SolarSetup arg0;
     protected int arg1;
 
     /**
@@ -41,10 +41,10 @@ public class CalculateYearlySavings {
      * 
      * @return
      *     possible object is
-     *     {@link SolarResult }
+     *     {@link SolarSetup }
      *     
      */
-    public SolarResult getArg0() {
+    public SolarSetup getArg0() {
         return arg0;
     }
 
@@ -53,10 +53,10 @@ public class CalculateYearlySavings {
      * 
      * @param value
      *     allowed object is
-     *     {@link SolarResult }
+     *     {@link SolarSetup }
      *     
      */
-    public void setArg0(SolarResult value) {
+    public void setArg0(SolarSetup value) {
         this.arg0 = value;
     }
 

@@ -11,10 +11,10 @@ package com.anonymous.solar.shared;
  */
 public class SolarPanels {
 
-	private SolarPanel panelType = null;
-	private Integer panelCount = 0;
-	private Double panelDirection = 0.00;
-	private Double panelAzimuth = 0.00;
+	private SolarPanel panelType;// = null;
+	private Integer panelCount;// = 0;
+	private Double panelDirection;// = 0.00;
+	private Double panelAzimuth;// = 0.00;
 
 	/**
 	 * Default constructor

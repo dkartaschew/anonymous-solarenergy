@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="dailySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="monthlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="savingsOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="solarSetup" type="{http://server.solar.anonymous.com/}solarSetup" minOccurs="0"/>
  *         &lt;element name="yearlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "solarResult", propOrder = {
     "dailySavings",
+    "monthlySavings",
     "savingsOverYears",
     "solarSetup",
     "yearlySavings"
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
 public class SolarResult {
 
     protected double dailySavings;
+    protected double monthlySavings;
     @XmlElement(nillable = true)
     protected List<Double> savingsOverYears;
     protected SolarSetup solarSetup;
@@ -60,6 +63,22 @@ public class SolarResult {
      */
     public void setDailySavings(double value) {
         this.dailySavings = value;
+    }
+
+    /**
+     * Gets the value of the monthlySavings property.
+     * 
+     */
+    public double getMonthlySavings() {
+        return monthlySavings;
+    }
+
+    /**
+     * Sets the value of the monthlySavings property.
+     * 
+     */
+    public void setMonthlySavings(double value) {
+        this.monthlySavings = value;
     }
 
     /**

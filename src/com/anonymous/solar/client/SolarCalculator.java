@@ -51,10 +51,46 @@ public interface SolarCalculator {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "calculateAllResults", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateAllResults")
+    @ResponseWrapper(localName = "calculateAllResultsResponse", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateAllResultsResponse")
+    @Action(input = "http://server.solar.anonymous.com/SolarCalculator/calculateAllResultsRequest", output = "http://server.solar.anonymous.com/SolarCalculator/calculateAllResultsResponse")
+    public SolarResult calculateAllResults(
+        @WebParam(name = "arg0", targetNamespace = "")
+        SolarSetup arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns com.anonymous.solar.client.SolarResult
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "calculateDailySavings", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateDailySavings")
     @ResponseWrapper(localName = "calculateDailySavingsResponse", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateDailySavingsResponse")
     @Action(input = "http://server.solar.anonymous.com/SolarCalculator/calculateDailySavingsRequest", output = "http://server.solar.anonymous.com/SolarCalculator/calculateDailySavingsResponse")
     public SolarResult calculateDailySavings(
+        @WebParam(name = "arg0", targetNamespace = "")
+        SolarResult arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns com.anonymous.solar.client.SolarResult
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "calculateMonthlySavings", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateMonthlySavings")
+    @ResponseWrapper(localName = "calculateMonthlySavingsResponse", targetNamespace = "http://server.solar.anonymous.com/", className = "com.anonymous.solar.client.CalculateMonthlySavingsResponse")
+    @Action(input = "http://server.solar.anonymous.com/SolarCalculator/calculateMonthlySavingsRequest", output = "http://server.solar.anonymous.com/SolarCalculator/calculateMonthlySavingsResponse")
+    public SolarResult calculateMonthlySavings(
         @WebParam(name = "arg0", targetNamespace = "")
         SolarResult arg0,
         @WebParam(name = "arg1", targetNamespace = "")

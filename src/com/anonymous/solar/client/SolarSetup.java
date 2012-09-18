@@ -1,11 +1,12 @@
 
 package com.anonymous.solar.client;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-
-import com.anonymous.solar.shared.SolarInverter;
 
 
 /**
@@ -20,8 +21,8 @@ import com.anonymous.solar.shared.SolarInverter;
  *       &lt;sequence>
  *         &lt;element name="customerData" type="{http://server.solar.anonymous.com/}customerData" minOccurs="0"/>
  *         &lt;element name="inverter" type="{http://server.solar.anonymous.com/}solarInverter" minOccurs="0"/>
- *         &lt;element name="locationLatitude" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
- *         &lt;element name="locationLongitude" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="location" type="{http://server.solar.anonymous.com/}locationData" minOccurs="0"/>
+ *         &lt;element name="panels" type="{http://server.solar.anonymous.com/}solarPanels" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="setupDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="setupName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="wireEfficiency" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
@@ -38,8 +39,8 @@ import com.anonymous.solar.shared.SolarInverter;
 @XmlType(name = "solarSetup", propOrder = {
     "customerData",
     "inverter",
-    "locationLatitude",
-    "locationLongitude",
+    "location",
+    "panels",
     "setupDescription",
     "setupName",
     "wireEfficiency",
@@ -49,8 +50,9 @@ public class SolarSetup {
 
     protected CustomerData customerData;
     protected SolarInverter inverter;
-    protected Double locationLatitude;
-    protected Double locationLongitude;
+    protected LocationData location;
+    @XmlElement(nillable = true)
+    protected List<SolarPanels> panels;
     protected String setupDescription;
     protected String setupName;
     protected Double wireEfficiency;
@@ -105,51 +107,56 @@ public class SolarSetup {
     }
 
     /**
-     * Gets the value of the locationLatitude property.
+     * Gets the value of the location property.
      * 
      * @return
      *     possible object is
-     *     {@link Double }
+     *     {@link LocationData }
      *     
      */
-    public Double getLocationLatitude() {
-        return locationLatitude;
+    public LocationData getLocation() {
+        return location;
     }
 
     /**
-     * Sets the value of the locationLatitude property.
+     * Sets the value of the location property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Double }
+     *     {@link LocationData }
      *     
      */
-    public void setLocationLatitude(Double value) {
-        this.locationLatitude = value;
+    public void setLocation(LocationData value) {
+        this.location = value;
     }
 
     /**
-     * Gets the value of the locationLongitude property.
+     * Gets the value of the panels property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getLocationLongitude() {
-        return locationLongitude;
-    }
-
-    /**
-     * Sets the value of the locationLongitude property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the panels property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPanels().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SolarPanels }
+     * 
+     * 
      */
-    public void setLocationLongitude(Double value) {
-        this.locationLongitude = value;
+    public List<SolarPanels> getPanels() {
+        if (panels == null) {
+            panels = new ArrayList<SolarPanels>();
+        }
+        return this.panels;
     }
 
     /**

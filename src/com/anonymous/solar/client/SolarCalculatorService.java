@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "SolarCalculatorService", targetNamespace = "http://server.solar.anonymous.com/", wsdlLocation = "file:/C:/Users/Luke/Documents/Uni/Year%202/Semester%202/INB372%20Agile%20Software%20Development/Project%20Files/anonymous-solarenergy/war/SolarCalculatorService.wsdl")
+@WebServiceClient(name = "SolarCalculatorService", targetNamespace = "http://server.solar.anonymous.com/", wsdlLocation = "file:/C:/Uni/INB372%20Project/anonymous-solarenergy/war/SolarCalculatorService.wsdl")
 public class SolarCalculatorService
     extends Service
 {
@@ -30,7 +30,7 @@ public class SolarCalculatorService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Users/Luke/Documents/Uni/Year%202/Semester%202/INB372%20Agile%20Software%20Development/Project%20Files/anonymous-solarenergy/war/SolarCalculatorService.wsdl");
+            url = new URL("file:/C:/Uni/INB372%20Project/anonymous-solarenergy/war/SolarCalculatorService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -42,25 +42,25 @@ public class SolarCalculatorService
         super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME);
     }
 
-//    public SolarCalculatorService(WebServiceFeature... features) {
-//        super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME, features);
-//    }
+    public SolarCalculatorService(WebServiceFeature... features) {
+        super(__getWsdlLocation(), SOLARCALCULATORSERVICE_QNAME);
+    }
 
     public SolarCalculatorService(URL wsdlLocation) {
         super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME);
     }
 
-//    public SolarCalculatorService(URL wsdlLocation, WebServiceFeature... features) {
-//        super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME, features);
-//    }
+    public SolarCalculatorService(URL wsdlLocation, WebServiceFeature... features) {
+        super(wsdlLocation, SOLARCALCULATORSERVICE_QNAME);
+    }
 
     public SolarCalculatorService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-//    public SolarCalculatorService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
-//        super(wsdlLocation, serviceName, features);
-//    }
+    public SolarCalculatorService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+        super(wsdlLocation, serviceName);
+    }
 
     /**
      * 

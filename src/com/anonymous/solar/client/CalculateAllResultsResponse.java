@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for calculateYearlySavingsOverTimeResponse complex type.
+ * <p>Java class for calculateAllResultsResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="calculateYearlySavingsOverTimeResponse">
+ * &lt;complexType name="calculateAllResultsResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "calculateYearlySavingsOverTimeResponse", propOrder = {
+@XmlType(name = "calculateAllResultsResponse", propOrder = {
     "_return"
 })
-public class CalculateYearlySavingsOverTimeResponse {
+public class CalculateAllResultsResponse {
 
     @XmlElement(name = "return")
     protected SolarResult _return;
