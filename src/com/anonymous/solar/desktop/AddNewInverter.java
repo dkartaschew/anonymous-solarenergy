@@ -29,12 +29,21 @@ public class AddNewInverter extends javax.swing.JDialog {
         this.iParent = parent;
         LoadInverter(parent.inverter);
         setTitle("Inverter Information");
+        nameComponents();
     }
     
     /**
      * Solar Inverter
      */
     SolarInverter inverter;
+    
+    private void nameComponents(){
+    	txtName.setName("TextFieldInverterName");
+    	txtManufacturer.setName("TextFieldInverterManufacturerName");
+    	txtCode.setName("TextFieldInverterManufacturerCode");
+    	jSpinnerCost.setName("SpinnerInverterCost");
+    	jSpinnerRRP.setName("SpinnerInverterRRP");
+    }
     
     /**
      * Parent

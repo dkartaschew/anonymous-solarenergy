@@ -13,8 +13,10 @@ import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
- *
- * @author darran
+ * User Cost Pane for Desktop Application
+ * 
+ * @author Alex Colvin
+ * @version 1.0
  */
 public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
