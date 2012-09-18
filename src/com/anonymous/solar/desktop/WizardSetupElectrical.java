@@ -48,7 +48,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		initComponents();
 		nameComponents();
 	}
-	
+
 	/**
 	 * Names components for GUI Testing
 	 */
@@ -251,15 +251,15 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		}
 		return true;
 	}
-	
+
 	/**
-     * Clear all the error effects from text boxes and jSpinners
-     */
-	private void returnToWhite(){
-    	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
-    	jButtonSetInverter.setBackground(Color.white);
-    	jSpinnerWiringLength.setBorder(clear);
-    }
+	 * Clear all the error effects from text boxes and jSpinners
+	 */
+	private void returnToWhite() {
+		javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
+		jButtonSetInverter.setBackground(Color.white);
+		jSpinnerWiringLength.setBorder(clear);
+	}
 
 	/**
 	 * Callback method used by the parent panel to notify this panel that we
@@ -271,7 +271,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 	public boolean callbackDispose(boolean validateInput) {
 		javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 3);
 		returnToWhite();
-    	
+
 		if (validateInput) {
 			if (inverter == null) {
 				jButtonSetInverter.setBackground(Color.red);
@@ -280,7 +280,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 						"You are missing inverter details. Please enter these to continue.",
 						"Inverter Details Missing", JOptionPane.OK_OPTION);
 				return false;
-			} else if(((Double)jSpinnerWiringLength.getValue()) == 0){
+			} else if (((Double) jSpinnerWiringLength.getValue()) == 0) {
 				jSpinnerWiringLength.setBorder(borderError);
 				return false;
 			}
@@ -288,12 +288,13 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		// Set our parent's global data based on our form!
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
-			try{
-			global.setWireLength((Double) jSpinnerWiringLength.getValue());
-			global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
-			global.setInverter(inverter);
-			} 
-			catch (SolarSetupException e){
+			try {
+				global.setWireLength((Double) jSpinnerWiringLength.getValue());
+				global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
+				if (inverter != null) {
+					global.setInverter(inverter);
+				}
+			} catch (SolarSetupException e) {
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this,
 						"You have invalid inverter or wiring details. Please correct these to continue.",
