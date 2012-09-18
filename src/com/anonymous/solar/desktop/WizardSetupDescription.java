@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * Main Entry Point for Desktop Application
@@ -356,8 +357,16 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
 			// Store the name and description fields.
+			try{
 			global.setSetupName(jTextFieldSetupName.getText());
 			global.setSetupDescription(jTextAreaSetupDescription.getText());
+			} catch (SolarSetupException e){
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You have invalid setup details. Please correct these to continue.",
+						"Setup Details Invalid", JOptionPane.OK_OPTION);
+				return false;
+			}
 		}
 		return true;
 	}

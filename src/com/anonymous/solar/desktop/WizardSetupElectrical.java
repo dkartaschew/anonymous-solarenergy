@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * Wizard Panel that displays the electrical setup for the solar setup.
@@ -287,11 +288,18 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		// Set our parent's global data based on our form!
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
+			try{
 			global.setWireLength((Double) jSpinnerWiringLength.getValue());
 			global.setWireEfficiency((Double) jSpinnerWiringEfficiency.getValue());
 			global.setInverter(inverter);
-			
-			
+			} 
+			catch (SolarSetupException e){
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You have invalid inverter or wiring details. Please correct these to continue.",
+						"Inverter Details Invalid", JOptionPane.OK_OPTION);
+				return false;
+			}
 		}
 		return true;
 	}

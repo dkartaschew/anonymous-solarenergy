@@ -24,6 +24,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * Location Awareness Dialog.
@@ -77,7 +78,8 @@ public class LocationDialog extends javax.swing.JDialog {
 	}
 
 	/**
-	 * Set all the names of components so they can be accessed via the testing code.
+	 * Set all the names of components so they can be accessed via the testing
+	 * code.
 	 */
 	private void initComponentNames() {
 		jMapViewer1.setName("jMapViewer1");
@@ -456,7 +458,10 @@ public class LocationDialog extends javax.swing.JDialog {
 		jTextFieldLongitude.setBorder(clear);
 		// If we suceeded, then dispose;
 		if (success) {
-			parent.getSetup().setLocationInformation(locationData);
+			try {
+				parent.getSetup().setLocationInformation(locationData);
+			} catch (SolarSetupException e) {
+			}
 			this.setVisible(false);
 			this.dispose();
 		} else {
@@ -498,6 +503,7 @@ public class LocationDialog extends javax.swing.JDialog {
 
 	/**
 	 * Event Handler for saving location data to GAE
+	 * 
 	 * @param evt
 	 */
 	private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +528,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		try {
 			LocationInformation locationSOAP = new LocationInformationService().getLocationInformationPort();
 			Long result = locationSOAP.storeLocationInformation(locData);
-			//System.out.printf("Location Item stored: key = %d \n", result);
+			// System.out.printf("Location Item stored: key = %d \n", result);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -701,7 +707,9 @@ public class LocationDialog extends javax.swing.JDialog {
 	}
 
 	/**
-	 * Adds a LocationData object as a selected item in the predefined drop downs.
+	 * Adds a LocationData object as a selected item in the predefined drop
+	 * downs.
+	 * 
 	 * @param defaultLocation
 	 */
 	private void loadLocationComboBox(LocationData defaultLocation) {

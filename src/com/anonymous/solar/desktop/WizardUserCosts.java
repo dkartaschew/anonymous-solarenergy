@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * User Cost Pane for Desktop Application
@@ -339,11 +340,12 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 			data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
 			data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
 			data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+			global.setCustomerData(data);
             } catch (SolarPanelException e) {
             	return false;
-            }
-			global.setCustomerData(data);
-			
+            }catch (SolarSetupException e) {
+            	return false;
+            }				 
 		}
 		return true;
 	}
