@@ -81,6 +81,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		Window mainWindow = getMainWindow();
 		
 		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("");
 		assertTrue(mainWindow.getTextBox("TextFieldSetupName").getText().compareTo("") == 0);
 
 		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
