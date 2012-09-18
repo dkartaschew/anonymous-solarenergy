@@ -210,15 +210,21 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
         SolarSetup global = parent.getSetup();
         SolarResult results = null;
         String output = "";
-        String output2 = "";
+        String output2 = "<html>";
         if (global != null) {
         	
-            SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
+            try {
+        	SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
             results = calculatorSOAP.calculateAllResults(global, 10);
+            } catch (Exception e) {
+            	e.printStackTrace();
+            }
         	
+            
             output2 += "<br /> Daily Savings: $" + results.getDailySavings() + "<br />";
             output2 += "<br /> Monthly Savings: $" + results.getMonthlySavings() + "<br />";
             output2 += "<br /> Yearly Savings: $" + results.getYearlySavings() + "<br />";
+            output2+= "</html>";
             
             
             //results = calculator.calculateDailySavings(results, 1);

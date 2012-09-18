@@ -38,9 +38,9 @@ public class SolarCalculator {
 			e.printStackTrace();
 		}
 		
-		newSolarResult = calculateDailySavings(newSolarResult, 0);
-		newSolarResult = calculateMonthlySavings(newSolarResult, 0);
-		newSolarResult = calculateYearlySavings(newSolarResult, 0);
+		newSolarResult = calculateDailySavings(newSolarResult, 1);
+		newSolarResult = calculateMonthlySavings(newSolarResult, 1);
+		newSolarResult = calculateYearlySavings(newSolarResult, 1);
 		newSolarResult = calculateYearlySavingsOverTime(newSolarResult, year);
 		
 		return newSolarResult;
