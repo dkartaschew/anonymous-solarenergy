@@ -91,10 +91,10 @@ public class SolarResult {
 		if (solarSetup.getInverter() == null) {
 			throw new SolarResultException("You cannot have a null inverter");
 		}
-		if (solarSetup.getPanels() == null) {
+		if (solarSetup.getSolarPanels() == null) {
 			throw new SolarResultException("You cannot have null panels");
 		}
-		if (solarSetup.getPanels().isEmpty()) {
+		if (solarSetup.getSolarPanels().isEmpty()) {
 			throw new SolarResultException("You cannot have an empty array of panels");
 		}
 	}

@@ -115,7 +115,7 @@ public class Wizard extends javax.swing.JPanel {
 		setup.setWireLength(15.0);
 		
 		//Panel Data
-		List<SolarPanels> panels = setup.getPanels();
+		List<SolarPanels> panels = setup.getSolarPanels();
 		panels.add(new SolarPanels(slow, 5, 0.0, 5.0));//NORTH
 		panels.add(new SolarPanels(medium, 5, 90.0, 5.0));//EAST
 		panels.add(new SolarPanels(fast, 5, 180.0, 5.0));//SOUTH

@@ -116,7 +116,7 @@ public class SolarCalculator {
 		
 		double yearlySavings = 365 * newSolarResult.getDailySavings();
 		
-		ArrayList<SolarPanels> solarPanelBanksList = solarSetup.getPanels();
+		ArrayList<SolarPanels> solarPanelBanksList = solarSetup.getSolarPanels();
 		double additionalCosts = 0.0;
 		//Calculate additional costs
 		for(int i = 0; i < solarPanelBanksList.size(); i++) {
@@ -196,7 +196,7 @@ public class SolarCalculator {
 	private double calculateSolarPanelCosts(SolarSetup solarSystem) {
 		double solarPanelCosts = 0;
 		
-		ArrayList<SolarPanels> solarPanels = solarSystem.getPanels();
+		ArrayList<SolarPanels> solarPanels = solarSystem.getSolarPanels();
 		
 		for (int i = 0; i < solarPanels.size(); i++) {
 			SolarPanels currentSolarBank = solarPanels.get(i);
@@ -221,7 +221,7 @@ public class SolarCalculator {
 		//Is the year relative to the lifetime of the panel or inverter
 		int relativeYear = 0;
 		
-		ArrayList<SolarPanels> solarPanelBanksList = solarSystem.getPanels();
+		ArrayList<SolarPanels> solarPanelBanksList = solarSystem.getSolarPanels();
 		for (int i = 0; i < solarPanelBanksList.size(); i++) {
 			SolarPanels currentSolarBank = solarPanelBanksList.get(i);
 			SolarPanel panelType = currentSolarBank.getPanelType();

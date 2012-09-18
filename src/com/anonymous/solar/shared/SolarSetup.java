@@ -16,27 +16,25 @@ import java.util.List;
  * @version 1.0
  */
 
-
-
-
 public class SolarSetup {
 
-	private ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	private ArrayList<SolarPanels> solarPanels = null;
 	private SolarInverter inverter = null;
 	private Double wireLength = 0.00;
 	private Double wireEfficiency = 100.00;
 	private LocationData locationInformation = null;
-	private CustomerData customerData;// = new CustomerData();
+	private CustomerData customerData = null;// = new CustomerData();
 	private String setupName = null;
 	private String setupDescription = null;
 
 	public SolarSetup() {
-
+		solarPanels = new ArrayList<SolarPanels>();
+		customerData = new CustomerData();
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
 			LocationData location, CustomerData customerData, String setupName, String setupDescription) {
-		this.panels = panels;
+		this.solarPanels = panels;
 		this.inverter = invertor;
 		this.wireLength = wireLength;
 		this.wireEfficiency = wireEfficiency;
@@ -56,7 +54,7 @@ public class SolarSetup {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((inverter == null) ? 0 : inverter.hashCode());
-		result = prime * result + ((panels == null) ? 0 : panels.hashCode());
+		result = prime * result + ((solarPanels == null) ? 0 : solarPanels.hashCode());
 		result = prime * result + ((wireEfficiency == null) ? 0 : wireEfficiency.hashCode());
 		result = prime * result + ((wireLength == null) ? 0 : wireLength.hashCode());
 		result = prime * result + ((customerData == null) ? 0 : customerData.hashCode());
@@ -87,11 +85,11 @@ public class SolarSetup {
 		} else if (!inverter.equals(other.inverter)) {
 			return false;
 		}
-		if (panels == null) {
-			if (other.panels != null) {
+		if (solarPanels == null) {
+			if (other.solarPanels != null) {
 				return false;
 			}
-		} else if (!panels.equals(other.panels)) {
+		} else if (!solarPanels.equals(other.solarPanels)) {
 			return false;
 		}
 		if (wireEfficiency == null) {
@@ -177,7 +175,7 @@ public class SolarSetup {
 	@Override
 	public String toString(){
 		String details = "<html>";
-		int panelCount = panels.size();
+		int panelCount = solarPanels.size();
 
 		//Setup name and description
 		details += "<b>System Name:</b> ";
@@ -201,7 +199,7 @@ public class SolarSetup {
 			// TODO Auto-generated catch block
 		//	e.printStackTrace();
 		//}
-		for(SolarPanels panel : panels){
+		for(SolarPanels panel : solarPanels){
 			details += panel.getPanelType().toString(false) + "<br />";		
 		}
 		
@@ -222,28 +220,28 @@ public class SolarSetup {
 		
 		switch(direction){
 		case NORTH:
-			for(SolarPanels panelz : panels){
+			for(SolarPanels panelz : solarPanels){
 			if (panelz.getPanelDirection() < 45 || panelz.getPanelDirection()  > 315){
 				directionalPanels.add(panelz);
 			}
 			}
 			break;
 		case EAST:
-			for(SolarPanels panelz : panels){
+			for(SolarPanels panelz : solarPanels){
 			if(panelz.getPanelDirection()  > 45 && panelz.getPanelDirection()  < 135){
 				directionalPanels.add(panelz);
 			}
 			}
 			break;
 		case SOUTH:
-			for(SolarPanels panelz : panels){
+			for(SolarPanels panelz : solarPanels){
 			if(panelz.getPanelDirection()  > 135 && panelz.getPanelDirection()  < 225){
 				directionalPanels.add(panelz);
 			}
 			}
 			break;
 		case WEST:
-			for(SolarPanels panelz : panels){
+			for(SolarPanels panelz : solarPanels){
 			if(panelz.getPanelDirection()  > 225 && panelz.getPanelDirection()  < 315){
 				directionalPanels.add(panelz);
 			}
@@ -309,6 +307,22 @@ public class SolarSetup {
 		return wireLength;
 	}
 
+	public ArrayList<SolarPanels> getSolarPanels() {
+		return solarPanels;
+	}
+
+	public void setSolarPanels(ArrayList<SolarPanels> solarPanels) {
+		this.solarPanels = solarPanels;
+	}
+
+	public LocationData getLocationInformation() {
+		return locationInformation;
+	}
+
+	public void setLocationInformation(LocationData locationInformation) {
+		this.locationInformation = locationInformation;
+	}
+
 	/**
 	 * @param wireLength
 	 *            the wireLength to set
@@ -333,15 +347,11 @@ public class SolarSetup {
 	}
 
 	public boolean addPanels(SolarPanels panels) {
-		return this.panels.add(panels);
+		return this.solarPanels.add(panels);
 	}
 
 	public boolean removePanels(SolarPanels panels) {
-		return this.panels.remove(panels);
-	}
-
-	public ArrayList<SolarPanels> getPanels() {
-		return panels;
+		return this.solarPanels.remove(panels);
 	}
 
 	

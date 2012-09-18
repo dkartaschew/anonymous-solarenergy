@@ -229,7 +229,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 		SolarSetup global = wparent.getSetup();
 		if (global != null) {
 			// Get our inverter.
-			panels = global.getPanels();
+			panels = global.getSolarPanels();
 			UpdateTable();
 		}
 		return true;

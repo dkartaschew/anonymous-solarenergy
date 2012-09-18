@@ -11,11 +11,7 @@
 	<classpathentry kind="lib" path="../appengine-java-sdk-1.7.0/lib/impl/appengine-api.jar"/>
 	<classpathentry kind="lib" path="../appengine-java-sdk-1.7.0/lib/impl/appengine-api-labs.jar"/>
 	<classpathentry kind="lib" path="../appengine-java-sdk-1.7.0/lib/impl/appengine-api-stubs.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk7">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

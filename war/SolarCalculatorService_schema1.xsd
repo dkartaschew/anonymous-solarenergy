@@ -43,8 +43,10 @@
       <xs:element name="customerData" type="tns:customerData" minOccurs="0"/>
       <xs:element name="inverter" type="tns:solarInverter" minOccurs="0"/>
       <xs:element name="location" type="tns:locationData" minOccurs="0"/>
+      <xs:element name="locationInformation" type="tns:locationData" minOccurs="0"/>
       <xs:element name="setupDescription" type="xs:string" minOccurs="0"/>
       <xs:element name="setupName" type="xs:string" minOccurs="0"/>
+      <xs:element name="solarPanels" type="tns:solarPanels" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="wireEfficiency" type="xs:double" minOccurs="0"/>
       <xs:element name="wireLength" type="xs:double" minOccurs="0"/>
     </xs:sequence>
@@ -88,6 +90,30 @@
       <xs:element name="locationWeatherData" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="locationWeatherEfficiency" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="longitude" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarPanels">
+    <xs:sequence>
+      <xs:element name="panelAzimuth" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelCount" type="xs:int" minOccurs="0"/>
+      <xs:element name="panelDirection" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelType" type="tns:solarPanel" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="solarPanel">
+    <xs:sequence>
+      <xs:element name="INITIAL_VALUES" type="xs:double" minOccurs="0"/>
+      <xs:element name="key" type="xs:long" minOccurs="0"/>
+      <xs:element name="panelCost" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelLifeYears" type="xs:int" minOccurs="0"/>
+      <xs:element name="panelLossYear" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelManufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelManufacturerCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelName" type="xs:string" minOccurs="0"/>
+      <xs:element name="panelRRP" type="xs:double" minOccurs="0"/>
+      <xs:element name="panelWattage" type="xs:double" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

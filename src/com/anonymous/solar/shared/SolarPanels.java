@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.shared;
 
+import com.anonymous.solar.shared.SolarPanelsException;
+
 /**
  * Class to hold a collection of Solar Panels. themselves.
  * 
@@ -12,30 +14,41 @@ package com.anonymous.solar.shared;
 public class SolarPanels {
 
 	private SolarPanel panelType = null;
-	private Integer panelCount = 0;
-	private Double panelDirection = 0.00;
-	private Double panelAzimuth = 0.00;
+	private Integer panelCount;
+	private Double panelDirection;
+	private Double panelAzimuth;
 
 	/**
 	 * Default constructor
 	 */
 	public SolarPanels() {
+		panelCount = 0;
+		panelDirection = 0.00;
+		panelAzimuth = 0.00;
 	}
 
 	/**
 	 * Default Constructor.
-	 * @param panelType The type of panel to be part of this collection of panels
-	 * @param panelCount The number of panels in the collection
-	 * @param panelDirection The direction of the panels in the collection (0 - 360)
-	 * @param panelAzimuth The azimuth of the panels in the collection (0 - 90)
+	 * 
+	 * @param panelType
+	 *            The type of panel to be part of this collection of panels
+	 * @param panelCount
+	 *            The number of panels in the collection
+	 * @param panelDirection
+	 *            The direction of the panels in the collection (0 - 360)
+	 * @param panelAzimuth
+	 *            The azimuth of the panels in the collection (0 - 90)
 	 * @throws SolarPanelsException
 	 */
-	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth)
-			throws SolarPanelsException {
-		setPanelType(panelType);
-		setPanelCount(panelCount);
-		setPanelDirection(panelDirection);
-		setPanelAzimuth(panelAzimuth);
+	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth) {
+		try {
+			setPanelType(panelType);
+			setPanelCount(panelCount);
+			setPanelDirection(panelDirection);
+			setPanelAzimuth(panelAzimuth);
+		} catch (Exception e) {
+
+		}
 	}
 
 	/*
@@ -186,7 +199,7 @@ public class SolarPanels {
 		if (panelDirection == null) {
 			throw new SolarPanelsException("The direction given is null");
 		}
-		if (panelDirection < 0.00 || panelDirection > 360.0 ) {
+		if (panelDirection < 0.00 || panelDirection > 360.0) {
 			throw new SolarPanelsException("The direction must be a value between 0 and 360.");
 		}
 		this.panelDirection = panelDirection;

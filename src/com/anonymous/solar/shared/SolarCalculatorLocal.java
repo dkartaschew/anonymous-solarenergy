@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.anonymous.solar.shared.*;
-
+import com.anonymous.solar.shared.CustomerData;
 
 /**
  * 
@@ -89,7 +88,7 @@ public SolarResult calculateYearlySavings(SolarResult solarResult, int year) {
 	
 	double yearlySavings = 365 * newSolarResult.getDailySavings();
 	
-	ArrayList<SolarPanels> solarPanelBanksList = solarSetup.getPanels();
+	ArrayList<SolarPanels> solarPanelBanksList = solarSetup.getSolarPanels();
 	double additionalCosts = 0.0;
 	//Calculate additional costs
 	for(int i = 0; i < solarPanelBanksList.size(); i++) {
@@ -168,7 +167,7 @@ private double calculateSunlightHours(double lat) {
 private double calculateSolarPanelCosts(SolarSetup solarSystem) {
 	double solarPanelCosts = 0;
 	
-	ArrayList<SolarPanels> solarPanels = solarSystem.getPanels();
+	ArrayList<SolarPanels> solarPanels = solarSystem.getSolarPanels();
 	
 	for (int i = 0; i < solarPanels.size(); i++) {
 		SolarPanels currentSolarBank = solarPanels.get(i);
@@ -193,7 +192,7 @@ private double calculateSystemPowerOutput(SolarSetup solarSystem, double dayligh
 	//Is the year relative to the lifetime of the panel or inverter
 	int relativeYear = 0;
 	
-	ArrayList<SolarPanels> solarPanelBanksList = solarSystem.getPanels();
+	ArrayList<SolarPanels> solarPanelBanksList = solarSystem.getSolarPanels();
 	for (int i = 0; i < solarPanelBanksList.size(); i++) {
 		SolarPanels currentSolarBank = solarPanelBanksList.get(i);
 		SolarPanel panelType = currentSolarBank.getPanelType();
