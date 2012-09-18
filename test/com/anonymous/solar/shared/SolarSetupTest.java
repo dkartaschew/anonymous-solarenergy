@@ -16,7 +16,23 @@ import com.anonymous.solar.shared.SolarPanels;
  */
 public class SolarSetupTest {
 
-	SolarSetup instance;
+	private SolarSetup instance;
+	
+	// Test Data
+	private ArrayList<SolarPanels> panels = new ArrayList<SolarPanels>();
+	private SolarInverter inverter = new SolarInverter("Inverter", "InverterManufacturer", "AA1234",
+			100.0, 0.5, 98.0, 150.0, 300.0, 15);
+	private Double wireLength = 25.00;
+	private Double wireEfficiency = 100.00;
+	
+	//private List<Double> locData = new ArrayList<Double>(1.0,2.0);
+	//private LocationData locationInformation = new LocationData(25.0, 25.0, "Test", {1.0,2.0,3.0});
+	private CustomerData customerData = new CustomerData();
+	private String setupName = "SetupName";
+	private String setupDescription = "SetupDescription";
+	private LocationData location = new LocationData();
+
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -95,137 +111,70 @@ public class SolarSetupTest {
 		assertTrue("Default Solar Panels count is valid", instance.getLocationInformation() == null);
 	}
 	
+	/**
+	 * test default constructor.
+	 * @throws SolarSetupException
+	 */
 	@Test
 	public final void testSolarSetupConstructor() throws SolarSetupException {
 		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
 		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
 	}
 	
+
 	
-
+	// setCustomerData
 	@Test
-	public final void testEqualsObject() {
-		fail("Not yet implemented"); // TODO
+	public void testSetCustomerData() throws SolarSetupException {
+		instance.setCustomerData(customerData);
+		assertTrue(instance.getCustomerData().equals(customerData));
 	}
 
+	// setSetupName
 	@Test
-	public final void testGetCustomerData() {
-		fail("Not yet implemented"); // TODO
+	public void testSetSetupName() throws SolarSetupException {
+		instance.setSetupName(setupName);
+		assertTrue(instance.getSetupName().compareTo("SetupName") == 0);
 	}
 
+	// setSetupDescription
 	@Test
-	public final void testSetCustomerData() {
-		fail("Not yet implemented"); // TODO
+	public void testSetSetupDescription() throws SolarSetupException {
+		instance.setSetupDescription(setupDescription);
+		assertTrue(instance.getSetupDescription().compareTo("SetupDescription") == 0);
 	}
 
+	// setInverter
 	@Test
-	public final void testGetSetupName() {
-		fail("Not yet implemented"); // TODO
+	public void testSetInverter() throws SolarSetupException {
+		instance.setInverter(inverter);
+		instance.getInverter().equals(inverter);
 	}
 
+	// setWireLength
 	@Test
-	public final void testSetSetupName() {
-		fail("Not yet implemented"); // TODO
+	public void testSetWireLength() throws SolarSetupException {
+		instance.setWireLength(wireLength);
+		instance.getWireLength().equals(wireLength);
 	}
 
+	// setWireEfficiency
 	@Test
-	public final void testGetSetupDescription() {
-		fail("Not yet implemented"); // TODO
+	public void testSetWireEfficiency() throws SolarSetupException {
+		instance.setWireEfficiency(wireEfficiency);
+		instance.getWireEfficiency().equals(wireEfficiency);
+	}
+	// getPanels
+	@Test
+	public void testGetPanels() throws SolarSetupException {
+		instance.setSolarPanels(panels);
+		assertTrue(instance.getSolarPanels().equals(panels));
 	}
 
+	// setLocation
 	@Test
-	public final void testSetSetupDescription() {
-		fail("Not yet implemented"); // TODO
+	public void testSetLocation() throws SolarSetupException {
+		instance.setLocationInformation(location);
+		assertTrue(instance.getLocationInformation().equals(location));
 	}
-
-	@Test
-	public final void testToString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetDirectionalPanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testDetermineInverterLoss() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testLengthUntilInverter() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetInverter() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetInverter() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetWireLength() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetSolarPanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetSolarPanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetLocationInformation() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetLocationInformation() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetWireLength() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetWireEfficiency() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetWireEfficiency() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testAddPanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testRemovePanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetPanels() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testToString1() {
-		fail("Not yet implemented"); // TODO
-	}
-
 }
