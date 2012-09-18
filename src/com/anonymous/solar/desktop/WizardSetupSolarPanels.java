@@ -53,7 +53,7 @@ public class WizardSetupSolarPanels extends javax.swing.JPanel implements Wizard
 	 * Names components for GUI testing
 	 */
 	private void nameComponents() {
-		
+		jTableSolarPanels.setName("tableSolarPanels");
 	}
 
 	/**
