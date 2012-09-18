@@ -1,4 +1,4 @@
-set wsdluri=.\war\SolarCalculatorService.wsdl
+set wsdluri=http://anonymous-solarenergy.appspot.com/SolarCalculatorService.wsdl
 set gensrcdir=.\src
 set targetpackage=com.anonymous.solar.client
 set genoutdir=.\war\WEB-INF\classes
