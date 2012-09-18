@@ -28,6 +28,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         initComponents();
         this.iParent = parent;
         LoadInverter(parent.inverter);
+        setTitle("Inverter Information");
     }
     
     /**
