@@ -8,6 +8,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * Main Entry Point for Desktop Application
@@ -50,7 +51,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 		jTextFieldLocation1.setName("jTextFieldLocation1");
 		jTextFieldLatitude.setName("jTextFieldLatitude");
 		jTextFieldLongitude.setName("jTextFieldLongitude");
-		
+
 	}
 
 	/**
@@ -145,10 +146,10 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 
 		jButtonSetLocation1.setText("...");
 		jButtonSetLocation1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSetLocationActionPerformed(evt);
-            }
-        });
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jSetLocationActionPerformed(evt);
+			}
+		});
 
 		jLabelLongHeader.setText("Longitude:");
 
@@ -345,7 +346,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 						"Setup Name Missing", JOptionPane.OK_OPTION);
 				return false;
 			}
-			if(parent.getSetup().getLocationInformation() == null){
+			if (parent.getSetup().getLocationInformation() == null) {
 				jButtonSetLocation1.setBackground(Color.red);
 				JOptionPane.showMessageDialog(this, "Please enter a location name before continuing.",
 						"Location Missing", JOptionPane.OK_OPTION);
@@ -356,8 +357,18 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 		SolarSetup global = parent.getSetup();
 		if (global != null) {
 			// Store the name and description fields.
-			global.setSetupName(jTextFieldSetupName.getText());
-			global.setSetupDescription(jTextAreaSetupDescription.getText());
+			try {
+				if (jTextFieldSetupName.getText().length() != 0) {
+					global.setSetupName(jTextFieldSetupName.getText());
+				}
+				global.setSetupDescription(jTextAreaSetupDescription.getText());
+			} catch (SolarSetupException e) {
+				// Oops, missing data, need to handle this.
+				JOptionPane.showMessageDialog(this,
+						"You have invalid setup details. Please correct these to continue.", "Setup Details Invalid",
+						JOptionPane.OK_OPTION);
+				return false;
+			}
 		}
 		return true;
 	}
@@ -380,12 +391,13 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 	public String getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * Event handler for location button.
+	 * 
 	 * @param evt
 	 */
-	private void jSetLocationActionPerformed(java.awt.event.ActionEvent evt){
+	private void jSetLocationActionPerformed(java.awt.event.ActionEvent evt) {
 		LocationDialog dialog = new LocationDialog(parent, true);
 		dialog.setVisible(true);
 		SolarSetup global = parent.getSetup();

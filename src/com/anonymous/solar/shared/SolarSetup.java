@@ -10,11 +10,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for solarSetup complex type.
+ * <p>
+ * Java class for solarSetup complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="solarSetup">
@@ -38,16 +40,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "solarSetup", propOrder = {
-    "customerData",
-    "inverter",
-    "locationInformation",
-    "setupDescription",
-    "setupName",
-    "solarPanels",
-    "wireEfficiency",
-    "wireLength"
-})
+@XmlType(name = "solarSetup", propOrder = { "customerData", "inverter", "locationInformation", "setupDescription",
+		"setupName", "solarPanels", "wireEfficiency", "wireLength" })
 /**
  * Class to hold and work on Solar Installation components, namely inverters
  * themselves.
@@ -55,18 +49,17 @@ import javax.xml.bind.annotation.XmlType;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
-
 public class SolarSetup {
 
 	protected CustomerData customerData;
-    protected SolarInverter inverter;
-    protected LocationData locationInformation;
-    protected String setupDescription;
-    protected String setupName;
-    @XmlElement(nillable = true)
-    protected List<SolarPanels> solarPanels;
-    protected Double wireEfficiency;
-    protected Double wireLength;
+	protected SolarInverter inverter;
+	protected LocationData locationInformation;
+	protected String setupDescription;
+	protected String setupName;
+	@XmlElement(nillable = true)
+	protected List<SolarPanels> solarPanels;
+	protected Double wireEfficiency;
+	protected Double wireLength;
 
 	public SolarSetup() {
 		solarPanels = new ArrayList<SolarPanels>();
@@ -74,15 +67,17 @@ public class SolarSetup {
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,
-			LocationData location, CustomerData customerData, String setupName, String setupDescription) {
-		this.solarPanels = panels;
-		this.inverter = invertor;
-		this.wireLength = wireLength;
-		this.wireEfficiency = wireEfficiency;
-		this.locationInformation = location;
-		this.customerData = customerData;
-		this.setupName = setupName;
-		this.setupDescription = setupDescription;
+			LocationData location, CustomerData customerData, String setupName, String setupDescription)
+			throws SolarSetupException {
+
+		setCustomerData(customerData);
+		setInverter(invertor);
+		setLocationInformation(location);
+		setSetupDescription(setupDescription);
+		setSetupName(setupName);
+		setSolarPanels(panels);
+		setWireEfficiency(wireEfficiency);
+		setWireLength(wireLength);
 	}
 
 	/*
@@ -171,40 +166,59 @@ public class SolarSetup {
 	 * Set the object that will hold the customer data.
 	 * 
 	 * @param customerData
+	 * @throws SolarSetupException
+	 *             if the customer data object is null
 	 */
-	public void setCustomerData(CustomerData customerData) {
+	public void setCustomerData(CustomerData customerData) throws SolarSetupException {
+		if (customerData == null) {
+			throw new SolarSetupException("The supplied customer object is null");
+		}
 		this.customerData = customerData;
 	}
 
 	/**
-	 * getter for setup name
-	 * @return
+	 * Get the Setup name used by the application
+	 * 
+	 * @return Setup Name
 	 */
 	public String getSetupName() {
 		return setupName;
 	}
 
 	/**
-	 * setter for setup name
+	 * Set the setup name
+	 * 
 	 * @param setupName
+	 * @throws SolarSetupException
+	 *             if the name is null or length = 0.
 	 */
-	public void setSetupName(String setupName) {
+	public void setSetupName(String setupName) throws SolarSetupException {
+		if (setupName == null || setupName.length() == 0) {
+			throw new SolarSetupException("The supplied name is null");
+		}
 		this.setupName = setupName;
 	}
 
 	/**
-	 * getter for setup description
-	 * @return
+	 * Get the setup description
+	 * 
+	 * @return Setup description
 	 */
 	public String getSetupDescription() {
 		return setupDescription;
 	}
 
 	/**
-	 * setter for setup description.
+	 * Set the setup description.
+	 * 
 	 * @param setupDescription
+	 * @throws SolarSetupException
+	 *             if the description is null.
 	 */
-	public void setSetupDescription(String setupDescription) {
+	public void setSetupDescription(String setupDescription) throws SolarSetupException {
+		if (setupDescription == null) {
+			throw new SolarSetupException("The supplied description is null");
+		}
 		this.setupDescription = setupDescription;
 	}
 
@@ -214,111 +228,124 @@ public class SolarSetup {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString(){
+	public String toString() {
 		String details = "<html>";
 		int panelCount = solarPanels.size();
 
-		//Setup name and description
+		// Setup name and description
 		details += "<b>System Name:</b> ";
 		details += setupName + "<br /><br />";
 		details += "<b>System Description:</b><br />";
 		details += setupDescription + "<br /><br />";
-		
+
 		// Location information
 		details += "<b>Location:</b><br />";
-		details += locationInformation.toString(false) + "<br />";	
-		
-		//Panel Data
+		details += locationInformation.toString(false) + "<br />";
+
+		// Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
 
-		for(SolarPanels panel : solarPanels){
-			details += panel.getPanelType().toString(false) + "<br />";		
+		for (SolarPanels panel : solarPanels) {
+			details += panel.getPanelType().toString(false) + "<br />";
 		}
-		
-		//Inverter details
+
+		// Inverter details
 		details += "<b>Inverter Details</b><br />";
-		details += inverter.toString(false)+"<br />";
-		
-		//Customer details
+		details += inverter.toString(false) + "<br />";
+
+		// Customer details
 		details += "<b>Customer Details</b><br />";
-		details += customerData.toString(false)+"<br /></html>";
-		
+		details += customerData.toString(false) + "<br /></html>";
+
 		return details;
 	}
-	
-	
-	public ArrayList<SolarPanels> GetDirectionalPanels(Direction direction){
+
+	/**
+	 * Return all the panels that are orientated a set direction.
+	 * 
+	 * @param direction
+	 *            The direction of panels requested.
+	 * @return An arraylist of panels that face the specified direction.
+	 */
+	public ArrayList<SolarPanels> GetDirectionalPanels(Direction direction) {
 		ArrayList<SolarPanels> directionalPanels = new ArrayList<SolarPanels>();
-		
-		switch(direction){
+
+		switch (direction) {
 		case NORTH:
-			for(SolarPanels panelz : solarPanels){
-			if (panelz.getPanelDirection() < 45 || panelz.getPanelDirection()  > 315){
-				directionalPanels.add(panelz);
-			}
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() <= 45 || panelz.getPanelDirection() > 315) {
+					directionalPanels.add(panelz);
+				}
 			}
 			break;
 		case EAST:
-			for(SolarPanels panelz : solarPanels){
-			if(panelz.getPanelDirection()  > 45 && panelz.getPanelDirection()  < 135){
-				directionalPanels.add(panelz);
-			}
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 45 && panelz.getPanelDirection() <= 135) {
+					directionalPanels.add(panelz);
+				}
 			}
 			break;
 		case SOUTH:
-			for(SolarPanels panelz : solarPanels){
-			if(panelz.getPanelDirection()  > 135 && panelz.getPanelDirection()  < 225){
-				directionalPanels.add(panelz);
-			}
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 135 && panelz.getPanelDirection() <= 225) {
+					directionalPanels.add(panelz);
+				}
 			}
 			break;
 		case WEST:
-			for(SolarPanels panelz : solarPanels){
-			if(panelz.getPanelDirection()  > 225 && panelz.getPanelDirection()  < 315){
-				directionalPanels.add(panelz);
-			}
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 225 && panelz.getPanelDirection() <= 315) {
+					directionalPanels.add(panelz);
+				}
 			}
 			break;
-		}	
+		}
 		return directionalPanels;
 	}
-	
-	
+
 	/**
-	 * The method will get the inverter efficiency at the specified number of years after use
-	 * @param years - the number of years to get data for
+	 * The method will get the inverter efficiency at the specified number of
+	 * years after use
+	 * 
+	 * @param years
+	 *            - the number of years to get data for
 	 * @return double representing the new inverter efficiency
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public double DetermineInverterLoss(double years) throws Exception{	
-		if(years < 0){
+	public double DetermineInverterLoss(double years) throws Exception {
+		if (years < 0) {
 			throw new Exception();
 		}
-		
+
 		double currentEff = inverter.getInverterEfficiency();
 		double loss = inverter.getInverterLossYear() / 100;
-		
+
 		return currentEff * Math.pow((1 - loss), years);
 	}
-	
+
 	/**
-	 * Determines how long it will take for the inverter to reach a specified efficiency
-	 * @param efficiency - the efficiency the inverter should reach
+	 * Determines how long it will take for the inverter to reach a specified
+	 * efficiency
+	 * 
+	 * @param efficiency
+	 *            - the efficiency the inverter should reach
 	 * @return A double representing time
 	 */
-	public double LengthUntilInverter(double newEff){
-		
+	public double LengthUntilInverter(double newEff) {
+
 		double currEff = inverter.getInverterEfficiency();
 		double loss = inverter.getInverterLossYear() / 100;
-		
+
 		double first = Math.log10(newEff / currEff);
-		double second =  Math.log10(1 - loss);
-		
-		return  first / second;
+		double second = Math.log10(1 - loss);
+
+		return first / second;
 	}
-	
+
 	/**
+	 * Get the Inverter utilised in this setup.
+	 * 
 	 * @return the invertor
 	 */
 	public SolarInverter getInverter() {
@@ -326,48 +353,87 @@ public class SolarSetup {
 	}
 
 	/**
+	 * Set the inverter to be utilised in this setup.
+	 * 
 	 * @param invertor
 	 *            the invertor to set
+	 * @throws SolarSetupException
+	 *             if the inverter is null.
 	 */
-	public void setInverter(SolarInverter invertor) {
+	public void setInverter(SolarInverter invertor) throws SolarSetupException {
+		if (invertor == null) {
+			throw new SolarSetupException("The supplied Inverter was null");
+		}
 		this.inverter = invertor;
 	}
 
 	/**
+	 * Get the arraylist of all solar panels that make up this installation.
+	 * @return Array list of solar panels.
+	 */
+	public ArrayList<SolarPanels> getSolarPanels() {
+		if (solarPanels == null) {
+			solarPanels = new ArrayList<SolarPanels>();
+		}
+		return (ArrayList<SolarPanels>) solarPanels;
+	}
+
+	/**
+	 * Set the entire array list of panels.
+	 * @param solarPanels
+	 * @throws SolarSetupException if the arraylist passed is null.
+	 */
+	public void setSolarPanels(ArrayList<SolarPanels> solarPanels) throws SolarSetupException {
+		if (solarPanels == null) {
+			throw new SolarSetupException("The supplied solarPanels was null");
+		}
+		this.solarPanels = solarPanels;
+	}
+
+	/**
+	 * Get the location data for this installation.
+	 * @return
+	 */
+	public LocationData getLocationInformation() {
+		return locationInformation;
+	}
+
+	/**
+	 * Set the location for this installation
+	 * @param locationInformation
+	 * @throws SolarSetupException if the installation information is null.
+	 */
+	public void setLocationInformation(LocationData locationInformation) throws SolarSetupException {
+		if (locationInformation == null) {
+			throw new SolarSetupException("The supplied locationInformation was null");
+		}
+		this.locationInformation = locationInformation;
+	}
+
+	/**
+	 * Get the length of wiring utilised in the setup.
+	 * 
 	 * @return the wireLength
 	 */
 	public Double getWireLength() {
 		return wireLength;
 	}
 
-	public ArrayList<SolarPanels> getSolarPanels() {
-        if (solarPanels == null) {
-            solarPanels = new ArrayList<SolarPanels>();
-        }
-		return (ArrayList<SolarPanels>) solarPanels;
-	}
-
-	public void setSolarPanels(ArrayList<SolarPanels> solarPanels) {
-		this.solarPanels = solarPanels;
-	}
-
-	public LocationData getLocationInformation() {
-		return locationInformation;
-	}
-
-	public void setLocationInformation(LocationData locationInformation) {
-		this.locationInformation = locationInformation;
-	}
-
 	/**
+	 * Set the length of wiring utilised in the setup
 	 * @param wireLength
 	 *            the wireLength to set
+	 * @throws SolarSetupException If the length is null or less than 0.00
 	 */
-	public void setWireLength(Double wireLength) {
+	public void setWireLength(Double wireLength) throws SolarSetupException {
+		if (wireLength == null || wireLength < 0.00) {
+			throw new SolarSetupException("The supplied wire Length was null or less than 0.00");
+		}
 		this.wireLength = wireLength;
 	}
 
 	/**
+	 * Get the wire efficiency used in this installation.
 	 * @return the wireEfficiency
 	 */
 	public Double getWireEfficiency() {
@@ -375,23 +441,42 @@ public class SolarSetup {
 	}
 
 	/**
+	 * Set the Wire efficiency as used in this installation.
 	 * @param wireEfficiency
 	 *            the wireEfficiency to set
+	 * @throws SolarSetupException if the efficiency is null or less than 0.00
 	 */
-	public void setWireEfficiency(Double wireEfficiency) {
+	public void setWireEfficiency(Double wireEfficiency) throws SolarSetupException {
+		if (wireEfficiency == null || wireEfficiency < 0.00) {
+			throw new SolarSetupException("The supplied wire Efficiency was null or less than 0.00");
+		}
 		this.wireEfficiency = wireEfficiency;
 	}
 
-	public boolean addPanels(SolarPanels panels) {
+	/**
+	 * Add a group of panels to this solar setup.
+	 * @param panelsthe SolarPanels to add.
+	 * @return if the addition succeeded or not.
+	 * @throws SolarSetupException if the panel information was null
+	 */
+	public boolean addPanels(SolarPanels panels) throws SolarSetupException {
+		if (panels == null) {
+			throw new SolarSetupException("The supplied panel information was null");
+		}
 		return this.solarPanels.add(panels);
 	}
 
-	public boolean removePanels(SolarPanels panels) {
+	/**
+	 * Remove a group of panels from this solar setup.
+	 * @param panels the SolarPanels to remove.
+	 * @return if the removal succeeded or not.
+	 * @throws SolarSetupException if the panels to be removed was null
+	 */
+	public boolean removePanels(SolarPanels panels) throws SolarSetupException {
+		if (panels == null) {
+			throw new SolarSetupException("The supplied panel information was null");
+		}
 		return this.solarPanels.remove(panels);
-	}
-	
-	public void setPanels(ArrayList<SolarPanels> newPanels) {
-		this.solarPanels = newPanels;
 	}
 
 }

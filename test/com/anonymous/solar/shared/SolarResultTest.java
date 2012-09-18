@@ -25,15 +25,15 @@ public class SolarResultTest {
 	/*
 	 * Test null values in SolarSetup when passed through SolarResult
 	 */
-	@Test(expected = SolarResultException.class)
-	public void nullSolarPanels() throws SolarResultException {
+	@Test(expected = SolarSetupException.class)
+	public void nullSolarPanels() throws SolarResultException, SolarSetupException {
 		setupInstance = new SolarSetup(null, testInverter, 0.00, 100.00, new LocationData(), null, null, null);
 		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);
 	}
 	
 	@Test(expected = SolarResultException.class)
-	public void nullInverter() throws SolarResultException {
+	public void nullInverter() throws SolarResultException, SolarSetupException  {
 		setupInstance = new SolarSetup();
 		setupInstance.addPanels(testPanels);
 		resultInstance = new SolarResult(setupInstance);
@@ -43,7 +43,7 @@ public class SolarResultTest {
 	 * Tests exception is thrown when the panels list is empty
 	 */
 	@Test(expected = SolarResultException.class)
-	public void emptyPanelsArray() throws SolarResultException {
+	public void emptyPanelsArray() throws SolarResultException, SolarSetupException  {
 		setupInstance = new SolarSetup();
 		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);

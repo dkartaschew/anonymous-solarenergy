@@ -11,10 +11,13 @@ import javax.swing.JOptionPane;
 import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
- *
- * @author darran
+ * User Cost Pane for Desktop Application
+ * 
+ * @author Alex Colvin
+ * @version 1.0
  */
 public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 
@@ -186,7 +189,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
                         .addComponent(jLabelAnnualTariffIncrease)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelTariffGroupLayout.setVerticalGroup(
             jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,9 +221,9 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -337,11 +340,12 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 			data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
 			data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
 			data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+			global.setCustomerData(data);
             } catch (SolarPanelException e) {
             	return false;
-            }
-			global.setCustomerData(data);
-			
+            }catch (SolarSetupException e) {
+            	return false;
+            }				 
 		}
 		return true;
 	}

@@ -28,6 +28,7 @@ import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarPanelsException;
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.SolarSetupException;
 
 /**
  * Main Entry Point for the wizard interface for the Desktop Application
@@ -85,18 +86,12 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
-		try {
-			LoadTestData();
-		} catch (SolarPanelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LocationDataException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SolarPanelsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			LoadTestData();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	private void LoadTestData() throws SolarPanelException, LocationDataException, SolarPanelsException{
@@ -108,6 +103,7 @@ public class Wizard extends javax.swing.JPanel {
 			monthData.add(i);
 		}
 		
+		try{
 		//String and Double Data
 		setup.setSetupName("DEFAULT_TITLE");
 		setup.setSetupDescription("DEFAULT_DESCRIPTION");
@@ -131,6 +127,9 @@ public class Wizard extends javax.swing.JPanel {
 		//Inverter Data
 		SolarInverter invert = new SolarInverter("DEF_TITLE", "D_MANU", "D_MANU_CODE", 100.0, 5.0, 100.0, 100.0, 100.0, 30);
 		setup.setInverter(invert);
+		} catch (SolarSetupException e){
+			
+		}
 	}
 
 	/**
