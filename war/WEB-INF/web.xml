@@ -56,12 +56,12 @@
 	
 	<!-- Main Calculation Engine Servelet -->
 	<servlet>
-		<servlet-name>SolarCalculatorService</servlet-name>
+		<servlet-name>SolarCalculator</servlet-name>
 		<servlet-class>com.anonymous.solar.server.SolarCalculatorSOAPServerServelet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>SolarCalculatorService</servlet-name>
+		<servlet-name>SolarCalculator</servlet-name>
 		<url-pattern>/SolarCalculatorService</url-pattern>
 	</servlet-mapping>
 		

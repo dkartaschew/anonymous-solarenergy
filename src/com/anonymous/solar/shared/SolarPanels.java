@@ -75,15 +75,12 @@ public class SolarPanels {
 	 *            The azimuth of the panels in the collection (0 - 90)
 	 * @throws SolarPanelsException
 	 */
-	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth) {
-		try {
-			setPanelType(panelType);
-			setPanelCount(panelCount);
-			setPanelDirection(panelDirection);
-			setPanelAzimuth(panelAzimuth);
-		} catch (Exception e) {
-
-		}
+	public SolarPanels(SolarPanel panelType, Integer panelCount, Double panelDirection, Double panelAzimuth)
+			throws SolarPanelsException {
+		setPanelType(panelType);
+		setPanelCount(panelCount);
+		setPanelDirection(panelDirection);
+		setPanelAzimuth(panelAzimuth);
 	}
 
 	/*
