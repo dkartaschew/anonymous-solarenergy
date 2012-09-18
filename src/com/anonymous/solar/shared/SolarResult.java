@@ -1,7 +1,44 @@
 package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
+
+/**
+ * <p>Java class for solarResult complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="solarResult">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="dailySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="monthlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="savingsOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="solarSetup" type="{http://server.solar.anonymous.com/}solarSetup" minOccurs="0"/>
+ *         &lt;element name="yearlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "solarResult", propOrder = {
+    "dailySavings",
+    "monthlySavings",
+    "savingsOverYears",
+    "solarSetup",
+    "yearlySavings"
+})
 /**
  * Class to hold the result of the solar output calculation from the server and to handle
  * any additional calculations using that result
@@ -11,66 +48,66 @@ import java.util.ArrayList;
  *
  */
 public class SolarResult {
-
-	private final double INITIAL_VALUE = 0.0;
 	
-	private SolarSetup finalSetup;
-	private double averageDailySavings;
-	private double averageMonthlySavings;
-	private double averageYearlySavings;
-	private ArrayList<Double> savingsOverYears;
+	protected double dailySavings;
+    protected double monthlySavings;
+    @XmlElement(nillable = true)
+    protected List<Double> savingsOverYears;
+    protected SolarSetup solarSetup;
+    protected double yearlySavings;
 	
 	public SolarResult() {
 		savingsOverYears = new ArrayList<Double>();
-		averageDailySavings = INITIAL_VALUE;
-		averageYearlySavings = INITIAL_VALUE;
+		dailySavings = 0.0;
+		yearlySavings = 0.0;
 		
 	}
 	
 	public SolarResult(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
 		savingsOverYears = new ArrayList<Double>();
-		averageDailySavings = INITIAL_VALUE;
-		averageYearlySavings = INITIAL_VALUE;
-		finalSetup = solarSetup;
+		dailySavings = 0.0;
+		monthlySavings = 0.0;
+		yearlySavings = 0.0;
+		this.solarSetup = solarSetup;
 		
 	}
 	
 	public SolarSetup getSolarSetup() {
-		return finalSetup;
+		return solarSetup;
 	}
 	
 	public void setSolarSetup(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
-		finalSetup = solarSetup;
+		solarSetup = solarSetup;
 	}
 	
 	public double getDailySavings() {
-		return averageDailySavings;
+		return dailySavings;
 	}
 	
 	public void setDailySavings(double newDailySavings) {
-		averageDailySavings = newDailySavings;
+		dailySavings = newDailySavings;
 	}
 	
 	public double getYearlySavings() {
-		return averageYearlySavings;
+		return yearlySavings;
 	}
 	
 	public void setYearlySavings(double newYearlySavings) {
-		averageYearlySavings = newYearlySavings;
+		yearlySavings = newYearlySavings;
 	}
 	
 	public double getMonthlySavings() {
-		return averageMonthlySavings;
+		return monthlySavings;
 	}
 	
 	public void setMonthlySavings(double newMonthlySavings) {
-		averageMonthlySavings = newMonthlySavings;
+		monthlySavings = newMonthlySavings;
 	}
 	
 	public ArrayList<Double> getSavingsOverYears() {
-		return savingsOverYears;
+		return (ArrayList<Double>) savingsOverYears;
 	}
 	
 	public void setSavingsOverYears(ArrayList<Double> newSavingsOverYears) {
@@ -104,10 +141,10 @@ public class SolarResult {
 		String details = "<html>";
 		
 		details += "<b>Daily Savings: </b>";
-		details += averageDailySavings + "<br /><br />";
+		details += dailySavings + "<br /><br />";
 		
 		details += "<b>Yearly Savings: </b>";
-		details += averageYearlySavings + "<br /><br />";
+		details += yearlySavings + "<br /><br />";
 		
 		details += "</html>";
 		return details;

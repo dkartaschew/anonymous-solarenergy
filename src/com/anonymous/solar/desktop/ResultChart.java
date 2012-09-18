@@ -1,4 +1,4 @@
-package com.anonymous.solar.shared;
+package com.anonymous.solar.desktop;
 
 
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import com.anonymous.solar.shared.SolarResult;
 
 public class ResultChart{
 	

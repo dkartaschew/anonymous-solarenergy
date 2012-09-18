@@ -5,9 +5,49 @@ package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
-
+/**
+ * <p>Java class for solarSetup complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="solarSetup">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="customerData" type="{http://server.solar.anonymous.com/}customerData" minOccurs="0"/>
+ *         &lt;element name="inverter" type="{http://server.solar.anonymous.com/}solarInverter" minOccurs="0"/>
+ *         &lt;element name="locationInformation" type="{http://server.solar.anonymous.com/}locationData" minOccurs="0"/>
+ *         &lt;element name="setupDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="setupName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="solarPanels" type="{http://server.solar.anonymous.com/}solarPanels" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="wireEfficiency" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="wireLength" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "solarSetup", propOrder = {
+    "customerData",
+    "inverter",
+    "locationInformation",
+    "setupDescription",
+    "setupName",
+    "solarPanels",
+    "wireEfficiency",
+    "wireLength"
+})
 /**
  * Class to hold and work on Solar Installation components, namely inverters
  * themselves.
@@ -18,14 +58,15 @@ import java.util.List;
 
 public class SolarSetup {
 
-	private ArrayList<SolarPanels> solarPanels;
-	private SolarInverter inverter;
-	private Double wireLength;
-	private Double wireEfficiency;
-	private LocationData locationInformation;
-	private CustomerData customerData;
-	private String setupName;
-	private String setupDescription;
+	protected CustomerData customerData;
+    protected SolarInverter inverter;
+    protected LocationData locationInformation;
+    protected String setupDescription;
+    protected String setupName;
+    @XmlElement(nillable = true)
+    protected List<SolarPanels> solarPanels;
+    protected Double wireEfficiency;
+    protected Double wireLength;
 
 	public SolarSetup() {
 		solarPanels = new ArrayList<SolarPanels>();
@@ -300,7 +341,10 @@ public class SolarSetup {
 	}
 
 	public ArrayList<SolarPanels> getSolarPanels() {
-		return solarPanels;
+        if (solarPanels == null) {
+            solarPanels = new ArrayList<SolarPanels>();
+        }
+		return (ArrayList<SolarPanels>) solarPanels;
 	}
 
 	public void setSolarPanels(ArrayList<SolarPanels> solarPanels) {

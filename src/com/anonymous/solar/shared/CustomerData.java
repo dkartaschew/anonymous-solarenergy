@@ -1,33 +1,73 @@
 package com.anonymous.solar.shared;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * <p>Java class for customerData complex type.
+ * 
+ * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
+ * <pre>
+ * &lt;complexType name="customerData">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="annualTariffIncrease" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="dailyAverageUsage" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="feedInFee" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="hourlyAverageUsage" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="monthlyAverageUsage" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="tariff11Cost" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="tariff11Fee" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="tariff13Cost" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="tariff13Fee" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "customerData", propOrder = {
+    "annualTariffIncrease",
+    "dailyAverageUsage",
+    "feedInFee",
+    "hourlyAverageUsage",
+    "monthlyAverageUsage",
+    "tariff11Cost",
+    "tariff11Fee",
+    "tariff13Cost",
+    "tariff13Fee"
+})
 public class CustomerData {
 	
-	private final Double INITIAL_VALUES = 0.0;
-	
-	private Double dailyAverageUsage;
-	private Double hourlyAverageUsage;
-	private Double monthlyAverageUsage;
-	
-	private Double tariff11Cost;
-	private Double tariff11Fee;
-	private Double tariff13Cost;
-	private Double tariff13Fee;
-	
-	private Double feedInFee;
-	private Double annualTariffIncrease;
+	protected Double annualTariffIncrease;
+    protected Double dailyAverageUsage;
+    protected Double feedInFee;
+    protected Double hourlyAverageUsage;
+    protected Double monthlyAverageUsage;
+    protected Double tariff11Cost;
+    protected Double tariff11Fee;
+    protected Double tariff13Cost;
+    protected Double tariff13Fee;
 	
 	public CustomerData(){
-		dailyAverageUsage = INITIAL_VALUES;
-		hourlyAverageUsage = INITIAL_VALUES;
-		monthlyAverageUsage = INITIAL_VALUES;
+		dailyAverageUsage = 0.0;
+		hourlyAverageUsage = 0.0;
+		monthlyAverageUsage = 0.0;
 		
-		tariff11Cost = INITIAL_VALUES;
-		tariff11Fee = INITIAL_VALUES;
-		tariff13Cost = INITIAL_VALUES;
-		tariff13Fee = INITIAL_VALUES;
+		tariff11Cost = 0.0;
+		tariff11Fee = 0.0;
+		tariff13Cost = 0.0;
+		tariff13Fee = 0.0;
 		
-		feedInFee = INITIAL_VALUES;
-		annualTariffIncrease = INITIAL_VALUES;
+		feedInFee = 0.0;
+		annualTariffIncrease = 0.0;
 	}
 	
 	public CustomerData(Double daily, Double hourly, Double monthly, Double tar11C, Double tar11F,

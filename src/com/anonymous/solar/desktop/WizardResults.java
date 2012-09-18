@@ -3,6 +3,8 @@
  */
 package com.anonymous.solar.desktop;
 
+import com.anonymous.solar.client.SolarCalculator;
+import com.anonymous.solar.client.SolarCalculatorService;
 import com.anonymous.solar.shared.Direction;
 import com.anonymous.solar.shared.SolarCalculatorLocal;
 import com.anonymous.solar.shared.SolarPanels;
@@ -210,17 +212,20 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
         SolarSetup global = parent.getSetup();
         SolarResult results = null;
         String output = "";
+        String output2 = "";
         if (global != null) {
-            try {
-                results = new SolarResult(global);
-            } catch (SolarResultException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            SolarCalculatorLocal calculator = new SolarCalculatorLocal();
-            results = calculator.calculateDailySavings(results, 1);
-            results = calculator.calculateYearlySavings(results, 1);
-            results = calculator.calculateYearlySavingsOverTime(results, 10);
+        	
+            SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
+            results = calculatorSOAP.calculateAllResults(global, 10);
+        	
+            output2 += "<br /> Daily Savings: $" + results.getDailySavings() + "<br />";
+            output2 += "<br /> Monthly Savings: $" + results.getMonthlySavings() + "<br />";
+            output2 += "<br /> Yearly Savings: $" + results.getYearlySavings() + "<br />";
+            
+            
+            //results = calculator.calculateDailySavings(results, 1);
+            //results = calculator.calculateYearlySavings(results, 1);
+            //results = calculator.calculateYearlySavingsOverTime(results, 10);
             
             try {
             	output += "<br />Your inverter will be at  50% efficiency in " + 
@@ -264,7 +269,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			}
             
 
-            jTextAreaConfirmationDetails.setText(output);
+            jTextAreaConfirmationDetails.setText(output2);
 
         }
         return true;
