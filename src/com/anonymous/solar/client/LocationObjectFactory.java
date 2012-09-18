@@ -9,6 +9,7 @@ import javax.xml.namespace.QName;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.CustomerData;
 
 
 /**

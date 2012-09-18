@@ -30,7 +30,7 @@ public SolarResult calculateDailySavings(SolarResult solarResult, int year) {
 	SolarResult newSolarResult = solarResult;
 	SolarSetup solarSystem = newSolarResult.getSolarSetup();
 	CustomerData customerData = solarSystem.getCustomerData();
-	LocationData locationInformation = solarSystem.getLocation();
+	LocationData locationInformation = solarSystem.getLocationInformation();
 	
 	double sunlightHours = calculateSunlightHours(locationInformation.getLatitude());
 	//double sunlightHours = 4.5;

@@ -57,10 +57,10 @@ public class LocationDialog extends javax.swing.JDialog {
 		SetupMapMouseHandlers();
 		SetupTable();
 		SetupLoadLocations();
-		if (parent.getSetup().getLocation() == null) {
+		if (parent.getSetup().getLocationInformation() == null) {
 			jComboBoxLocationName.setSelectedIndex(0);
 		} else {
-			locationData = parent.getSetup().getLocation();
+			locationData = parent.getSetup().getLocationInformation();
 			jTextFieldLocationName.setText(locationData.getLocationName());
 			jTextFieldLatitude.setText(locationData.getLatitude().toString());
 			jTextFieldLongitude.setText(locationData.getLongitude().toString());
@@ -456,7 +456,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		jTextFieldLongitude.setBorder(clear);
 		// If we suceeded, then dispose;
 		if (success) {
-			parent.getSetup().setLocation(locationData);
+			parent.getSetup().setLocationInformation(locationData);
 			this.setVisible(false);
 			this.dispose();
 		} else {

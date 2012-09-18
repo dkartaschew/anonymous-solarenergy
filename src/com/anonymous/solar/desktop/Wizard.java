@@ -126,7 +126,7 @@ public class Wizard extends javax.swing.JPanel {
 		
 		//Location Data
 		LocationData location = new LocationData(12.314890, 23.8765430, "DEFAULT_NAME", monthData, monthData);
-		setup.setLocation(location);
+		setup.setLocationInformation(location);
 		
 		//Inverter Data
 		SolarInverter invert = new SolarInverter("DEF_TITLE", "D_MANU", "D_MANU_CODE", 100.0, 5.0, 100.0, 100.0, 100.0, 30);

@@ -308,18 +308,18 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 			} else {
 				jTextAreaSetupDescription.setText("");
 			}
-			if (global.getLocation() != null) {
-				jTextFieldLocation1.setText(global.getLocation().getLocationName());
+			if (global.getLocationInformation() != null) {
+				jTextFieldLocation1.setText(global.getLocationInformation().getLocationName());
 			} else {
 				jTextFieldLocation1.setText("");
 			}
-			if (global.getLocation() != null) {
-				jTextFieldLatitude.setText(global.getLocation().getLatitude().toString());
+			if (global.getLocationInformation() != null) {
+				jTextFieldLatitude.setText(global.getLocationInformation().getLatitude().toString());
 			} else {
 				jTextFieldLatitude.setText("");
 			}
-			if (global.getLocation() != null) {
-				jTextFieldLongitude.setText(global.getLocation().getLongitude().toString());
+			if (global.getLocationInformation() != null) {
+				jTextFieldLongitude.setText(global.getLocationInformation().getLongitude().toString());
 			} else {
 				jTextFieldLongitude.setText("");
 			}
@@ -345,7 +345,7 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 						"Setup Name Missing", JOptionPane.OK_OPTION);
 				return false;
 			}
-			if(parent.getSetup().getLocation() == null){
+			if(parent.getSetup().getLocationInformation() == null){
 				jButtonSetLocation1.setBackground(Color.red);
 				JOptionPane.showMessageDialog(this, "Please enter a location name before continuing.",
 						"Location Missing", JOptionPane.OK_OPTION);
@@ -389,18 +389,18 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 		LocationDialog dialog = new LocationDialog(parent, true);
 		dialog.setVisible(true);
 		SolarSetup global = parent.getSetup();
-		if (global.getLocation() != null) {
-			jTextFieldLocation1.setText(global.getLocation().getLocationName());
+		if (global.getLocationInformation() != null) {
+			jTextFieldLocation1.setText(global.getLocationInformation().getLocationName());
 		} else {
 			jTextFieldLocation1.setText("");
 		}
-		if (global.getLocation() != null) {
-			jTextFieldLatitude.setText(global.getLocation().getLatitude().toString());
+		if (global.getLocationInformation() != null) {
+			jTextFieldLatitude.setText(global.getLocationInformation().getLatitude().toString());
 		} else {
 			jTextFieldLatitude.setText("");
 		}
-		if (global.getLocation() != null) {
-			jTextFieldLongitude.setText(global.getLocation().getLongitude().toString());
+		if (global.getLocationInformation() != null) {
+			jTextFieldLongitude.setText(global.getLocationInformation().getLongitude().toString());
 		} else {
 			jTextFieldLongitude.setText("");
 		}
