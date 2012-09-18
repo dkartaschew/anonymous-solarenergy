@@ -18,7 +18,6 @@ public class SolarInverterTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		//TODO
 		inverter = new SolarInverter();
 	}
 	
@@ -40,7 +39,7 @@ public class SolarInverterTest {
 	
 	@Test
 	public void testToStringInitialState() {
-		assertTrue(inverter.toString().compareTo("SolarInverter [inverterName=, inverterManufacturer=, inverterManufacturerCode=, inverterWattage=0.0, inverterLossYear=0.0, inverterEfficiency=0.0, inverterCost=0.0, inverterRRP=0.0, inverterLifeYears=0]") == 0);
+		assertTrue(inverter.toString().compareTo(" - Cost: $0.0 - Life: 0 years - Wattage: 0.0W - Efficiency Loss: 0.0%") == 0);
 	}
 	
 	@Test
@@ -54,13 +53,7 @@ public class SolarInverterTest {
 		inverter.setInverterCost(TEST_DOUBLE_VALUE);
 		inverter.setInverterRRP(TEST_DOUBLE_VALUE);
 		inverter.setInverterLifeYears(TEST_INTEGER_VALUE);
-		
-		assertTrue(inverter.toString().compareTo("SolarInverter [inverterName=" +
-		TEST_STRING_VALUE + ", inverterManufacturer=" + TEST_STRING_VALUE + 
-		", inverterManufacturerCode=" + TEST_STRING_VALUE + ", inverterWattage=" +
-		TEST_DOUBLE_VALUE + ", inverterLossYear=" + TEST_DOUBLE_VALUE + ", inverterEfficiency=" +
-		TEST_DOUBLE_VALUE + ", inverterCost=" + TEST_DOUBLE_VALUE + ", inverterRRP=" +
-		TEST_DOUBLE_VALUE + ", inverterLifeYears=" + TEST_INTEGER_VALUE + "]") == 0);
+		assertTrue(inverter.toString().compareTo("test - Cost: $5.0 - Life: 5 years - Wattage: 5.0W - Efficiency Loss: 5.0%") == 0);
 	}
 	
 	@Test
