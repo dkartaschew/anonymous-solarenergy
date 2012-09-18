@@ -117,11 +117,112 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupConstructor() throws SolarSetupException {
-		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), inverter, 0.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
 		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
 	}
 	
-
+	/**
+	 * test default constructor. null panels
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor2() throws SolarSetupException {
+		instance = new SolarSetup(null, new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	
+	/**
+	 * test default constructor. null inverter
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor3() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), null, 0.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. null length
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor4() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), null, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. negative length
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor5() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), -10.00, 0.00, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. null efficiency
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor6() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, null, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. negative efficiency
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor7() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, -10.00, new LocationData(), new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. null location
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor8() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, null, new CustomerData(), "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. null customer
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor9() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), null, "Test", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	/**
+	 * test default constructor. null name
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor10() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), null, "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	
+	/**
+	 * test default constructor. zero length name
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor11() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), "", "Test");
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
+	
+	/**
+	 * test default constructor. null description
+	 * @throws SolarSetupException
+	 */
+	@Test(expected =  SolarSetupException.class)
+	public final void testSolarSetupConstructor12() throws SolarSetupException {
+		instance = new SolarSetup(new ArrayList<SolarPanels>(), new SolarInverter(), 0.00, 0.00, new LocationData(), new CustomerData(), "Test", null);
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo("Test") == 0);
+	}
 	
 	// setCustomerData
 	@Test

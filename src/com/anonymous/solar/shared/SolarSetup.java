@@ -213,10 +213,10 @@ public class SolarSetup {
 	 * 
 	 * @param setupDescription
 	 * @throws SolarSetupException
-	 *             if the description is null or length = 0.
+	 *             if the description is null.
 	 */
 	public void setSetupDescription(String setupDescription) throws SolarSetupException {
-		if (setupDescription == null || setupDescription.length() == 0) {
+		if (setupDescription == null) {
 			throw new SolarSetupException("The supplied description is null");
 		}
 		this.setupDescription = setupDescription;
@@ -361,7 +361,7 @@ public class SolarSetup {
 	 *             if the inverter is null.
 	 */
 	public void setInverter(SolarInverter invertor) throws SolarSetupException {
-		if (inverter == null) {
+		if (invertor == null) {
 			throw new SolarSetupException("The supplied Inverter was null");
 		}
 		this.inverter = invertor;
