@@ -6,10 +6,8 @@ package com.anonymous.solar.desktop;
 import com.anonymous.solar.client.SolarCalculator;
 import com.anonymous.solar.client.SolarCalculatorService;
 import com.anonymous.solar.shared.Direction;
-import com.anonymous.solar.shared.SolarCalculatorLocal;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarResult;
-import com.anonymous.solar.shared.SolarResultException;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
