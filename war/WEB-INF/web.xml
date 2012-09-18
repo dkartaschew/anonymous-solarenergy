@@ -57,7 +57,7 @@
 	<!-- Main Calculation Engine Servelet -->
 	<servlet>
 		<servlet-name>SolarCalculatorService</servlet-name>
-		<servlet-class>com.anonymous.solar.server.SolarCalculatorSOAPServerServelet</servlet-class>
+		<servlet-class>com.anonymous.solar.server.SolarCalculatorSOAPServerServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
