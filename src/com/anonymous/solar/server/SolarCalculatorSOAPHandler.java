@@ -13,7 +13,9 @@ import javax.xml.soap.SOAPFault;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.transform.dom.DOMSource;
 
+import com.anonymous.solar.server.jaxws.CalculateAllResults;
 import com.anonymous.solar.server.jaxws.CalculateDailySavings;
+import com.anonymous.solar.server.jaxws.CalculateMonthlySavings;
 import com.anonymous.solar.server.jaxws.CalculateYearlySavings;
 import com.anonymous.solar.server.jaxws.CalculateYearlySavingsOverTime;
 
@@ -32,6 +34,8 @@ import com.anonymous.solar.server.jaxws.CalculateYearlySavingsOverTime;
 public class SolarCalculatorSOAPHandler {
 
 	 private static final String NAMESPACE_URI = "http://server.solar.anonymous.com/";
+	 private static final QName CALCULATE_ALL_RESULTS_QNAME = new QName
+			 (NAMESPACE_URI, "calculateAllResults");
 	 private static final QName CALCULATE_DAILY_SAVINGS_QNAME = new QName
 			 (NAMESPACE_URI, "calculateDailySavings");
 	 private static final QName CALCULATE_MONTHLY_SAVINGS_QNAME = new QName
@@ -71,6 +75,10 @@ public class SolarCalculatorSOAPHandler {
 	        } else if (CALCULATE_YEARLY_SAVINGS_OVER_TIME_QNAME.equals(qname)) {
 	        	responsePojo = handleCalculateYearlySavingsOverTimeRequest(soapElement);
 	            break;
+	        } else if (CALCULATE_MONTHLY_SAVINGS_QNAME.equals(qname)) {
+	        	responsePojo = handleCalculateMonthlySavingsRequest(soapElement);
+	        } else if (CALCULATE_ALL_RESULTS_QNAME.equals(qname)) {
+	        	responsePojo = handleCalculateAllResultsRequest(soapElement);
 	        }
 	      }
 	    }
@@ -106,5 +114,17 @@ public class SolarCalculatorSOAPHandler {
 						CalculateYearlySavingsOverTime.class);
 		return solarCalculatorAdapter.CalculateYearlySavingsOverTime
 				(calculateYearlySavingsOverTimeRequest);
+	}
+	
+	private Object handleCalculateMonthlySavingsRequest(SOAPElement soapElement) {
+		CalculateMonthlySavings calculateMonthlySavingsRequest = JAXB.unmarshal(new 
+				DOMSource(soapElement), CalculateMonthlySavings.class);
+		return solarCalculatorAdapter.CalculateMonthlySavings(calculateMonthlySavingsRequest);
+	}
+	
+	private Object handleCalculateAllResultsRequest(SOAPElement soapElement) {
+		CalculateAllResults calculateAllResultsRequest = JAXB.unmarshal(new 
+				DOMSource(soapElement), CalculateAllResults.class);
+		return solarCalculatorAdapter.CalculateAllResults(calculateAllResultsRequest);
 	}
 }

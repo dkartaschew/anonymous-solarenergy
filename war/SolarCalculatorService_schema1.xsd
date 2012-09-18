@@ -42,7 +42,6 @@
     <xs:sequence>
       <xs:element name="customerData" type="tns:customerData" minOccurs="0"/>
       <xs:element name="inverter" type="tns:solarInverter" minOccurs="0"/>
-      <xs:element name="location" type="tns:locationData" minOccurs="0"/>
       <xs:element name="locationInformation" type="tns:locationData" minOccurs="0"/>
       <xs:element name="setupDescription" type="xs:string" minOccurs="0"/>
       <xs:element name="setupName" type="xs:string" minOccurs="0"/>

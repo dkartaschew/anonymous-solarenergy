@@ -47,6 +47,18 @@ public class LocationObjectFactory {
     private final static QName _GetInverters_QNAME = new QName("http://server.solar.anonymous.com/", "getInverters");
     private final static QName _InsertInverter_QNAME = new QName("http://server.solar.anonymous.com/", "insertInverter");
     private final static QName _RemoveInverter_QNAME = new QName("http://server.solar.anonymous.com/", "removeInverter");
+    
+    private final static QName _CalculateYearlySavings_QNAME = new QName("http://server.solar.anonymous.com/", "calculateYearlySavings");
+    private final static QName _CalculateAllResultsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateAllResultsResponse");
+    private final static QName _CalculateAllResults_QNAME = new QName("http://server.solar.anonymous.com/", "calculateAllResults");
+    private final static QName _CalculateYearlySavingsOverTimeResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateYearlySavingsOverTimeResponse");
+    private final static QName _CalculateYearlySavingsOverTime_QNAME = new QName("http://server.solar.anonymous.com/", "calculateYearlySavingsOverTime");
+    private final static QName _CalculateMonthlySavingsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateMonthlySavingsResponse");
+    private final static QName _CalculateDailySavings_QNAME = new QName("http://server.solar.anonymous.com/", "calculateDailySavings");
+    private final static QName _CalculateYearlySavingsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateYearlySavingsResponse");
+    private final static QName _CalculateDailySavingsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateDailySavingsResponse");
+    private final static QName _CalculateMonthlySavings_QNAME = new QName("http://server.solar.anonymous.com/", "calculateMonthlySavings");
+
 
 
     /**
@@ -275,6 +287,14 @@ public class LocationObjectFactory {
     public LocationData createLocationData() {
         return new LocationData();
     }
+    
+    /**
+     * Create an instance of {@link CustomerData }
+     * 
+     */
+    public CustomerData createCustomerData() {
+        return new CustomerData();
+    }
 
     /**
      * Create an instance of {@link StoreLocationInformationResponse }
@@ -318,6 +338,200 @@ public class LocationObjectFactory {
     @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "StoreLocationGetAll")
     public JAXBElement<StoreLocationGetAll> createStoreLocationGetAll(StoreLocationGetAll value) {
         return new JAXBElement<StoreLocationGetAll>(_StoreLocationGetAll_QNAME, StoreLocationGetAll.class, null, value);
+    }
+    
+    /**
+     * Create an instance of {@link CalculateYearlySavingsResponse }
+     * 
+     */
+    public CalculateYearlySavingsResponse createCalculateYearlySavingsResponse() {
+        return new CalculateYearlySavingsResponse();
+    }
+
+    /**
+     * Create an instance of {@link CalculateDailySavings }
+     * 
+     */
+    public CalculateDailySavings createCalculateDailySavings() {
+        return new CalculateDailySavings();
+    }
+
+    /**
+     * Create an instance of {@link CalculateMonthlySavingsResponse }
+     * 
+     */
+    public CalculateMonthlySavingsResponse createCalculateMonthlySavingsResponse() {
+        return new CalculateMonthlySavingsResponse();
+    }
+
+    /**
+     * Create an instance of {@link CalculateYearlySavingsOverTime }
+     * 
+     */
+    public CalculateYearlySavingsOverTime createCalculateYearlySavingsOverTime() {
+        return new CalculateYearlySavingsOverTime();
+    }
+
+    /**
+     * Create an instance of {@link CalculateMonthlySavings }
+     * 
+     */
+    public CalculateMonthlySavings createCalculateMonthlySavings() {
+        return new CalculateMonthlySavings();
+    }
+
+    /**
+     * Create an instance of {@link CalculateDailySavingsResponse }
+     * 
+     */
+    public CalculateDailySavingsResponse createCalculateDailySavingsResponse() {
+        return new CalculateDailySavingsResponse();
+    }
+
+    /**
+     * Create an instance of {@link CalculateYearlySavings }
+     * 
+     */
+    public CalculateYearlySavings createCalculateYearlySavings() {
+        return new CalculateYearlySavings();
+    }
+
+    /**
+     * Create an instance of {@link CalculateYearlySavingsOverTimeResponse }
+     * 
+     */
+    public CalculateYearlySavingsOverTimeResponse createCalculateYearlySavingsOverTimeResponse() {
+        return new CalculateYearlySavingsOverTimeResponse();
+    }
+
+    /**
+     * Create an instance of {@link CalculateAllResults }
+     * 
+     */
+    public CalculateAllResults createCalculateAllResults() {
+        return new CalculateAllResults();
+    }
+
+    /**
+     * Create an instance of {@link CalculateAllResultsResponse }
+     * 
+     */
+    public CalculateAllResultsResponse createCalculateAllResultsResponse() {
+        return new CalculateAllResultsResponse();
+    }
+    
+    /**
+     * Create an instance of {@link SolarResult }
+     * 
+     */
+    public SolarResult createSolarResult() {
+        return new SolarResult();
+    }
+    
+    /**
+     * Create an instance of {@link SolarSetup }
+     * 
+     */
+    public SolarSetup createSolarSetup() {
+        return new SolarSetup();
+    }
+    
+    /**
+     * Create an instance of {@link SolarPanels }
+     * 
+     */
+    public SolarPanels createSolarPanels() {
+        return new SolarPanels();
+    }
+    
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateYearlySavings }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateYearlySavings")
+    public JAXBElement<CalculateYearlySavings> createCalculateYearlySavings(CalculateYearlySavings value) {
+        return new JAXBElement<CalculateYearlySavings>(_CalculateYearlySavings_QNAME, CalculateYearlySavings.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateAllResultsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateAllResultsResponse")
+    public JAXBElement<CalculateAllResultsResponse> createCalculateAllResultsResponse(CalculateAllResultsResponse value) {
+        return new JAXBElement<CalculateAllResultsResponse>(_CalculateAllResultsResponse_QNAME, CalculateAllResultsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateAllResults }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateAllResults")
+    public JAXBElement<CalculateAllResults> createCalculateAllResults(CalculateAllResults value) {
+        return new JAXBElement<CalculateAllResults>(_CalculateAllResults_QNAME, CalculateAllResults.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateYearlySavingsOverTimeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateYearlySavingsOverTimeResponse")
+    public JAXBElement<CalculateYearlySavingsOverTimeResponse> createCalculateYearlySavingsOverTimeResponse(CalculateYearlySavingsOverTimeResponse value) {
+        return new JAXBElement<CalculateYearlySavingsOverTimeResponse>(_CalculateYearlySavingsOverTimeResponse_QNAME, CalculateYearlySavingsOverTimeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateYearlySavingsOverTime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateYearlySavingsOverTime")
+    public JAXBElement<CalculateYearlySavingsOverTime> createCalculateYearlySavingsOverTime(CalculateYearlySavingsOverTime value) {
+        return new JAXBElement<CalculateYearlySavingsOverTime>(_CalculateYearlySavingsOverTime_QNAME, CalculateYearlySavingsOverTime.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateMonthlySavingsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateMonthlySavingsResponse")
+    public JAXBElement<CalculateMonthlySavingsResponse> createCalculateMonthlySavingsResponse(CalculateMonthlySavingsResponse value) {
+        return new JAXBElement<CalculateMonthlySavingsResponse>(_CalculateMonthlySavingsResponse_QNAME, CalculateMonthlySavingsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateDailySavings }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateDailySavings")
+    public JAXBElement<CalculateDailySavings> createCalculateDailySavings(CalculateDailySavings value) {
+        return new JAXBElement<CalculateDailySavings>(_CalculateDailySavings_QNAME, CalculateDailySavings.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateYearlySavingsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateYearlySavingsResponse")
+    public JAXBElement<CalculateYearlySavingsResponse> createCalculateYearlySavingsResponse(CalculateYearlySavingsResponse value) {
+        return new JAXBElement<CalculateYearlySavingsResponse>(_CalculateYearlySavingsResponse_QNAME, CalculateYearlySavingsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateDailySavingsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateDailySavingsResponse")
+    public JAXBElement<CalculateDailySavingsResponse> createCalculateDailySavingsResponse(CalculateDailySavingsResponse value) {
+        return new JAXBElement<CalculateDailySavingsResponse>(_CalculateDailySavingsResponse_QNAME, CalculateDailySavingsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CalculateMonthlySavings }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "calculateMonthlySavings")
+    public JAXBElement<CalculateMonthlySavings> createCalculateMonthlySavings(CalculateMonthlySavings value) {
+        return new JAXBElement<CalculateMonthlySavings>(_CalculateMonthlySavings_QNAME, CalculateMonthlySavings.class, null, value);
     }
 
 }

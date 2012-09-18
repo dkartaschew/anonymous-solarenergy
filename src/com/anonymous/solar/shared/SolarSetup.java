@@ -18,14 +18,14 @@ import java.util.List;
 
 public class SolarSetup {
 
-	private ArrayList<SolarPanels> solarPanels = null;
-	private SolarInverter inverter = null;
-	private Double wireLength = 0.00;
-	private Double wireEfficiency = 100.00;
-	private LocationData locationInformation = null;
-	private CustomerData customerData = null;// = new CustomerData();
-	private String setupName = null;
-	private String setupDescription = null;
+	private ArrayList<SolarPanels> solarPanels;
+	private SolarInverter inverter;
+	private Double wireLength;
+	private Double wireEfficiency;
+	private LocationData locationInformation;
+	private CustomerData customerData;
+	private String setupName;
+	private String setupDescription;
 
 	public SolarSetup() {
 		solarPanels = new ArrayList<SolarPanels>();
@@ -190,15 +190,7 @@ public class SolarSetup {
 		//Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
-		//try {
-			//details += panelTimeBreakdown().direction();
-		//} catch (SolarPanelException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//} catch (SolarPanelsException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+
 		for(SolarPanels panel : solarPanels){
 			details += panel.getPanelType().toString(false) + "<br />";		
 		}
@@ -353,21 +345,9 @@ public class SolarSetup {
 	public boolean removePanels(SolarPanels panels) {
 		return this.solarPanels.remove(panels);
 	}
-
 	
-	/**
-	 * @return the locationLongitude
-	 */
-	public LocationData getLocation() {
-		return locationInformation;
-	}
-
-	/**
-	 * @param locationLongitude
-	 *            the locationLongitude to set
-	 */
-	public void setLocation(LocationData location) {
-		this.locationInformation = location;
+	public void setPanels(ArrayList<SolarPanels> newPanels) {
+		this.solarPanels = newPanels;
 	}
 
 }

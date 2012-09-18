@@ -53,6 +53,17 @@
 		<servlet-name>SInverterInfo</servlet-name>
 		<url-pattern>/SInverterService</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Main Calculation Engine Servelet -->
+	<servlet>
+		<servlet-name>SolarCalculatorService</servlet-name>
+		<servlet-class>com.anonymous.solar.server.SolarCalculatorSOAPServerServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SolarCalculatorService</servlet-name>
+		<url-pattern>/SolarCalculatorService</url-pattern>
+	</servlet-mapping>
 		
 
 	<!-- Default page to serve -->
