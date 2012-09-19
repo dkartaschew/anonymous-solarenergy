@@ -57,6 +57,8 @@ public class AddNewPanel extends javax.swing.JDialog {
     	jSpinnerPanelCount.setName("SpinnerSolarPanelCount");
     	jSpinnerAzimuth.setName("SpinnerSolarPanelAzimuth");
     	jSpinnerDirection.setName("SpinnerSolarPanelDirection");
+    	
+    	jButtonLoadPanel.setName("ButtonLoadNewPanel");
     }
     
     /*

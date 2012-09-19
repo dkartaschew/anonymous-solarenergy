@@ -110,6 +110,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         jSpinnerCost.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 25000.0d, 10.0d));
 
         jSpinnerRRP.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 25000.0d, 10.0d));
+        
 
         javax.swing.GroupLayout jPanelDataGroupLayout = new javax.swing.GroupLayout(jPanelDataGroup);
         jPanelDataGroup.setLayout(jPanelDataGroupLayout);
@@ -192,7 +193,7 @@ public class AddNewInverter extends javax.swing.JDialog {
 
         lblLife2.setText("Efficiency Loss Per Year");
 
-        jSpinnerEffLossYr.setModel(new javax.swing.SpinnerNumberModel(25, 0, 50, 5));
+        jSpinnerEffLossYr.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
 
         javax.swing.GroupLayout jPanelDataGroup1Layout = new javax.swing.GroupLayout(jPanelDataGroup1);
         jPanelDataGroup1.setLayout(jPanelDataGroup1Layout);
@@ -344,7 +345,7 @@ public class AddNewInverter extends javax.swing.JDialog {
 		   inverter.setInverterManufacturerCode(txtCode.getText());
 		   inverter.setInverterWattage((Double)jSpinnerWattage.getModel().getValue());
 		   inverter.setInverterCost((Double)jSpinnerCost.getModel().getValue());
-		   inverter.setInverterLossYear((Double.parseDouble(jSpinnerEffLossYr.getModel().getValue().toString())));
+		   inverter.setInverterLossYear((Double)jSpinnerEffLossYr.getModel().getValue());
 		   inverter.setInverterRRP((Double)jSpinnerRRP.getModel().getValue());
 		   inverter.setInverterLifeYears((Integer)jSpinnerLife.getModel().getValue());
 		   inverter.setInverterEfficiency((Double)jSpinnerEfficiency.getModel().getValue());
