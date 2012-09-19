@@ -276,6 +276,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		for (int i = 0; i < numResultColumns; i++) {
 			types[i] = java.lang.Double.class;
 		}
+		//types[0] = java.lang.String.class;
 
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { resultTable.toArray() }, columnTitles) {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -289,7 +290,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		});
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.setSize(5000, jScrollPane2.getHeight());
-		for (int i = 0; i < numResultColumns; i++) {
+		for (int i = 1; i < numResultColumns; i++) {
 			jTable1.getColumnModel().getColumn(i).setResizable(true);
 			jTable1.getColumnModel().getColumn(i).setMinWidth(120);
 			jTable1.getColumnModel().getColumn(i).setCellRenderer((TableCellRenderer) new MyTableCellRenderer());
