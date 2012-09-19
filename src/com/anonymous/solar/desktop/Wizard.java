@@ -85,7 +85,7 @@ public class Wizard extends javax.swing.JPanel {
 	public Wizard(javax.swing.JFrame parent) {
 		initComponents();
 		jButtonBack.setVisible(false);
-//		initWizardPanels();
+		initWizardPanels();
 //		try {
 //			LoadTestData();
 //		} catch (Exception e) {
