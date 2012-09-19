@@ -354,6 +354,12 @@ public class AddNewPanel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Event handler to handle when the user tries to submit data
+     * 
+     * @param evt
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_btnSubmitActionPerformed
     	boolean success = submitPanelData();
     	
@@ -362,10 +368,21 @@ public class AddNewPanel extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * 
+     * Event handle when a user tries to canel panel input
+     * @param evt
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /**
+     * 
+     * Event handler to handle when a user tries to save data to datastore
+     * 
+     * @param evt
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         SolarPanel panel;
         try {
@@ -387,16 +404,30 @@ public class AddNewPanel extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * 
+     * Event handler to call dialog used to access inverters from the datastore
+     * @param evt
+     */
     private void jButtonLoadPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadPanelActionPerformed
         LoadPanel webPanel = new LoadPanel(this);
         webPanel.setVisible(true);
         
     }//GEN-LAST:event_jButtonLoadPanelActionPerformed
 
+    /**
+     * Close the dialog and return control to parent.
+     */
     private void doClose() {
         setVisible(false);
     }
     
+    /**
+     * Verify the data specified about the solar panel (not number or direction)
+     * and return a solar panel on success. Throws an error if anything is wrong.
+     * @return
+     * @throws Exception
+     */
     private SolarPanel getVerifiedPanel() throws Exception{
     	SolarPanel panel = new SolarPanel();
     	boolean error = false;
@@ -460,7 +491,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     
     /**
      * Load the dialog with the details of a specific panel
-     * @param oldPanels 
+     * @param oldPanels  - panel to load into dialog
      */
     protected void LoadPanel(SolarPanel oldPanel){
     	
