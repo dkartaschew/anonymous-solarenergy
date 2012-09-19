@@ -37,6 +37,10 @@ public class LoadInverter extends javax.swing.JDialog {
         btnLoadInverter.setEnabled(false);
     }
     
+    /**
+     * Loads stored inverters from the datastore
+     * @param comparison - comparer used to sort the inverters
+     */
     private void LoadStoredInverters(Comparator comparison){
     	SInverter SInverterSOAP = new SInverterService().getSInverterPort();
     	
@@ -61,6 +65,9 @@ public class LoadInverter extends javax.swing.JDialog {
         
     }
     
+    /**
+     * Name the components for testing purposes
+     */
     private void nameComponents() {
     	lstInverterInformation.setName("lstInverterInformation");
     }
@@ -279,6 +286,10 @@ public class LoadInverter extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handler to handle what happens when a user changes the selected value in the list box
+     * @param evt
+     */
     private void lstInverterInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstInverterInformationValueChanged
     	SolarInverter inverter = new SolarInverter();
         inverter = (SolarInverter)lstInverterInformation.getSelectedValue();
@@ -297,6 +308,10 @@ public class LoadInverter extends javax.swing.JDialog {
         btnLoadInverter.setEnabled(true);
     }//GEN-LAST:event_lstInverterInformationValueChanged
 
+    /**
+     * Event handler to handler changed value in sorting combination box
+     * @param evt
+     */
     private void cmbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortByActionPerformed
     	
     	String selected = (String)cmbSortBy.getSelectedItem();
@@ -312,10 +327,18 @@ public class LoadInverter extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_cmbSortByActionPerformed
 
+    /**
+     * Event handler for cancel button
+     * @param evt
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /**
+     * Event handler for load Inverter from data store button
+     * @param evt
+     */
     private void btnLoadInverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadInverterActionPerformed
     	SolarInverter inverter = (SolarInverter) lstInverterInformation.getSelectedValue();
     	if(inverter != null) {

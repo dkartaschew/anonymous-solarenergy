@@ -85,6 +85,7 @@ public class AddNewInverter extends javax.swing.JDialog {
         jButtonLoadInverter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelDataGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Inverter Details"));
         jPanelDataGroup.setToolTipText("rgdfg");
@@ -93,10 +94,16 @@ public class AddNewInverter extends javax.swing.JDialog {
         lblName.setText("Name");
 
         lblCost.setText("Cost");
+        lblCost.setToolTipText("Cost of Inverter");
 
         lblCode.setText("Code");
 
+        txtName.setToolTipText("Name of the inverter");
+
         lblRRP.setText("RRP");
+        lblRRP.setToolTipText("Recommend Retail Price");
+
+        txtManufacturer.setToolTipText("");
 
         lblManufacturer.setText("Manufacturer");
 
@@ -147,15 +154,13 @@ public class AddNewInverter extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblManufacturer)))
+                                    .addComponent(lblManufacturer)
+                                    .addComponent(lblRRP)))
                             .addGroup(jPanelDataGroupLayout.createSequentialGroup()
                                 .addComponent(jSpinnerCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSpinnerRRP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelDataGroupLayout.createSequentialGroup()
-                                .addComponent(lblCost)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblRRP)))
+                            .addComponent(lblCost))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,6 +352,10 @@ public class AddNewInverter extends javax.swing.JDialog {
 
     }		
 
+    /**
+     * Save the specified panel to the data store
+     * @param evt - event that triggers the action
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
     	SolarInverter inverter;
     	try {
@@ -368,6 +377,10 @@ public class AddNewInverter extends javax.swing.JDialog {
     	
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * Cancel the add inverter dialog
+     * @param evt
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -380,16 +393,27 @@ public class AddNewInverter extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * Call a dialog that has a list of inverters from the data store for easy selection
+     * @param evt
+     */
     private void jButtonLoadInverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadInverterActionPerformed
         LoadInverter webInverter = new LoadInverter(this);
         webInverter.setVisible(true);
     }//GEN-LAST:event_jButtonLoadInverterActionPerformed
     
+    /**
+     * Close the inverter dialog and return control to parent form
+     */
     private void doClose() {
         setVisible(false);
     }
     
-protected void LoadInverter(SolarInverter oldInverter){
+    /**
+     * Preload an inverter into the dialog.
+     * @param oldInverter - inverter to load in
+     */
+    protected void LoadInverter(SolarInverter oldInverter){
     	
     	if(oldInverter != null){
 			txtName.setText(oldInverter.getInverterName());
@@ -421,6 +445,11 @@ protected void LoadInverter(SolarInverter oldInverter){
         jSpinnerEfficiency.setBorder(clear);
     }
     
+    /**
+     * Try to save the inverter data into a variable. Will notify the user
+     * of any incorrect data if what is entered is inappropriate.
+     * @return
+     */
     private boolean submitInverterData(){
 		inverter = new SolarInverter();
 	    boolean error = false;

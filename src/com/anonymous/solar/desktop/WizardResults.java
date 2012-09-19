@@ -213,6 +213,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 						+ " years <br />";
 				output += "<br />In 20 years time your inverter will be at " + global.DetermineInverterLoss(20)
 						+ "% efficiency";
+
 				output += "<br /><br />In 20 years time your panels will be at:";
 				for (SolarPanels panls : global.GetDirectionalPanels(Direction.NORTH)) {
 					output += "<br />" + panls.getPanelType().getPanelName() + " will go from 100% to "
