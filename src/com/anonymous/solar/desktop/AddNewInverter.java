@@ -352,6 +352,10 @@ public class AddNewInverter extends javax.swing.JDialog {
 
     }		
 
+    /**
+     * Save the specified panel to the data store
+     * @param evt - event that triggers the action
+     */
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
     	SolarInverter inverter;
     	try {
@@ -373,6 +377,10 @@ public class AddNewInverter extends javax.swing.JDialog {
     	
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
+    /**
+     * Cancel the add inverter dialog
+     * @param evt
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
@@ -385,16 +393,27 @@ public class AddNewInverter extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * Call a dialog that has a list of inverters from the data store for easy selection
+     * @param evt
+     */
     private void jButtonLoadInverterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadInverterActionPerformed
         LoadInverter webInverter = new LoadInverter(this);
         webInverter.setVisible(true);
     }//GEN-LAST:event_jButtonLoadInverterActionPerformed
     
+    /**
+     * Close the inverter dialog and return control to parent form
+     */
     private void doClose() {
         setVisible(false);
     }
     
-protected void LoadInverter(SolarInverter oldInverter){
+    /**
+     * Preload an inverter into the dialog.
+     * @param oldInverter - inverter to load in
+     */
+    protected void LoadInverter(SolarInverter oldInverter){
     	
     	if(oldInverter != null){
 			txtName.setText(oldInverter.getInverterName());
@@ -426,6 +445,11 @@ protected void LoadInverter(SolarInverter oldInverter){
         jSpinnerEfficiency.setBorder(clear);
     }
     
+    /**
+     * Try to save the inverter data into a variable. Will notify the user
+     * of any incorrect data if what is entered is inappropriate.
+     * @return
+     */
     private boolean submitInverterData(){
 		inverter = new SolarInverter();
 	    boolean error = false;
