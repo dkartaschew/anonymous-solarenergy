@@ -245,6 +245,7 @@ public class SolarSetup {
 		// Panel Data
 		details += "<b>Panel Details:</b><br />";
 		details += "You have " + panelCount + " types of panels.<br />";
+		details += getDirectionBreakdown();
 
 		for (SolarPanels panel : solarPanels) {
 			details += panel.getPanelType().toString(false) + "<br />";
@@ -261,6 +262,64 @@ public class SolarSetup {
 		return details;
 	}
 
+	/**
+	 * Get information on the direction of each panel 
+	 * @return = HTML about direction without <html> tags
+	 */
+	public String getDirectionBreakdown(){
+		double north = GetDirectionalPanelsCount(Direction.NORTH);
+		double east = GetDirectionalPanelsCount(Direction.EAST);
+		double south = GetDirectionalPanelsCount(Direction.SOUTH);
+		double west = GetDirectionalPanelsCount(Direction.WEST);
+		double total = north + east + south + west;
+		
+		
+		
+		String direction = String.format("North Panels: %.2f %%<br/>", north/total*100);
+		
+		direction += String.format("East Panels: %.2f %%<br/>", east/total*100);
+		direction += String.format("South Panels: %.2f %%<br/>", south/total*100);
+		direction += String.format("West Panels: %.2f %%<br/><br/>", west/total*100);
+		
+		return direction;
+	}
+	
+	public double GetDirectionalPanelsCount(Direction direction) {
+		ArrayList<SolarPanels> directionalPanels = new ArrayList<SolarPanels>();
+
+		switch (direction) {
+		case NORTH:
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() <= 45 || panelz.getPanelDirection() > 315) {
+					directionalPanels.add(panelz);
+				}
+			}
+			break;
+		case EAST:
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 45 && panelz.getPanelDirection() <= 135) {
+					directionalPanels.add(panelz);
+				}
+			}
+			break;
+		case SOUTH:
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 135 && panelz.getPanelDirection() <= 225) {
+					directionalPanels.add(panelz);
+				}
+			}
+			break;
+		case WEST:
+			for (SolarPanels panelz : solarPanels) {
+				if (panelz.getPanelDirection() > 225 && panelz.getPanelDirection() <= 315) {
+					directionalPanels.add(panelz);
+				}
+			}
+			break;
+		}
+		return directionalPanels.size();
+	}
+	
 	/**
 	 * Return all the panels that are orientated a set direction.
 	 * 

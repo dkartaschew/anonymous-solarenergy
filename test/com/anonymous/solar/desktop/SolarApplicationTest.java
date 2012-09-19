@@ -641,4 +641,16 @@ public class SolarApplicationTest extends UISpecTestCase {
 		assertTrue(mainWindow.getTextBox("jTextFieldLatitude").getText().compareTo("16.299051014581828") == 0);
 	    assertTrue(mainWindow.getTextBox("jTextFieldLongitude").getText().compareTo("68.5546875") == 0);
 	}
+	
+	public void testDailySavings(){
+		
+	}
+	
+	public void testMonthlySavings() {
+		
+	}
+	
+	public void testAnnualSavings(){
+		
+	}
 }
