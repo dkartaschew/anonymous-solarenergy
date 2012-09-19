@@ -28,12 +28,18 @@ public class SolarApplicationTest extends UISpecTestCase {
 	      UISpec4J.init();
 	  }
 	
+	/**
+	 * Test the main window title is correct
+	 */
 	public void testMainWindowTitle(){
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
 	    assertTrue(mainWindow.getTitle().compareTo("Solar Power Calculator") == 0);
 	}
 	
+	/**
+	 * Test the about dialog
+	 */
 	public void testMainAboutDialog(){
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -46,9 +52,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	}
 	
 	
-	//
-	// WizardStart Tests
-	//
+	/**
+	 * Test the title is correct
+	 */
 	public void testMainTitle() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -63,7 +69,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 		assertTrue(mainWindow.getTextBox("MainDescription").getText().compareTo("<html>\n<center>\nA simple Solar Power Calculator<br>\nfor domestic installations.<br>\n<br>\n<small>Copyright 2012, Team Anonymous (QUT)<br>\nReleased under the GPL v3 license</small>\n</center>\n</html>") == 0);
 	}
 	
-	// Close Dialog Test
+	/**
+	 * Test exit dialog
+	 */
 	public void testCloseDialog() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -76,9 +84,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
-	//
-	// WizardSetupDescription Tests
-	//
+	/**
+	 * Test attempt to move on without setup name complete
+	 */
 	public void testNextWithoutSetupName() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -95,37 +103,33 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
-	//
-	// WizardUserCosts Tests
-	//
-//	@Ignore
-//	public void testNextWithoutUsageDetails() {
-//		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
-//		Window mainWindow = getMainWindow();
-//		
-//		mainWindow.getButton("Next").click();
-//		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
-//		
-//		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
-//	    	public Trigger process(Window dialog) {
-//	    	      assertTrue(dialog.titleEquals("Select Location"));
-//	    	      return dialog.getButton("OK").triggerClick();
-//	    	    }
-//	    }).run();
-//		
-//		mainWindow.getButton("Next").click();
-//		
-//		mainWindow.getSpinner("SpinnerDailyAverageUsage").setValue(0);
-//		mainWindow.getSpinner("SpinnerDayTimeHourlyUsage").setValue(0);
-//		//mainWindow.getSpinner("SpinnerDayTimeHourlyUsage").setValue(0);
-//
-//		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
-//	    	public Trigger process(Window dialog) {
-//	    	      //assertTrue(dialog.titleEquals("Estimated Usage Missing"));
-//	    	      return dialog.getButton("OK").triggerClick();
-//	    	    }
-//	    }).run();
-//	}
+	/**
+	 * Test attempt to move on without complete usage details
+	 */
+	public void testNextWithoutUsageDetails() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    		assertTrue(dialog.getTitle().equals("Estimated Usage Missing"));
+	    		
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
 	//
 	// WizardSetupElectrical Tests
@@ -147,7 +151,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	}
 	
 	
-	@Ignore
+	/**
+	 * Test attempt to move on without complete inverter details
+	 */
 	public void testNextWithoutInverterDetails() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -176,6 +182,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test setting an inverter using the inverter dialog
+	 */
 	public void testInverterInformationDialog() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -184,7 +193,6 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		WindowInterceptor.init(mainWindow.getButton("EditInverterDetails").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
-	    	      //assertTrue(dialog.titleEquals("Inverter Information"));
 	    	      
 	    	      dialog.getTextBox("TextFieldInverterName").setText("TestName");
 	    	      dialog.getTextBox("TextFieldInverterManufacturerName").setText("TestManufacturer");
@@ -198,6 +206,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test attempt to submit inverter with incomplete details
+	 */
 	public void testInverterInformationDialogInComplete() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -206,7 +217,6 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		WindowInterceptor.init(mainWindow.getButton("EditInverterDetails").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
-	    	      //assertTrue(dialog.titleEquals("Inverter Information"));
 	    	      
 	    	      dialog.getButton("Submit").click();
 	    	      
@@ -219,6 +229,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test loading an inverter
+	 */
 	public void testInverterLoadDialog() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -227,8 +240,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		WindowInterceptor.init(mainWindow.getButton("EditInverterDetails").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
-	    	      //assertTrue(dialog.titleEquals("Inverter Information"));
-	    	      
+
 	    	      WindowInterceptor.init(dialog.getButton("Load Inverter").triggerClick()).process(new WindowHandler() {
 	    		    	public Trigger process(Window dialog) {
 	    		    	      
@@ -243,15 +255,15 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
-	//
-	// WizardSetupSolarPanels Tests
-	//
+	/**
+	 * Utility method to go through the application up to the solar panel setup screen
+	 * @param mainWindow
+	 */
 	private void gotoSetupSolarPanels(Window mainWindow) {
 		gotoElectricalSetup(mainWindow);
 
 		WindowInterceptor.init(mainWindow.getButton("EditInverterDetails").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
-	    	      //assertTrue(dialog.titleEquals("Inverter Information"));
 	    	      
 	    	      dialog.getTextBox("TextFieldInverterName").setText("TestInverterName");
 	    	      dialog.getTextBox("TextFieldInverterManufacturerName").setText("TestInverterManufacturerName");
@@ -269,6 +281,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 		mainWindow.getButton("Next").click();
 	}
 	
+	/**
+	 * Test hitting next on solar panel setup without any panels
+	 */
 	public void testNextWithoutSolarPanels() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -286,6 +301,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test attempt to delete without a panel currently selected
+	 */
 	public void testDeleteWithoutSelection() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -300,6 +318,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test attempt to edit without a panel currently selected
+	 */
 	public void testEditWithoutSelection() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -314,6 +335,10 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Utility method to add panels
+	 * @param mainWindow 
+	 */
 	private void addSomePanels(Window mainWindow){
 		WindowInterceptor.init(mainWindow.getButton("Add").triggerClick()).process(new WindowHandler() {
 	    	public Trigger process(Window dialog) {
@@ -333,6 +358,38 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    }).run();
 	}
 	
+	/**
+	 * Test loading an panel
+	 */
+//	public void testPanelLoadDialog() {
+//		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+//		Window mainWindow = getMainWindow();
+//		
+//		gotoSetupSolarPanels(mainWindow);
+//		
+//		WindowInterceptor.init(mainWindow.getButton("Add").triggerClick()).process(new WindowHandler() {
+//	    	public Trigger process(Window dialog) {
+//
+//	    	      WindowInterceptor.init(dialog.getButton("ButtonLoadNewPanel").triggerClick()).process(new WindowHandler() {
+//	    		    	public Trigger process(Window dialog) {
+//	    		    	      
+//	    		    		dialog.getListBox("lstPanelInformation").selectIndex(0);  
+//	    		    		assertTrue("Shit's borked",dialog.getButton("ButtonLoadPanel").isEnabled());
+//	    		    		
+//	    		    	    return dialog.getButton("ButtonLoadPanel").triggerClick();
+//	    		    	}
+//	    		    }).run();
+//	    	      
+//	    	      dialog.getSpinner("SpinnerSolarPanelCount").clickForNextValue();
+//	    	      
+//	    	      return dialog.getButton("Submit").triggerClick();
+//	    	    }
+//	    }).run();
+//	}
+	
+	/**
+	 * Test the addition of solar panels
+	 */
 	public void testAddSolarPanels() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -349,6 +406,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 		}));
 	}
 	
+	/**
+	 * Test the deletion of solar panels
+	 */
 	public void testDeleteSolarPanels() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();
@@ -376,6 +436,9 @@ public class SolarApplicationTest extends UISpecTestCase {
 		assertTrue(mainWindow.getTable().isEmpty());
 	}
 	
+	/**
+	 * Test editing entered solar panels
+	 */
 	public void testEditSolarPanels() {
 		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
 		Window mainWindow = getMainWindow();

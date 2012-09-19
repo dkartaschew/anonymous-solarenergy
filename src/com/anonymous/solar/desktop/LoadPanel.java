@@ -31,6 +31,7 @@ public class LoadPanel extends javax.swing.JDialog {
     public LoadPanel(AddNewPanel parent) {
         super(parent, true);
         initComponents();
+        nameComponents();
         LoadStoredPanels(new PanelCostComparison());
         this.parent = parent;
         btnLoadPanel.setEnabled(false);
@@ -66,6 +67,12 @@ public class LoadPanel extends javax.swing.JDialog {
         
     }
 
+    public void nameComponents(){
+    	lstPanelInformation.setName("lstPanelInformation");
+    	
+    	btnLoadPanel.setName("ButtonLoadPanel");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
