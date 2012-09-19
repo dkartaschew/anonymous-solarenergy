@@ -86,14 +86,20 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
-		try {
-			LoadTestData();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			LoadTestData();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
+	/**
+	 * Load dummy data in wizard for manual UI testing.
+	 * @throws SolarPanelException
+	 * @throws LocationDataException
+	 * @throws SolarPanelsException
+	 */
 	private void LoadTestData() throws SolarPanelException, LocationDataException, SolarPanelsException{
 		SolarPanel slow = new SolarPanel("PAN_SLOW_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 1.0, 100.0, 100.0, 30);
 		SolarPanel medium = new SolarPanel("PAN_MED_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 2.0, 100.0, 100.0, 30);
