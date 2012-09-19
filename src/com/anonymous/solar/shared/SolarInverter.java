@@ -246,7 +246,7 @@ public class SolarInverter {
 	@Override
 	public String toString(){
 		return getInverterName() + 
-				" - Cost: $" + getInverterCost() + 
+				" - Cost: " + String.format("$%,.2f", getInverterCost()) + 
 				" - Life: " + getInverterLifeYears() + " years" + 
 				" - Wattage: " + getInverterWattage() + "W" + 
 				" - Efficiency Loss: " + inverterLossYear + "%";
@@ -256,12 +256,12 @@ public class SolarInverter {
 
 		if(htmlTags){
 			return "<html><p>Wattage: " + inverterWattage + "W </p>" + "<p>Efficiency: " + inverterEfficiency + "%</p>"
-			+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: $" + inverterRRP.toString() + "</p>" + "</html>";
+			+ "<p>Life: " + inverterLifeYears.toString() + " Years</p>" + "<p>RRP: " + String.format("$%,.2f", inverterRRP) + "</p>" + "</html>";
 		} else {
 			return "Wattage: " + inverterWattage + "W" + "<br />" + 
 				   "Efficiency: " + inverterEfficiency + "%<br />"	+ 
 				   "Life: " + inverterLifeYears.toString() + " Years<br />" + 
-				   "RRP: $" + inverterRRP.toString() + "<br />";
+				   "RRP: " + String.format("$%,.2f", inverterRRP) + "<br />";
 		}
 	}
 	

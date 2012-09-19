@@ -484,7 +484,7 @@ public class SolarPanel {
 	@Override
 	public String toString(){
 		return getPanelName() + 
-				" - Cost: $" + getPanelCost() + 
+				" - Cost: " + String.format("$%,.2f", getPanelCost()) + 
 				" - Life: " + getPanelLifeYears() + " years" + 
 				" - Wattage: " + getPanelWattage() + "W" + 
 				" - Efficiency Loss: " + panelLossYear + "%";
@@ -530,8 +530,8 @@ public class SolarPanel {
 					+ "Code: " + panelManufacturerCode + "<br />"
 					+ "Wattage: " + panelWattage + "<br />"
 					+ "Loss/year: " + panelLossYear + "<br />"
-					+ "Cost : $" + panelCost + "<br />"
-					+ "RRP: $" + panelRRP + "<br />"
+					+ "Cost : " + String.format("$%,.2f", panelCost) + "<br />"
+					+ "RRP: " + String.format("$%,.2f", panelRRP) + "<br />"
 					+ "Life(years): " + panelLifeYears + "<br /></html>";
 		} else {
 			return "<b>Name: " + panelName + "</b><br />"
@@ -539,8 +539,8 @@ public class SolarPanel {
 					+ "Code: " + panelManufacturerCode + "<br />"
 					+ "Wattage: " + panelWattage + "<br />"
 					+ "Loss/year: " + panelLossYear + "<br />"
-					+ "Cost : $" + panelCost + "<br />"
-					+ "RRP: $" + panelRRP + "<br />"
+					+ "Cost : " + String.format("$%,.2f", panelCost) + "<br />"
+					+ "RRP: " + String.format("$%,.2f", panelRRP) + "<br />"
 					+ "Life(years): " + panelLifeYears + "<br />";
 		}
 	}

@@ -285,11 +285,11 @@ public class CustomerData {
 	public String toString(){
 		return "Daily Average: " + dailyAverageUsage + "<br />"
 				+ "Hourly Average: " + hourlyAverageUsage + "<br />"
-				+ "Tariff 11 Cost: " +  tariff11Cost + "<br />"
-				+ "Tariff 11 Fee: " + tariff11Fee + "<br />"
-				+ "Tariff 13 Cost: " +  tariff13Cost + "<br />"
-				+ "Tariff 13 Fee: " + tariff13Fee + "<br />"
-				+ "Feed In Fee: " + feedInFee + "<br />"
+				+ "Tariff 11 Cost: " +  String.format("$%,.2f", tariff11Cost) + "<br />"
+				+ "Tariff 11 Fee: " + String.format("$%,.2f", tariff11Fee) + "<br />"
+				+ "Tariff 13 Cost: " +  String.format("$%,.2f", tariff13Cost) + "<br />"
+				+ "Tariff 13 Fee: " + String.format("$%,.2f", tariff13Fee) + "<br />"
+				+ "Feed In Fee: " + String.format("$%,.2f", feedInFee) + "<br />"
 				+ "Annual Tariff Increase: " + annualTariffIncrease + "<br />";
 	}
 	
@@ -302,11 +302,11 @@ public class CustomerData {
 		
 		about += "Daily Average: " + dailyAverageUsage + "<br />"
 				 + "Hourly Average: " + hourlyAverageUsage + "<br />"
-				 + "Tariff 11 Cost: " +  tariff11Cost + "<br />"
-				 + "Tariff 11 Fee: " + tariff11Fee + "<br />"
-				 + "Tariff 13 Cost: " +  tariff13Cost + "<br />"
-				 + "Tariff 13 Fee: " + tariff13Fee + "<br />"
-				 + "Feed In Fee: " + feedInFee + "<br />"
+				 + "Tariff 11 Cost: " +  String.format("$%,.2f", tariff11Cost) + "<br />"
+				 + "Tariff 11 Fee: " + String.format("$%,.2f", tariff11Fee) + "<br />"
+				 + "Tariff 13 Cost: " +  String.format("$%,.2f", tariff13Cost) + "<br />"
+				 + "Tariff 13 Fee: " + String.format("$%,.2f", tariff13Fee) + "<br />"
+				 + "Feed In Fee: " + String.format("$%,.2f", feedInFee) + "<br />"
 				 + "Annual Tariff Increase: " + annualTariffIncrease + "<br />";
 		
 		if(htmlTags){
