@@ -36,6 +36,11 @@ public class LoadPanel extends javax.swing.JDialog {
         btnLoadPanel.setEnabled(false);
     }
     
+    /**
+     * Load panels from the datastore
+     * 
+     * @param comparison - A comparator used to order the panels
+     */
     private void LoadStoredPanels(Comparator comparison){
     	SPanel SPanelSOAP = new SPanelService().getSPanelPort();
     	
@@ -299,14 +304,25 @@ public class LoadPanel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Unused
+     * @param evt
+     */
     private void txtPanelCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPanelCostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPanelCostActionPerformed
-
+    /**
+     * Unused
+     * @param evt
+     */
     private void txtPanelLifetimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPanelLifetimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPanelLifetimeActionPerformed
 
+    /**
+     * Event handler to hanlde what happens when the sortBy combination box performs ANY action
+     * @param evt
+     */
     private void cmbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSortByActionPerformed
         String selected = (String)cmbSortBy.getSelectedItem();
         
@@ -322,6 +338,10 @@ public class LoadPanel extends javax.swing.JDialog {
     	}
     }//GEN-LAST:event_cmbSortByActionPerformed
 
+    /**
+     * Event handler to handle what happens when the user tries to cancel the dialog
+     * @param evt
+     */
     private void btnLoadPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadPanelActionPerformed
         SolarPanel panel = (SolarPanel) lstPanelInformation.getSelectedValue();
         parent.LoadPanel(panel);
@@ -329,10 +349,18 @@ public class LoadPanel extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnLoadPanelActionPerformed
 
+    /**
+     * Event handler to handle what happens when the information value in the list box is changed
+     * @param evt
+     */
     private void lstPanelInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPanelInformationValueChanged
         //
     }//GEN-LAST:event_lstPanelInformationValueChanged
 
+    /**
+     * Event handler to handle what happens when the mouse is clicked on the list box
+     * @param evt
+     */
     private void lstPanelInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPanelInformationMouseReleased
         SolarPanel panel = new SolarPanel();
         panel = (SolarPanel)lstPanelInformation.getSelectedValue();
@@ -350,6 +378,10 @@ public class LoadPanel extends javax.swing.JDialog {
         btnLoadPanel.setEnabled(true);
     }//GEN-LAST:event_lstPanelInformationMouseReleased
 
+    /**
+     * Event handler to handle what happens when a user tries to cancel the dialog
+     * @param evt
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         setVisible(false);
     }//GEN-LAST:event_btnCancelActionPerformed
