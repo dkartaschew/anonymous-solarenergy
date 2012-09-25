@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://server.solar.anonymous.com/" xmlns:tns="http://server.solar.anonymous.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getTariffRates" type="tns:getTariffRates"/>
+
+  <xs:element name="getTariffRatesResponse" type="tns:getTariffRatesResponse"/>
+
+  <xs:element name="insertTariffRate" type="tns:insertTariffRate"/>
+
+  <xs:element name="insertTariffRateResponse" type="tns:insertTariffRateResponse"/>
+
+  <xs:element name="removeTariffRate" type="tns:removeTariffRate"/>
+
+  <xs:element name="removeTariffRateResponse" type="tns:removeTariffRateResponse"/>
+
+  <xs:complexType name="removeTariffRate">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="removeTariffRateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTariffRates">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getTariffRatesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:tariffRate" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tariffRate">
+    <xs:sequence>
+      <xs:element name="tariff11Cost" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariff11Fee" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariff33Cost" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariff33Fee" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariffFeedInFee" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariffProvider" type="xs:string" minOccurs="0"/>
+      <xs:element name="tariffState" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="insertTariffRate">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:tariffRate" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="insertTariffRateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
