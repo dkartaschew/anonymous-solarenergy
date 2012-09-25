@@ -91,7 +91,7 @@ public class DataStoreUtils {
 		List<TariffRate> panelArrayList = new ArrayList<TariffRate>();
 
 		Query q = pm.newQuery(TariffRate.class);
-		q.setOrdering("state asc, provider asc");
+		q.setOrdering("tariffState asc, tariffProvider asc");
 
 		try {
 			panelArrayList = (List<TariffRate>) q.execute();

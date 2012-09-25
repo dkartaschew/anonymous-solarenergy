@@ -42,6 +42,17 @@
 		<url-pattern>/LocationInformationService</url-pattern>
 	</servlet-mapping>
 	
+	<!--  Tariff Information Servlet -->
+	<servlet>
+		<servlet-name>TRateInformation</servlet-name>
+		<servlet-class>com.anonymous.solar.server.TRateSOAPServerServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TRateInformation</servlet-name>
+		<url-pattern>/TRateInformationService</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Panel Information Servelet -->
 	<servlet>
 		<servlet-name>SpanelInfo</servlet-name>
@@ -62,17 +73,6 @@
 	<servlet-mapping>
 		<servlet-name>SInverterInfo</servlet-name>
 		<url-pattern>/SInverterService</url-pattern>
-	</servlet-mapping>
-	
-	<!-- Tariff Rate Information Servelet -->
-	<servlet>
-		<servlet-name>TRateInfo</servlet-name>
-		<servlet-class>com.anonymous.solar.server.TRateSOAPServerServelet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>TRateInfo</servlet-name>
-		<url-pattern>/TRateService</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Main Calculation Engine Servelet -->

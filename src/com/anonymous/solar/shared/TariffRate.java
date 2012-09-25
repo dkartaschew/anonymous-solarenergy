@@ -4,6 +4,9 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 @PersistenceCapable
 public class TariffRate {
@@ -13,13 +16,13 @@ public class TariffRate {
 	private Long key;
 	
 	@Persistent
-	String provider;
+	String tariffProvider;
 	
 	@Persistent
-	String state;
+	String tariffState;
 	
 	@Persistent
-	Double feedInFee;
+	Double tariffFeedIn;
 	
 	@Persistent
 	Double tariff11Cost;
@@ -43,9 +46,9 @@ public class TariffRate {
 			
 	
 	public TariffRate(){
-		this.provider = new String();
-		this.state = new String();
-		this.feedInFee = 0.0;
+		this.tariffProvider = new String();
+		this.tariffState = new String();
+		this.tariffFeedIn = 0.0;
 		this.tariff11Cost = 0.0;
 		this.tariff11Fee = 0.0;
 		this.tariff33Cost = 0.0;
@@ -54,9 +57,9 @@ public class TariffRate {
 	
 	public TariffRate(String provider, String state, Double feedIn, Double t11C, Double t11F, Double t33C,
 			Double t33F){
-		this.provider = provider;
-		this.state = state;
-		this.feedInFee = feedIn;
+		this.tariffProvider = provider;
+		this.tariffState = state;
+		this.tariffFeedIn = feedIn;
 		this.tariff11Cost = t11C;
 		this.tariff11Fee = t11F;
 		this.tariff33Cost = t33C;
@@ -76,7 +79,7 @@ public class TariffRate {
 	 * @return tariff provider
 	 */
 	public String getTariffProvider(){
-		return provider;
+		return tariffProvider;
 	}
 	
 	/**
@@ -84,7 +87,7 @@ public class TariffRate {
 	 * @return tarif State
 	 */
 	public String getTariffState(){
-		return state;
+		return tariffState;
 	}
 	
 	/**
@@ -92,7 +95,7 @@ public class TariffRate {
 	 * @return feed in fee
 	 */
 	public Double getTariffFeedInFee(){
-		return feedInFee;
+		return tariffFeedIn;
 	}
 	
 	/**
@@ -140,7 +143,7 @@ public class TariffRate {
 		if(provider == null || provider.compareTo("") == 0){
 			throw new TariffRateException();
 		}
-		this.provider = provider;
+		this.tariffProvider = provider;
 	}
 	
 	/**
@@ -154,7 +157,7 @@ public class TariffRate {
 		}
 		
 		
-		this.state = state;
+		this.tariffState = state;
 	}
 	
 	/**
@@ -167,7 +170,7 @@ public class TariffRate {
 		if(feedInFee == null || feedInFee < 0){
 			throw new TariffRateException();
 		}
-		this.feedInFee = feedInFee;
+		this.tariffFeedIn = feedInFee;
 	}
 	
 	/**

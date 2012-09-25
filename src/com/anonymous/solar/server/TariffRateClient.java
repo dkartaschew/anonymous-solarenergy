@@ -17,7 +17,7 @@ import com.anonymous.solar.shared.TariffRate;
 
 /**
  * Servlet to handle HTML interface to the storage of panel objects in the
- * datastore. Do not use directly, instead use the tariffs.jsp to access this
+ * datastore. Do not use directly, instead use the Tariffs.jsp to access this
  * servlet.
  * 
  * @author 07627505 Darran Kartaschew
@@ -84,11 +84,11 @@ public class TariffRateClient extends HttpServlet {
 
 			} catch (Exception e) {
 				// Oops, something went wrong, let the client know.
-				response.sendRedirect("tariffs.jsp?error=CommitFailed");
+				response.sendRedirect("Tariffs.jsp?error=CommitFailed");
 				return;
 			}
 		}
-		response.sendRedirect("tariffs.jsp");
+		response.sendRedirect("Tariffs.jsp");
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class TariffRateClient extends HttpServlet {
 	 * @return A string containing the form.
 	 */
 	private String displayTariffRateNewForm() {
-		String form = "<form action=\"tariffs.jsp\" method=\"post\">\n";
+		String form = "<form action=\"Tariffs.jsp\" method=\"post\">\n";
 		form += "<span class=\"textfield\">Tariff Provider: </span><input type=\"text\" name=\"" + TariffRate.TARIFF_PROVIDER
 				+ "\" /><br />\n";
 		form += "<span class=\"textfield\">Tariff STATE:  </span><input type=\"text\" name=\""
@@ -136,12 +136,12 @@ public class TariffRateClient extends HttpServlet {
 		for (TariffRate tariff : tariffs) {
 			table += "<tr>\n<td>" + tariff.getTariffProvider() + "</td>\n";
 			table += "<td>" + tariff.getTariffState() + "</td>\n";
-			table += "<td>" + tariff.getTariff11Cost() + "</td>\n";
-			table += "<td>" + tariff.getTariff11Fee().toString() + "</td>\n";
-			table += "<td>" + tariff.getTariff33Cost().toString() + "</td>\n";
-			table += "<td>$" + tariff.getTariff33Fee().toString() + "</td>\n";
-			table += "<td>$" + tariff.getTariffFeedInFee().toString() + "</td>\n";
-			table += "<td><form action=\"tariffs.jsp\" method=\"post\">"
+			table += "<td>" + tariff.getTariff11Cost() + "c</td>\n";
+			table += "<td>" + tariff.getTariff11Fee().toString() + "c</td>\n";
+			table += "<td>" + tariff.getTariff33Cost().toString() + "c</td>\n";
+			table += "<td>" + tariff.getTariff33Fee().toString() + "c</td>\n";
+			table += "<td>" + tariff.getTariffFeedInFee().toString() + "c</td>\n";
+			table += "<td><form action=\"Tariffs.jsp\" method=\"post\">"
 					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + tariff.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";
 			table += "</tr>\n";
