@@ -9,6 +9,7 @@ import javax.jdo.Query;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
+import com.anonymous.solar.shared.TariffRate;
 
 public class DataStoreUtils {
 
@@ -50,14 +51,54 @@ public class DataStoreUtils {
 	 * @param inverter
 	 * @return
 	 */
-	public Long storeTariff(SolarInverter inverter) {
+	public Long storeTariffRate(TariffRate rates) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			pm.makePersistent(inverter);
+			pm.makePersistent(rates);
 		} finally {
 			pm.close();
 		}
-		return inverter.getKey();
+		return rates.getKey();
+	}
+	
+	/**
+	 * Remove a tariffRate from the datastore based on the key contained in the tariffRate
+	 * object. (If key == 0, then object is not in the datastore.
+	 * 
+	 * @param tariffKey
+	 *            Key ID of the panel to remove from the datastore.
+	 */
+	public void removeTariffRate(Long tariffKey) {
+		if (tariffKey > 0) {
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			Query q = pm.newQuery(TariffRate.class);
+			q.setFilter("key == tariffKeyParam");
+			q.declareParameters("Long tariffKeyParam");
+			q.deletePersistentAll(tariffKey);
+		}
+	}
+	
+	/**
+	 * Retrieve a list of all tariff rates that are available within the
+	 * datastore.
+	 * 
+	 * @return A List of TariffRates.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<TariffRate> getAllTariffs() {
+
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		List<TariffRate> panelArrayList = new ArrayList<TariffRate>();
+
+		Query q = pm.newQuery(TariffRate.class);
+		q.setOrdering("state asc, provider asc");
+
+		try {
+			panelArrayList = (List<TariffRate>) q.execute();
+			return panelArrayList;
+		} finally {
+			q.closeAll();
+		}
 	}
 
 	/**

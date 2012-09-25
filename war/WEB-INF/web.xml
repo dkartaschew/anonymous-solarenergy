@@ -21,6 +21,16 @@
 		<url-pattern>/SolarPanelsClient</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>TariffRateClient</servlet-name>
+		<servlet-class>com.anonymous.solar.server.TariffRateClient</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TariffRateClient</servlet-name>
+		<url-pattern>/TariffRateClient</url-pattern>
+	</servlet-mapping>
+	
 	<!--  Location Information Servlet -->
 	<servlet>
 		<servlet-name>LocationInformation</servlet-name>
