@@ -19,7 +19,7 @@ public class TRateAdapter {
 		return response;
 	}
 	
-	public InsertTariffRateResponse insertInverter(InsertTariffRate request){
+	public InsertTariffRateResponse insertTariffRate(InsertTariffRate request){
 		TariffRate store = request.getArg0();
 		boolean success = tRate.insertTariffRate(store);
 		InsertTariffRateResponse response = new InsertTariffRateResponse();
@@ -27,7 +27,7 @@ public class TRateAdapter {
 		return response;
 	}
 	
-	public RemoveTariffRateResponse removeInverter(RemoveTariffRate request){
+	public RemoveTariffRateResponse removeTariffRate(RemoveTariffRate request){
 		Long key = request.getArg0();
 		boolean success = tRate.removeTariffRate(key);
 		RemoveTariffRateResponse response = new RemoveTariffRateResponse();

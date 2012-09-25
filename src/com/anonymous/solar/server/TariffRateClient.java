@@ -117,7 +117,7 @@ public class TariffRateClient extends HttpServlet {
 	}
 
 	/**
-	 * Display all the solar panels in the datastore in a table, and include a button to remove them as needed.
+	 * Display all the tariff rates in the datastore in a table, and include a button to remove them as needed.
 	 * @return A string containing the table.
 	 */
 	private String displayTariffRates() {

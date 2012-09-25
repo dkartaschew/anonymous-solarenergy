@@ -64,6 +64,17 @@
 		<url-pattern>/SInverterService</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Tariff Rate Information Servelet -->
+	<servlet>
+		<servlet-name>TRateInfo</servlet-name>
+		<servlet-class>com.anonymous.solar.server.TRateSOAPServerServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TRateInfo</servlet-name>
+		<url-pattern>/TRateService</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Main Calculation Engine Servelet -->
 	<servlet>
 		<servlet-name>SolarCalculator</servlet-name>
