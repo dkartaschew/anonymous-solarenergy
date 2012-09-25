@@ -41,7 +41,7 @@
       <xs:element name="tariff11Fee" type="xs:double" minOccurs="0"/>
       <xs:element name="tariff33Cost" type="xs:double" minOccurs="0"/>
       <xs:element name="tariff33Fee" type="xs:double" minOccurs="0"/>
-      <xs:element name="tariffFeedInFee" type="xs:double" minOccurs="0"/>
+      <xs:element name="tariffFeedIn" type="xs:double" minOccurs="0"/>
       <xs:element name="tariffProvider" type="xs:string" minOccurs="0"/>
       <xs:element name="tariffState" type="xs:string" minOccurs="0"/>
     </xs:sequence>

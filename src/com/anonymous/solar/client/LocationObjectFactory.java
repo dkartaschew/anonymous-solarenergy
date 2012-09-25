@@ -13,6 +13,7 @@ import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarResult;
 import com.anonymous.solar.shared.SolarSetup;
+import com.anonymous.solar.shared.TariffRate;
 
 
 /**
@@ -63,7 +64,128 @@ public class LocationObjectFactory {
     private final static QName _CalculateDailySavingsResponse_QNAME = new QName("http://server.solar.anonymous.com/", "calculateDailySavingsResponse");
     private final static QName _CalculateMonthlySavings_QNAME = new QName("http://server.solar.anonymous.com/", "calculateMonthlySavings");
 
+    //Start Tariff Rate
+    
+    private final static QName _RemoveTariffRateResponse_QNAME = new QName("http://server.solar.anonymous.com/", "removeTariffRateResponse");
+    private final static QName _InsertTariffRateResponse_QNAME = new QName("http://server.solar.anonymous.com/", "insertTariffRateResponse");
+    private final static QName _GetTariffRatesResponse_QNAME = new QName("http://server.solar.anonymous.com/", "getTariffRatesResponse");
+    private final static QName _GetTariffRates_QNAME = new QName("http://server.solar.anonymous.com/", "getTariffRates");
+    private final static QName _RemoveTariffRate_QNAME = new QName("http://server.solar.anonymous.com/", "removeTariffRate");
+    private final static QName _InsertTariffRate_QNAME = new QName("http://server.solar.anonymous.com/", "insertTariffRate");
 
+    
+    /**
+     * Create an instance of {@link RemoveTariffRateResponse }
+     * 
+     */
+    public RemoveTariffRateResponse createRemoveTariffRateResponse() {
+        return new RemoveTariffRateResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTariffRates }
+     * 
+     */
+    public GetTariffRates createGetTariffRates() {
+        return new GetTariffRates();
+    }
+
+    /**
+     * Create an instance of {@link RemoveTariffRate }
+     * 
+     */
+    public RemoveTariffRate createRemoveTariffRate() {
+        return new RemoveTariffRate();
+    }
+
+    /**
+     * Create an instance of {@link TariffRate }
+     * 
+     */
+    public TariffRate createTariffRate() {
+        return new TariffRate();
+    }
+
+    /**
+     * Create an instance of {@link GetTariffRatesResponse }
+     * 
+     */
+    public GetTariffRatesResponse createGetTariffRatesResponse() {
+        return new GetTariffRatesResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertTariffRate }
+     * 
+     */
+    public InsertTariffRate createInsertTariffRate() {
+        return new InsertTariffRate();
+    }
+
+    /**
+     * Create an instance of {@link InsertTariffRateResponse }
+     * 
+     */
+    public InsertTariffRateResponse createInsertTariffRateResponse() {
+        return new InsertTariffRateResponse();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveTariffRateResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "removeTariffRateResponse")
+    public JAXBElement<RemoveTariffRateResponse> createRemoveTariffRateResponse(RemoveTariffRateResponse value) {
+        return new JAXBElement<RemoveTariffRateResponse>(_RemoveTariffRateResponse_QNAME, RemoveTariffRateResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertTariffRateResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "insertTariffRateResponse")
+    public JAXBElement<InsertTariffRateResponse> createInsertTariffRateResponse(InsertTariffRateResponse value) {
+        return new JAXBElement<InsertTariffRateResponse>(_InsertTariffRateResponse_QNAME, InsertTariffRateResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTariffRatesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "getTariffRatesResponse")
+    public JAXBElement<GetTariffRatesResponse> createGetTariffRatesResponse(GetTariffRatesResponse value) {
+        return new JAXBElement<GetTariffRatesResponse>(_GetTariffRatesResponse_QNAME, GetTariffRatesResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTariffRates }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "getTariffRates")
+    public JAXBElement<GetTariffRates> createGetTariffRates(GetTariffRates value) {
+        return new JAXBElement<GetTariffRates>(_GetTariffRates_QNAME, GetTariffRates.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveTariffRate }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "removeTariffRate")
+    public JAXBElement<RemoveTariffRate> createRemoveTariffRate(RemoveTariffRate value) {
+        return new JAXBElement<RemoveTariffRate>(_RemoveTariffRate_QNAME, RemoveTariffRate.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertTariffRate }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://server.solar.anonymous.com/", name = "insertTariffRate")
+    public JAXBElement<InsertTariffRate> createInsertTariffRate(InsertTariffRate value) {
+        return new JAXBElement<InsertTariffRate>(_InsertTariffRate_QNAME, InsertTariffRate.class, null, value);
+    }
+
+    
+    //End Tariff Rate
 
     /**
      * Create an instance of {@link RemoveInverter }
