@@ -44,6 +44,21 @@ public class DataStoreUtils {
 			q.deletePersistentAll(panelKey);
 		}
 	}
+	
+	/**
+	 * Store a tariff into the data store.
+	 * @param inverter
+	 * @return
+	 */
+	public Long storeTariff(SolarInverter inverter) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		try {
+			pm.makePersistent(inverter);
+		} finally {
+			pm.close();
+		}
+		return inverter.getKey();
+	}
 
 	/**
 	 * Retrieve a single solar panels information based on the panel name.
