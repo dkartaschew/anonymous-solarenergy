@@ -1,5 +1,8 @@
 package com.anonymous.solar.shared;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -167,6 +170,7 @@ public class TariffRate {
 	
 	/****************************
 	 * Setters
+	 *
 	 ****************************/
 	
 	/**
@@ -187,10 +191,24 @@ public class TariffRate {
 	 * @throws TariffRateException
 	 */
 	public void setTariffState(String state) throws TariffRateException{
+		
+		List<String> goodStates = new ArrayList<String>();
+		goodStates.add("QLD");
+		goodStates.add("NSW");
+		goodStates.add("VIC");
+		goodStates.add("TAS");
+		goodStates.add("NT");
+		goodStates.add("SA");
+		goodStates.add("WA");
+		
 		if(state == null || state.compareTo("") == 0){
 			throw new TariffRateException();
 		}
+		state = state.toUpperCase();
 		
+		if(!goodStates.contains(state)){
+			throw new TariffRateException();
+		}
 		
 		this.tariffState = state;
 	}
