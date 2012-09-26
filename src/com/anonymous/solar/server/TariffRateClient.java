@@ -132,6 +132,7 @@ public class TariffRateClient extends HttpServlet {
 		table += "<th>33 Cost</th>";
 		table += "<th>33 Fee</th>";
 		table += "<th>Feed In Reward</th>";
+		table += "<th>KEY</th>";
 		table += "<th>&nbsp;</th></tr>";
 		for (TariffRate tariff : tariffs) {
 			table += "<tr>\n<td>" + tariff.getTariffProvider() + "</td>\n";
@@ -141,6 +142,7 @@ public class TariffRateClient extends HttpServlet {
 			table += "<td>" + tariff.getTariff33Cost().toString() + "c</td>\n";
 			table += "<td>" + tariff.getTariff33Fee().toString() + "c</td>\n";
 			table += "<td>" + tariff.getTariffFeedInFee().toString() + "c</td>\n";
+			table += "<td>" + tariff.getKey().toString() + "</td>\n";
 			table += "<td><form action=\"Tariffs.jsp\" method=\"post\">"
 					+ "<input type=\"hidden\" name=\"delKey\" value=\"" + tariff.getKey() + "\">"
 					+ "<input type=\"submit\" value=\"Delete\"></form></td>\n ";

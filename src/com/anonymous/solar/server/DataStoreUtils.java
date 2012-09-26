@@ -48,7 +48,7 @@ public class DataStoreUtils {
 	
 	/**
 	 * Store a tariff into the data store.
-	 * @param inverter
+	 * @param TariffRate - a tariffRate variable to store into the datastore
 	 * @return
 	 */
 	public Long storeTariffRate(TariffRate rates) {

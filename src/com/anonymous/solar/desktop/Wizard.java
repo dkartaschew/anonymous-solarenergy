@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,6 +20,8 @@ import com.anonymous.solar.client.SInverter;
 import com.anonymous.solar.client.SInverterService;
 import com.anonymous.solar.client.SPanel;
 import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.client.TRate;
+import com.anonymous.solar.client.TRateService;
 import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.LocationDataException;
@@ -29,6 +32,7 @@ import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarPanelsException;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
+import com.anonymous.solar.shared.TariffRate;
 
 /**
  * Main Entry Point for the wizard interface for the Desktop Application

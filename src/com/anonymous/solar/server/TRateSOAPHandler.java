@@ -41,10 +41,10 @@ public class TRateSOAPHandler {
 	        SOAPElement soapElement = (SOAPElement) next;
 	        QName qname = soapElement.getElementQName();
 	          if (GET_ALL_TARIFFS.equals(qname)) {
-	            responsePojo = handleInsertTariffRateRequest(soapElement);
+	            responsePojo = handleGetTariffRatesRequest(soapElement);
 	            break;
 	          } else if (INSERT_TARIFF_RATE.equals(qname)) {
-	            responsePojo = handleGetTariffRatesRequest(soapElement);
+	            responsePojo = handleInsertTariffRateRequest(soapElement);
 	            break;
 	      	  } else if (REMOVE_TARIFF_RATE.equals(qname)) {
 	            responsePojo = handleRemoveTariffRateRequest(soapElement);

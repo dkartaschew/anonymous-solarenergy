@@ -119,7 +119,7 @@ public class TariffRate {
 	
 	/**
 	 * Get the state of the tariff data
-	 * @return tarif State
+	 * @return tariff State
 	 */
 	public String getTariffState(){
 		return tariffState;
@@ -254,5 +254,11 @@ public class TariffRate {
 			throw new TariffRateException();
 		}
 		this.tariff33Fee = t33F;
+	}
+	
+	@Override
+	public String toString(){
+		return "Provider: " + tariffProvider + "; State: " + tariffState +
+				"; Tariff11 Cost: " + tariff11Cost + "; Tariff33 Cost:" + tariff33Cost;
 	}
 }
