@@ -15,7 +15,6 @@ import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
 import com.anonymous.solar.shared.TariffRate;
-import com.google.apphosting.utils.config.BackendsXml.Option;
 
 /**
  * User Cost Pane for Desktop Application
