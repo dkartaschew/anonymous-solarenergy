@@ -12,6 +12,7 @@ import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
+import com.anonymous.solar.shared.TariffRate;
 
 /**
  * User Cost Pane for Desktop Application
@@ -349,7 +350,14 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
 		}
 		return true;
 	}
-
+    
+    protected void LoadTariff(TariffRate tariff){
+		jSpinnerMonthlyCostTariff1.setValue(tariff.getTariff11Cost());
+		jSpinnerTariff11.setValue(tariff.getTariff11Fee());
+		jSpinnerMonthlyCostTariff2.setValue(tariff.getTariff33Cost());
+		jSpinnerTariff33.setValue(tariff.getTariff33Fee());
+		jSpinnerFeedInFee.setValue(tariff.getTariffFeedInFee());
+    }
 
     /**
      * Return the title to be used for this wizard panel;
