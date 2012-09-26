@@ -6,13 +6,16 @@ package com.anonymous.solar.desktop;
 
 import java.awt.Color;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.anonymous.solar.shared.CustomerData;
+import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
 import com.anonymous.solar.shared.TariffRate;
+import com.google.apphosting.utils.config.BackendsXml.Option;
 
 /**
  * User Cost Pane for Desktop Application
@@ -42,6 +45,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         initComponents();
         nameComponents();
         this.parent = parent;
+        
     }
     
     /**
@@ -271,18 +275,27 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     public boolean callbackStart() {
     	SolarSetup global = parent.getSetup();
     	CustomerData data;
-		if (global != null) {
-			data = global.getCustomerData();
-            jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
-			jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
-			jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
-			jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
-			jSpinnerTariff11.setValue(data.getTariff11Fee());
-			jSpinnerMonthlyCostTariff2.setValue(data.getTariff13Cost());
-			jSpinnerTariff33.setValue(data.getTariff13Fee());
-			jSpinnerTariffIncrease.setValue(data.getAnnualTariffIncrease());
-			jSpinnerFeedInFee.setValue(data.getFeedInFee());
-		}
+    	
+    	int option = JOptionPane.showConfirmDialog(new JFrame(), "Do you want to choose from a list of providers?", "Existing Options",
+    			JOptionPane.YES_NO_OPTION);
+    	
+    	if(option == JOptionPane.YES_OPTION){
+    		LoadTariff tariff = new LoadTariff(this);
+    		tariff.setVisible(true);
+    	} else {
+			if (global != null) {
+				data = global.getCustomerData();
+	            jSpinnerMonthly.setValue(data.getMonthlyAverageUsage());
+				jSpinnerDailyAverageUsage.setValue(data.getDailyAverageUsage());
+				jSpinnerDayTimeHourlyUsage.setValue(data.getHourlyAverageUsage());
+				jSpinnerMonthlyCostTariff1.setValue(data.getTariff11Cost());
+				jSpinnerTariff11.setValue(data.getTariff11Fee());
+				jSpinnerMonthlyCostTariff2.setValue(data.getTariff13Cost());
+				jSpinnerTariff33.setValue(data.getTariff13Fee());
+				jSpinnerTariffIncrease.setValue(data.getAnnualTariffIncrease());
+				jSpinnerFeedInFee.setValue(data.getFeedInFee());
+			}
+    	}
         return true;
     }
     
