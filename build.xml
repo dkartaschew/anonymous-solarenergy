@@ -160,6 +160,7 @@
 		<javac srcdir="src" destdir="android" classpathref="project.classpath" debug="on" includeantruntime="false"/>
 		<delete dir="android/com/anonymous/solar/server/" quiet="true" />
 		<delete dir="android/com/anonymous/solar/desktop/" quiet="true" />
+		<delete dir="android/com/anonymous/solar/client/" quiet="true" />
 		<delete file="android/log4j.properties" quiet="true" />
 		<delete dir="android/META-INF" quiet="true" />
 		<delete quiet="true">
