@@ -17,6 +17,8 @@ import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarInverterException;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanelException;
+import com.anonymous.solar.shared.TariffRate;
+import com.anonymous.solar.shared.TariffRateException;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
@@ -145,6 +147,11 @@ public class DataStoreComponentsTest {
 		locations =  dsutils.getAllLocations();
 		assertTrue("Number of Locations is now 0", locations.size() == 0);
 	}
+	
+	/********************************************************************************************************
+	 ********************************************************************************************************
+	 ******************************************* SolarPanel tests *******************************************
+	 ********************************************************************************************************/
 	
 	/**
 	 * Test to ensure we are using a cached copy of the datastore.
@@ -288,6 +295,11 @@ public class DataStoreComponentsTest {
 		assertTrue(testPanel.getPanelWattage() == 100.0);
 	}
 	
+	/********************************************************************************************************
+	 ********************************************************************************************************
+	 ****************************************** SolarInverter test ******************************************
+	 ********************************************************************************************************/
+	
 	/**
 	 * Test to ensure we are using a cached copy of the datastore.
 	 */
@@ -398,4 +410,133 @@ public class DataStoreComponentsTest {
 		inverters =  dsutils.getAllInverters();
 		assertTrue("Number of Inverters is now 0", inverters.size() == 0);
 	}
+	
+	/********************************************************************************************************
+	 ********************************************************************************************************
+	 ******************************************* TariffRate tests *******************************************
+	 ********************************************************************************************************/
+	
+	/**
+	 * Test to ensure we are using a cached copy of the datastore.
+	 */
+	@Test
+	public void testTariffDataEmpty(){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		boolean notFound = false;
+		try {
+			//TODO What ID is TariffRate?
+			pm.getObjectById(TariffRate.class, 1);
+			fail("should have raised not found");
+		} catch (Exception e) {
+			notFound = true;
+		} finally {
+			pm.close();
+		}
+		assertTrue(notFound);
+	}
+	
+	/**
+	 * Test basic insertion, to check that no exceptions are thrown.
+	 * @throws TariffRateException 
+	 */
+	@Test
+	public void testStoreTariffData() throws TariffRateException{
+		TariffRate rate = new TariffRate();
+		rate.setTariffProvider("AAAAA");
+		rate.setTariffState("ACT");
+		dsutils.storeTariffRate(rate);
+	}
+	
+	/**
+	 * Test insertion and retrieval of tariff data.
+	 * @throws TariffRateException 
+	 */
+	@Test
+	public void testRetrieveTariffData() throws TariffRateException{
+		TariffRate rate = new TariffRate();
+		rate.setTariffProvider("AAAAA");
+		rate.setTariffState("ACT");
+		dsutils.storeTariffRate(rate);
+		
+		List<TariffRate> tariffs = dsutils.getAllTariffs();
+		
+		assertTrue("Number of Tariffs = 1", tariffs.size() == 1);
+		assertTrue("Single inverter object is sane", tariffs.get(0).getTariffProvider().compareTo("AAAAA") == 0);
+	}
+	
+	/**
+	 * Test insertion and retrieval of inverter data.
+	 * @throws TariffRateException 
+	 */
+	@Test
+	public void testRetrieveTariffData2() throws TariffRateException{
+		TariffRate rate = new TariffRate();
+		rate.setTariffProvider("AAAAA");
+		rate.setTariffState("ACT");
+		dsutils.storeTariffRate(rate);
+		
+		rate = new TariffRate();
+		rate.setTariffProvider("BBBBB");
+		rate.setTariffState("ACT");
+		dsutils.storeTariffRate(rate);
+		
+		List<TariffRate> rates =  dsutils.getAllTariffs();
+		
+		assertTrue("Number of Tariffs = 2", rates.size() == 2);
+		assertTrue("Inverter 1 correct", rates.get(0).getTariffProvider().compareTo("AAAAA") == 0);
+		assertTrue("Inverter 2 correct", rates.get(1).getTariffProvider().compareTo("BBBBB") == 0);
+	}
+	
+	/**
+	 * Test insertion and removal of inverter data.
+	 * @throws TariffRateException 
+	 */
+	@Test
+	public void testRemoveTariffData() throws TariffRateException{
+		TariffRate rate1 = new TariffRate();
+		rate1.setTariffProvider("Rate1");
+		rate1.setTariffState("ACT");
+		dsutils.storeTariffRate(rate1);
+		
+		TariffRate rate2 = new TariffRate();
+		rate2.setTariffProvider("Rate2");
+		rate1.setTariffState("ACT");
+		dsutils.storeTariffRate(rate2);
+		
+		List<TariffRate> rates =  dsutils.getAllTariffs();
+		dsutils.removeTariffRate(rates.get(0).getKey());
+		
+		rates = dsutils.getAllTariffs();
+		assertTrue("Number of Inverters is now 1", rates.size() == 1);
+	}
+	
+	/**
+	 * Test insertion and removal of all location data.
+	 * @throws TariffRateException 
+	 */
+	@Test
+	public void testRemoveTariffData2() throws TariffRateException{
+		TariffRate rate1 = new TariffRate();
+		rate1.setTariffProvider("Rate1");
+		rate1.setTariffState("ACT");
+		dsutils.storeTariffRate(rate1);
+		
+		TariffRate rate2 = new TariffRate();
+		rate2.setTariffProvider("Rate2");
+		rate1.setTariffState("ACT");
+		dsutils.storeTariffRate(rate2);
+		
+		List<TariffRate> rates = dsutils.getAllTariffs();
+		for(TariffRate inv: rates){
+			dsutils.removeTariffRate(inv.getKey());
+		}
+		
+		rates =  dsutils.getAllTariffs();
+		assertTrue("Number of Inverters is now 0", rates.size() == 0);
+	}
+	
+	
+	
+	
+	
 }

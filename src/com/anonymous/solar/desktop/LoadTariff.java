@@ -89,9 +89,15 @@ public class LoadTariff extends javax.swing.JDialog {
 	}
 
     public void nameComponents(){
-    	lstPanelInformation.setName("lstPanelInformation");
-    	
-    	btnLoadTariff.setName("ButtonLoadPanel");
+    	lstPanelInformation.setName("lstTariffInformation");
+    	txtTariffProvider.setName("txtTariffProvider");
+        txtTariffState.setName("txtTariffState");
+        txtTariffFeedIn.setName("txtTariffFeedIn");
+        txtTariff11C.setName("txtTariff11C");
+        txtTariff11F.setName("txtTariff11F");
+        txtTariff33F.setName("txtTariff33F");
+        txtTariff33C.setName("txtTariff33C");
+    	btnLoadTariff.setName("btnLoadTariff");
     }
     
     /**
