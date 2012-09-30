@@ -200,6 +200,7 @@ public class TariffRate {
 		goodStates.add("NT");
 		goodStates.add("SA");
 		goodStates.add("WA");
+		goodStates.add("ACT");
 		
 		if(state == null || state.compareTo("") == 0){
 			throw new TariffRateException();

@@ -10,8 +10,13 @@ import org.junit.Test;
 
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
+import com.anonymous.solar.client.SPanel;
+import com.anonymous.solar.client.SPanelService;
+import com.anonymous.solar.client.TRate;
+import com.anonymous.solar.client.TRateService;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.LocationDataException;
+import com.anonymous.solar.shared.TariffRate;
 
 public class SolarClientSOAPTest {
 
@@ -72,6 +77,91 @@ public class SolarClientSOAPTest {
 		List<LocationData> locations = locationSOAP.storeLocationGetAll();
 		assertTrue("At least Location returned", locations.size() != 0);
 		assertTrue("Single location object is sane",
-				locations.get(0).getLocationName().compareTo("Surfers Paradise") == 0);
+				locations.get(0).getLocationName().compareTo("Noosa") == 0);
 	}
+	
+	/*******************************
+	 ******** TARIFF TESTS *********
+	 *******************************/
+	
+	/**
+	 * Try to get a list of tariffs
+	 * 
+	 * Assumption: Service contains some objects and at least 1 object for the ACT
+	 */
+	@Test
+	public void testTariffGet() {
+		TRate TRateSOAP = new TRateService().getTRatePort();
+        List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+        assertTrue("No data detected",
+        		tRateData.get(0).getTariffState().compareTo("ACT") == 0); 
+	}
+	
+	/**
+	 * Try and insert a tariff into the system
+	 *  
+	 * Assumption: Objects are still been sorted by State, Provider
+	 * Assumption 2: No provider has a name with higher priority than "AAAAA"
+	 * Assumption 3: The previous test (GET) passed
+	 */
+	@Test
+	public void testTariffInsert() {
+		//Generate variables
+		String provider = "AAAAA";
+		String state = "ACT";
+		Double elecDetail = 0.1;
+		TariffRate rate = new TariffRate(provider, state, elecDetail, elecDetail, elecDetail, elecDetail
+				,elecDetail);
+		
+		//Insert the tariff
+		TRate TRateSOAP = new TRateService().getTRatePort();
+        boolean succ = TRateSOAP.insertTariffRate(rate);
+        
+        //Get a list of current tariffs
+        List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+        
+        //Test results to check for tariff
+        assertTrue("The service has rejected the tariff insert command", succ);
+        assertTrue("The tariff did not appear in the store",
+        		tRateData.get(0).getTariffProvider().compareTo(provider) == 0); 
+	}
+	
+	/**
+	 * Test loading any data from the service, and ensuring we ae getting what
+	 * we expected.
+	 * 
+	 * Assumption: Objects are still been sorted by State, Provider
+	 * Assumption 2: No provider has a name with higher priority than "AAAAA"
+	 * Assumption 3: The previous test(s) (GET, INSERT) passed
+	 * Assumption 4: The previous test (INSERT) has been run and the desired tariff
+	 * 				 still sitting at the top (named "AAAAA")
+	 */
+	@Test
+	public void testTariffRemove() {
+		//Generate variables
+		String provider = "AAAAA";
+		String state = "ACT";
+		Double elecDetail = 0.1;
+		Long key;
+		TRate TRateSOAP = new TRateService().getTRatePort();
+        
+        //Check the tariff is present
+        List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+        assertTrue("The panel is not in the store",
+        		tRateData.get(0).getTariffProvider().compareTo(provider) == 0); 
+        key = tRateData.get(0).getKey();
+        
+        //Delete the tariff
+        boolean succ = TRateSOAP.removeTariffRate(key);
+        
+        //Get a list of new current tariffs
+        tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+        
+        //Test results
+        assertTrue("The service has rejected the tariff delete command", succ);
+        assertTrue("The panel is still in the store",
+        		tRateData.get(0).getTariffProvider().compareTo("AAAAA") != 0); 
+		
+	}
+	
 }
