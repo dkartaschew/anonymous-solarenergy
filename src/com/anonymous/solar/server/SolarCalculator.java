@@ -38,10 +38,10 @@ public class SolarCalculator {
 			e.printStackTrace();
 		}
 		
+		newSolarResult = calculateYearlySavingsOverTime(newSolarResult, year);
 		newSolarResult = calculateDailySavings(newSolarResult, 1);
 		newSolarResult = calculateMonthlySavings(newSolarResult, 1);
 		newSolarResult = calculateYearlySavings(newSolarResult, 1);
-		newSolarResult = calculateYearlySavingsOverTime(newSolarResult, year);
 		
 		return newSolarResult;
 	}
@@ -112,9 +112,7 @@ public class SolarCalculator {
 		SolarResult newSolarResult = solarResult;
 		SolarSetup solarSetup = solarResult.getSolarSetup();
 		
-		if (newSolarResult.getDailySavings() == 0.0) {
-			newSolarResult = calculateDailySavings(newSolarResult, year);
-		}
+		newSolarResult = calculateDailySavings(newSolarResult, year);
 		
 		double yearlySavings = 365 * newSolarResult.getDailySavings();
 		
