@@ -23,6 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="savingsOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="solarSetup" type="{http://server.solar.anonymous.com/}solarSetup" minOccurs="0"/>
  *         &lt;element name="yearlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="powerGenerated" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="powerGeneratedOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +39,9 @@ import javax.xml.bind.annotation.XmlType;
     "monthlySavings",
     "savingsOverYears",
     "solarSetup",
-    "yearlySavings"
+    "yearlySavings",
+    "powerGenerated",
+    "powerGeneratedOverYears"
 })
 /**
  * Class to hold the result of the solar output calculation from the server and to handle
@@ -55,6 +59,9 @@ public class SolarResult {
     protected List<Double> savingsOverYears;
     protected SolarSetup solarSetup;
     protected double yearlySavings;
+    protected double powerGenerated;
+    @XmlElement(nillable = true)
+    protected List<Double> powerGeneratedOverYears;
 	
 	public SolarResult() {
 		savingsOverYears = new ArrayList<Double>();
@@ -73,13 +80,23 @@ public class SolarResult {
 		
 	}
 	
+	/**
+	 * This method returns the solarSetup that was used to calculate the results
+	 * 
+	 * @return a SolarSetup object that contains the current solar setup
+	 */
 	public SolarSetup getSolarSetup() {
 		return solarSetup;
 	}
 	
+	/**
+	 * 
+	 * @param solarSetup
+	 * @throws SolarResultException
+	 */
 	public void setSolarSetup(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
-		solarSetup = solarSetup;
+		this.solarSetup = solarSetup;
 	}
 	
 	public double getDailySavings() {
@@ -122,6 +139,22 @@ public class SolarResult {
 		}
 		
 		return cumulativeSavings;
+	}
+	
+	public double getPowerGenerated() {
+		return powerGenerated;
+	}
+	
+	public void setPowerGenerated(double newPowerGenerated) {
+		powerGenerated = newPowerGenerated;
+	}
+	
+	public ArrayList<Double> getPowerGeneratedOverYears() {
+		return (ArrayList<Double>) powerGeneratedOverYears;
+	}
+	
+	public void setPowerGeneratedOverYears(ArrayList<Double> newPowerGeneratedOverYears) {
+		powerGeneratedOverYears = newPowerGeneratedOverYears;
 	}
 	
 	private void SolarSetupExceptionCheck(SolarSetup solarSetup) throws SolarResultException {

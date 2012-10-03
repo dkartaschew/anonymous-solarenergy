@@ -35,6 +35,8 @@
       <xs:element name="savingsOverYears" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="solarSetup" type="tns:solarSetup" minOccurs="0"/>
       <xs:element name="yearlySavings" type="xs:double"/>
+	  <xs:element name="powerGenerated" type="xs:double"/>
+	  <xs:element name="powerGenerated" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
