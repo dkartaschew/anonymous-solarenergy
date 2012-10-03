@@ -103,7 +103,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         lblName = new javax.swing.JLabel();
         lblCost = new javax.swing.JLabel();
         lblCode = new javax.swing.JLabel();
-        lblEfficiency = new javax.swing.JLabel();
+        lblEfficiencyLoss = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblLife = new javax.swing.JLabel();
         lblWattage = new javax.swing.JLabel();
@@ -155,7 +155,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         lblCode.setText("Code");
 
-        lblEfficiency.setText("Efficiency");
+        lblEfficiencyLoss.setText("Efficiency Loss");
 
         lblLife.setText("Life");
 
@@ -201,7 +201,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                     .addComponent(lblRRP)
                     .addComponent(lblCost)
                     .addComponent(lblLife)
-                    .addComponent(lblEfficiency))
+                    .addComponent(lblEfficiencyLoss))
                 .addGap(25, 25, 25)
                 .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSpinnerCost, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
@@ -244,7 +244,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                         .addGroup(jPanelDataGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblWattage)
                             .addComponent(jSpinnerWattage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEfficiency)
+                            .addComponent(lblEfficiencyLoss)
                             .addComponent(jSpinnerEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -279,7 +279,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(lblDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinnerDirection, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addComponent(jSpinnerDirection)
                 .addContainerGap())
         );
         jPanelPanelLocationGroupLayout.setVerticalGroup(
@@ -320,11 +320,6 @@ public class AddNewPanel extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelDataGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelPanelLocationGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLoadPanel)
@@ -332,7 +327,12 @@ public class AddNewPanel extends javax.swing.JDialog {
                         .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSubmit)
-                        .addGap(12, 12, 12))))
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanelPanelLocationGroup, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelDataGroup, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +602,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblCount;
     private javax.swing.JLabel lblDirection;
-    private javax.swing.JLabel lblEfficiency;
+    private javax.swing.JLabel lblEfficiencyLoss;
     private javax.swing.JLabel lblLife;
     private javax.swing.JLabel lblManufacturer;
     private javax.swing.JLabel lblName;

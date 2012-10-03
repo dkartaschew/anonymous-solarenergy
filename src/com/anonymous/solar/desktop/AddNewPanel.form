@@ -29,13 +29,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanelDataGroup" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanelPanelLocationGroup" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonLoadPanel" min="-2" max="-2" attributes="0"/>
@@ -44,6 +37,13 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jPanelPanelLocationGroup" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanelDataGroup" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -130,7 +130,7 @@
                       <Component id="lblRRP" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCost" min="-2" max="-2" attributes="0"/>
                       <Component id="lblLife" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEfficiency" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblEfficiencyLoss" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -184,7 +184,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblWattage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jSpinnerWattage" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEfficiency" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEfficiencyLoss" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jSpinnerEfficiency" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -210,9 +210,9 @@
             <Property name="text" type="java.lang.String" value="Code"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblEfficiency">
+        <Component class="javax.swing.JLabel" name="lblEfficiencyLoss">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Efficiency"/>
+            <Property name="text" type="java.lang.String" value="Efficiency Loss"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtName">
@@ -304,7 +304,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblDirection" min="-2" pref="69" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSpinnerDirection" pref="117" max="32767" attributes="0"/>
+                  <Component id="jSpinnerDirection" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
