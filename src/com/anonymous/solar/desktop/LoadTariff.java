@@ -27,9 +27,9 @@ public class LoadTariff extends javax.swing.JDialog {
     /**
      * Creates new form LoadPanel
      */
-	WizardUserCosts parent;
+	WizardTariffData parent;
 	
-    public LoadTariff(WizardUserCosts parent) {
+    public LoadTariff(WizardTariffData parent) {
         super(new JDialog(), true);
         initComponents();
         nameComponents();
