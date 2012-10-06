@@ -18,6 +18,8 @@ import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
 import com.anonymous.solar.shared.TariffRate;
+import com.anonymous.solar.shared.TariffRateException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -379,8 +381,47 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
     private void returnToWhite(){
     	javax.swing.border.LineBorder clear = new javax.swing.border.LineBorder(Color.white, 0);
   
-    	//jSpinnerDailyAverageUsage.setBorder(clear);
+    	jSpinnerDailyCostTariff11.setBorder(clear);
+    	jSpinnerTariff11.setBorder(clear);
+    	jSpinnerDailyCostTariff33.setBorder(clear);
+    	jSpinnerTariff33.setBorder(clear);
+    	jSpinnerTariffIncrease.setBorder(clear);
+    	jSpinnerFeedInFee.setBorder(clear);
 
+    }
+    
+    private void validateInput() throws TariffRateException{
+    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 1);
+    	boolean errorFree = true;
+    	
+    	if((Double)jSpinnerDailyCostTariff11.getValue() == 0){
+    		jSpinnerDailyCostTariff11.setBorder(borderError);
+    		errorFree = false;
+    	}
+    	
+    	if((Double)jSpinnerDailyCostTariff33.getValue() == 0){
+    		jSpinnerDailyCostTariff33.setBorder(borderError);
+    		errorFree = false;
+    	}
+    	
+    	if((Double)jSpinnerTariffIncrease.getValue() == 0){
+    		jSpinnerTariffIncrease.setBorder(borderError);
+    		errorFree = false;
+    	}
+    	
+    	if((Double)jSpinnerTariff11.getValue() == 0){
+    		jSpinnerTariff11.setBorder(borderError);
+    		errorFree = false;
+    	}
+    	
+    	if((Double)jSpinnerTariff33.getValue() == 0){
+    		jSpinnerTariff33.setBorder(borderError);
+    		errorFree = false;
+    	}
+    	
+    	if(!errorFree){
+    		throw new TariffRateException();
+    	}
     }
 
 
@@ -392,23 +433,31 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
      */
     @Override
     public boolean callbackDispose(boolean validateInput) {
-    	javax.swing.border.LineBorder borderError = new javax.swing.border.LineBorder(Color.red, 1);
-    	returnToWhite();
     	
-        SolarSetup global = parent.getSetup();
-        if (global != null) {
-            // Store the name and description fields.
-            try {    
-                data.setTariff11Cost((Double) jSpinnerDailyCostTariff11.getValue());
-                data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
-                data.setTariff13Cost((Double) jSpinnerDailyCostTariff33.getValue());
-                data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
-                data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
-                data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
-            } catch (Exception e) {
-                return false;
-            }
-        }
+    	returnToWhite();
+    	try {
+			validateInput();
+    	} catch (TariffRateException e1) {
+    		JOptionPane.showMessageDialog(this, "Please fill in all the required fields!",
+					"Estimated Usage Missing", JOptionPane.OK_OPTION);
+			return false;
+		}
+    	
+	        SolarSetup global = parent.getSetup();
+	        if (global != null) {
+	            // Store the name and description fields.
+	            try {    
+	                data.setTariff11Cost((Double) jSpinnerDailyCostTariff11.getValue());
+	                data.setTariff11Fee((Double) jSpinnerTariff11.getValue());
+	                data.setTariff13Cost((Double) jSpinnerDailyCostTariff33.getValue());
+	                data.setTariff13Fee((Double) jSpinnerTariff33.getValue());
+	                data.setAnnualTariffIncrease((Double) jSpinnerTariffIncrease.getValue());
+	                data.setFeedInFee((Double) jSpinnerFeedInFee.getValue());
+	            } catch (Exception e) {
+	                return false;
+	            }
+	        }
+    	
         return true;
     }
     
