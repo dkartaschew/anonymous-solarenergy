@@ -60,7 +60,8 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
      * Names components for GUI testing
      */
     private void nameComponents() {
-
+    	lstProviderInformation.setName("ListTariffProviderInformation");
+    	jSpinnerTariffIncrease.setName("SpinnerTariffIncrease");
     }
 
 
@@ -77,7 +78,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         jLabelDailyAvgUsage = new javax.swing.JLabel();
         cmbSortBy = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstPanelInformation = new javax.swing.JList();
+        lstProviderInformation = new javax.swing.JList();
         jPanelTariffGroup = new javax.swing.JPanel();
         jSpinnerTariff11 = new javax.swing.JSpinner();
         jLabelTariff11 = new javax.swing.JLabel();
@@ -105,17 +106,17 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             }
         });
 
-        lstPanelInformation.addMouseListener(new java.awt.event.MouseAdapter() {
+        lstProviderInformation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 lstPanelInformationMouseReleased(evt);
             }
         });
-        lstPanelInformation.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstProviderInformation.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstPanelInformationValueChanged(evt);
             }
         });
-        jScrollPane2.setViewportView(lstPanelInformation);
+        jScrollPane2.setViewportView(lstProviderInformation);
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -254,7 +255,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
 
     private void lstPanelInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPanelInformationMouseReleased
         TariffRate tariff = new TariffRate();
-        tariff = (TariffRate)lstPanelInformation.getSelectedValue();
+        tariff = (TariffRate)lstProviderInformation.getSelectedValue();
 
         if(tariff != null){
             jSpinnerFeedInFee.setValue(tariff.getTariffFeedInFee());
@@ -268,7 +269,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
 
     private void lstPanelInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPanelInformationValueChanged
         TariffRate tariff = new TariffRate();
-        tariff = (TariffRate)lstPanelInformation.getSelectedValue();
+        tariff = (TariffRate)lstProviderInformation.getSelectedValue();
 
         if(tariff != null){
             jSpinnerFeedInFee.setValue(tariff.getTariffFeedInFee());
@@ -300,7 +301,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         }
         
         
-        lstPanelInformation.setModel(new javax.swing.AbstractListModel() {
+        lstProviderInformation.setModel(new javax.swing.AbstractListModel() {
             //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return objs.length; }
             public Object getElementAt(int i) { return objs[i]; }
@@ -321,7 +322,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         		}
         }
         
-		lstPanelInformation.setModel(new javax.swing.AbstractListModel() {
+		lstProviderInformation.setModel(new javax.swing.AbstractListModel() {
             //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return objs.size(); }
             public Object getElementAt(int i) { return objs.get(i); }
@@ -348,7 +349,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
     private javax.swing.JSpinner jSpinnerTariff11;
     private javax.swing.JSpinner jSpinnerTariff33;
     private javax.swing.JSpinner jSpinnerTariffIncrease;
-    private javax.swing.JList lstPanelInformation;
+    private javax.swing.JList lstProviderInformation;
     // End of variables declaration//GEN-END:variables
 
 
