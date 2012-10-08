@@ -61,6 +61,11 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 		jTabbedPaneResults = new javax.swing.JTabbedPane();
 		jPanelSummaryResults = new javax.swing.JPanel();
+		
+		jPanelHardwareEfficiencyLoss = new javax.swing.JPanel();
+		jScrollPaneHardware = new javax.swing.JScrollPane();
+		jTableHardware = new javax.swing.JTable();
+		
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTextAreaConfirmationDetails = new javax.swing.JEditorPane("text/html", "");
 		jPanelGraphResults = new javax.swing.JPanel();
@@ -156,12 +161,35 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 		jTabbedPaneResults.addTab("Tabulated Results", jPanelTableresults);
 
+		
+		jTableHardware.setName("tblHardware");
+		jScrollPaneHardware.setViewportView(jTableHardware);
+		
+		javax.swing.GroupLayout jPanelHardwareEfficiencyLossLayout = new javax.swing.GroupLayout(jPanelHardwareEfficiencyLoss);
+		jPanelHardwareEfficiencyLoss.setLayout(jPanelHardwareEfficiencyLossLayout);
+		jPanelHardwareEfficiencyLossLayout.setHorizontalGroup(jPanelHardwareEfficiencyLossLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelHardwareEfficiencyLossLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jScrollPaneHardware, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+						.addContainerGap()));
+		jPanelHardwareEfficiencyLossLayout.setVerticalGroup(jPanelHardwareEfficiencyLossLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelHardwareEfficiencyLossLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jScrollPaneHardware, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+						.addContainerGap()));
+		
+		
+		jTabbedPaneResults.addTab("Hardware Efficiency Loss", jPanelHardwareEfficiencyLoss);
+		
+		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addContainerGap().addComponent(jTabbedPaneResults).addContainerGap()));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup().addContainerGap().addComponent(jTabbedPaneResults).addContainerGap()));
+		
+		
 	}// </editor-fold>//GEN-END:initComponents
 		// Variables declaration - do not modify//GEN-BEGIN:variables
 
@@ -174,6 +202,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private javax.swing.JTabbedPane jTabbedPaneResults;
 	private javax.swing.JTable jTable1;
 	private javax.swing.JEditorPane jTextAreaConfirmationDetails;
+	
+	private javax.swing.JPanel jPanelHardwareEfficiencyLoss;
+	private javax.swing.JScrollPane jScrollPaneHardware;
+	private javax.swing.JTable jTableHardware;
 
 	// End of variables declaration//GEN-END:variables
 
@@ -293,7 +325,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		});
 		jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		jTable1.setSize(5000, jScrollPane2.getHeight());
-		for (int i = 1; i < numResultColumns; i++) {
+		for (int i = 0; i < numResultColumns; i++) {
 			jTable1.getColumnModel().getColumn(i).setResizable(true);
 			jTable1.getColumnModel().getColumn(i).setMinWidth(120);
 			jTable1.getColumnModel().getColumn(i).setCellRenderer((TableCellRenderer) new MyTableCellRenderer());
@@ -301,6 +333,76 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		jScrollPane2.setEnabled(true);
 		jScrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		// TODO Hardware Efficiency
+		SolarSetup global = parent.getSetup();
+		
+		ArrayList<SolarPanels> pans = global.getSolarPanels();
+		
+		int numHardwareColumns = numResultColumns + 2;
+		
+		// Table Column Titles
+		String[] hardwareColumnTitles = new String[numHardwareColumns];
+		hardwareColumnTitles[0] = "Type";
+		hardwareColumnTitles[1] = "Name";
+		for (int i = 2; i < numHardwareColumns; i++) {
+			hardwareColumnTitles[i] = new String(String.format("Year %d", i - 1));
+		}
+		
+		// Inverter
+		String[] inverterEfficiency = new String[numHardwareColumns];
+		inverterEfficiency[0] = "Inverter";
+		inverterEfficiency[1] = global.getInverter().getInverterName();
+		for (int i = 2; i < numHardwareColumns; i++) {
+			try {
+				inverterEfficiency[i] = Double.toString(global.DetermineInverterLoss(i-2));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Object[][] hardwareEfficiencyResults = new Object[pans.size()+1][numHardwareColumns];
+		// First row is the inverter
+		hardwareEfficiencyResults[0] = inverterEfficiency;
+		
+		// Add Panels
+		for(int i=0; i < pans.size(); i++){
+			String[] panelRow = new String[numHardwareColumns];
+			panelRow[0] = "Panel";
+			panelRow[1] = pans.get(i).getPanelType().getPanelName();
+			
+			for (int j = 2; j < numHardwareColumns; j++) {
+				try {
+					panelRow[j] = Double.toString(100 * Math.pow((1 - pans.get(i).getPanelType().getPanelLossYear()/100), j-2));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			hardwareEfficiencyResults[i+1] = panelRow;
+		}
+		
+		jTableHardware.setModel(new javax.swing.table.DefaultTableModel(hardwareEfficiencyResults, hardwareColumnTitles) {
+			/*@SuppressWarnings({ "rawtypes", "unchecked" })
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}*/
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return false;
+			}
+		});
+		jTableHardware.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		jTableHardware.getColumnModel().getColumn(1).setMinWidth(120);
+		jTableHardware.setSize(5000, jScrollPaneHardware.getHeight());
+		for (int i = 2; i < numHardwareColumns; i++) {
+			jTableHardware.getColumnModel().getColumn(i).setResizable(true);
+			jTableHardware.getColumnModel().getColumn(i).setMinWidth(80);
+			jTableHardware.getColumnModel().getColumn(i).setCellRenderer((TableCellRenderer) new HardwareTableCellRenderer());
+		}
+		jScrollPaneHardware.setEnabled(true);
+		jScrollPaneHardware.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		jScrollPaneHardware.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	}
 
 	/**
@@ -326,6 +428,52 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 			// Configure the component with the specified value
 			String valueStr = String.format("$%,.2f", value);
+			setText(valueStr);
+
+			// Set tool tip if desired
+			setToolTipText(valueStr);
+
+			// Since the renderer is a component, return itself
+			return this;
+		}
+
+		// The following methods override the defaults for performance reasons
+		public void validate() {
+		}
+
+		public void revalidate() {
+		}
+
+		protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+		}
+
+		public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
+		}
+	}
+	
+	/**
+	 * Hardware Table Cell renderer to ensure all numbers are displayed in $
+	 * format.
+	 */
+	@SuppressWarnings("serial")
+	public class HardwareTableCellRenderer extends JLabel implements TableCellRenderer {
+		// This method is called each time a cell in a column
+		// using this renderer needs to be rendered.
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+				boolean hasFocus, int rowIndex, int vColIndex) {
+			// 'value' is value contained in the cell located at
+			// (rowIndex, vColIndex)
+
+			if (isSelected) {
+				// cell (and perhaps other cells) are selected
+			}
+
+			if (hasFocus) {
+				// this cell is the anchor and the table has the focus
+			}
+
+			// Configure the component with the specified value
+			String valueStr = String.format("%.2f", Double.parseDouble((String)value));
 			setText(valueStr);
 
 			// Set tool tip if desired
