@@ -8,6 +8,7 @@ import com.anonymous.solar.client.TRate;
 import com.anonymous.solar.client.TRateService;
 import com.anonymous.solar.comparison.TariffStateComparer;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -117,6 +118,8 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             }
         });
         jScrollPane2.setViewportView(lstProviderInformation);
+        lstProviderInformation.setPreferredSize(new Dimension(400, 185));
+        
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -197,7 +200,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
                             .addComponent(jLabelAnnualTariffIncrease))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinnerTariffIncrease)
+                        		.addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
                                 .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 1, Short.MAX_VALUE)))))
