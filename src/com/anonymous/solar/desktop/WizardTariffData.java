@@ -62,6 +62,12 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
      */
     private void nameComponents() {
     	lstProviderInformation.setName("ListTariffProviderInformation");
+    	cmbSortBy.setName("ComboSortByState");
+    	
+    	jSpinnerTariff11.setName("SpinnerTariff11");
+    	jSpinnerTariff33.setName("SpinnerTariff33");
+    	jSpinnerDailyCostTariff11.setName("SpinnerDailyCostTariff11");
+    	jSpinnerDailyCostTariff33.setName("SpinnerDailyCostTariff33");
     	jSpinnerTariffIncrease.setName("SpinnerTariffIncrease");
     }
 

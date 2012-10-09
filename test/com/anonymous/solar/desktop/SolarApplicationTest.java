@@ -139,9 +139,121 @@ public class SolarApplicationTest extends UISpecTestCase {
 	
 	
 	
+	/********************************************************************************************************
+	 ************************************** WizardTariffData Test **************************************
+	 ********************************************************************************************************/
+	// Helper method to navigate to the Tariff Rates Wizard page
+	private void gotoTariffRatesSetup(Window mainWindow) {
+		mainWindow.getButton("Next").click();
+		
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
+		mainWindow.getButton("Next").click();
+	}
 	
+	/**
+	 * Test attempt to go to the next page without data filled in
+	 */
+	public void testNextWithoutTariffData() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Estimated Usage Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
+	/**
+	 * Test manually entering the tariff data
+	 */
+	public void testTariffManualDataEntry() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Complete Information
+		mainWindow.getSpinner("SpinnerTariff11").clickForNextValue();
+		mainWindow.getSpinner("SpinnerTariff33").clickForNextValue();
+		mainWindow.getSpinner("SpinnerDailyCostTariff11").clickForNextValue();
+		mainWindow.getSpinner("SpinnerDailyCostTariff33").clickForNextValue();
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
+	/**
+	 * Test automatically filling the tariff data
+	 */
+	public void testTariffAutoDataEntry(){
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Complete Information
+		mainWindow.getListBox("ListTariffProviderInformation").selectIndex(0);
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	/**
+	 * Test sorting by a state
+	 */
+	public void testTariffSortByState() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Change State
+		mainWindow.getComboBox("ComboSortByState").select("NSW");
+		
+		// TODO Ensure all values are the selected state
+		// Ensure no providers from other states are shown
+		//assertTrue(mainWindow.getListBox("ListTariffProviderInformation").contains("Provider: AGL; State: NSW; Tariff11 Cost: 52.54; Tariff33 Cost:13.09"));
+		
+		mainWindow.getListBox("ListTariffProviderInformation").selectIndex(0);
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
 	/********************************************************************************************************
 	 ************************************** WizardSetupElectrical Test **************************************
