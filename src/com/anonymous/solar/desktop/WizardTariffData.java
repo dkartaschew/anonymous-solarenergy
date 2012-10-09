@@ -155,16 +155,20 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         jLabelUsage2.setText("Daily Tariff 33 Cost:");
 
         jSpinnerDailyCostTariff11.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
+        jSpinnerDailyCostTariff11.setToolTipText("Cost per day in cents to have the tariff provided");
 
         jSpinnerDailyCostTariff33.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(25.0d)));
+        jSpinnerDailyCostTariff33.setToolTipText("Cost per day in cents to have the tariff provided");
 
         jSpinnerFeedInFee.setModel(new javax.swing.SpinnerNumberModel(0.5d, 0.0d, 25.0d, 0.1d));
+        jSpinnerFeedInFee.setToolTipText("Cents recieved per kWh for feeding in power");
 
         jLabelFeedInFee.setText("Feed in Fee");
 
         jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 500.0d, 1.0d));
+        jSpinnerTariffIncrease.setToolTipText("Annual increase in % of tariff cost.");
 
-        jLabelAnnualTariffIncrease.setText("Annual Tariff Increase");
+        jLabelAnnualTariffIncrease.setText("Tariff Increase %");
 
         javax.swing.GroupLayout jPanelTariffGroupLayout = new javax.swing.GroupLayout(jPanelTariffGroup);
         jPanelTariffGroup.setLayout(jPanelTariffGroupLayout);
@@ -184,20 +188,19 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
-                        .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
-                                .addComponent(jLabelTariff11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jSpinnerTariff11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
-                                .addComponent(jLabelTariff33)
-                                .addGap(18, 18, 18)
-                                .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addComponent(jLabelTariff11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinnerTariff11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
-                        .addComponent(jLabelAnnualTariffIncrease)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTariff33)
+                            .addComponent(jLabelAnnualTariffIncrease))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerTariffIncrease)
+                            .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
+                                .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 1, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanelTariffGroupLayout.setVerticalGroup(

@@ -153,24 +153,23 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <Component id="jLabelTariff11" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jSpinnerTariff11" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelTariff33" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelAnnualTariffIncrease" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jSpinnerTariffIncrease" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jLabelTariff11" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jSpinnerTariff11" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabelTariff33" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jSpinnerTariff33" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelAnnualTariffIncrease" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jSpinnerTariffIncrease" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -246,6 +245,7 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="25.0" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Cost per day in cents to have the tariff provided"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerDailyCostTariff33">
@@ -253,6 +253,7 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="25.0" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Cost per day in cents to have the tariff provided"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerFeedInFee">
@@ -260,6 +261,7 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0.5" maximum="25.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Cents recieved per kWh for feeding in power"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelFeedInFee">
@@ -272,11 +274,12 @@
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0.0" maximum="500.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Annual increase in % of tariff cost."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelAnnualTariffIncrease">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Annual Tariff Increase"/>
+            <Property name="text" type="java.lang.String" value="Tariff Increase %"/>
           </Properties>
         </Component>
       </SubComponents>
