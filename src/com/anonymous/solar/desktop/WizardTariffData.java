@@ -108,12 +108,12 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
 
         lstProviderInformation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lstPanelInformationMouseReleased(evt);
+                lstProviderInformationMouseReleased(evt);
             }
         });
         lstProviderInformation.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstPanelInformationValueChanged(evt);
+                lstProviderInformationValueChanged(evt);
             }
         });
         jScrollPane2.setViewportView(lstProviderInformation);
@@ -133,12 +133,11 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         jPanelUsageGroupLayout.setVerticalGroup(
             jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUsageGroupLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelUsageGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDailyAvgUsage)
                     .addComponent(cmbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
         );
 
         jPanelTariffGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Tariff Rates"));
@@ -240,10 +239,9 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelUsageGroup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanelTariffGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,7 +251,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         LoadStoredTariffs(selected);
     }//GEN-LAST:event_cmbSortByActionPerformed
 
-    private void lstPanelInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPanelInformationMouseReleased
+    private void lstProviderInformationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstProviderInformationMouseReleased
         TariffRate tariff = new TariffRate();
         tariff = (TariffRate)lstProviderInformation.getSelectedValue();
 
@@ -265,9 +263,9 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             jSpinnerTariff33.setValue(tariff.getTariff33Cost());
         }
 
-    }//GEN-LAST:event_lstPanelInformationMouseReleased
+    }//GEN-LAST:event_lstProviderInformationMouseReleased
 
-    private void lstPanelInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPanelInformationValueChanged
+    private void lstProviderInformationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstProviderInformationValueChanged
         TariffRate tariff = new TariffRate();
         tariff = (TariffRate)lstProviderInformation.getSelectedValue();
 
@@ -278,7 +276,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             jSpinnerDailyCostTariff33.setValue(tariff.getTariff33Fee());
             jSpinnerTariff33.setValue(tariff.getTariff33Cost());
         }
-    }//GEN-LAST:event_lstPanelInformationValueChanged
+    }//GEN-LAST:event_lstProviderInformationValueChanged
 
     /**
      * Load panels from the datastore
