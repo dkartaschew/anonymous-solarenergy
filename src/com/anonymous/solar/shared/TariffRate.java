@@ -277,7 +277,7 @@ public class TariffRate {
 	
 	@Override
 	public String toString(){
-		return "Provider: " + tariffProvider + "; State: " + tariffState +
+		return tariffProvider + "; State: " + tariffState +
 				"; Tariff11 Cost: " + tariff11Cost + "; Tariff33 Cost:" + tariff33Cost;
 	}
 }
