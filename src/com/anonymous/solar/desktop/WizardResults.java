@@ -39,6 +39,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	 */
 	public WizardResults(Wizard parent) {
 		initComponents();
+		nameComponents();
 		this.parent = parent;
 	}
 
@@ -192,6 +193,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 	}// </editor-fold>//GEN-END:initComponents
 		// Variables declaration - do not modify//GEN-BEGIN:variables
+	
+	private void nameComponents() {
+		
+	}
 
 	private javax.swing.JPanel jPanelGraph;
 	private javax.swing.JPanel jPanelGraphResults;
