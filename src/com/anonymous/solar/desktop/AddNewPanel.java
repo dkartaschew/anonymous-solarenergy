@@ -52,7 +52,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     	jSpinnerLife.setName("SpinnerSolarPanelLife");
     	jSpinnerCost.setName("SpinnerSolarPanelCost");
     	jSpinnerRRP.setName("SpinnerSolarPanelRRP");
-    	jSpinnerEfficiency.setName("SpinnerSolarPanelEfficiency");
+    	jSpinnerEfficiencyLoss.setName("SpinnerSolarPanelEfficiencyLoss");
     	
     	jSpinnerPanelCount.setName("SpinnerSolarPanelCount");
     	jSpinnerAzimuth.setName("SpinnerSolarPanelAzimuth");
@@ -115,7 +115,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         jSpinnerWattage = new javax.swing.JSpinner();
         jSpinnerCost = new javax.swing.JSpinner();
         jSpinnerRRP = new javax.swing.JSpinner();
-        jSpinnerEfficiency = new javax.swing.JSpinner();
+        jSpinnerEfficiencyLoss = new javax.swing.JSpinner();
         jPanelPanelLocationGroup = new javax.swing.JPanel();
         lblCount = new javax.swing.JLabel();
         lblAzimuth = new javax.swing.JLabel();
@@ -173,7 +173,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 
         jSpinnerRRP.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 25000.0d, 10.0d));
 
-        jSpinnerEfficiency.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
+        jSpinnerEfficiencyLoss.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 1.0d));
 
         javax.swing.GroupLayout jPanelDataGroupLayout = new javax.swing.GroupLayout(jPanelDataGroup);
         jPanelDataGroup.setLayout(jPanelDataGroupLayout);
@@ -207,7 +207,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                     .addComponent(jSpinnerCost, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(jSpinnerLife)
                     .addComponent(jSpinnerRRP)
-                    .addComponent(jSpinnerEfficiency))
+                    .addComponent(jSpinnerEfficiencyLoss))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDataGroupLayout.setVerticalGroup(
@@ -245,7 +245,7 @@ public class AddNewPanel extends javax.swing.JDialog {
                             .addComponent(lblWattage)
                             .addComponent(jSpinnerWattage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEfficiencyLoss)
-                            .addComponent(jSpinnerEfficiency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSpinnerEfficiencyLoss, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -463,7 +463,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         panel.setPanelManufacturerCode(txtCode.getText());
         panel.setPanelWattage((Double)jSpinnerWattage.getModel().getValue());
         panel.setPanelCost((Double)jSpinnerCost.getModel().getValue());
-        panel.setPanelLossYear((Double)jSpinnerEfficiency.getModel().getValue());
+        panel.setPanelLossYear((Double)jSpinnerEfficiencyLoss.getModel().getValue());
         panel.setPanelRRP((Double)jSpinnerRRP.getModel().getValue());
         panel.setPanelLifeYears((Integer)jSpinnerLife.getModel().getValue());
         
@@ -484,7 +484,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 	        jSpinnerCost.setValue(oldPanels.getPanelType().getPanelCost());
 	        jSpinnerRRP.setValue(oldPanels.getPanelType().getPanelRRP());
 	        jSpinnerLife.setValue(oldPanels.getPanelType().getPanelLifeYears());
-	        jSpinnerEfficiency.setValue(oldPanels.getPanelType().getPanelLossYear());
+	        jSpinnerEfficiencyLoss.setValue(oldPanels.getPanelType().getPanelLossYear());
 	        jSpinnerDirection.setValue(oldPanels.getPanelDirection());
 	        jSpinnerPanelCount.setValue(oldPanels.getPanelCount());
 	        jSpinnerAzimuth.setValue(oldPanels.getPanelAzimuth());
@@ -505,7 +505,7 @@ public class AddNewPanel extends javax.swing.JDialog {
 	        jSpinnerCost.setValue(oldPanel.getPanelCost());
 	        jSpinnerRRP.setValue(oldPanel.getPanelRRP());
 	        jSpinnerLife.setValue(oldPanel.getPanelLifeYears());
-	        jSpinnerEfficiency.setValue(oldPanel.getPanelLossYear());
+	        jSpinnerEfficiencyLoss.setValue(oldPanel.getPanelLossYear());
     	}
     }
     
@@ -522,7 +522,7 @@ public class AddNewPanel extends javax.swing.JDialog {
         jSpinnerCost.setBackground(Color.white);
         jSpinnerRRP.setBackground(Color.white);
         jSpinnerLife.setBorder(clear);
-        jSpinnerEfficiency.setBorder(clear);
+        jSpinnerEfficiencyLoss.setBorder(clear);
         jSpinnerDirection.setBorder(clear);
         jSpinnerPanelCount.setBorder(clear);
         jSpinnerAzimuth.setBorder(clear);
@@ -592,7 +592,7 @@ public class AddNewPanel extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinnerAzimuth;
     private javax.swing.JSpinner jSpinnerCost;
     private javax.swing.JSpinner jSpinnerDirection;
-    private javax.swing.JSpinner jSpinnerEfficiency;
+    private javax.swing.JSpinner jSpinnerEfficiencyLoss;
     private javax.swing.JSpinner jSpinnerLife;
     private javax.swing.JSpinner jSpinnerPanelCount;
     private javax.swing.JSpinner jSpinnerRRP;

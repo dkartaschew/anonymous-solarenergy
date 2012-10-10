@@ -43,6 +43,8 @@ public class AddNewInverter extends javax.swing.JDialog {
     	txtCode.setName("TextFieldInverterManufacturerCode");
     	jSpinnerCost.setName("SpinnerInverterCost");
     	jSpinnerRRP.setName("SpinnerInverterRRP");
+    	jSpinnerEfficiency.setName("SpinnerInverterEfficiency");
+    	jSpinnerEffLossYr.setName("SpinnerInverterEffLossYear");
     }
     
     /**

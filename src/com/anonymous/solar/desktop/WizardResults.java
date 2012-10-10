@@ -39,6 +39,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	 */
 	public WizardResults(Wizard parent) {
 		initComponents();
+		nameComponents();
 		this.parent = parent;
 	}
 
@@ -192,6 +193,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 	}// </editor-fold>//GEN-END:initComponents
 		// Variables declaration - do not modify//GEN-BEGIN:variables
+	
+	private void nameComponents() {
+		
+	}
 
 	private javax.swing.JPanel jPanelGraph;
 	private javax.swing.JPanel jPanelGraphResults;
@@ -339,7 +344,20 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		ArrayList<SolarPanels> pans = global.getSolarPanels();
 		
-		int numHardwareColumns = numResultColumns + 2;
+		// Figure out hardware with max life
+		int maxLifeTime = global.getInverter().getInverterLifeYears();
+		int currentPanelLifeTime = 0;
+		
+		// Loop through panels and find longest lifetime
+		for(int i=0; i < pans.size(); i++){
+			currentPanelLifeTime = pans.get(i).getPanelType().getPanelLifeYears();
+			if(currentPanelLifeTime > maxLifeTime) {
+				maxLifeTime = currentPanelLifeTime;
+			}
+		}
+		//
+		
+		int numHardwareColumns = maxLifeTime + 2;
 		
 		// Table Column Titles
 		String[] hardwareColumnTitles = new String[numHardwareColumns];
@@ -351,9 +369,13 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		// Inverter
 		String[] inverterEfficiency = new String[numHardwareColumns];
+		// Initialise Array
+		for(int i=0; i < numHardwareColumns; i++) {
+			inverterEfficiency[i] = "0.00";
+		}
 		inverterEfficiency[0] = "Inverter";
 		inverterEfficiency[1] = global.getInverter().getInverterName();
-		for (int i = 2; i < numHardwareColumns; i++) {
+		for (int i = 2; i < global.getInverter().getInverterLifeYears()+2; i++) {
 			try {
 				inverterEfficiency[i] = Double.toString(global.DetermineInverterLoss(i-2));
 			} catch (Exception e) {
@@ -368,10 +390,15 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		// Add Panels
 		for(int i=0; i < pans.size(); i++){
 			String[] panelRow = new String[numHardwareColumns];
+			// Initialise Array
+			for(int j=0; j < numHardwareColumns; j++) {
+				panelRow[j] = "0.00";
+			}
+			
 			panelRow[0] = "Panel";
 			panelRow[1] = pans.get(i).getPanelType().getPanelName();
 			
-			for (int j = 2; j < numHardwareColumns; j++) {
+			for (int j = 2; j < pans.get(i).getPanelType().getPanelLifeYears()+2; j++) {
 				try {
 					panelRow[j] = Double.toString(100 * Math.pow((1 - pans.get(i).getPanelType().getPanelLossYear()/100), j-2));
 				} catch (Exception e) {

@@ -139,9 +139,121 @@ public class SolarApplicationTest extends UISpecTestCase {
 	
 	
 	
+	/********************************************************************************************************
+	 ************************************** WizardTariffData Test **************************************
+	 ********************************************************************************************************/
+	// Helper method to navigate to the Tariff Rates Wizard page
+	private void gotoTariffRatesSetup(Window mainWindow) {
+		mainWindow.getButton("Next").click();
+		
+		mainWindow.getTextBox("TextFieldSetupName").setText("TestSetupName");
+		
+		WindowInterceptor.init(mainWindow.getButton("ButtonSetLocation").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Select Location"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+		
+		mainWindow.getButton("Next").click();
+		mainWindow.getSpinner("SpinnerDailyAverageUsage").clickForNextValue();
+		mainWindow.getButton("Next").click();
+	}
 	
+	/**
+	 * Test attempt to go to the next page without data filled in
+	 */
+	public void testNextWithoutTariffData() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Estimated Usage Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
+	/**
+	 * Test manually entering the tariff data
+	 */
+	public void testTariffManualDataEntry() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Complete Information
+		mainWindow.getSpinner("SpinnerTariff11").clickForNextValue();
+		mainWindow.getSpinner("SpinnerTariff33").clickForNextValue();
+		mainWindow.getSpinner("SpinnerDailyCostTariff11").clickForNextValue();
+		mainWindow.getSpinner("SpinnerDailyCostTariff33").clickForNextValue();
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
+	/**
+	 * Test automatically filling the tariff data
+	 */
+	public void testTariffAutoDataEntry(){
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Complete Information
+		mainWindow.getListBox("ListTariffProviderInformation").selectIndex(0);
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
+	
+	/**
+	 * Test sorting by a state
+	 */
+	public void testTariffSortByState() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoTariffRatesSetup(mainWindow);
+		
+		// Change State
+		mainWindow.getComboBox("ComboSortByState").select("NSW");
+		
+		// TODO Ensure all values are the selected state
+		// Ensure no providers from other states are shown
+		//assertTrue(mainWindow.getListBox("ListTariffProviderInformation").contains("Provider: AGL; State: NSW; Tariff11 Cost: 52.54; Tariff33 Cost:13.09"));
+		
+		mainWindow.getListBox("ListTariffProviderInformation").selectIndex(0);
+		mainWindow.getSpinner("SpinnerTariffIncrease").clickForNextValue();
+		
+		mainWindow.getButton("Next").click();
+		
+		WindowInterceptor.init(mainWindow.getButton("Next").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    	      assertTrue(dialog.titleEquals("Inverter Details Missing"));
+	    	      return dialog.getButton("OK").triggerClick();
+	    	    }
+	    }).run();
+	}
 	
 	/********************************************************************************************************
 	 ************************************** WizardSetupElectrical Test **************************************
@@ -276,6 +388,11 @@ public class SolarApplicationTest extends UISpecTestCase {
 	    	      
 	    	      dialog.getSpinner("SpinnerInverterCost").clickForNextValue();  
 	    	      dialog.getSpinner("SpinnerInverterRRP").clickForNextValue();
+	    	      
+	    	      for(int i=0; i < 100; i++) {
+	    	    	  dialog.getSpinner("SpinnerInverterEfficiency").clickForNextValue();
+	    	      }
+	    	      dialog.getSpinner("SpinnerInverterEffLossYear").clickForNextValue();
 
 	    	      return dialog.getButton("Submit").triggerClick();
 	    	    }
@@ -357,6 +474,8 @@ public class SolarApplicationTest extends UISpecTestCase {
 				dialog.getSpinner("SpinnerSolarPanelRRP").clickForNextValue();
 				
 				dialog.getSpinner("SpinnerSolarPanelCount").clickForNextValue();
+				
+				dialog.getSpinner("SpinnerSolarPanelEfficiencyLoss").clickForNextValue();
 	    	      
 				return dialog.getButton("Submit").triggerClick();
     	    }
@@ -407,7 +526,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		addSomePanels(mainWindow);
 		
 		assertTrue(mainWindow.getTable().contentEquals(new String[][]{
-				{TEST_STRING, "10.0", "100.0", "25", "0.0", "5"}
+				{TEST_STRING, "10.0", "100.0", "25", "1.0", "5"}
 		}));
 	}
 	
@@ -426,7 +545,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		addSomePanels(mainWindow);
 		assertTrue(mainWindow.getTable().contentEquals(new String[][]{
-				{TEST_STRING, "10.0", "100.0", "25", "0.0", "5"}
+				{TEST_STRING, "10.0", "100.0", "25", "1.0", "5"}
 		}));
 		
 		mainWindow.getTable().selectRow(0);
@@ -456,7 +575,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		addSomePanels(mainWindow);
 		assertTrue(mainWindow.getTable().contentEquals(new String[][]{
-				{TEST_STRING, "10.0", "100.0", "25", "0.0", "5"}
+				{TEST_STRING, "10.0", "100.0", "25", "1.0", "5"}
 		}));
 		
 		mainWindow.getTable().selectRow(0);
@@ -488,7 +607,7 @@ public class SolarApplicationTest extends UISpecTestCase {
 		
 		// Check the table has been updated
 		assertTrue(mainWindow.getTable().contentEquals(new String[][]{
-				{ANOTHER_TEST_STRING, "20.0", "100.0", "25", "0.0", "10"}
+				{ANOTHER_TEST_STRING, "20.0", "100.0", "25", "1.0", "10"}
 		}));
 	}
 	
@@ -657,5 +776,196 @@ public class SolarApplicationTest extends UISpecTestCase {
 	
 	public void testAnnualSavings(){
 		
+	}
+	
+	/**
+	 * Test displaying the efficiency loss table on the results page
+	 */
+	public void testResultsEfficiencyLossTable() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		addSomePanels(mainWindow);
+		
+		// Click through to the results page
+		mainWindow.getButton("Next").click();
+		mainWindow.getButton("Next").click();
+		
+		// Change to tab and check table
+		mainWindow.getTabGroup().selectTab("Hardware Efficiency Loss");
+		
+		assertTrue(mainWindow.getTable("tblHardware").contentEquals(new String[][]{
+				{"Inverter", "TestInverterName", "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"}
+		}));
+	}
+	
+	/**
+	 * Test displaying the efficiency loss table on the results page with duplicate panels
+	 */
+	public void testResultsEfficiencyLossTableDuplicatePanels() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		addSomePanels(mainWindow);
+		addSomePanels(mainWindow);
+		
+		// Click through to the results page
+		mainWindow.getButton("Next").click();
+		mainWindow.getButton("Next").click();
+		
+		// Change to tab and check table
+		mainWindow.getTabGroup().selectTab("Hardware Efficiency Loss");
+		
+		assertTrue(mainWindow.getTable("tblHardware").contentEquals(new String[][]{
+				{"Inverter", "TestInverterName", "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"}
+		}));
+	}
+	
+	/**
+	 * Test displaying the efficiency loss table on the results page with multiple unique panels
+	 */
+	public void testResultsEfficiencyLossTableMultiplePanels() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		addSomePanels(mainWindow);
+		
+		// Add another set of unique panels
+		WindowInterceptor.init(mainWindow.getButton("Add").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    		assertTrue(dialog.titleEquals("Add Panel Set"));
+	    	      
+    	      	dialog.getTextBox("TextFieldSolarPanelName").setText("SolarPanel");
+				dialog.getTextBox("TextFieldSolarPanelManufacturerName").setText(TEST_STRING);
+				dialog.getTextBox("TextFieldSolarPanelManufacturerCode").setText(TEST_STRING);
+				
+				dialog.getSpinner("SpinnerSolarPanelCost").clickForNextValue();
+				dialog.getSpinner("SpinnerSolarPanelRRP").clickForNextValue();
+				
+				dialog.getSpinner("SpinnerSolarPanelCount").clickForNextValue();
+				
+				for(int i=0; i < 5; i++){
+					dialog.getSpinner("SpinnerSolarPanelEfficiencyLoss").clickForNextValue();
+				}
+	    	      
+				return dialog.getButton("Submit").triggerClick();
+    	    }
+	    }).run();
+		
+		// Click through to the results page
+		mainWindow.getButton("Next").click();
+		mainWindow.getButton("Next").click();
+		
+		// Change to tab and check table
+		mainWindow.getTabGroup().selectTab("Hardware Efficiency Loss");
+		
+		assertTrue(mainWindow.getTable("tblHardware").contentEquals(new String[][]{
+				{"Inverter", "TestInverterName", "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", "SolarPanel", "100.00", "95.00", "90.25", "85.74", "81.45", "77.38", "73.51", "69.83", "66.34", "63.02"}
+		}));
+	}
+	
+	/**
+	 * Test displaying the efficiency loss table on the results page with a high efficiency loss
+	 */
+	public void testResultsEfficiencyLossTableHighEfficiencyLoss() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		// Add another set of unique panels
+		WindowInterceptor.init(mainWindow.getButton("Add").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    		assertTrue(dialog.titleEquals("Add Panel Set"));
+	    	      
+    	      	dialog.getTextBox("TextFieldSolarPanelName").setText("SolarPanel");
+				dialog.getTextBox("TextFieldSolarPanelManufacturerName").setText(TEST_STRING);
+				dialog.getTextBox("TextFieldSolarPanelManufacturerCode").setText(TEST_STRING);
+				
+				dialog.getSpinner("SpinnerSolarPanelCost").clickForNextValue();
+				dialog.getSpinner("SpinnerSolarPanelRRP").clickForNextValue();
+				
+				dialog.getSpinner("SpinnerSolarPanelCount").clickForNextValue();
+				
+				for(int i=0; i < 60; i++){
+					dialog.getSpinner("SpinnerSolarPanelEfficiencyLoss").clickForNextValue();
+				}
+	    	      
+				return dialog.getButton("Submit").triggerClick();
+    	    }
+	    }).run();
+		
+		// Click through to the results page
+		mainWindow.getButton("Next").click();
+		mainWindow.getButton("Next").click();
+		
+		// Change to tab and check table
+		mainWindow.getTabGroup().selectTab("Hardware Efficiency Loss");
+		
+		assertTrue(mainWindow.getTable("tblHardware").contentEquals(new String[][]{
+				{"Inverter", "TestInverterName", "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", "SolarPanel", "100.00", "40.00", "16.00", "6.40", "2.56", "1.02", "0.41", "0.16", "0.07", "0.03"}
+		}));
+	}
+	
+	/**
+	 * Test displaying the efficiency loss table on the results page with multiple unique panels and duplicates
+	 */
+	public void testResultsEfficiencyLossTableMultiplePanelsWithDuplicates() {
+		setAdapter((UISpecAdapter) new MainClassAdapter(SolarApplication.class, new String[]{}));
+		Window mainWindow = getMainWindow();
+		
+		gotoSetupSolarPanels(mainWindow);
+		
+		addSomePanels(mainWindow);
+		
+		// Add another set of unique panels
+		WindowInterceptor.init(mainWindow.getButton("Add").triggerClick()).process(new WindowHandler() {
+	    	public Trigger process(Window dialog) {
+	    		assertTrue(dialog.titleEquals("Add Panel Set"));
+	    	      
+    	      	dialog.getTextBox("TextFieldSolarPanelName").setText("SolarPanel");
+				dialog.getTextBox("TextFieldSolarPanelManufacturerName").setText(TEST_STRING);
+				dialog.getTextBox("TextFieldSolarPanelManufacturerCode").setText(TEST_STRING);
+				
+				dialog.getSpinner("SpinnerSolarPanelCost").clickForNextValue();
+				dialog.getSpinner("SpinnerSolarPanelRRP").clickForNextValue();
+				
+				dialog.getSpinner("SpinnerSolarPanelCount").clickForNextValue();
+				
+				for(int i=0; i < 5; i++){
+					dialog.getSpinner("SpinnerSolarPanelEfficiencyLoss").clickForNextValue();
+				}
+	    	      
+				return dialog.getButton("Submit").triggerClick();
+    	    }
+	    }).run();
+		
+		addSomePanels(mainWindow);
+		
+		// Click through to the results page
+		mainWindow.getButton("Next").click();
+		mainWindow.getButton("Next").click();
+		
+		// Change to tab and check table
+		mainWindow.getTabGroup().selectTab("Hardware Efficiency Loss");
+		
+		assertTrue(mainWindow.getTable("tblHardware").contentEquals(new String[][]{
+				{"Inverter", "TestInverterName", "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"},
+				{"Panel", "SolarPanel", "100.00", "95.00", "90.25", "85.74", "81.45", "77.38", "73.51", "69.83", "66.34", "63.02"},
+				{"Panel", TEST_STRING, "100.00", "99.00", "98.01", "97.03", "96.06", "95.10", "94.15", "93.21", "92.27", "91.35"}
+		}));
 	}
 }
