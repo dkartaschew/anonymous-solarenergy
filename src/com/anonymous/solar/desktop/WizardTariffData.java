@@ -38,6 +38,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
 
     private Wizard parent = null;
     private CustomerData data; 
+    private List<TariffRate> tRateData;
     
     
     /**
@@ -55,6 +56,9 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
         initComponents();
         nameComponents();
         this.parent = parent;
+        
+        TRate TRateSOAP = new TRateService().getTRatePort();  	
+        tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
     }
     
     /**
@@ -296,11 +300,10 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
      * @param comparison - A comparator used to order the panels
      */
     private void LoadStoredTariffs(Comparator comparison){
-    	TRate TRateSOAP = new TRateService().getTRatePort();
+    	//TRate TRateSOAP = new TRateService().getTRatePort();
+        //List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
     	
-		int counter = 0;
-    	
-        List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+    	int counter = 0;
         Collections.sort(tRateData, comparison);
         
         final Object[] objs = new Object[tRateData.size()];
@@ -320,9 +323,8 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
     }
     
     private void LoadStoredTariffs(String selected) {
-    	TRate TRateSOAP = new TRateService().getTRatePort();
-    	
-        List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
+    	//TRate TRateSOAP = new TRateService().getTRatePort();
+        //List<TariffRate> tRateData = (List<TariffRate>) TRateSOAP.getTariffRates();
         
         final List<Object> objs = new ArrayList<Object>();
         
