@@ -62,16 +62,22 @@ public class ResultChart{
 		
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		ArrayList<Double> yearlySavingsList = solarResult.getSavingsOverYears();
+		ArrayList<Double> monthlySavingsList = solarResult.getMonthlyPowerGeneratedOverYears();
 		
 		//Add in cumulative savings
 		double cumulativeSavings = 0.0;
 		XYSeries cumulativeSavingsSeries = new XYSeries("Cumulative Savings");
+		XYSeries monthlyPowerGenerationSeries = new XYSeries("Monthly Power Generation");
 		for (int i = 0; i < yearlySavingsList.size(); i++) {
 			cumulativeSavings+= yearlySavingsList.get(i);
 			cumulativeSavingsSeries.add(i + 1, cumulativeSavings);
 		}
+		for (int i = 0; i < monthlySavingsList.size(); i ++) {
+			monthlyPowerGenerationSeries.add((i/10) + 1, monthlySavingsList.get(i));
+		}
 		
 		dataset.addSeries(cumulativeSavingsSeries);
+		dataset.addSeries(monthlyPowerGenerationSeries);
 		
 		return dataset;
 	}
@@ -82,7 +88,7 @@ public class ResultChart{
 	private void createChart() {
 		resultChart = ChartFactory.createXYLineChart(
 				"Calculation Results", 
-				"Year", 
+				"Years", 
 				"Savings ($)", 
 				resultDataset, 
 				PlotOrientation.VERTICAL, 

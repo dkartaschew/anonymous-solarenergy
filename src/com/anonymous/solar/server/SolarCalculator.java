@@ -59,6 +59,8 @@ public class SolarCalculator {
 		SolarSetup solarSystem = newSolarResult.getSolarSetup();
 		CustomerData customerData = solarSystem.getCustomerData();
 		LocationData locationInformation = solarSystem.getLocationInformation();
+		double newTariff11Fee = customerData.getTariff11Fee();
+		double newFeedInFee = customerData.getFeedInFee();
 		
 		double sunlightHours = calculateSunlightHours(locationInformation.getLatitude());
 		//double sunlightHours = 4.5;
@@ -67,12 +69,17 @@ public class SolarCalculator {
 				sunlightHours, year - 1);
 		
 		solarResult.setPowerGenerated(averageDailySolarGeneration);
+		//increase tariff with 
+		for (int i = 0; i < year; i++) {
+			newTariff11Fee += newTariff11Fee * customerData.getAnnualTariffIncrease();
+			newFeedInFee += newFeedInFee * customerData.getAnnualTariffIncrease();
+		}
 		
 		double replacementGeneration = customerData.getHourlyAverageUsage() * sunlightHours;
 		double exportedGeneration = averageDailySolarGeneration - replacementGeneration;
 		
-		double dailySavings = (replacementGeneration * customerData.getTariff11Fee()) +
-				(exportedGeneration * customerData.getFeedInFee());
+		double dailySavings = (replacementGeneration * newTariff11Fee) +
+				(exportedGeneration * newFeedInFee);
 		
 		solarResult.setDailySavings(dailySavings);
 		
@@ -155,6 +162,7 @@ public class SolarCalculator {
 		SolarResult newSolarResult = solarResult;
 		ArrayList<Double> yearlySavingsOverTime = new ArrayList<Double>();
 		ArrayList<Double> powerGeneratedOverTime = new ArrayList<Double>();
+		ArrayList<Double> monthlyPowerOverYears = new ArrayList<Double>();
 		
 		for (int i = 0; i < year; i++) {
 			SolarResult yearlyResults = calculateYearlySavings(newSolarResult, i);
@@ -162,6 +170,11 @@ public class SolarCalculator {
 			yearlySavingsOverTime.add(yearlySavings);
 			double powerGenerated = yearlyResults.getPowerGenerated();
 			powerGeneratedOverTime.add(powerGenerated);
+			
+			//need to calculate the power savings in each month of the year
+			monthlyPowerOverYears = calculateMonthlyPowerSavingsForYear(newSolarResult, 
+					powerGenerated);
+			newSolarResult.getMonthlyPowerGeneratedOverYears().addAll(monthlyPowerOverYears);
 		}
 		
 		newSolarResult.setSavingsOverYears(yearlySavingsOverTime);
@@ -215,7 +228,6 @@ public class SolarCalculator {
 	}
 	
 	/**
-	 * 
 	 * This method calculates the average daily power output for a given system.
 	 * 
 	 * @param solarSystem - the system to calculate the power output for
@@ -234,9 +246,24 @@ public class SolarCalculator {
 			SolarPanel panelType = currentSolarBank.getPanelType();
 			relativeYear = year % panelType.getPanelLifeYears();
 			
-			powerOutput = powerOutput + ((currentSolarBank.getPanelCount() * 
-					panelType.getPanelWattage()) * (1 - (currentSolarBank.getPanelDirection()/100)) *
-					(1 - (relativeYear * (panelType.getPanelLossYear()/100))));
+			//Need to account when direction exceeds 180 that the efficiency will start to go up
+			//again as 360 degrees == 0 degrees
+			if (currentSolarBank.getPanelDirection() <= 180) {
+				powerOutput = powerOutput + ((currentSolarBank.getPanelCount() * 
+						panelType.getPanelWattage()) * (1 - (currentSolarBank.getPanelDirection()/100)) *
+						(1 - (relativeYear * (panelType.getPanelLossYear()/100))));
+			} else {
+				powerOutput = powerOutput + ((currentSolarBank.getPanelCount() * 
+						panelType.getPanelWattage()) * (1 - ((360 - currentSolarBank.getPanelDirection())/100)) *
+						(1 - (relativeYear * (panelType.getPanelLossYear()/100))));
+			}
+
+		}
+		
+		//If the power output by panels is higher than the inverters size than the power output
+		//should be the same as the max output of the inverter
+		if (powerOutput > solarSystem.getInverter().getInverterWattage()) {
+			powerOutput = solarSystem.getInverter().getInverterWattage();
 		}
 		
 		relativeYear = year % solarSystem.getInverter().getInverterLifeYears();
@@ -245,6 +272,50 @@ public class SolarCalculator {
 				daylightHours;
 		
 		return powerOutput;
+	}
+	
+	/**
+	 * This method calculates the/ monthly power savings for the given solar system over a year
+	 * which is determined by the dailyPowerGeneration passed through which should be calculated
+	 * from the year you are looking to calculate.
+	 * 
+	 * @param solarResult the solarResult to calculate the monthly power generation for
+	 * @param year the year in which to calculate the monthly power generation for
+	 * @param dailyPowerGeneration the average daily power generation for the system to use for
+	 * 		  monthly calculations
+	 * @return an ArrayList<Double> that contains the monthly power generation for the year.
+	 */
+	private ArrayList<Double> calculateMonthlyPowerSavingsForYear(SolarResult solarResult, 
+			double dailyPowerGeneration) {
+		SolarResult newSolarResult = solarResult;
+		ArrayList<Double> monthlyPowerSavings = new ArrayList<Double>();
+		
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		int startingMonth = cal.get(java.util.Calendar.MONTH);
+		
+		//for 12 months calculation, this is not a relative to an actual month but just
+		//to loop for 12 general months
+		for (int i = 0; i < 12; i++) {
+			
+			double monthlyPowerGeneration = dailyPowerGeneration * 30;
+			int actualMonth = (startingMonth + i) % 12;
+			double currentLatitude = newSolarResult.getSolarSetup().getLocationInformation().getLatitude();
+			//if latitude of location is negative then in southern hemisphere so the seasons are
+			//switched
+			//winter is may, june july in sourthern hemisphere
+			if (actualMonth >= 4 && actualMonth <= 6 && currentLatitude < 0) {
+				monthlyPowerGeneration = monthlyPowerGeneration * 0.3;
+			}
+			//northern hemisphere winter is november, december, january
+			else if ((actualMonth == 10 || actualMonth == 11 || actualMonth == 0) && 
+					currentLatitude >= 0) {
+				monthlyPowerGeneration = monthlyPowerGeneration * 0.3;
+			}
+			
+			monthlyPowerSavings.add(monthlyPowerGeneration);
+		}
+		
+		return monthlyPowerSavings;
 	}
 	
 }
