@@ -90,11 +90,11 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
-//		try {
-//			LoadTestData();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			LoadTestData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
