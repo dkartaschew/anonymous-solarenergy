@@ -2,6 +2,7 @@ package com.anonymous.solar.shared;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -44,6 +45,7 @@ import javax.xml.bind.annotation.XmlType;
     "tariff13Cost",
     "tariff13Fee"
 })
+@XmlRootElement
 public class CustomerData {
 	
 	protected Double annualTariffIncrease;

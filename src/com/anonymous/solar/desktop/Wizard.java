@@ -14,6 +14,26 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
+import java.io.*;
+
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.*;
+import javax.xml.transform.stream.*;
+
+import java.io.FileNotFoundException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+ 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.anonymous.solar.client.LocationInformation;
 import com.anonymous.solar.client.LocationInformationService;
 import com.anonymous.solar.client.SInverter;
@@ -30,6 +50,7 @@ import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.SolarPanelException;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarPanelsException;
+import com.anonymous.solar.shared.SolarResult;
 import com.anonymous.solar.shared.SolarSetup;
 import com.anonymous.solar.shared.SolarSetupException;
 import com.anonymous.solar.shared.TariffRate;
@@ -91,11 +112,65 @@ public class Wizard extends javax.swing.JPanel {
 		jButtonBack.setVisible(false);
 		initWizardPanels();
 		try {
+			MarshallExample();
+			//DomXmlExample(GetTestData());
 			LoadTestData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
+	
+	public void MarshallExample() throws Exception {
+		// =============================================================================================================
+        // Setup JAXB
+        // =============================================================================================================
+ 
+        // Create a JAXB context passing in the class of the object we want to marshal/unmarshal
+        final JAXBContext context = JAXBContext.newInstance(SolarResult.class);
+ 
+        // =============================================================================================================
+        // Marshalling OBJECT to XML
+        // =============================================================================================================
+ 
+        // Create the marshaller, this is the nifty little thing that will actually transform the object into XML
+        final Marshaller marshaller = context.createMarshaller();
+ 
+        // Create a stringWriter to hold the XML
+        final StringWriter stringWriter = new StringWriter();
+ 
+        // Create the sample object we wish to transform into XML
+        final SolarSetup javaObject = GetTestData();
+        final SolarResult result = new SolarResult(javaObject);
+ 
+        // Marshal the javaObject and write the XML to the stringWriter
+        marshaller.marshal(result, stringWriter);
+ 
+        // Print out the contents of the stringWriter
+        //System.out.println(stringWriter.toString());
+        //JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
+        
+        FileOutputStream fos = new FileOutputStream("D:/test2.xml");
+		OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8"); 
+		out.write(stringWriter.toString());
+		out.close();
+ 
+        // =============================================================================================================
+        // Unmarshalling XML to OBJECT
+        // =============================================================================================================
+ 
+        // Create the unmarshaller, this is the nifty little thing that will actually transform the XML back into an object
+        final Unmarshaller unmarshaller = context.createUnmarshaller();
+ 
+        // Unmarshal the XML in the stringWriter back into an object
+        final SolarResult javaObject2 = (SolarResult) unmarshaller.unmarshal(new StringReader(stringWriter.toString()));
+ 
+        // Print out the contents of the JavaObject we just unmarshalled from the XML
+        System.out.println(javaObject2.toString());
+        JOptionPane.showMessageDialog(new JFrame(), javaObject2.getSolarSetup().getSetupDescription());
+	}
+	
 	
 	/**
 	 * Load dummy data in wizard for manual UI testing.
@@ -126,7 +201,7 @@ public class Wizard extends javax.swing.JPanel {
 		panels.add(new SolarPanels(fast, 5, 180.0, 5.0));//SOUTH
 		
 		//Customer Data
-		CustomerData customer = new CustomerData(11.0, 22.0, 33.0, 5.0, 0.1, 7.0, 0.2, 10.0, 1.0);
+		CustomerData customer = new CustomerData(24.0, 1.0, 720.0, 5.0, 0.1, 7.0, 0.2, 10.0, 1.0);
 		setup.setCustomerData(customer);
 		
 		//Location Data
@@ -139,6 +214,47 @@ public class Wizard extends javax.swing.JPanel {
 		} catch (SolarSetupException e){
 			
 		}
+	}
+
+	private SolarSetup GetTestData() throws SolarPanelException, LocationDataException, SolarPanelsException{
+		SolarSetup setup = new SolarSetup();
+		SolarPanel slow = new SolarPanel("PAN_SLOW_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 1.0, 100.0, 100.0, 30);
+		SolarPanel medium = new SolarPanel("PAN_MED_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 2.0, 100.0, 100.0, 30);
+		SolarPanel fast = new SolarPanel("PAN_FAST_DEGRADE", "D_MANU", "D_MANU_CODE", 100.0, 4.0, 100.0, 100.0, 30);
+		ArrayList<Double> monthData = new ArrayList<Double>();
+		for(Double i = 0.0; i < 12; i++){
+			monthData.add(i);
+		}
+		
+		try{
+		//String and Double Data
+		setup.setSetupName("DEFAULT_TITLE");
+		setup.setSetupDescription("DEFAULT_DESCRIPTION");
+		setup.setWireEfficiency(15.0);
+		setup.setWireLength(15.0);
+		
+		//Panel Data
+		List<SolarPanels> panels = setup.getSolarPanels();
+		panels.add(new SolarPanels(slow, 5, 0.0, 5.0));//NORTH
+		panels.add(new SolarPanels(medium, 5, 90.0, 5.0));//EAST
+		panels.add(new SolarPanels(fast, 5, 180.0, 5.0));//SOUTH
+		
+		//Customer Data
+		CustomerData customer = new CustomerData(24.0, 1.0, 720.0, 5.0, 0.1, 7.0, 0.2, 10.0, 1.0);
+		setup.setCustomerData(customer);
+		
+		//Location Data
+		LocationData location = new LocationData(12.314890, 23.8765430, "DEFAULT_NAME", monthData, monthData);
+		setup.setLocationInformation(location);
+		
+		//Inverter Data
+		SolarInverter invert = new SolarInverter("DEF_TITLE", "D_MANU", "D_MANU_CODE", 100.0, 5.0, 100.0, 100.0, 100.0, 30);
+		setup.setInverter(invert);
+		} catch (SolarSetupException e){
+			return new SolarSetup();
+		}
+		
+		return setup;
 	}
 
 	/**

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -49,6 +50,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author 07627505 Darran Kartaschew
  * @version 1.0
  */
+@XmlRootElement
 public class SolarSetup {
 
 	protected CustomerData customerData;
