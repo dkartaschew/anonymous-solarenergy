@@ -18,7 +18,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabelFinishMsg" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelFinishMsg" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonSaveConfiguration" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonGenerateReport" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -28,7 +32,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelFinishMsg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonSaveConfiguration" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonGenerateReport" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="100" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,6 +46,22 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;h1&gt;Thank you&lt;/h1&gt; &lt;p&gt;Thank you for using the Solar Energy Calculator.&lt;/p&gt; &lt;p&gt;If you have any questions please do not hesitate to contact the development team.&lt;/p&gt; &lt;/html&gt;"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonSaveConfiguration">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save Configuration"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSaveConfigurationActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonGenerateReport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generate a report"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGenerateReportActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -14,34 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
-import java.io.*;
-
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-
-import java.io.FileNotFoundException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
- 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import com.anonymous.solar.client.LocationInformation;
-import com.anonymous.solar.client.LocationInformationService;
-import com.anonymous.solar.client.SInverter;
-import com.anonymous.solar.client.SInverterService;
-import com.anonymous.solar.client.SPanel;
-import com.anonymous.solar.client.SPanelService;
-import com.anonymous.solar.client.TRate;
-import com.anonymous.solar.client.TRateService;
 import com.anonymous.solar.shared.CustomerData;
 import com.anonymous.solar.shared.LocationData;
 import com.anonymous.solar.shared.LocationDataException;
@@ -72,6 +44,8 @@ public class Wizard extends javax.swing.JPanel {
 	 * Solar Setup Data
 	 */
 	private SolarSetup setup = new SolarSetup();
+	
+	private SolarResult results;
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -112,7 +86,7 @@ public class Wizard extends javax.swing.JPanel {
 		jButtonBack.setVisible(false);
 		initWizardPanels();
 		try {
-			MarshallExample();
+			//MarshallExample();
 			//DomXmlExample(GetTestData());
 			LoadTestData();
 		} catch (Exception e) {
@@ -121,56 +95,7 @@ public class Wizard extends javax.swing.JPanel {
 		
 	}
 	
-	
-	public void MarshallExample() throws Exception {
-		// =============================================================================================================
-        // Setup JAXB
-        // =============================================================================================================
- 
-        // Create a JAXB context passing in the class of the object we want to marshal/unmarshal
-        final JAXBContext context = JAXBContext.newInstance(SolarResult.class);
- 
-        // =============================================================================================================
-        // Marshalling OBJECT to XML
-        // =============================================================================================================
- 
-        // Create the marshaller, this is the nifty little thing that will actually transform the object into XML
-        final Marshaller marshaller = context.createMarshaller();
- 
-        // Create a stringWriter to hold the XML
-        final StringWriter stringWriter = new StringWriter();
- 
-        // Create the sample object we wish to transform into XML
-        final SolarSetup javaObject = GetTestData();
-        final SolarResult result = new SolarResult(javaObject);
- 
-        // Marshal the javaObject and write the XML to the stringWriter
-        marshaller.marshal(result, stringWriter);
- 
-        // Print out the contents of the stringWriter
-        //System.out.println(stringWriter.toString());
-        //JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
-        
-        FileOutputStream fos = new FileOutputStream("D:/test2.xml");
-		OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8"); 
-		out.write(stringWriter.toString());
-		out.close();
- 
-        // =============================================================================================================
-        // Unmarshalling XML to OBJECT
-        // =============================================================================================================
- 
-        // Create the unmarshaller, this is the nifty little thing that will actually transform the XML back into an object
-        final Unmarshaller unmarshaller = context.createUnmarshaller();
- 
-        // Unmarshal the XML in the stringWriter back into an object
-        final SolarResult javaObject2 = (SolarResult) unmarshaller.unmarshal(new StringReader(stringWriter.toString()));
- 
-        // Print out the contents of the JavaObject we just unmarshalled from the XML
-        System.out.println(javaObject2.toString());
-        JOptionPane.showMessageDialog(new JFrame(), javaObject2.getSolarSetup().getSetupDescription());
-	}
-	
+		
 	
 	/**
 	 * Load dummy data in wizard for manual UI testing.
@@ -650,5 +575,19 @@ public class Wizard extends javax.swing.JPanel {
 	public SolarSetup getSetup() {
 		return setup;
 	}
+	
+	/**
+	 * Allow client panels to get the global solar results...
+	 * 
+	 * @return SolarResult used to define the results.
+	 */
+	public SolarResult getResults() {
+		return results;
+	}
+	
+	public void setResults(SolarResult results){
+		this.results = results;
+	}
+
 
 }

@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,6 +19,7 @@ import com.anonymous.solar.client.SolarCalculatorService;
 import com.anonymous.solar.shared.Direction;
 import com.anonymous.solar.shared.SolarPanels;
 import com.anonymous.solar.shared.SolarResult;
+import com.anonymous.solar.shared.SolarResultException;
 import com.anonymous.solar.shared.SolarSetup;
 
 /**
@@ -223,14 +225,18 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	@Override
 	public boolean callbackStart() {
 		SolarSetup global = parent.getSetup();
-		SolarResult results = null;
+		SolarResult results = parent.getResults();
+		
 		String output = "";
 		String output2 = "";
-		if (global != null) {
+		if (results == null || results.getSolarSetup().toString().compareTo(global.toString()) != 0) {
 
 			SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
 			results = calculatorSOAP.calculateAllResults(global, 10);
-
+			parent.setResults(results);
+		}
+		
+		
 			output2 += "<br /> Daily Savings: " + String.format("$%,.2f", results.getDailySavings()) + "<br />";
 			output2 += "<br /> Monthly Savings: " + String.format("$%,.2f", results.getMonthlySavings()) + "<br />";
 			output2 += "<br /> Yearly Savings: " + String.format("$%,.2f", results.getYearlySavings()) + "<br />";
@@ -290,7 +296,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 			jTextAreaConfirmationDetails.setText(output2);
 
-		}
+		
 		return true;
 	}
 

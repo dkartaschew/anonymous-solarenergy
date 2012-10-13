@@ -256,7 +256,13 @@ public class SolarSetup {
 		// Inverter details
 		details += "<b>Inverter Details</b><br />";
 		details += inverter.toString(false) + "<br />";
-
+		
+		details += "<b>Wiring Length: </b><br />";
+		details += wireLength + "<br />";
+		
+		details += "<b>Wiring Efficiency: </b><br />";
+		details += wireEfficiency + "<br />";
+		
 		// Customer details
 		details += "<b>Customer Details</b><br />";
 		details += customerData.toString(false) + "<br /></html>";
