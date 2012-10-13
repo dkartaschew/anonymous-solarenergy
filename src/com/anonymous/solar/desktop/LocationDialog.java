@@ -58,7 +58,7 @@ public class LocationDialog extends javax.swing.JDialog {
 		SetupMapMouseHandlers();
 		SetupTable();
 		SetupLoadLocations();
-		if (parent.getSetup().getLocationInformation() == null) {
+		if (parent.getSetup().getLocationInformation().getLocationName() == null) {
 			jComboBoxLocationName.setSelectedIndex(0);
 		} else {
 			locationData = parent.getSetup().getLocationInformation();

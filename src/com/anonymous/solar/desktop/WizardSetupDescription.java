@@ -339,14 +339,14 @@ public class WizardSetupDescription extends javax.swing.JPanel implements Wizard
 		returnToWhite();
 
 		if (validateInput) {
-			if ((jTextFieldSetupName.getText() == null) || (jTextFieldSetupName.getText().equals(""))) {
+			if ((jTextFieldSetupName.getText() == null) || (jTextFieldSetupName.getText().trim().length() == 0)) {
 				// Oops, missing data, need to handle this.
 				jTextFieldSetupName.setBackground(Color.red);
 				JOptionPane.showMessageDialog(this, "Please enter a setup name before continuing.",
 						"Setup Name Missing", JOptionPane.OK_OPTION);
 				return false;
 			}
-			if (parent.getSetup().getLocationInformation() == null) {
+			if (parent.getSetup().getLocationInformation() == null || parent.getSetup().getLocationInformation().getLocationName() == null) {
 				jButtonSetLocation1.setBackground(Color.red);
 				JOptionPane.showMessageDialog(this, "Please enter a location name before continuing.",
 						"Location Missing", JOptionPane.OK_OPTION);

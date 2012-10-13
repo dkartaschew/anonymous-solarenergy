@@ -66,6 +66,14 @@ public class SolarSetup {
 	public SolarSetup() {
 		solarPanels = new ArrayList<SolarPanels>();
 		customerData = new CustomerData();
+		locationInformation = new LocationData();
+		inverter = new SolarInverter();
+		setupDescription = " ";
+		setupName = " ";
+		wireEfficiency = 99.0;
+		wireLength = 0.0;
+		
+		
 	}
 
 	public SolarSetup(ArrayList<SolarPanels> panels, SolarInverter invertor, Double wireLength, Double wireEfficiency,

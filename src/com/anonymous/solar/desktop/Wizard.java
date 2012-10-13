@@ -90,7 +90,7 @@ public class Wizard extends javax.swing.JPanel {
 		try {
 			//MarshallExample();
 			//DomXmlExample(GetTestData());
-			LoadTestData();
+			//LoadTestData();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -480,6 +480,8 @@ public class Wizard extends javax.swing.JPanel {
 		}
 		activeButton.setFont(activeButton.getFont().deriveFont(java.awt.Font.BOLD, activeButton.getFont().getSize()));
 	}
+	
+	
 
 	/**
 	 * Event handler for the sidebar buttons.
@@ -576,6 +578,10 @@ public class Wizard extends javax.swing.JPanel {
 	 */
 	public SolarSetup getSetup() {
 		return setup;
+	}
+	
+	public void setSetup(SolarSetup setup){
+		this.setup = setup;
 	}
 	
 	/**

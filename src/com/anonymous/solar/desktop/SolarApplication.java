@@ -6,10 +6,24 @@ package com.anonymous.solar.desktop;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
 
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import com.anonymous.solar.shared.SolarPanelsException;
+import com.anonymous.solar.shared.SolarResult;
+import com.anonymous.solar.shared.SolarSetup;
 
 /**
  * Main Entry Point for Desktop Application
@@ -49,6 +63,8 @@ public class SolarApplication extends javax.swing.JFrame {
 		menuMain = new javax.swing.JMenuBar();
 		menuFile = new javax.swing.JMenu();
 		menuFileExit = new javax.swing.JMenuItem();
+		menuFileLoadConfig = new javax.swing.JMenuItem();
+		menuFileSaveConfig = new javax.swing.JMenuItem();
 		menuHelp = new javax.swing.JMenu();
 		menuHelpAbout = new javax.swing.JMenuItem();
 
@@ -76,8 +92,25 @@ public class SolarApplication extends javax.swing.JFrame {
 				menuFileExitActionPerformed(evt);
 			}
 		});
+		
+		menuFileLoadConfig.setText("Load Configuration");
+		menuFileLoadConfig.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				menuFileLoadConfigActionPerformed(evt);
+			}
+		});
+		
+		menuFileSaveConfig.setText("Save Configuration");
+		menuFileSaveConfig.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				menuFileSaveConfigActionPerformed(evt);
+			}
+		});
+		
+		menuFile.add(menuFileSaveConfig);
+		menuFile.add(menuFileLoadConfig);
 		menuFile.add(menuFileExit);
-
+		
 		menuMain.add(menuFile);
 
 		menuHelp.setText("Help");
@@ -114,9 +147,116 @@ public class SolarApplication extends javax.swing.JFrame {
 			System.exit(0);
 		}
 	}
+	
+	private void loadConfiguration(File file) throws Exception{
+		
+		FileInputStream fis = null;
+		fis = new FileInputStream(file);
+		String xml = "";
+		
+		
+		int content;
+		while ((content = fis.read()) != -1) {
+			// convert to char and display it
+			xml += (char) content;
+		}
+		fis.close();
+		
+		final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
+		
+		// =============================================================================================================
+        // Unmarshalling XML to OBJECT
+        // =============================================================================================================
+ 
+        // Create the unmarshaller, this is the nifty little thing that will actually transform the XML back into an object
+        final Unmarshaller unmarshaller = context.createUnmarshaller();
+ 
+        // Unmarshal the XML in the stringWriter back into an object
+        final SolarSetup setup = (SolarSetup) unmarshaller.unmarshal(new StringReader(xml));
+ 
+        // Print out the contents of the JavaObject we just unmarshalled from the XML
+        JOptionPane.showMessageDialog(new JFrame(), setup.toString());
+        //JOptionPane.showMessageDialog(new JFrame(), javaObject2.getSolarSetup().getSetupDescription());
+        
+        Wizard wizard = (Wizard) this.getContentPane().getComponent(0);
+        wizard.setSetup(setup);
+	}
+	
+	private void saveConfiguration() throws Exception{
+		JFileChooser fc = new JFileChooser();	
+		fc.addChoosableFileFilter(new SSUFilter());
+		int returnVal;
+		
+		// =============================================================================================================
+        // Setup JAXB
+        // =============================================================================================================
+ 
+        // Create a JAXB context passing in the class of the object we want to marshal/unmarshal
+        final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
+ 
+        // =============================================================================================================
+        // Marshalling OBJECT to XML
+        // =============================================================================================================
+ 
+        // Create the marshaller, this is the nifty little thing that will actually transform the object into XML
+        final Marshaller marshaller = context.createMarshaller();
+ 
+        // Create a stringWriter to hold the XML
+        final StringWriter stringWriter = new StringWriter();
+ 
+        // Create the sample object we wish to transform into XML
+        Wizard abc = (Wizard) this.getContentPane().getComponent(0);
+        SolarSetup setup = abc.getSetup();
+ 
+        // Marshal the javaObject and write the XML to the stringWriter
+        marshaller.marshal(setup, stringWriter);
+ 
+        // Print out the contents of the stringWriter
+        //System.out.println(stringWriter.toString());
+        //JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
+        
+        returnVal = fc.showDialog(new JFrame(), "Save");
+        
+        if(returnVal == JFileChooser.APPROVE_OPTION){
+        
+	        FileOutputStream fos = new FileOutputStream(fc.getSelectedFile() + ".ssu");
+			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8"); 
+			out.write(stringWriter.toString());
+			out.close();
+		
+        }
+
+	}
 
 	private void menuFileExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
 		confirmExit();
+	}// GEN-LAST:event_menuFileExitActionPerformed
+	
+	private void menuFileLoadConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
+		JFileChooser fc = new JFileChooser();
+		fc.addChoosableFileFilter(new SSUFilter());
+		
+		int returnVal = fc.showDialog(new JFrame(), "Attach");
+		
+		File file = fc.getSelectedFile();
+		
+		if(returnVal == JFileChooser.APPROVE_OPTION){
+			try {
+				loadConfiguration(file);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}// GEN-LAST:event_menuFileExitActionPerformed
+	
+	private void menuFileSaveConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
+		try {
+			saveConfiguration();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}// GEN-LAST:event_menuFileExitActionPerformed
 
 	private void menuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuHelpAboutActionPerformed
@@ -173,6 +313,8 @@ public class SolarApplication extends javax.swing.JFrame {
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JMenu menuFile;
 	private javax.swing.JMenuItem menuFileExit;
+	private javax.swing.JMenuItem menuFileLoadConfig;
+	private javax.swing.JMenuItem menuFileSaveConfig;
 	private javax.swing.JMenu menuHelp;
 	private javax.swing.JMenuItem menuHelpAbout;
 	private javax.swing.JMenuBar menuMain;
