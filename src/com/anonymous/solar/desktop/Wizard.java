@@ -46,6 +46,8 @@ public class Wizard extends javax.swing.JPanel {
 	private SolarSetup setup = new SolarSetup();
 	
 	private SolarResult results;
+	
+	private Integer timeFrame = 10;
 
 	/**
 	 * Arraylist to hold all the panels that get displayed as part of the wizard
@@ -587,6 +589,14 @@ public class Wizard extends javax.swing.JPanel {
 	
 	public void setResults(SolarResult results){
 		this.results = results;
+	}
+	
+	public void setTimeFrame(Integer timeFrame){
+		this.timeFrame = timeFrame;
+	}
+	
+	public Integer getTimeFrame(){
+		return timeFrame;
 	}
 
 

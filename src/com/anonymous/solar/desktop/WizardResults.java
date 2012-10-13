@@ -229,10 +229,12 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		String output = "";
 		String output2 = "";
-		if (results == null || results.getSolarSetup().toString().compareTo(global.toString()) != 0) {
+		if (results == null 
+				|| results.getSolarSetup().toString().compareTo(global.toString()) != 0
+				|| results.getSavingsOverYears().size() != parent.getTimeFrame()) {
 
 			SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
-			results = calculatorSOAP.calculateAllResults(global, 10);
+			results = calculatorSOAP.calculateAllResults(global, parent.getTimeFrame());
 			parent.setResults(results);
 		}
 		
