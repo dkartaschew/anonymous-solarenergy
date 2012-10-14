@@ -376,16 +376,19 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		}
 		
 		// Inverter
-		String[] inverterEfficiency = new String[numHardwareColumns];
+		String[] inverterRow = new String[numHardwareColumns];
 		// Initialise Array
 		for(int i=0; i < numHardwareColumns; i++) {
-			inverterEfficiency[i] = "0.00";
+			inverterRow[i] = "0.00";
 		}
-		inverterEfficiency[0] = "Inverter";
-		inverterEfficiency[1] = global.getInverter().getInverterName();
+		inverterRow[0] = "Inverter";
+		inverterRow[1] = global.getInverter().getInverterName();
 		for (int i = 2; i < global.getInverter().getInverterLifeYears()+2; i++) {
 			try {
-				inverterEfficiency[i] = Double.toString(global.DetermineInverterLoss(i-2));
+				double inverterEfficiency = global.DetermineInverterLoss(i-2)/100;
+				double inverterOutput = inverterEfficiency * global.getInverter().getInverterWattage();
+				inverterRow[i] = String.format("%.2f" + "KW (" + "%.2f" + "%%)",inverterOutput,inverterEfficiency*100);
+				//inverterRow[i] = String.format("%.2f", inverterEfficiency);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -393,7 +396,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		Object[][] hardwareEfficiencyResults = new Object[pans.size()+1][numHardwareColumns];
 		// First row is the inverter
-		hardwareEfficiencyResults[0] = inverterEfficiency;
+		hardwareEfficiencyResults[0] = inverterRow;
 		
 		// Add Panels
 		for(int i=0; i < pans.size(); i++){
@@ -408,7 +411,9 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			
 			for (int j = 2; j < pans.get(i).getPanelType().getPanelLifeYears()+2; j++) {
 				try {
-					panelRow[j] = Double.toString(100 * Math.pow((1 - pans.get(i).getPanelType().getPanelLossYear()/100), j-2));
+					double panelEfficiency = 100 * Math.pow((1 - pans.get(i).getPanelType().getPanelLossYear()/100), j-2);
+					double panelOutput = panelEfficiency/100 * pans.get(i).getPanelType().getPanelWattage();
+					panelRow[j] = String.format("%.2f" + "KW (" + "%.2f" + "%%)",panelOutput,panelEfficiency);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -432,8 +437,8 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		jTableHardware.setSize(5000, jScrollPaneHardware.getHeight());
 		for (int i = 2; i < numHardwareColumns; i++) {
 			jTableHardware.getColumnModel().getColumn(i).setResizable(true);
-			jTableHardware.getColumnModel().getColumn(i).setMinWidth(80);
-			jTableHardware.getColumnModel().getColumn(i).setCellRenderer((TableCellRenderer) new HardwareTableCellRenderer());
+			jTableHardware.getColumnModel().getColumn(i).setMinWidth(150);
+			//jTableHardware.getColumnModel().getColumn(i).setCellRenderer((TableCellRenderer) new HardwareTableCellRenderer());
 		}
 		jScrollPaneHardware.setEnabled(true);
 		jScrollPaneHardware.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -508,7 +513,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			}
 
 			// Configure the component with the specified value
-			String valueStr = String.format("%.2f", Double.parseDouble((String)value));
+			String valueStr = String.format("%", Double.parseDouble((String)value));
 			setText(valueStr);
 
 			// Set tool tip if desired

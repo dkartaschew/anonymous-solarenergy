@@ -45,6 +45,8 @@ public class AddNewInverter extends javax.swing.JDialog {
     	jSpinnerRRP.setName("SpinnerInverterRRP");
     	jSpinnerEfficiency.setName("SpinnerInverterEfficiency");
     	jSpinnerEffLossYr.setName("SpinnerInverterEffLossYear");
+    	jSpinnerWattage.setName("SpinnerInverterWattage");
+    	jSpinnerLife.setName("SpinnerInverterLife");
     }
     
     /**
