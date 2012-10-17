@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
 import com.anonymous.solar.shared.LocationData;
+import com.anonymous.solar.shared.ResultsDetails;
 import com.anonymous.solar.shared.SolarInverter;
 import com.anonymous.solar.shared.SolarPanel;
 import com.anonymous.solar.shared.CustomerData;
@@ -568,6 +569,14 @@ public class LocationObjectFactory {
      */
     public SolarPanels createSolarPanels() {
         return new SolarPanels();
+    }
+    
+    /**
+     * Create an instance of {@link ResultsDetails }
+     * 
+     */
+    public ResultsDetails createResultsDetails() {
+    	return new ResultsDetails();
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,6 +29,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="powerGeneratedOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="monthlyPowerGenerated" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="monthlyPowerGeneratedOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="resultDetails" type="{http://server.solar.anonymous.com/}resultsDetails" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="dateTime" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,7 +50,10 @@ import javax.xml.bind.annotation.XmlType;
     "powerGenerated",
     "powerGeneratedOverYears",
     "monthlyPowerGenerated",
-    "monthlyPowerGeneratedOverYears"
+    "monthlyPowerGeneratedOverYears",
+    "resultDetailsList",
+    "ID",
+    "dateTime"
 })
 /**
  * Class to hold the result of the solar output calculation from the server and to handle
@@ -71,6 +78,10 @@ public class SolarResult {
     protected double monthlyPowerGenerated;
     @XmlElement(nillable = true)
     protected List<Double> monthlyPowerGeneratedOverYears;
+    @XmlElement(nillable = true)
+    protected List<ResultsDetails> resultDetailsList;
+    protected Integer ID;
+    protected Date dateTime;
 	
 	public SolarResult() {
 		savingsOverYears = new ArrayList<Double>();
@@ -89,7 +100,9 @@ public class SolarResult {
 		this.solarSetup = solarSetup;
 		monthlyPowerGeneratedOverYears = new ArrayList<Double>();
 		powerGeneratedOverYears = new ArrayList<Double>();
-		
+		resultDetailsList = new ArrayList<ResultsDetails>();
+		ID = 0;
+		dateTime = null;
 	}
 	
 	/**
@@ -276,6 +289,61 @@ public class SolarResult {
 	public void setMonthlyPowerGeneratedOverYears(
 			ArrayList<Double> newMonthlyPowerGeneratedOverYears) {
 		monthlyPowerGeneratedOverYears = newMonthlyPowerGeneratedOverYears;
+	}
+	
+	/**
+	 * This method gets a result details breakdown of the results
+	 * 
+	 * @return a ResultsDetails object which breaks down the power output;
+	 */
+	public ArrayList<ResultsDetails> getResultsDetailsList() {
+		return (ArrayList<ResultsDetails>)resultDetailsList;
+	}
+	
+	/**
+	 * This methods set the results details 
+	 * 
+	 * @param newResultDetails the new results breakdown from the calculation
+	 */
+	public void setResultsDeatilsList(ArrayList<ResultsDetails> newResultDetailsList) {
+		resultDetailsList = newResultDetailsList;
+	}
+	
+	/**
+	 * This method gets the unique ID for this calculation
+	 * 
+	 * @return an int which represents the ID for this calculation
+	 */
+	public int getID() {
+		return ID;
+	}
+	
+	/**
+	 * This method sets the unique ID for this calculation
+	 * 
+	 * @param newID the new ID for this transaction
+	 */
+	public void setID(int newID) {
+		ID = newID;
+	}
+	
+	/**
+	 * This method get the time the calculation occurred
+	 * 
+	 * @return the date and time the calculation occurred
+	 */
+	public Date getDateTime() {
+		return dateTime;
+	}
+	
+	/**
+	 * This method sets the time the calculation occurred
+	 * 
+	 * @param newDateTime - a Date type that represents the new time
+	 * 						the calculation occured
+	 */
+	public void setDateTime(Date newDateTime) {
+		dateTime = newDateTime;
 	}
 	
 	/**
