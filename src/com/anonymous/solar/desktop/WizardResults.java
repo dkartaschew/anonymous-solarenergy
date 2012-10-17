@@ -4,7 +4,9 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -76,6 +78,13 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		jPanelTableresults = new javax.swing.JPanel();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
+		
+		// Comparison
+		jPanelSetupComparison = new javax.swing.JPanel();
+		jPanelSetupComparison1 = new javax.swing.JPanel();
+		jPanelSetupComparison2 = new javax.swing.JPanel();
+		jScrollPaneSetupComparison = new javax.swing.JScrollPane();
+		
 
 		jTabbedPaneResults.setName("TabResults"); // NOI18N
 
@@ -184,6 +193,27 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		jTabbedPaneResults.addTab("Hardware Efficiency Loss", jPanelHardwareEfficiencyLoss);
 		
+		//TODO
+		
+		javax.swing.GroupLayout jPanelSetupComparisonLayout = new javax.swing.GroupLayout(jPanelSetupComparison);
+		jPanelSetupComparison.setLayout(jPanelSetupComparisonLayout);
+		jPanelSetupComparisonLayout.setHorizontalGroup(jPanelSetupComparisonLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelSetupComparisonLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jScrollPaneSetupComparison, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+						.addContainerGap()));
+		jPanelSetupComparisonLayout.setVerticalGroup(jPanelSetupComparisonLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						jPanelSetupComparisonLayout.createSequentialGroup().addContainerGap()
+						.addComponent(jScrollPaneSetupComparison, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+						.addContainerGap()));
+		
+		jPanelSetupComparison1.setBackground(Color.BLUE);
+		jPanelSetupComparison.add(jPanelSetupComparison1);
+		jPanelSetupComparison2.setBackground(Color.RED);
+		jPanelSetupComparison.add(jPanelSetupComparison2);
+		jTabbedPaneResults.addTab("Compare Setups", jPanelSetupComparison);
+		
 		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
@@ -206,11 +236,18 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private javax.swing.JPanel jPanelTableresults;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
+	
+	private javax.swing.JPanel jPanelSetupComparison;
+	private javax.swing.JPanel jPanelSetupComparison1;
+	private javax.swing.JPanel jPanelSetupComparison2;
+	private javax.swing.JScrollPane jScrollPaneSetupComparison;
+	
 	private javax.swing.JTabbedPane jTabbedPaneResults;
 	private javax.swing.JTable jTable1;
 	private javax.swing.JEditorPane jTextAreaConfirmationDetails;
 	
 	private javax.swing.JPanel jPanelHardwareEfficiencyLoss;
+	
 	private javax.swing.JScrollPane jScrollPaneHardware;
 	private javax.swing.JTable jTableHardware;
 
@@ -246,7 +283,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			String.format("%,.2f", results.getPowerGenerated()) + "KW<br />";
 			
 			jPanelGraph.setLayout(new BorderLayout());
-			jPanelGraph.add(new org.jfree.chart.ChartPanel(new ResultChart(results).getChartPanel()),
+			jPanelGraph.add(new org.jfree.chart.ChartPanel(new ComparisonChart(results).getChartPanel()),
 					BorderLayout.CENTER);
 
 			setResultsTable(results);
@@ -292,7 +329,6 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 				}
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

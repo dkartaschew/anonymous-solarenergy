@@ -15,33 +15,36 @@ import org.jfree.data.xy.XYSeriesCollection;
 import com.anonymous.solar.shared.SolarResult;
 
 /**
- * This class is designed to create an updatable JFreeChart object for displaying various
+ * This class is designed to create an updatable JFreeChart object for comparing various
  * data from the SolarResult class
  * 
- * @author 07377495 Luke Durkan
+ * @author 07377495 Luke Durkan, 08311382 Michael Munchin
  * @version 1.0
  */
-public class ResultChart{
+public class ComparisonChart{
 	
 	private SolarResult solarResult;
 	private JFreeChart resultChart;
-	private XYDataset resultDataset;
+	private XYSeriesCollection resultDataset;
 	
-	public ResultChart(SolarResult solResult) {
+	private ArrayList<XYSeries> dataSeriesList;
+	
+	public ComparisonChart(SolarResult solResult) {
 		this.solarResult = solResult;
-		setUpChart();
-
+		dataSeriesList = new ArrayList<XYSeries>();
+		
+		addDataset(solResult);
 	}
 	
 	/**
-	 * This method updates ResultChart with the data from the new Solar Result object
+	 * This method updates ComparisonChart with the data from the new Solar Result object
 	 * and recreates the JFreeChart object
 	 * 
-	 * @param newSolarResult the solarResult object to create a chart for
+	 * @param newSolarResult the solarResult object to update data for
 	 */
 	public void updateChart(SolarResult newSolarResult) {
 		this.solarResult = newSolarResult;
-		setUpChart();
+		addDataset(newSolarResult);
 	}
 	
 	/**
@@ -54,32 +57,55 @@ public class ResultChart{
 	}
 	
 	/**
-	 * This method creates the XYDataset used for the creation of the graph
+	 * This method adds the new data to the XYDataset
 	 * 
-	 * @return the XYDataset to be used for the creation of the chart
+	 * @param resultToAdd the SolarResult object to add
 	 */
-	private XYDataset updateDataset() {
+	public void addDataset(SolarResult resultToAdd) {	
+		updateDataset(resultToAdd);
 		
-		XYSeriesCollection dataset = new XYSeriesCollection();
+		createDataSet();
+	}
+	
+	/**
+	 * This method creates the dataset to be used by the graph
+	 */
+	private void createDataSet() {
+		
+		resultDataset = new XYSeriesCollection();
+		for(int i=0; i < dataSeriesList.size(); i++) {
+			resultDataset.addSeries(dataSeriesList.get(i));
+		}
+		createChart();
+	}
+	
+	/**
+	 * This method updates the dataset to be used by the graph
+	 * 
+	 * @param resultToAdd the SolarResult object to add
+	 */
+	private void updateDataset(SolarResult resultToAdd) {
 		ArrayList<Double> yearlySavingsList = solarResult.getSavingsOverYears();
-		ArrayList<Double> monthlySavingsList = solarResult.getMonthlyPowerGeneratedOverYears();
 		
 		//Add in cumulative savings
 		double cumulativeSavings = 0.0;
-		XYSeries cumulativeSavingsSeries = new XYSeries("Cumulative Savings");
-		XYSeries monthlyPowerGenerationSeries = new XYSeries("Monthly Power Generation");
+		XYSeries cumulativeSavingsSeries = new XYSeries(resultToAdd.getSolarSetup().getSetupName());
 		for (int i = 0; i < yearlySavingsList.size(); i++) {
 			cumulativeSavings+= yearlySavingsList.get(i);
 			cumulativeSavingsSeries.add(i + 1, cumulativeSavings);
 		}
-		for (int i = 0; i < monthlySavingsList.size(); i ++) {
-			monthlyPowerGenerationSeries.add((i/10) + 1, monthlySavingsList.get(i));
-		}
+		dataSeriesList.add(cumulativeSavingsSeries);
+	}
+	
+	/**
+	 * Remove the dataset at the given index
+	 * 
+	 * @param index The index of the dataset to remove
+	 */
+	public void removeDataset(int index) {
+		dataSeriesList.remove(index);
 		
-		dataset.addSeries(cumulativeSavingsSeries);
-		dataset.addSeries(monthlyPowerGenerationSeries);
-		
-		return dataset;
+		createDataSet();
 	}
 	
 	/**
@@ -87,7 +113,7 @@ public class ResultChart{
 	 */
 	private void createChart() {
 		resultChart = ChartFactory.createXYLineChart(
-				"Calculation Results", 
+				"System Comparison", 
 				"Years", 
 				"Savings ($)", 
 				resultDataset, 
@@ -102,15 +128,7 @@ public class ResultChart{
 		// change the auto tick unit selection to integer units only
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-		
 	}
-	
-	/**
-	 * This method runs the method required for creating a chart
-	 */
-	private void setUpChart() {
-		resultDataset = updateDataset();
-		createChart();
-	}
+
 
 }
