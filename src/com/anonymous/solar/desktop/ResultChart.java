@@ -12,6 +12,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import com.anonymous.solar.shared.ResultsDetails;
 import com.anonymous.solar.shared.SolarResult;
 
 /**
@@ -61,23 +62,18 @@ public class ResultChart{
 	private XYDataset updateDataset() {
 		
 		XYSeriesCollection dataset = new XYSeriesCollection();
-		ArrayList<Double> yearlySavingsList = solarResult.getSavingsOverYears();
-		ArrayList<Double> monthlySavingsList = solarResult.getMonthlyPowerGeneratedOverYears();
+		ArrayList<ResultsDetails> monthlyResults = solarResult.getResultsDetailsList();
 		
 		//Add in cumulative savings
 		double cumulativeSavings = 0.0;
 		XYSeries cumulativeSavingsSeries = new XYSeries("Cumulative Savings");
 		XYSeries monthlyPowerGenerationSeries = new XYSeries("Monthly Power Generation");
-		for (int i = 0; i < yearlySavingsList.size(); i++) {
-			cumulativeSavings+= yearlySavingsList.get(i);
-			cumulativeSavingsSeries.add(i + 1, cumulativeSavings);
-		}
-		for (int i = 0; i < monthlySavingsList.size(); i ++) {
-			monthlyPowerGenerationSeries.add((i/10) + 1, monthlySavingsList.get(i));
+		for (int i = 0; i < monthlyResults.size(); i++) {
+			cumulativeSavings+= monthlyResults.get(i).getIncome();
+			cumulativeSavingsSeries.add((i + 1)/12, cumulativeSavings);
 		}
 		
 		dataset.addSeries(cumulativeSavingsSeries);
-		dataset.addSeries(monthlyPowerGenerationSeries);
 		
 		return dataset;
 	}

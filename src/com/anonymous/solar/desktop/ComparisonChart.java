@@ -12,6 +12,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import com.anonymous.solar.shared.ResultsDetails;
 import com.anonymous.solar.shared.SolarResult;
 
 /**
@@ -85,14 +86,14 @@ public class ComparisonChart{
 	 * @param resultToAdd the SolarResult object to add
 	 */
 	private void updateDataset(SolarResult resultToAdd) {
-		ArrayList<Double> yearlySavingsList = solarResult.getSavingsOverYears();
+		ArrayList<ResultsDetails> monthlySavingsList = solarResult.getResultsDetailsList();
 		
 		//Add in cumulative savings
 		double cumulativeSavings = 0.0;
 		XYSeries cumulativeSavingsSeries = new XYSeries(resultToAdd.getSolarSetup().getSetupName());
-		for (int i = 0; i < yearlySavingsList.size(); i++) {
-			cumulativeSavings+= yearlySavingsList.get(i);
-			cumulativeSavingsSeries.add(i + 1, cumulativeSavings);
+		for (int i = 0; i < monthlySavingsList.size(); i++) {
+			cumulativeSavings+= monthlySavingsList.get(i).getIncome();
+			cumulativeSavingsSeries.add((i + 1)/12, cumulativeSavings);
 		}
 		dataSeriesList.add(cumulativeSavingsSeries);
 	}

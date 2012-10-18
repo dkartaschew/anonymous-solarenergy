@@ -20,18 +20,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="dailySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="monthlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="savingsOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="solarSetup" type="{http://server.solar.anonymous.com/}solarSetup" minOccurs="0"/>
- *         &lt;element name="yearlySavings" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="powerGenerated" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="powerGeneratedOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="monthlyPowerGenerated" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="monthlyPowerGeneratedOverYears" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="resultDetails" type="{http://server.solar.anonymous.com/}resultsDetails" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="dateTime" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         &lt;element name="initialSystemCost" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,18 +35,11 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "solarResult", propOrder = {
-    "dailySavings",
-    "monthlySavings",
-    "savingsOverYears",
     "solarSetup",
-    "yearlySavings",
-    "powerGenerated",
-    "powerGeneratedOverYears",
-    "monthlyPowerGenerated",
-    "monthlyPowerGeneratedOverYears",
     "resultDetailsList",
     "ID",
-    "dateTime"
+    "dateTime",
+    "initialSystemCost"
 })
 /**
  * Class to hold the result of the solar output calculation from the server and to handle
@@ -66,42 +52,34 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 public class SolarResult {
 	
-	protected double dailySavings;
-    protected double monthlySavings;
-    @XmlElement(nillable = true)
-    protected List<Double> savingsOverYears;
+
     protected SolarSetup solarSetup;
-    protected double yearlySavings;
-    protected double powerGenerated;
-    @XmlElement(nillable = true)
-    protected List<Double> powerGeneratedOverYears;
-    protected double monthlyPowerGenerated;
-    @XmlElement(nillable = true)
-    protected List<Double> monthlyPowerGeneratedOverYears;
     @XmlElement(nillable = true)
     protected List<ResultsDetails> resultDetailsList;
-    protected Integer ID;
+    protected Long ID;
     protected Date dateTime;
+    protected Double initialSystemCost;
 	
 	public SolarResult() {
-		savingsOverYears = new ArrayList<Double>();
+		/*savingsOverYears = new ArrayList<Double>();
 		dailySavings = 0.0;
 		yearlySavings = 0.0;
 		monthlyPowerGeneratedOverYears = new ArrayList<Double>();
 		powerGeneratedOverYears = new ArrayList<Double>();
+		*/
 	}
 	
 	public SolarResult(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
-		savingsOverYears = new ArrayList<Double>();
-		dailySavings = 0.0;
-		monthlySavings = 0.0;
-		yearlySavings = 0.0;
+		//savingsOverYears = new ArrayList<Double>();
+		//dailySavings = 0.0;
+		//monthlySavings = 0.0;
+		//yearlySavings = 0.0;
 		this.solarSetup = solarSetup;
-		monthlyPowerGeneratedOverYears = new ArrayList<Double>();
-		powerGeneratedOverYears = new ArrayList<Double>();
+		//monthlyPowerGeneratedOverYears = new ArrayList<Double>();
+		//powerGeneratedOverYears = new ArrayList<Double>();
 		resultDetailsList = new ArrayList<ResultsDetails>();
-		ID = 0;
+		ID = (long) 0;
 		dateTime = null;
 	}
 	
@@ -122,173 +100,6 @@ public class SolarResult {
 	public void setSolarSetup(SolarSetup solarSetup) throws SolarResultException {
 		SolarSetupExceptionCheck(solarSetup);
 		this.solarSetup = solarSetup;
-	}
-	
-	/**
-	 * This method returns the daily savings of the solar system
-	 * 
-	 * @return a double that represents the daily savings of the system in dollars
-	 */
-	public double getDailySavings() {
-		return dailySavings;
-	}
-	
-	/**
-	 * This methods sets the daily savings of the solar system
-	 * 
-	 * @param newDailySavings - the daily savings for the solar system in dollars
-	 */
-	public void setDailySavings(double newDailySavings) {
-		dailySavings = newDailySavings;
-	}
-	
-	/**
-	 * This methods returns the yearly savings of the solar system
-	 * 
-	 * @return a double that represents the yearly savings of the system in dollars
-	 */
-	public double getYearlySavings() {
-		return yearlySavings;
-	}
-	
-	/**
-	 * This methods sets the daily savings of the solar system
-	 * 
-	 * @param newDailySavings - the daily savings for the solar system in dollars
-	 */
-	public void setYearlySavings(double newYearlySavings) {
-		yearlySavings = newYearlySavings;
-	}
-	
-	/**
-	 * This methods returns the monthly savings of the solar system
-	 * 
-	 * @return a double that represents the yearly savings of the system in dollars
-	 */
-	public double getMonthlySavings() {
-		return monthlySavings;
-	}
-	
-	/**
-	 * This methods sets the daily savings of the solar system
-	 * 
-	 * @param newDailySavings - the daily savings for the solar system in dollars
-	 */
-	public void setMonthlySavings(double newMonthlySavings) {
-		monthlySavings = newMonthlySavings;
-	}
-	
-	/**
-	 * This methods gets the yearly savings over years for the solar system
-	 * 
-	 * @return an ArrayList<Double> that represents the yearly savings over a certain
-	 * 		   number of years for the solar system
-	 */
-	public ArrayList<Double> getSavingsOverYears() {
-		return (ArrayList<Double>) savingsOverYears;
-	}
-	
-	/**
-	 * This method sets the yearly savings over years for the solar system
-	 * 
-	 * @param newSavingsOverYears the yearly savings over years for the solar system
-	 */
-	public void setSavingsOverYears(ArrayList<Double> newSavingsOverYears) {
-		savingsOverYears = newSavingsOverYears;
-	}
-	
-	/**
-	 * This method returns the cumulative savings for the solar system up to the year provided
-	 * 
-	 * @param year the year in which to calculate the savings up to
-	 * @return a double value that represents the cumulative savings of the system up to the
-	 * 		   given year in dollars.
-	 */
-	public double getCumulativeSavings(int year) {
-		double cumulativeSavings = 0;
-		
-		for (int i = 0; i < year; i++) {
-			cumulativeSavings = cumulativeSavings + savingsOverYears.get(i);
-		}
-		
-		return cumulativeSavings;
-	}
-	
-	/**
-	 * This method returns the daily power generation of the system
-	 * 
-	 * @return a double showing the daily power generation of the system
-	 */
-	public double getPowerGenerated() {
-		return powerGenerated;
-	}
-	
-	/**
-	 * This method sets the daily power generation of the system
-	 * 
-	 * @param newPowerGenerated the amount of power generated on the system on a daily basis
-	 */
-	public void setPowerGenerated(double newPowerGenerated) {
-		powerGenerated = newPowerGenerated;
-	}
-	
-	/**
-	 * This method set the power generated over the years by the system
-	 * 
-	 * @return an ArrayList<Double> that represents the power generation of the system over the
-	 * 								years
-	 */
-	public ArrayList<Double> getPowerGeneratedOverYears() {
-		return (ArrayList<Double>) powerGeneratedOverYears;
-	}
-	
-	/**
-	 * This method sets the power generated by the system over the years
-	 * 
-	 * @param newPowerGeneratedOverYears a list of values that represents the power generation
-	 * 									 for the system each year.
-	 */
-	public void setPowerGeneratedOverYears(ArrayList<Double> newPowerGeneratedOverYears) {
-		powerGeneratedOverYears = newPowerGeneratedOverYears;
-	}
-	
-	/**
-	 * This method returns the monthly power generation of the system given
-	 * 
-	 * @return the monthly power generation of a system
-	 */
-	public double getMonthlyPowerGenerated() {
-		return monthlyPowerGenerated;
-	}
-	
-	/**
-	 * This method sets the monthly power generation of the system given
-	 * 
-	 * @param newMonthlyPowerGenerated the monthly power generation of the system
-	 */
-	public void setMonthlyPowerGenerated(double newMonthlyPowerGenerated) {
-		monthlyPowerGenerated = newMonthlyPowerGenerated;
-	}
-	
-	/**
-	 * This method sets the monthly power generated over the years by the system
-	 * 
-	 * @return a ArrayList<Double> that contains the monthly power generation of the system
-	 * 							   over a certain amount of years
-	 */
-	public ArrayList<Double> getMonthlyPowerGeneratedOverYears() {
-		return (ArrayList<Double>) monthlyPowerGeneratedOverYears;
-	}
-	
-	/**
-	 * This method sets the monthly power generated over the years by the system
-	 * 
-	 * @param newMonthlyPowerGeneratedOverYears the new monthly power generated over the years
-	 * 											by the system
-	 */
-	public void setMonthlyPowerGeneratedOverYears(
-			ArrayList<Double> newMonthlyPowerGeneratedOverYears) {
-		monthlyPowerGeneratedOverYears = newMonthlyPowerGeneratedOverYears;
 	}
 	
 	/**
@@ -314,7 +125,7 @@ public class SolarResult {
 	 * 
 	 * @return an int which represents the ID for this calculation
 	 */
-	public int getID() {
+	public long getID() {
 		return ID;
 	}
 	
@@ -323,7 +134,7 @@ public class SolarResult {
 	 * 
 	 * @param newID the new ID for this transaction
 	 */
-	public void setID(int newID) {
+	public void setID(long newID) {
 		ID = newID;
 	}
 	
@@ -344,6 +155,156 @@ public class SolarResult {
 	 */
 	public void setDateTime(Date newDateTime) {
 		dateTime = newDateTime;
+	}
+	
+	/**
+	 * This method returns the cost of the solar system
+	 * 
+	 * @return a double that represents the cost of the solar system
+	 */
+	public double getInitialSystemCost() {
+		return initialSystemCost;
+	}
+	
+	/**
+	 * This method sets the cost of the solarSystem
+	 * 
+	 * @param newInitialSystemCost - a double type that represents the
+	 * 								 new cost of the system
+	 */
+	public void setInitialSystemCost(double newInitialSystemCost) {
+		initialSystemCost = newInitialSystemCost;
+	}
+	
+	public double getDailySavings(int day, int year) {
+		double dailySavings = 0.0;
+		
+		int month = getMonthForDay(day);
+		double monthlySavings = resultDetailsList.get(((year - 1) * 12) + month).getIncome();
+		dailySavings = monthlySavings / daysInMonth(month);
+		
+		return dailySavings;
+	}
+	
+	public double getYearlySavings(int year) {
+		double yearlySavings = 0;
+		
+		for(int i = year * 12; i < (year * 12) + 12; i++) {
+			yearlySavings += resultDetailsList.get(i).getIncome();
+		}
+		
+		return yearlySavings;
+	}
+	
+	private int daysInMonth(int month) {
+		int numberOfDays = 0;
+		
+		switch(month) {
+			//January
+			case 0:
+				numberOfDays = 31;
+				break;
+			//Feburary
+			case 1:
+				numberOfDays = 28;
+				break;
+			//March
+			case 2:
+				numberOfDays = 31;
+				break;
+			//April
+			case 3:
+				numberOfDays = 30;
+				break;
+			//May
+			case 4:
+				numberOfDays = 31;
+				break;
+			//June
+			case 5:
+				numberOfDays = 30;
+				break;
+			//July
+			case 6:
+				numberOfDays = 31;
+				break;
+			//August
+			case 7:
+				numberOfDays = 31;
+				break;
+			//September
+			case 8:
+				numberOfDays = 30;
+				break;
+			//October
+			case 9:
+				numberOfDays = 31;
+				break;
+			//November
+			case 10:
+				numberOfDays = 30;
+				break;
+			//December
+			case 11:
+				numberOfDays = 31;
+				break;
+		}
+		
+		return numberOfDays;
+	}
+	
+	private int getMonthForDay(int day) {
+		int month = 0;
+		//Jan
+		if (day >= 1 && day <= 31) {
+			month = 0;
+		}
+		//Feb
+		else if (day >= 32 && day <= 59) {
+			month = 1;
+		}
+		//Mar
+		else if (day >= 60 && day <= 90) {
+			month = 2;
+		}
+		//Apr
+		else if (day >= 91 && day <= 120) {
+			month = 3;
+		}
+		//May
+		else if (day >= 121 && day <= 151) {
+			month = 4;
+		}
+		//Jun
+		else if (day >= 152 && day <= 181) {
+			month = 5;
+		}
+		//Jul
+		else if (day >= 182 && day <= 212) {
+			month = 6;
+		}
+		//Aug
+		else if (day >= 213 && day <= 243) {
+			month = 7;
+		}
+		//Sep
+		else if (day >= 244 && day <= 273) {
+			month = 8;
+		}
+		//Oct
+		else if (day >= 274 && day <= 304) {
+			month = 9;
+		}
+		//Nov
+		else if (day >= 305 && day <= 334) {
+			month = 10;
+		}
+		//Dec
+		else if (day >= 335 && day <= 365) {
+			month = 11;
+		}
+		
+		return month;
 	}
 	
 	/**
@@ -370,10 +331,10 @@ public class SolarResult {
 		String details = "<html>";
 		
 		details += "<b>Daily Savings: </b>";
-		details += dailySavings + "<br /><br />";
+		//details += dailySavings + "<br /><br />";
 		
 		details += "<b>Yearly Savings: </b>";
-		details += yearlySavings + "<br /><br />";
+		//details += yearlySavings + "<br /><br />";
 		
 		details += "</html>";
 		return details;
