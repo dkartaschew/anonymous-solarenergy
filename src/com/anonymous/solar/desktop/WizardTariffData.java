@@ -128,8 +128,6 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
             }
         });
         jScrollPane2.setViewportView(lstProviderInformation);
-        lstProviderInformation.setPreferredSize(new Dimension(400, 185));
-        
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -178,7 +176,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
 
         jLabelFeedInFee.setText("Feed in Fee");
 
-        jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 500.0d, 1.0d));
+        jSpinnerTariffIncrease.setModel(new javax.swing.SpinnerNumberModel(0.0d, -100.0d, 100.0d, 1.0d));
         jSpinnerTariffIncrease.setToolTipText("Annual increase in % of tariff cost.");
 
         jLabelAnnualTariffIncrease.setText("Tariff Increase %");
@@ -210,7 +208,7 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
                             .addComponent(jLabelAnnualTariffIncrease))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelTariffGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        		.addComponent(jSpinnerTariffIncrease, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerTariffIncrease)
                             .addGroup(jPanelTariffGroupLayout.createSequentialGroup()
                                 .addComponent(jSpinnerTariff33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 1, Short.MAX_VALUE)))))
@@ -414,11 +412,6 @@ public class WizardTariffData extends javax.swing.JPanel implements WizardPanel 
     	
     	if((Double)jSpinnerDailyCostTariff33.getValue() == 0){
     		jSpinnerDailyCostTariff33.setBorder(borderError);
-    		errorFree = false;
-    	}
-    	
-    	if((Double)jSpinnerTariffIncrease.getValue() == 0){
-    		jSpinnerTariffIncrease.setBorder(borderError);
     		errorFree = false;
     	}
     	

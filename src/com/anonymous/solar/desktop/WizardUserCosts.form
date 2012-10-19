@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel3"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -98,6 +105,9 @@
               <SpinnerModel initial="0.0" maximum="10000.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDailyAverageUsageStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerDayTimeHourlyUsage">
           <Properties>
@@ -105,6 +115,9 @@
               <SpinnerModel initial="0.0" maximum="24.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerDayTimeHourlyUsageStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelDayTime">
           <Properties>
@@ -122,6 +135,9 @@
               <Connection code="new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d)" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerMonthlyStateChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -66,6 +66,7 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jPanelUsageGroup = new javax.swing.JPanel();
         jLabelDailyAvgUsage = new javax.swing.JLabel();
         jSpinnerDailyAverageUsage = new javax.swing.JSpinner();
@@ -74,19 +75,36 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
         jLabel1 = new javax.swing.JLabel();
         jSpinnerMonthly = new javax.swing.JSpinner();
 
+        jLabel3.setText("jLabel3");
+
         jPanelUsageGroup.setBorder(javax.swing.BorderFactory.createTitledBorder("Average Monthly Usage"));
 
         jLabelDailyAvgUsage.setText("Daily Average Usage (KWh):");
 
-        jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
+        jSpinnerDailyAverageUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100000.0d, 1.0d));
+        jSpinnerDailyAverageUsage.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDailyAverageUsageStateChanged(evt);
+            }
+        });
 
         jSpinnerDayTimeHourlyUsage.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 24.0d, 1.0d));
+        jSpinnerDayTimeHourlyUsage.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerDayTimeHourlyUsageStateChanged(evt);
+            }
+        });
 
         jLabelDayTime.setText("Day Time Hourly Usage (KWh):");
 
         jLabel1.setText("Monthly Usage (KWh)");
 
-        jSpinnerMonthly.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 10000.0d, 1.0d));
+        jSpinnerMonthly.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100000.0d, 1.0d));
+        jSpinnerMonthly.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerMonthlyStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelUsageGroupLayout = new javax.swing.GroupLayout(jPanelUsageGroup);
         jPanelUsageGroup.setLayout(jPanelUsageGroupLayout);
@@ -140,8 +158,30 @@ public class WizardUserCosts extends javax.swing.JPanel implements WizardPanel {
                 .addGap(134, 134, 134))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jSpinnerDayTimeHourlyUsageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDayTimeHourlyUsageStateChanged
+        double currentValue = (Double)jSpinnerDayTimeHourlyUsage.getValue();
+        jSpinnerDailyAverageUsage.setValue(currentValue * 12);
+        jSpinnerMonthly.setValue(currentValue * 12 * 30);
+    }//GEN-LAST:event_jSpinnerDayTimeHourlyUsageStateChanged
+
+    private void jSpinnerDailyAverageUsageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerDailyAverageUsageStateChanged
+    	double currentValue = (Double)jSpinnerDailyAverageUsage.getValue();
+    	jSpinnerDayTimeHourlyUsage.setValue(currentValue / 12);
+        jSpinnerMonthly.setValue(currentValue * 30);
+       
+    }//GEN-LAST:event_jSpinnerDailyAverageUsageStateChanged
+
+    private void jSpinnerMonthlyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMonthlyStateChanged
+    	double currentValue = (Double)jSpinnerMonthly.getValue();
+    	jSpinnerDayTimeHourlyUsage.setValue(currentValue / 30 / 12);
+    	jSpinnerDailyAverageUsage.setValue(currentValue / 30);
+        
+    }//GEN-LAST:event_jSpinnerMonthlyStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelDailyAvgUsage;
     private javax.swing.JLabel jLabelDayTime;
     private javax.swing.JPanel jPanelUsageGroup;
