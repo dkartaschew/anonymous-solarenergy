@@ -8,28 +8,28 @@ public class SolarReport {
 	private boolean finalized = false;
 	private boolean coloured = false;
 	
-	//Styling
-	private String textColor = "#000";
-	private String bodyColour = "#CCC";
-	private String backgroundColor = "#FFF";
-	
 	public SolarReport(){
 		//Add starting elements from <body> -> content div
-		reportHTML = "<body style=\"background-color:" + bodyColour + ";margin: 0px;padding: 0px;font-family:Arial;\">\n";
-		reportHTML += "<div style=\"width:1000px;min-height:600px;margin-left:auto;margin-right:auto;padding: 10px 10px 0px 10px;background-image:url(/Pictures/matrix1.png);\">\n";
-		reportHTML += "<div id=\"head\" style=\"width:100%;height:250px;margin-left:auto;margin-right:" + 
-					  "auto;padding: 10px 10px 10px 10px;background-image: url(/Pictures/qutChemSoc.jpg);" + 
-					  "background-position:center;background-repeat:repeat-x;background-color:" + backgroundColor + ";\">PICTURE</div>";		
-		reportHTML += "<div style=\"background-color:" + backgroundColor + ";float:left;margin-top:20px;padding:15px 15px 0px 15px;width:100%;color:" + textColor + ";\">";
+		reportHTML = "<body " +  getBodyCSS() + ">\n";
+		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">\n";
+		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n ANONYMOUS SOLAR ENERGY REPORT\n</div>\n";		
+		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >\n";
 	}
 	
+	
+	/*****************************************************************************************************
+	 * PRIVATE METHODS: CONTAINING THE BODY OF THE HTML - ADD HEADER AND FOOTER
+	 *****************************************************************************************************/
+
 	/**
 	 * Add a header onto the HTML file
 	 */
 	private void addHeader(){
 		
-		String header = "<head>\n";
+		String header = "";
 		
+		header +="<head>\n";
+		//additional head stuff
 		header += "</head>\n";
 		
 		reportHTML = header + reportHTML;
@@ -40,16 +40,20 @@ public class SolarReport {
 	 */
 	private void addFooter(){
 		
-		String footer = "</div>\n</div>\n<div style=\"position: relative; color:red; bottom: 0px; width: 100%; ";
-		footer += "padding: 15px 0px; margin-top: 5px; font-style: italic; font-weight: bold; ";
-		footer += "font-size: 13px; letter-spacing: 2px; clear:both; background-color:#000; ";
-		footer += "border-top:1px dotted #500; text-align:center;\">\n"; 
+		String footer = "";
+		footer += "</div>\n";
+		footer += "</div>\n";
+		footer += "<div id=\"footer\" " + getFooterCSS() + ">\n"; 
 		
-		footer += "This is a Solar Anonymous Energy Report ";
+		footer += "This is an Anonymous Solar Energy Report ";
 		footer += "</div>\n</body>\n";
 		
 		reportHTML = reportHTML + footer;
 	}
+	
+	/*****************************************************************************************************
+	 * PUBLIC METHODS: FINALIZE THE REPORT. ONCE THIS HAS DONE ALL ADDITION OF INFORMATION IS PREVENTED
+	 *****************************************************************************************************/
 	
 	/**
 	 * Finalize the report. Once the report has been finalized nothing more can be 
@@ -58,9 +62,7 @@ public class SolarReport {
 	public void Finalize(){
 		addHeader();
 		addFooter();
-		
-		
-		
+
 		String htmlStart = "<!DOCTYPE html>\n";
 		htmlStart += "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
 		
@@ -70,6 +72,11 @@ public class SolarReport {
 		
 		
 	}
+	
+	/*****************************************************************************************************
+	 * PUBLIC METHODS: ADDING CONTENT TO REPORT
+	 *****************************************************************************************************/
+	
 	
 	/**
 	 * Add a single string to the report
@@ -104,24 +111,40 @@ public class SolarReport {
 	 */
 	public void addContent(SolarResult result) throws SolarReportException{	
 		
-		//Title Details
-		addContent("Title: ", result.getSolarSetup().getSetupName());
-		addContent("Description: ", result.getSolarSetup().getSetupDescription());
-		addContent("<br />");
-		
-		//Panels
-		addContent("<h3 style=\"clear:left\">Panel Selection</h3>");
-		addContent(result.getSolarSetup().getSolarPanels());
-		
-		//Inverter
-		addContent("<h3 style=\"clear:left\">Inverter Selection</h3>");
-		addContent(result.getSolarSetup().getInverter());
-		
-		//Customer Details
-		addContent("<h3 style=\"clear:left\">Customer Details</h3>");
-		addContent(result.getSolarSetup().getCustomerData());
+		//Solar Setup details
+		addContent(result.getSolarSetup());
 		
 	}
+	
+	/**
+	 * Loads the solar result with all details structured into the appropriate containes into the page
+	 * @param result - the solar result to add
+	 * @throws SolarReportException
+	 */
+	public void addContent(SolarSetup result) throws SolarReportException{	
+		
+		//Title Details
+		addContent("<b>Title: </b>", result.getSetupName());
+		addContent("<b>Description: </b>", result.getSetupDescription());
+		addContent("<br />\n<br />\n<br />\n");
+		
+		//Panels
+		addContent("<h4 style=\"clear:left\">Panel Selection</h4>");
+		addContent(result.getSolarPanels());
+		
+		//Inverter
+		addContent("<h4 style=\"clear:left\">Inverter Selection</h4>");
+		addContent(result.getInverter());
+		
+		//Customer Details
+		addContent("<h4 style=\"clear:left\">Customer Details</h4>");
+		addContent(result.getCustomerData());
+		
+		
+		
+	}
+	
+	
 	
 	/**
 	 * Add a list of solar panels formatted in a table
@@ -226,6 +249,97 @@ public class SolarReport {
 		return reportHTML;
 	}
 	
+	
+	
+	/*****************************************************************************************************
+	 * PRIVATE METHODS: CSS STYLING
+	 *****************************************************************************************************/
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for the [body] of the web report page
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getBodyCSS(){
+		return "style=\""
+				+ "background-color:#CCC;" 
+				+ "margin: 0px;"
+				+ "padding: 0px;"
+				+ "font-family:Arial;"
+				+ "\"";
+	}
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for the [div id="wrapper"] of the web report page
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getWrapperCSS(){
+		return "style=\""
+				+ "width:1000px;"
+				+ "background-color:#FFF;" 
+				+ "min-height:600px;"
+				+ "margin-left:auto;"
+				+ "margin-right:auto;"
+				+ "padding: 10px 10px 0px 10px;"
+				+ "background-image:url(/Pictures/matrix1.png);"
+				+ "\"";
+	}
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for the [div id="head"] of the web report page
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getHeadCSS(){
+		return "style=\""
+				+ "width:95%;"
+				+ "height:80px;"
+				+ "margin-left:auto;"
+				+ "margin-right:auto;"
+				+ "padding: 2.5% 2.5% 2.5% 2.5%;"
+				+ "border-bottom:4px solid #000;"
+				+ "background-image: url(/Pictures/qutChemSoc.jpg);"
+				+ "background-position:center;"
+				+ "background-repeat:repeat-x;"
+				+ "background-color:#FFF;"
+				+ "font-size:30px;"
+				+ "font-weight:bold;"
+				+ "\"";
+	}
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for the [div id="pageBody"] of the web report page
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getPageBodyCSS(){
+		return "style=\""
+				+ "background-color:#FFF;"
+				+ "padding:2.5% 2.5% 0% 2.5%;"
+				+ "width:95%;"
+				+ "color:#000;"
+				+ "\"";
+	}
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for the [div id="footer"] of the web report page
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getFooterCSS(){
+		return "style=\""
+				+ "position: relative;"
+				+ "color:red;"
+				+ "bottom: 0px;"
+				+ "width: 100%;"
+				+ "padding: 15px 0px;"
+				+ "margin-top: 5px;"
+				+ "font-style: italic;"
+				+ "font-weight: bold;"
+				+ "font-size: 13px;"
+				+ "letter-spacing: 2px;"
+				+ "clear:both;"
+				+ "background-color:#000;"
+				+ "border-top:1px dotted #500;"
+				+ "text-align:center;"
+				+ "\"";
+	}
 	
 	
 	

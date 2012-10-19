@@ -206,7 +206,7 @@ public class SolarApplication extends javax.swing.JFrame {
 		//JOptionPane.showMessageDialog(new JFrame(), report.toString());
 		
 		try{
-		FileOutputStream fos = new FileOutputStream("D:/report.html");
+		FileOutputStream fos = new FileOutputStream("D:/SolarReport.html");
 		OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 		out.write(report.toString());
 		out.close();

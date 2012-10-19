@@ -9,12 +9,14 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.anonymous.solar.shared.SolarReport;
 import com.anonymous.solar.shared.SolarResult;
 import com.anonymous.solar.shared.SolarSetup;
 
@@ -108,7 +110,7 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     private void jButtonSaveConfigurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveConfigurationActionPerformed
         // TODO add your handling code here:
     	try {
-			MarshallExample();
+    		saveConfiguration();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,8 +118,86 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     }//GEN-LAST:event_jButtonSaveConfigurationActionPerformed
 
     private void jButtonGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateReportActionPerformed
-        // TODO add your handling code here:
+    	try {
+			saveHTMLReport();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_jButtonGenerateReportActionPerformed
+    
+    private void saveConfiguration() throws Exception {
+		JFileChooser fc = new JFileChooser();
+		fc.addChoosableFileFilter(new SSUFilter());
+		int returnVal;
+
+		// =============================================================================================================
+		// Setup JAXB
+		// =============================================================================================================
+
+		// Create a JAXB context passing in the class of the object we want to
+		// marshal/unmarshal
+		final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
+
+		// =============================================================================================================
+		// Marshalling OBJECT to XML
+		// =============================================================================================================
+
+		// Create the marshaller, this is the nifty little thing that will
+		// actually transform the object into XML
+		final Marshaller marshaller = context.createMarshaller();
+
+		// Create a stringWriter to hold the XML
+		final StringWriter stringWriter = new StringWriter();
+
+		// Create the sample object we wish to transform into XML
+		SolarSetup setup = parent.getSetup();
+
+		// Marshal the javaObject and write the XML to the stringWriter
+		marshaller.marshal(setup, stringWriter);
+
+		// Print out the contents of the stringWriter
+		// System.out.println(stringWriter.toString());
+		// JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
+
+		returnVal = fc.showDialog(new JFrame(), "Save");
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+			FileOutputStream fos = new FileOutputStream(fc.getSelectedFile()
+					+ ".ssu");
+			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
+			out.write(stringWriter.toString());
+			out.close();
+
+		}
+
+	}
+
+    
+    private void saveHTMLReport() throws Exception {
+		JFileChooser fc = new JFileChooser();
+		fc.addChoosableFileFilter(new HTMLFilter());
+		int returnVal;
+		
+		SolarReport report = new SolarReport();
+
+		report.addContent(parent.getResults());
+
+		returnVal = fc.showDialog(new JFrame(), "Save");
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+			FileOutputStream fos = new FileOutputStream(fc.getSelectedFile()
+					+ ".html");
+			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
+			out.write(report.toString());
+			out.close();
+
+		}
+
+	}
+
     
 
 	public void MarshallExample() throws Exception {
