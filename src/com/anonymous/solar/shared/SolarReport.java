@@ -12,11 +12,16 @@ public class SolarReport {
 	
 	public SolarReport(){
 		//Add starting elements from <body> -> content div
-		reportHTML = "<body onload=\"load()\" " +  getBodyCSS() + ">\n";
+		reportHTML = "<body onload=\"\" " +  getBodyCSS() + ">\n";
 		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">\n";
 		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n";
-		reportHTML += "<img border=\"0\" src=\"http://us.123rf.com/400wm/400/400/coliap/coliap1110/coliap111001390/10959841-solar-energy-panel-with-sun-and-leaves-alternative-energy-icon.jpg\" alt=\"Leaf\" width=\"100\" height=\"100\">";
-		reportHTML += "ANONYMOUS SOLAR ENERGY REPORT\n</div>\n";
+		
+		reportHTML += "<img border=\"0\" src=\"http://us.123rf.com/400wm/400/400/coliap/coliap1110"
+				   + "/coliap111001390/10959841-solar-energy-panel-with-sun-and-leaves-alternative"
+				   +"-energy-icon.jpg\" alt=\"Leaf\" width=\"100\" height=\"100\">";
+		reportHTML += "ANONYMOUS SOLAR ENERGY REPORT\n";
+		reportHTML += "<button onclick=\"load()\" style=\"float:right\">Print</button></div>\n";
+		
 		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >\n";
 	}
 	
@@ -150,16 +155,24 @@ public class SolarReport {
 		
 		String table = "";
 		
+		//
 		//Solar Setup details
+		//
+		
 		addContent(result.getSolarSetup());
 		
-		addContent("<div style=\"background-color:#FFC\">");
+		
+		//
+		//Result Details
+		//
+		
+		//Initial Cost
+		addContent("<div style=\"background-color:#FFC\">");	//OPEN DIV
 		addContent("<h4 style=\"clear:left\">Results</h4>");
 		addContent("System Startup Cost", "$" + result.getInitialSystemCost());
 		
-		addContent("<h4 style=\"clear:left\">Yearly Savings</h4>");
-		
 		//Yearly Saving Details
+		addContent("<h4 style=\"clear:left\">Yearly Savings</h4>");
 		addContent("<table style=\"margin-top: 1em;clear: both;width:40%;color:Black;\">");
 
 		addContent("<tr>\n" 
@@ -169,14 +182,14 @@ public class SolarReport {
 		
 		for(int i = 0; i < timeFrame; i++){
 			addContent("<tr>\n" 
-					+ "<td>Year " + i + "</td>\n"
+					+ "<td>Year " + i + 1 + "</td>\n"
 					+ "<td>" + String.format("$%,.2f", result.getYearlySavings(i)) + "</td>\n"
 					+ "</tr>\n");
 		}
 
 		addContent(table + "</table>");
 		addContent("<h4 style=\"clear:left\"></h4>");
-		addContent("</div>");		
+		addContent("</div>");									//CLOSE DIV
 	}
 	
 	/**
@@ -226,23 +239,23 @@ public class SolarReport {
 	 */
 	public void addContent(ArrayList<SolarPanels> panels) throws SolarReportException{
 		//Table heading
-		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" " + getTableCSS() + ">" 
 		+ "<tr>"
-		+"<th>Name</th>"
-		+"<th>Manufacturer</th>"
-		+"<th>Wattage</th>"
-		+"<th>Life</th>"
-		+"<th>Direction</th>"
-		+"<th>Azimuth</th>"
-		+"<th>Cost($)</th>"
-		+"<th>Units</th>"
-		+"<th>Total($)</th>"
-		+"<th>Efficiency</th>"
+		+"<td>Name</td>"
+		+"<td>Manufacturer</td>"
+		+"<td>Wattage</td>"
+		+"<td>Life</td>"
+		+"<td>Direction</td>"
+		+"<td>Azimutd</td>"
+		+"<td>Cost($)</td>"
+		+"<td>Units</td>"
+		+"<td>Total($)</td>"
+		+"<td>Efficiency</td>"
 		+"</tr>");
 		
 		//Table body
 		for(SolarPanels panelz : panels){
-		addContent("<tr style=\"background-color:#BBB\">"
+		addContent("<tr " + getTableRowCSS() + ">"
 				
 				+ "<td>" + panelz.getPanelType().getPanelName() + "</td>" 
 				+ "<td>" + panelz.getPanelType().getPanelManufacturer() + "</td>" 
@@ -267,17 +280,17 @@ public class SolarReport {
 	 */
 	public void addContent(SolarInverter inverter) throws SolarReportException{
 		//Table heading
-		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" " + getTableCSS() + ">" 
 		+ "<tr>"
-		+"<th>Name</th>"
-		+"<th>Manufacturer</th>"
-		+"<th>Wattage</th>"
-		+"<th>Life</th>"
-		+"<th>Cost</th>"
-		+"<th>Efficiency</th>"
+		+"<td>Name</td>"
+		+"<td>Manufacturer</td>"
+		+"<td>Wattage</td>"
+		+"<td>Life</td>"
+		+"<td>Cost</td>"
+		+"<td>Efficiency</td>"
 		+"</tr>");
 		
-		addContent("<tr style=\"background-color:#BBB\"><td>" + inverter.getInverterName()
+		addContent("<tr " + getTableRowCSS() + "><td>" + inverter.getInverterName()
 				+ "</td><td>" + inverter.getInverterManufacturer() 
 				+ "</td><td>" + inverter.getInverterWattage() 
 				+ "</td><td>" + inverter.getInverterLifeYears() 
@@ -296,17 +309,17 @@ public class SolarReport {
 	 */
 	public void addContent(CustomerData details) throws SolarReportException{
 		//Table heading
-		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" " + getTableCSS() + " >" 
 		+ "<tr>"
-		+"<th>Tariff 11 Cost</th>"
-		+"<th>Tariff 11 Fee</th>"
-		+"<th>Tariff 33 Cost</th>"
-		+"<th>Tariff 33 Fee</th>"
-		+"<th>Tariff Feed In Rate</th>"
-		+"<th>Tariff Change %</th>"
+		+"<td>Tariff 11 Cost</td>"
+		+"<td>Tariff 11 Fee</td>"
+		+"<td>Tariff 33 Cost</td>"
+		+"<td>Tariff 33 Fee</td>"
+		+"<td>Tariff Feed In Rate</td>"
+		+"<td>Tariff Change %</td>"
 		+"</tr>");
 		
-		addContent("<tr style=\"background-color:#BBB\"><td>" + details.getTariff11Cost()
+		addContent("<tr " + getTableRowCSS() + "><td>" + details.getTariff11Cost()
 				+ "</td><td>" + details.getTariff11Fee() 
 				+ "</td><td>" + details.getTariff13Cost() 
 				+ "</td><td>" + details.getTariff13Fee() 
@@ -314,6 +327,10 @@ public class SolarReport {
 				+ "</td><td>" + details.getAnnualTariffIncrease()
 				+ "</td></tr>");
 	
+		
+		
+		if(CustomerData.class == CustomerData.class);
+		
 		addContent("</table>");
 		
 	}
@@ -326,11 +343,40 @@ public class SolarReport {
 		return reportHTML;
 	}
 	
+	public void addContent(){
+		
+	}
+	
 	
 	
 	/*****************************************************************************************************
 	 * PRIVATE METHODS: CSS STYLING
 	 *****************************************************************************************************/
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for table rows
+	 * 
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getTableRowCSS(){
+		return "style=\"" 
+				+ "background-color:#DDD;" 
+				+ "\"";	
+	}
+	
+	/**
+	 * Provides a CSS styling in the form of style="..." for tables that contain panels, inverters or
+	 * customer details
+	 * @return CSS styling in form of style="..."
+	 */
+	private String getTableCSS(){
+		return "style=\""
+				+ "margin-top: 1em;" 
+				+ "clear: both;" 
+				+ "width:100%;" 
+				+ "color:Black;" 
+				+ "\"";	
+	}
 	
 	/**
 	 * Provides a CSS styling in the form of style="..." for the [body] of the web report page
