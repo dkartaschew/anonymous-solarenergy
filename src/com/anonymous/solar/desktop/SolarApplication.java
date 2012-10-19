@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import javax.print.DocPrintJob;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -194,26 +195,6 @@ public class SolarApplication extends javax.swing.JFrame {
 		Wizard wizard = (Wizard) this.getContentPane().getComponent(0);
 		wizard.setSetup(setup);
 		
-		SolarReport report = new SolarReport();
-
-		try {
-			report.addContent(new SolarResult(setup));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		report.Finalize();
-		//JOptionPane.showMessageDialog(new JFrame(), report.toString());
-		
-		try{
-		FileOutputStream fos = new FileOutputStream("D:/SolarReport.html");
-		OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
-		out.write(report.toString());
-		out.close();
-		} catch(Exception e) {
-			
-		}
-		
 	}
 
 	private void saveConfiguration() throws Exception {
@@ -262,6 +243,8 @@ public class SolarApplication extends javax.swing.JFrame {
 			out.close();
 
 		}
+		
+		
 
 	}
 

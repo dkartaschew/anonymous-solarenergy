@@ -178,18 +178,50 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     private void saveHTMLReport() throws Exception {
 		JFileChooser fc = new JFileChooser();
 		fc.addChoosableFileFilter(new HTMLFilter());
+		String fileName;
+		FileOutputStream fos;
+		int nameLength;
 		int returnVal;
+		int lastOccurence;
 		
+		//Generate and finalise report
 		SolarReport report = new SolarReport();
+		report.addContent(parent.getResults(), parent.getTimeFrame());
+		report.Finalize();
 
-		report.addContent(parent.getResults());
-
+		//Get file
 		returnVal = fc.showDialog(new JFrame(), "Save");
 
+		//If file valid
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-			FileOutputStream fos = new FileOutputStream(fc.getSelectedFile()
+			fileName = fc.getSelectedFile().getName();
+			nameLength = fileName.length();
+			lastOccurence = fileName.lastIndexOf('.');
+			
+			//JOptionPane.showMessageDialog(new JFrame(), fileName);
+			
+			//Determine whether to add .html or not
+			if(lastOccurence == -1){
+			fos = new FileOutputStream(fc.getSelectedFile()
 					+ ".html");
+			} else {
+				String extension = fileName.substring(lastOccurence, fileName.length());
+				
+				if (extension != null) {
+		            if (extension.compareTo(".html") == 0) {
+		            	fos = new FileOutputStream(fc.getSelectedFile());
+		            } else {
+		            	fos = new FileOutputStream(fc.getSelectedFile()
+		    					+ ".html");
+		            }
+		        } else {
+		        	fos = new FileOutputStream(fc.getSelectedFile()
+							+ ".html");
+		        }
+			}
+						
+			//output file
 			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 			out.write(report.toString());
 			out.close();

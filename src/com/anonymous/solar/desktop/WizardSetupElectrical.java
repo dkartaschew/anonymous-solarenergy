@@ -273,7 +273,7 @@ public class WizardSetupElectrical extends javax.swing.JPanel implements WizardP
 		returnToWhite();
 
 		if (validateInput) {
-			if (inverter == null) {
+			if (inverter.getInverterName().trim().compareTo("") == 0) {
 				jButtonSetInverter.setBackground(Color.red);
 				// Oops, missing data, need to handle this.
 				JOptionPane.showMessageDialog(this,

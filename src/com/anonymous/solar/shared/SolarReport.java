@@ -2,6 +2,8 @@ package com.anonymous.solar.shared;
 
 import java.util.ArrayList;
 
+import com.google.appengine.api.search.Results;
+
 public class SolarReport {
 
 	private String reportHTML;
@@ -10,7 +12,7 @@ public class SolarReport {
 	
 	public SolarReport(){
 		//Add starting elements from <body> -> content div
-		reportHTML = "<body " +  getBodyCSS() + ">\n";
+		reportHTML = "<body onload=\"load()\" " +  getBodyCSS() + ">\n";
 		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">\n";
 		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n ANONYMOUS SOLAR ENERGY REPORT\n</div>\n";		
 		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >\n";
@@ -30,6 +32,15 @@ public class SolarReport {
 		
 		header +="<head>\n";
 		//additional head stuff
+		header += "<script>\n";
+		header += "\tfunction load()\n";
+		header += "\t{\n";
+		//header += "\tprint();\n";
+		
+		header += "\tprint();\n";
+		
+		header += "\t}\n";
+		header += "</script>\n";
 		header += "</head>\n";
 		
 		reportHTML = header + reportHTML;
@@ -79,7 +90,7 @@ public class SolarReport {
 	
 	
 	/**
-	 * Add a single string to the report
+	 * Add a single string to the report. Warning: This will be COMPLETELY unformatted
 	 * @param input - the string to add
 	 * @throws SolarReportException
 	 */
@@ -93,15 +104,39 @@ public class SolarReport {
 	}
 	
 	/**
-	 * Add a simple title and label to the report
+	 * Add a simple title and title-detail to the report
 	 * @param title - title of the page (left)
 	 * @param content - add content that relates to the title (to right of title, float left)
 	 * @throws SolarReportException
 	 */
 	public void addContent(String title, String content) throws SolarReportException{
 		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
-		addContent("<span style=\"float:left; width:300px;padding:5px;margin:2px;\">" + content + "</span>");
-		
+		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
+		addContent("<br />\n<br />\n");
+	}
+	
+	/**
+	 * Add a simple title and title-detail to the report, where the title-detail is a double
+	 * @param title - title of the page (left)
+	 * @param content - numeric double content to add to report (to right of title, float left)
+	 * @throws SolarReportException
+	 */
+	public void addContent(String title, Double content) throws SolarReportException{
+		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
+		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
+		addContent("<br />\n<br />\n");
+	}
+	
+	/**
+	 * Add a simple title and title-detail to the report, where the title-detail is a double
+	 * @param title - title of the page (left)
+	 * @param content - numeric integer content to add to report (to right of title, float left)
+	 * @throws SolarReportException
+	 */
+	public void addContent(String title, Integer content) throws SolarReportException{
+		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
+		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
+		addContent("<br />\n<br />\n");
 	}
 	
 	/**
@@ -109,42 +144,78 @@ public class SolarReport {
 	 * @param result - the solar result to add
 	 * @throws SolarReportException
 	 */
-	public void addContent(SolarResult result) throws SolarReportException{	
+	public void addContent(SolarResult result, Integer timeFrame) throws SolarReportException{	
+		
+		String table = "";
 		
 		//Solar Setup details
 		addContent(result.getSolarSetup());
 		
+		addContent("<div style=\"background-color:#FFC\">");
+		addContent("<h4 style=\"clear:left\">Results</h4>");
+		addContent("System Startup Cost", "$" + result.getInitialSystemCost());
+		
+		addContent("<h4 style=\"clear:left\">Yearly Savings</h4>");
+		
+		//Yearly Saving Details
+		addContent("<table style=\"margin-top: 1em;clear: both;width:40%;color:Black;\">");
+
+		addContent("<tr>\n" 
+				+ "<th>Year</th>\n" 
+				+ "<th>Savings</th>\n" 
+				+ "</tr>\n");
+		
+		for(int i = 0; i < timeFrame; i++){
+			addContent("<tr>\n" 
+					+ "<td>Year " + i + "</td>\n"
+					+ "<td>" + String.format("$%,.2f", result.getYearlySavings(i)) + "</td>\n"
+					+ "</tr>\n");
+		}
+
+		addContent(table + "</table>");
+		addContent("<h4 style=\"clear:left\"></h4>");
+		addContent("</div>");		
 	}
 	
 	/**
 	 * Loads the solar result with all details structured into the appropriate containes into the page
-	 * @param result - the solar result to add
+	 * @param setup - the solar result to add
 	 * @throws SolarReportException
 	 */
-	public void addContent(SolarSetup result) throws SolarReportException{	
+	public void addContent(SolarSetup setup) throws SolarReportException{	
 		
 		//Title Details
-		addContent("<b>Title: </b>", result.getSetupName());
-		addContent("<b>Description: </b>", result.getSetupDescription());
-		addContent("<br />\n<br />\n<br />\n");
+		addContent("<div style=\"background-color:#CFF\">");
+		addContent("<b>Title: </b>", setup.getSetupName());
+		addContent("<b>Description: </b>", setup.getSetupDescription());
+		addContent(setup.getLocationInformation());
+		addContent("<h4 style=\"clear:left\"></h4>");
+		addContent("</div>");
 		
 		//Panels
+		addContent("<div style=\"background-color:#CF6\">");
 		addContent("<h4 style=\"clear:left\">Panel Selection</h4>");
-		addContent(result.getSolarPanels());
+		addContent(setup.getSolarPanels());
 		
 		//Inverter
 		addContent("<h4 style=\"clear:left\">Inverter Selection</h4>");
-		addContent(result.getInverter());
+		addContent(setup.getInverter());
 		
 		//Customer Details
 		addContent("<h4 style=\"clear:left\">Customer Details</h4>");
-		addContent(result.getCustomerData());
+		addContent(setup.getCustomerData());
+		addContent("<h4 style=\"clear:left\"></h4>");
+		addContent("</div>");
 		
-		
-		
+
 	}
 	
-	
+	public void addContent(LocationData location) throws SolarReportException{
+		
+		addContent("<b>Location: </b>", location.getLocationName());
+		addContent("<b>Longitude: </b>", location.getLongitude());
+		addContent("<b>Latitude: </b>", location.getLatitude());
+	}
 	
 	/**
 	 * Add a list of solar panels formatted in a table
@@ -153,31 +224,35 @@ public class SolarReport {
 	 */
 	public void addContent(ArrayList<SolarPanels> panels) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;background-color:#FFF;width:100%;color:Black;\">" 
+		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
-		+"<th>Count</th>"
-		+"<th>Direction</th>"
-		+"<th>Azimuth</th>"
 		+"<th>Name</th>"
 		+"<th>Manufacturer</th>"
 		+"<th>Wattage</th>"
 		+"<th>Life</th>"
-		+"<th>Cost</th>"
+		+"<th>Direction</th>"
+		+"<th>Azimuth</th>"
+		+"<th>Cost($)</th>"
+		+"<th>Units</th>"
+		+"<th>Total($)</th>"
 		+"<th>Efficiency</th>"
 		+"</tr>");
 		
 		//Table body
 		for(SolarPanels panelz : panels){
-		addContent("<tr style=\"background-color:#BBB\"><td>" + panelz.getPanelCount() 
-				+ "</td><td>" + panelz.getPanelDirection() 
-				+ "</td><td>" + panelz.getPanelAzimuth() 
-				+ "</td><td>" + panelz.getPanelType().getPanelName()
-				+ "</td><td>" + panelz.getPanelType().getPanelManufacturer() 
-				+ "</td><td>" + panelz.getPanelType().getPanelWattage() 
-				+ "</td><td>" + panelz.getPanelType().getPanelLifeYears() 
-				+ "</td><td>" + panelz.getPanelType().getPanelCost() 
-				+ "</td><td>" + panelz.getPanelType().getPanelLossYear() 
-				+ "</td></tr>");
+		addContent("<tr style=\"background-color:#BBB\">"
+				
+				+ "<td>" + panelz.getPanelType().getPanelName() + "</td>" 
+				+ "<td>" + panelz.getPanelType().getPanelManufacturer() + "</td>" 
+				+ "<td>" + panelz.getPanelType().getPanelWattage() + "</td>" 
+				+ "<td>" + panelz.getPanelType().getPanelLifeYears() + "</td>" 
+				+ "<td>" + panelz.getPanelDirection() + "</td>" 
+				+ "<td>" + panelz.getPanelAzimuth() + "</td>" 
+				+ "<td>" + panelz.getPanelType().getPanelCost() + "</td>"
+				+ "<td>" + panelz.getPanelCount() + "</td>" 
+				+ "<td>$" + panelz.getPanelCount() * panelz.getPanelType().getPanelCost() + "</td>"
+				+ "<td>" + panelz.getPanelType().getPanelLossYear() 
+				+ "</tr>");
 		}
 		addContent("</table>");
 		
@@ -190,7 +265,7 @@ public class SolarReport {
 	 */
 	public void addContent(SolarInverter inverter) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;background-color:#FFF;width:100%;color:Black;\">" 
+		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
 		+"<th>Name</th>"
 		+"<th>Manufacturer</th>"
@@ -219,7 +294,7 @@ public class SolarReport {
 	 */
 	public void addContent(CustomerData details) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;background-color:#FFF;width:100%;color:Black;\">" 
+		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
 		+"<th>Tariff 11 Cost</th>"
 		+"<th>Tariff 11 Fee</th>"
@@ -276,11 +351,9 @@ public class SolarReport {
 		return "style=\""
 				+ "width:1000px;"
 				+ "background-color:#FFF;" 
-				+ "min-height:600px;"
 				+ "margin-left:auto;"
 				+ "margin-right:auto;"
 				+ "padding: 10px 10px 0px 10px;"
-				+ "background-image:url(/Pictures/matrix1.png);"
 				+ "\"";
 	}
 	
