@@ -311,7 +311,7 @@ public class SolarReport {
 				+ "</td><td>" + details.getTariff13Cost() 
 				+ "</td><td>" + details.getTariff13Fee() 
 				+ "</td><td>" + details.getFeedInFee() 
-				+ "</td><td>!"
+				+ "</td><td>" + details.getAnnualTariffIncrease()
 				+ "</td></tr>");
 	
 		addContent("</table>");
