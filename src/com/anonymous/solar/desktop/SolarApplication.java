@@ -201,6 +201,10 @@ public class SolarApplication extends javax.swing.JFrame {
 		JFileChooser fc = new JFileChooser();
 		fc.addChoosableFileFilter(new SSUFilter());
 		int returnVal;
+		String fileName;
+		FileOutputStream fos;
+		int nameLength;
+		int lastOccurence;
 
 		// =============================================================================================================
 		// Setup JAXB
@@ -236,8 +240,33 @@ public class SolarApplication extends javax.swing.JFrame {
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 
-			FileOutputStream fos = new FileOutputStream(fc.getSelectedFile()
+			fileName = fc.getSelectedFile().getName();
+			nameLength = fileName.length();
+			lastOccurence = fileName.lastIndexOf('.');
+			
+			//JOptionPane.showMessageDialog(new JFrame(), fileName);
+			
+			//Determine whether to add .html or not
+			if(lastOccurence == -1){
+			fos = new FileOutputStream(fc.getSelectedFile()
 					+ ".ssu");
+			} else {
+				String extension = fileName.substring(lastOccurence, fileName.length());
+				
+				if (extension != null) {
+		            if (extension.compareTo(".ssu") == 0) {
+		            	fos = new FileOutputStream(fc.getSelectedFile());
+		            } else {
+		            	fos = new FileOutputStream(fc.getSelectedFile()
+		    					+ ".ssu");
+		            }
+		        } else {
+		        	fos = new FileOutputStream(fc.getSelectedFile()
+							+ ".ssu");
+		        }
+			}
+			
+
 			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 			out.write(stringWriter.toString());
 			out.close();

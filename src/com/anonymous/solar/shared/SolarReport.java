@@ -14,7 +14,9 @@ public class SolarReport {
 		//Add starting elements from <body> -> content div
 		reportHTML = "<body onload=\"load()\" " +  getBodyCSS() + ">\n";
 		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">\n";
-		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n ANONYMOUS SOLAR ENERGY REPORT\n</div>\n";		
+		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n";
+		reportHTML += "<img border=\"0\" src=\"http://us.123rf.com/400wm/400/400/coliap/coliap1110/coliap111001390/10959841-solar-energy-panel-with-sun-and-leaves-alternative-energy-icon.jpg\" alt=\"Leaf\" width=\"100\" height=\"100\">";
+		reportHTML += "ANONYMOUS SOLAR ENERGY REPORT\n</div>\n";
 		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >\n";
 	}
 	
@@ -224,7 +226,7 @@ public class SolarReport {
 	 */
 	public void addContent(ArrayList<SolarPanels> panels) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
 		+"<th>Name</th>"
 		+"<th>Manufacturer</th>"
@@ -265,7 +267,7 @@ public class SolarReport {
 	 */
 	public void addContent(SolarInverter inverter) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
 		+"<th>Name</th>"
 		+"<th>Manufacturer</th>"
@@ -294,7 +296,7 @@ public class SolarReport {
 	 */
 	public void addContent(CustomerData details) throws SolarReportException{
 		//Table heading
-		addContent("<table style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
+		addContent("<table cellspacing=\"0\" style=\"margin-top: 1em;clear: both;width:100%;color:Black;\">" 
 		+ "<tr>"
 		+"<th>Tariff 11 Cost</th>"
 		+"<th>Tariff 11 Fee</th>"
