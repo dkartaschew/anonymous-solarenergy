@@ -650,7 +650,7 @@ public class SolarCalculator {
 			// (currentInverterEfficency / 100.00); // DK: Add in /100.00 as
 			// efficiency is a percentage (eg stored as 99.0 for 99%).
 			double currentInverterOutput = previousMonthDetails.getinverterOutput()
-					* (solarSetup.getInverter().getInverterLossYear() / 12.00 / 100.00);
+					* (solarSetup.getInverter().getInverterLossYear() / 12.00 );
 			if (currentInverterOutput <= 0
 					|| ((currentYear % solarSetup.getInverter().getInverterLifeYears() == 0) && currentMonth == 0)) {
 				currentInverterOutput = solarSetup.getInverter().getInverterWattage();
