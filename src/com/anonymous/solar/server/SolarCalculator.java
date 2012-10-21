@@ -120,7 +120,7 @@ public class SolarCalculator {
 				if (j == 0 && i == 0) {
 					ROI = -1 * systemCost;// income - systemCost;
 				} else {
-					ROI = previousMonthDetails.getROI() + income;
+					ROI = previousMonthDetails.getROI() + ((customerData.getMonthlyAverageUsage() * newTariff11Fee - currentMonthDetails.getExpectedUtilityBill()));
 				}
 				currentMonthDetails.setROI(ROI);
 
