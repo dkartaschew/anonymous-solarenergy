@@ -706,7 +706,7 @@ public class SolarCalculator {
 						- (previousMonthDetails.getSolarBanksOutputList().get(k)
 								* currentSolarBank.getPanelType().getPanelLossYear() / 100.00 / 12.00);
 
-				if (panelBankOutput <= 0) {
+				if (panelBankOutput <= 0  || ((currentYear % currentSolarBank.getPanelType().getPanelLifeYears() == 0) && currentMonth == 0)) {
 					panelBankOutput = currentSolarBank.getPanelCount()
 							* currentSolarBank.getPanelType().getPanelWattage();
 					solarBanksReplaced.add(currentSolarBank);
@@ -868,7 +868,7 @@ public class SolarCalculator {
 
 		if (currentMonthDetails.isBanksReplaced()) {
 			for (int i = 0; i < currentMonthDetails.getBanksReplaced().size(); i++) {
-				additionalCosts += currentMonthDetails.getBanksReplaced().get(i).getPanelType().getPanelRRP();
+				additionalCosts += (currentMonthDetails.getBanksReplaced().get(i).getPanelType().getPanelRRP() * currentMonthDetails.getBanksReplaced().get(i).getPanelCount());
 			}
 		}
 
@@ -906,7 +906,7 @@ public class SolarCalculator {
 
 		if (currentMonthDetails.isBanksReplaced()) {
 			for (int i = 0; i < currentMonthDetails.getBanksReplaced().size(); i++) {
-				additionalCosts += currentMonthDetails.getBanksReplaced().get(i).getPanelType().getPanelRRP();
+				additionalCosts += (currentMonthDetails.getBanksReplaced().get(i).getPanelType().getPanelRRP() * currentMonthDetails.getBanksReplaced().get(i).getPanelCount());
 			}
 		}
 		
