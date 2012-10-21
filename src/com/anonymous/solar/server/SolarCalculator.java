@@ -74,7 +74,7 @@ public class SolarCalculator {
 		double systemCost = calculateSystemCost(solarSystem);
 		newSolarResult.setInitialSystemCost(systemCost);
 
-		for (int i = 0; i < year; i++) {
+		for (int i = 0; i <= year; i++) {
 			// update tariff fees for current year
 			// don't update tariff fees in first year
 			if (i > 0) {
