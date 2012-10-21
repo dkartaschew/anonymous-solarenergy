@@ -322,7 +322,7 @@ public class SolarCalculator {
 				* Math.acos((Math.sin(0.8333 * Math.PI / 180) + Math.sin(lat * Math.PI / 180) * Math.sin(p))
 						/ (Math.cos(lat * Math.PI / 180) * Math.cos(p)));
 
-		return Math.abs(sunlightHours);
+		return Math.abs(sunlightHours) / 2.0;  // Divide by 2 for usable hours!
 	}
 
 	/**
@@ -859,7 +859,7 @@ public class SolarCalculator {
 		//double replacementGeneration = customerData.getMonthlyAverageUsage();
 		//double exportedGeneration = currentMonthDetails.getPowerGenerated() - replacementGeneration;
 		
-		income = currentMonthDetails.getPowerGenerated() * feedInFee;
+		income = currentMonthDetails.getPowerGenerated() * feedInFee / 100.00;
 
 		// Calculate
 		if (currentMonthDetails.getInverterReplaced()) {
@@ -912,9 +912,9 @@ public class SolarCalculator {
 		
 		if(usage < 0.00){
 			// we are generating more than we are using.
-			return (usage * newFeedInFee) + additionalCosts;
+			return (usage * newFeedInFee / 100.00) + additionalCosts;
 		} else {
-			return (usage * newTariff11Fee) + additionalCosts;
+			return (usage * newTariff11Fee / 100.00) + additionalCosts;
 		}
 	}
 
