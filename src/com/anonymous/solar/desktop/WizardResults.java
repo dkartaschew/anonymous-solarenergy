@@ -349,7 +349,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		// Update table model
 		ArrayList<Double> resultTable = new ArrayList<Double>();
 		for (int i = 0; i < parent.getTimeFrame(); i++) {
-			resultTable.add(results.getYearlySavings(i));
+			resultTable.add(results.getYearlySavings(i + 1));
 		}
 
 		int numResultColumns = resultTable.size();
