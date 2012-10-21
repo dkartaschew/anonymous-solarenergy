@@ -831,7 +831,7 @@ public class SolarCalculator {
 				* (locationData.getLocationWeatherEfficiency().get(currentMonthDetails.getMonthID()) / 100.00);
 		powerOutput = sunnyDaysPowerOutput + cloudyDaysPowerOutput;
 
-		return powerOutput * daysInMonth(currentMonthDetails.getMonthID()) * currentMonthDetails.getDaylightHours() ;
+		return powerOutput * currentMonthDetails.getDaylightHours() ;
 	}
 
 	/**
