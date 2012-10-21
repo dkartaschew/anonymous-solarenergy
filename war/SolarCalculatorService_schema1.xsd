@@ -137,6 +137,7 @@
       <xs:element name="solarBanksEfficencyList" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="powerGenerated" type="xs:double" minOccurs="0"/>
       <xs:element name="income" type="xs:double" minOccurs="0"/>
+      <xs:element name="expectedUtilityBill" type="xs:double" minOccurs="0"/>
       <xs:element name="ROI" type="xs:double" minOccurs="0"/>
       <xs:element name="daylightHours" type="xs:double" minOccurs="0"/>
       <xs:element name="inverterReplaced" type="xs:boolean" minOccurs="0"/>

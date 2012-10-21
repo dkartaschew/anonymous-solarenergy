@@ -111,13 +111,16 @@ public class SolarCalculator {
 				double income = calculateIncome(currentMonthDetails, newTariff11Fee, newFeedInFee, customerData,
 						solarSetup);
 				currentMonthDetails.setIncome(income);
+				
+				currentMonthDetails.setExpectedUtilityBill(calculateBill(currentMonthDetails, newTariff11Fee, newFeedInFee, customerData,
+						solarSetup));
 
 				// Calculate ROI (Return on Investment)
 				double ROI;
 				if (j == 0 && i == 0) {
-					ROI = income - systemCost;
+					ROI = -1 * systemCost;// income - systemCost;
 				} else {
-					ROI = calculateROI(monthlySystemResults, currentMonthDetails, systemCost);
+					ROI = previousMonthDetails.getROI() + income;
 				}
 				currentMonthDetails.setROI(ROI);
 
@@ -138,6 +141,8 @@ public class SolarCalculator {
 
 		return newSolarResult;
 	}
+
+
 
 	/**
 	 * This method calculates the daily savings for a solar system.
@@ -296,8 +301,8 @@ public class SolarCalculator {
 	/**
 	 * This calculates the number of sunlight hours for a given location. Using
 	 * the formula given here:
-	 * "http://stackoverflow.com/questions/6372802/calculate-daylight-hours-based-o
-	 * n - gegraphical-coordinates"
+	 * "http://stackoverflow.com/questions/6372802/calculate-daylight-hours-based-
+	 * o n - gegraphical-coordinates"
 	 * 
 	 * 
 	 * @param lat
@@ -454,61 +459,69 @@ public class SolarCalculator {
 	 *            the month in which to find the number of days for
 	 * @return an integer that represents the number of days in the month given
 	 */
-	private int daysInMonth(int month) {
-		int numberOfDays = 0;
+	private final static int[] days = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-		switch (month) {
-		// January
-		case 0:
-			numberOfDays = 31;
-			break;
-		// Feburary
-		case 1:
-			numberOfDays = 28;
-			break;
-		// March
-		case 2:
-			numberOfDays = 31;
-			break;
-		// April
-		case 3:
-			numberOfDays = 30;
-			break;
-		// May
-		case 4:
-			numberOfDays = 31;
-			break;
-		// June
-		case 5:
-			numberOfDays = 30;
-			break;
-		// July
-		case 6:
-			numberOfDays = 31;
-			break;
-		// August
-		case 7:
-			numberOfDays = 31;
-			break;
-		// September
-		case 8:
-			numberOfDays = 30;
-			break;
-		// October
-		case 9:
-			numberOfDays = 31;
-			break;
-		// November
-		case 10:
-			numberOfDays = 30;
-			break;
-		// December
-		case 11:
-			numberOfDays = 31;
-			break;
+	private int daysInMonth(int month) {
+		if (month >= 0 && month < 12) {
+			return days[month];
+		} else {
+			return 0;
 		}
 
-		return numberOfDays;
+		// int numberOfDays = 0;
+		//
+		// switch (month) {
+		// // January
+		// case 0:
+		// numberOfDays = 31;
+		// break;
+		// // Feburary
+		// case 1:
+		// numberOfDays = 28;
+		// break;
+		// // March
+		// case 2:
+		// numberOfDays = 31;
+		// break;
+		// // April
+		// case 3:
+		// numberOfDays = 30;
+		// break;
+		// // May
+		// case 4:
+		// numberOfDays = 31;
+		// break;
+		// // June
+		// case 5:
+		// numberOfDays = 30;
+		// break;
+		// // July
+		// case 6:
+		// numberOfDays = 31;
+		// break;
+		// // August
+		// case 7:
+		// numberOfDays = 31;
+		// break;
+		// // September
+		// case 8:
+		// numberOfDays = 30;
+		// break;
+		// // October
+		// case 9:
+		// numberOfDays = 31;
+		// break;
+		// // November
+		// case 10:
+		// numberOfDays = 30;
+		// break;
+		// // December
+		// case 11:
+		// numberOfDays = 31;
+		// break;
+		// }
+		//
+		// return numberOfDays;
 	}
 
 	/**
@@ -518,61 +531,70 @@ public class SolarCalculator {
 	 *            - the month you want to find a day located in
 	 * @return an integer that represents a day located in the given month
 	 */
-	private int getDayInMonth(int month) {
-		int dayInMonth = 0;
+	private final static int[] dateMonth = { 1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335 };
 
-		switch (month) {
-		// January
-		case 0:
-			dayInMonth = 1;
-			break;
-		// Feburary
-		case 1:
-			dayInMonth = 32;
-			break;
-		// March
-		case 2:
-			dayInMonth = 60;
-			break;
-		// April
-		case 3:
-			dayInMonth = 91;
-			break;
-		// May
-		case 4:
-			dayInMonth = 121;
-			break;
-		// June
-		case 5:
-			dayInMonth = 152;
-			break;
-		// July
-		case 6:
-			dayInMonth = 182;
-			break;
-		// August
-		case 7:
-			dayInMonth = 213;
-			break;
-		// September
-		case 8:
-			dayInMonth = 244;
-			break;
-		// October
-		case 9:
-			dayInMonth = 274;
-			break;
-		// November
-		case 10:
-			dayInMonth = 305;
-			break;
-		// December
-		case 11:
-			dayInMonth = 335;
-			break;
+	private int getDayInMonth(int month) {
+
+		if (month >= 0 && month < 12) {
+			return dateMonth[month];
+		} else {
+			return 0;
 		}
 
-		return dayInMonth;
+		// int dayInMonth = 0;
+		//
+		// switch (month) {
+		// // January
+		// case 0:
+		// dayInMonth = 1;
+		// break;
+		// // Feburary
+		// case 1:
+		// dayInMonth = 32;
+		// break;
+		// // March
+		// case 2:
+		// dayInMonth = 60;
+		// break;
+		// // April
+		// case 3:
+		// dayInMonth = 91;
+		// break;
+		// // May
+		// case 4:
+		// dayInMonth = 121;
+		// break;
+		// // June
+		// case 5:
+		// dayInMonth = 152;
+		// break;
+		// // July
+		// case 6:
+		// dayInMonth = 182;
+		// break;
+		// // August
+		// case 7:
+		// dayInMonth = 213;
+		// break;
+		// // September
+		// case 8:
+		// dayInMonth = 244;
+		// break;
+		// // October
+		// case 9:
+		// dayInMonth = 274;
+		// break;
+		// // November
+		// case 10:
+		// dayInMonth = 305;
+		// break;
+		// // December
+		// case 11:
+		// dayInMonth = 335;
+		// break;
+		// }
+		//
+		// return dayInMonth;
 	}
 
 	/**
@@ -601,22 +623,41 @@ public class SolarCalculator {
 
 		// at very first month of system no changes occur to the original values
 		if (currentMonth == 0 && currentYear == 0) {
-			newResultDetails.setInverterEfficiency(solarSetup.getInverter().getInverterEfficiency());
+			// newResultDetails.setInverterEfficiency(solarSetup.getInverter().getInverterEfficiency());
+			newResultDetails.setInverterEfficiency(100.00);
 			newResultDetails.setInverterOutput(solarSetup.getInverter().getInverterWattage());
+
 		} else {
 			// get previous month efficency then take away loss
-			double currentInverterEfficency = previousMonthDetails.getInverterEfficiency()
-					- (previousMonthDetails.getInverterEfficiency() * (solarSetup.getInverter().getInverterLossYear() / 12));
+			// double currentInverterEfficency =
+			// previousMonthDetails.getInverterEfficiency()
+			// - (previousMonthDetails.getInverterEfficiency() *
+			// (solarSetup.getInverter().getInverterLossYear() / 12));
 
 			// Check if inverter is past it's lifetime or it's efficency is now
 			// below 0, when
 			// we're at the start of the month for the year
-			if (currentInverterEfficency <= 0
+			// if (currentInverterEfficency <= 0
+			// || ((currentYear %
+			// solarSetup.getInverter().getInverterLifeYears() == 0) &&
+			// currentMonth == 0)) {
+			// currentInverterEfficency =
+			// solarSetup.getInverter().getInverterEfficiency();
+			// newResultDetails.setInverterReplaced(true);
+			// }
+			// double currentInverterOutput =
+			// solarSetup.getInverter().getInverterWattage() *
+			// (currentInverterEfficency / 100.00); // DK: Add in /100.00 as
+			// efficiency is a percentage (eg stored as 99.0 for 99%).
+			double currentInverterOutput = previousMonthDetails.getinverterOutput()
+					* (solarSetup.getInverter().getInverterLossYear() / 12.00 / 100.00);
+			if (currentInverterOutput <= 0
 					|| ((currentYear % solarSetup.getInverter().getInverterLifeYears() == 0) && currentMonth == 0)) {
-				currentInverterEfficency = solarSetup.getInverter().getInverterEfficiency();
+				currentInverterOutput = solarSetup.getInverter().getInverterWattage();
 				newResultDetails.setInverterReplaced(true);
 			}
-			double currentInverterOutput = solarSetup.getInverter().getInverterWattage() * currentInverterEfficency;
+			double currentInverterEfficency = currentInverterOutput / solarSetup.getInverter().getInverterWattage()
+					* 100.00;
 
 			newResultDetails.setInverterEfficiency(currentInverterEfficency);
 			newResultDetails.setInverterOutput(currentInverterOutput);
@@ -640,22 +681,39 @@ public class SolarCalculator {
 				currentPanelBanksOutput.add(bankOutput);
 			} else {
 				// get previous month efficency then take away loss
-				double panelBankEfficency = previousMonthDetails.getSolarBanksEfficencyList().get(k)
-						- (previousMonthDetails.getSolarBanksEfficencyList().get(k) * (currentSolarBank.getPanelType()
-								.getPanelLossYear() / 12));
+				// double panelBankEfficency =
+				// previousMonthDetails.getSolarBanksEfficencyList().get(k)
+				// - (previousMonthDetails.getSolarBanksEfficencyList().get(k) *
+				// (currentSolarBank.getPanelType()
+				// .getPanelLossYear() / 12));
 
 				// If the efficency is less is 0 or less, or panel is past its
 				// life years
 				// it will need replaced and the efficency set back to 100%
-				if (panelBankEfficency <= 0
-						|| ((currentYear % currentSolarBank.getPanelType().getPanelLifeYears() == 0) && currentMonth == 0)) {
-					panelBankEfficency = 100.0;
+				// if (panelBankEfficency <= 0
+				// || ((currentYear %
+				// currentSolarBank.getPanelType().getPanelLifeYears() == 0) &&
+				// currentMonth == 0)) {
+				// panelBankEfficency = 100.0;
+				// solarBanksReplaced.add(currentSolarBank);
+				// }
+
+				// double panelBankOutput = (currentSolarBank.getPanelCount() *
+				// currentSolarBank.getPanelType()
+				// .getPanelWattage()) * (panelBankEfficency / 100.00);
+
+				double panelBankOutput = previousMonthDetails.getSolarBanksOutputList().get(k)
+						- (previousMonthDetails.getSolarBanksOutputList().get(k)
+								* currentSolarBank.getPanelType().getPanelLossYear() / 100.00);
+
+				if (panelBankOutput <= 0) {
+					panelBankOutput = currentSolarBank.getPanelCount()
+							* currentSolarBank.getPanelType().getPanelWattage();
 					solarBanksReplaced.add(currentSolarBank);
 				}
-
-				double panelBankOutput = (currentSolarBank.getPanelCount() * currentSolarBank.getPanelType()
-						.getPanelWattage()) * panelBankEfficency;
-
+				double panelBankEfficency = panelBankOutput
+						/ (currentSolarBank.getPanelCount() * currentSolarBank.getPanelType().getPanelWattage())
+						* 100.00;
 				currentPanelBanksEfficency.add(panelBankEfficency);
 				currentPanelBanksOutput.add(panelBankOutput);
 			}
@@ -685,7 +743,6 @@ public class SolarCalculator {
 	private double calculatePowerOutput(ResultsDetails currentMonthDetails, SolarSetup solarSetup,
 			LocationData locationData) {
 		double powerOutput = 0.0;
-		double cloudyDaysPowerOutput = 0.0;
 
 		// Set up efficency values for southern hemisphere location
 		double northDirectionEfficiency = 1;
@@ -754,24 +811,31 @@ public class SolarCalculator {
 		// output to apply
 		// efficency loss
 		double numCloudyDays = locationData.getLocationWeatherData().get(currentMonthDetails.getMonthID());
-		double averageDaylightHoursPerDay = currentMonthDetails.getDaylightHours()
-				/ daysInMonth(currentMonthDetails.getMonthID());
+		//double averageDaylightHoursPerDay = currentMonthDetails.getDaylightHours()
+		//		/ daysInMonth(currentMonthDetails.getMonthID());
 
 		// Now calculate how much power is produced through the daylight
 		// available
-		powerOutput = powerOutput
-				* (averageDaylightHoursPerDay * daysInMonth(currentMonthDetails.getMonthID()) - numCloudyDays);
+		// powerOutput = powerOutput
+		// * (averageDaylightHoursPerDay *
+		// daysInMonth(currentMonthDetails.getMonthID()) - numCloudyDays);
+		//
+		// cloudyDaysPowerOutput = powerOutput * (averageDaylightHoursPerDay *
+		// numCloudyDays)
+		// *
+		// locationData.getLocationWeatherEfficiency().get(currentMonthDetails.getMonthID());
 
-		cloudyDaysPowerOutput = powerOutput * (averageDaylightHoursPerDay * numCloudyDays)
-				* locationData.getLocationWeatherEfficiency().get(currentMonthDetails.getMonthID());
+		double sunnyDaysPowerOutput = powerOutput * (daysInMonth(currentMonthDetails.getMonthID()) - numCloudyDays)
+				/ daysInMonth(currentMonthDetails.getMonthID());
+		double cloudyDaysPowerOutput = powerOutput * (numCloudyDays / daysInMonth(currentMonthDetails.getMonthID()))
+				* (locationData.getLocationWeatherEfficiency().get(currentMonthDetails.getMonthID()) / 100.00);
+		powerOutput = sunnyDaysPowerOutput + cloudyDaysPowerOutput;
 
-		powerOutput = powerOutput + cloudyDaysPowerOutput;
-
-		return powerOutput;
+		return powerOutput * daysInMonth(currentMonthDetails.getMonthID()) * currentMonthDetails.getDaylightHours() ;
 	}
 
 	/**
-	 * This method calculates the income for a given month and setup
+	 * This method calculates the income for a given month and setup, assuming zero usage (pure feedin).
 	 * 
 	 * @param currentMonthDetails
 	 *            - the month and setup to calculate the income for
@@ -791,10 +855,11 @@ public class SolarCalculator {
 		double income = 0.0;
 		double additionalCosts = 0.0;
 
-		double replacementGeneration = customerData.getMonthlyAverageUsage() * currentMonthDetails.getDaylightHours();
-		double exportedGeneration = currentMonthDetails.getPowerGenerated() - replacementGeneration;
-
-		income = (replacementGeneration * tariff11Fee) + (exportedGeneration * feedInFee);
+		//double replacementGeneration = customerData.getMonthlyAverageUsage() * currentMonthDetails.getDaylightHours();
+		//double replacementGeneration = customerData.getMonthlyAverageUsage();
+		//double exportedGeneration = currentMonthDetails.getPowerGenerated() - replacementGeneration;
+		
+		income = currentMonthDetails.getPowerGenerated() * feedInFee;
 
 		// Calculate
 		if (currentMonthDetails.getInverterReplaced()) {
@@ -810,6 +875,47 @@ public class SolarCalculator {
 		income = income - additionalCosts;
 
 		return income;
+	}
+	
+	/**
+	 * This method calculates the expected utility for a given month and setup. 
+	 * (This assumes that we consume what we generate and NOT feed it back into the grid).
+	 * 
+	 * @param currentMonthDetails
+	 *            - the month and setup to calculate the income for
+	 * @param tariff11Fee
+	 *            - the current tariff 11 fee for the setup
+	 * @param feedInFee
+	 *            - the current feed in fee for the setup
+	 * @param customerData
+	 *            - an object representing information about customer usage
+	 * @param solarSetup
+	 *            - the setup that is being used
+	 * @return a double that represents the income of the given setup for the
+	 *         given month ($)
+	 */
+	private Double calculateBill(ResultsDetails currentMonthDetails, double newTariff11Fee, double newFeedInFee,
+			CustomerData customerData, SolarSetup solarSetup) {
+		
+		double usage = (customerData.getMonthlyAverageUsage() - currentMonthDetails.getPowerGenerated());
+		double additionalCosts = 0.0;
+		
+		if (currentMonthDetails.getInverterReplaced()) {
+			additionalCosts += solarSetup.getInverter().getInverterRRP();
+		}
+
+		if (currentMonthDetails.isBanksReplaced()) {
+			for (int i = 0; i < currentMonthDetails.getBanksReplaced().size(); i++) {
+				additionalCosts += currentMonthDetails.getBanksReplaced().get(i).getPanelType().getPanelRRP();
+			}
+		}
+		
+		if(usage < 0.00){
+			// we are generating more than we are using.
+			return (usage * newFeedInFee) + additionalCosts;
+		} else {
+			return (usage * newTariff11Fee) + additionalCosts;
+		}
 	}
 
 	/**

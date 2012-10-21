@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *       	&lt;element name="solarPowerEfficencyList" type="{http://www.w3.org/2001/XMLSchema}double" maxOccurs="unbounded" minOccurs="0"/>
  *       	&lt;element name="powerGenerated" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       	&lt;element name="income" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *       	&lt;element name="expectedUtilityBill" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       	&lt;element name="ROI" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       	&lt;element name="daylightHours" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       	&lt;element name="inverterReplaced" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
@@ -48,6 +49,7 @@ import javax.xml.bind.annotation.XmlType;
     "solarBanksEfficencyList",
     "powerGenerated",
     "income",
+    "expectedUtilityBill",
     "ROI",
     "daylightHours",
     "inverterReplaced",
@@ -70,7 +72,8 @@ public class ResultsDetails {
     @XmlElement(nillable = true)
 	protected List<Double> solarBanksEfficencyList;
 	protected Double powerGenerated;
-	protected Double income;
+	protected Double income;	// This is our power generated * feed in fee in dollars.
+	protected Double expectedUtilityBill; // This is our expected bill - income
 	protected Double ROI;
 	protected Double daylightHours;
 	protected Boolean inverterReplaced;
@@ -252,6 +255,14 @@ public class ResultsDetails {
 		}
 		
 		return false;
+	}
+
+	public Double getExpectedUtilityBill() {
+		return expectedUtilityBill;
+	}
+
+	public void setExpectedUtilityBill(Double expectedUtilityBill) {
+		this.expectedUtilityBill = expectedUtilityBill;
 	}
 	
 	
