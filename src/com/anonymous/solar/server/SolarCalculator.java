@@ -120,7 +120,7 @@ public class SolarCalculator {
 				if (j == 0 && i == 0) {
 					ROI = -1 * systemCost;// income - systemCost;
 				} else {
-					ROI = previousMonthDetails.getROI() + ((customerData.getMonthlyAverageUsage() * newTariff11Fee - currentMonthDetails.getExpectedUtilityBill()));
+					ROI = previousMonthDetails.getROI() + (((customerData.getMonthlyAverageUsage() * newTariff11Fee/100.00) - currentMonthDetails.getExpectedUtilityBill()));
 				}
 				currentMonthDetails.setROI(ROI);
 
@@ -649,8 +649,8 @@ public class SolarCalculator {
 			// solarSetup.getInverter().getInverterWattage() *
 			// (currentInverterEfficency / 100.00); // DK: Add in /100.00 as
 			// efficiency is a percentage (eg stored as 99.0 for 99%).
-			double currentInverterOutput = previousMonthDetails.getinverterOutput()
-					* (solarSetup.getInverter().getInverterLossYear() / 12.00 );
+			double currentInverterOutput = previousMonthDetails.getinverterOutput() - (previousMonthDetails.getinverterOutput()
+					* (solarSetup.getInverter().getInverterLossYear() / 100.00 / 12.00 ));
 			if (currentInverterOutput <= 0
 					|| ((currentYear % solarSetup.getInverter().getInverterLifeYears() == 0) && currentMonth == 0)) {
 				currentInverterOutput = solarSetup.getInverter().getInverterWattage();
@@ -704,7 +704,7 @@ public class SolarCalculator {
 
 				double panelBankOutput = previousMonthDetails.getSolarBanksOutputList().get(k)
 						- (previousMonthDetails.getSolarBanksOutputList().get(k)
-								* currentSolarBank.getPanelType().getPanelLossYear() / 100.00);
+								* currentSolarBank.getPanelType().getPanelLossYear() / 100.00 / 12.00);
 
 				if (panelBankOutput <= 0) {
 					panelBankOutput = currentSolarBank.getPanelCount()
