@@ -322,7 +322,7 @@ public class SolarCalculator {
 				* Math.acos((Math.sin(0.8333 * Math.PI / 180) + Math.sin(lat * Math.PI / 180) * Math.sin(p))
 						/ (Math.cos(lat * Math.PI / 180) * Math.cos(p)));
 
-		return Math.abs(sunlightHours) / 2.0;  // Divide by 2 for usable hours!
+		return Math.abs(sunlightHours / 2.0);  // Divide by 2 for usable hours!
 	}
 
 	/**
@@ -859,7 +859,7 @@ public class SolarCalculator {
 		//double replacementGeneration = customerData.getMonthlyAverageUsage();
 		//double exportedGeneration = currentMonthDetails.getPowerGenerated() - replacementGeneration;
 		
-		income = currentMonthDetails.getPowerGenerated() * feedInFee / 100.00;
+		income = currentMonthDetails.getPowerGenerated() / 1000.00 * feedInFee / 100.00;
 
 		// Calculate
 		if (currentMonthDetails.getInverterReplaced()) {
@@ -897,7 +897,7 @@ public class SolarCalculator {
 	private Double calculateBill(ResultsDetails currentMonthDetails, double newTariff11Fee, double newFeedInFee,
 			CustomerData customerData, SolarSetup solarSetup) {
 		
-		double usage = (customerData.getMonthlyAverageUsage() - currentMonthDetails.getPowerGenerated());
+		double usage = (customerData.getMonthlyAverageUsage() - (currentMonthDetails.getPowerGenerated() / 1000.00));
 		double additionalCosts = 0.0;
 		
 		if (currentMonthDetails.getInverterReplaced()) {
