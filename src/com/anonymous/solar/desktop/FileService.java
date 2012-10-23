@@ -306,7 +306,61 @@ public class FileService {
 
 	}
 	
-	private void Save(FileFilter filter, String extension, String content){
-		
+	
+	/**
+	 * Saves the html report to a location specified by the user
+	 * This will take the contents of the given string and save it
+	 * to a .html file
+	 * @param reportHTML - content to save to the file
+	 * @throws Exception
+	 */
+	public static void saveHTMLReport(String reportHTML) throws Exception {
+		JFileChooser fc = new JFileChooser();
+		fc.addChoosableFileFilter(new HTMLFilter());
+		String fileName;
+		FileOutputStream fos;
+		int nameLength;
+		int returnVal;
+		int lastOccurence;
+
+		//Get file
+		returnVal = fc.showDialog(new JFrame(), "Save");
+
+		//If file valid
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+			fileName = fc.getSelectedFile().getName();
+			nameLength = fileName.length();
+			lastOccurence = fileName.lastIndexOf('.');
+			
+			//JOptionPane.showMessageDialog(new JFrame(), fileName);
+			
+			//Determine whether to add .html or not
+			if(lastOccurence == -1){
+			fos = new FileOutputStream(fc.getSelectedFile()
+					+ ".html");
+			} else {
+				String extension = fileName.substring(lastOccurence, fileName.length());
+				
+				if (extension != null) {
+		            if (extension.compareTo(".html") == 0) {
+		            	fos = new FileOutputStream(fc.getSelectedFile());
+		            } else {
+		            	fos = new FileOutputStream(fc.getSelectedFile()
+		    					+ ".html");
+		            }
+		        } else {
+		        	fos = new FileOutputStream(fc.getSelectedFile()
+							+ ".html");
+		        }
+			}
+						
+			//output file
+			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
+			out.write(reportHTML);
+			out.close();
+
+		}
+
 	}
 }

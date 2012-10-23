@@ -113,125 +113,23 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     	try {
 			FileService.SaveSetup(setup);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(new JFrame(), "An error occured while trying saving this file!");
+			JOptionPane.showMessageDialog(new JFrame(), "An error occured while trying to save this file!");
 		}
     }//GEN-LAST:event_jButtonSaveConfigurationActionPerformed
 
     private void jButtonGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateReportActionPerformed
     	try {
-			saveHTMLReport();
+    		
+    		//Generate and finalise report
+    		SolarReport report = new SolarReport();
+    		report.addContent(parent.getResults(), parent.getTimeFrame());
+    		report.Finalize();
+    		
+			FileService.saveHTMLReport(report.toString());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), "An error occured while trying to save the report! :" + e.getCause());
 		}
     }//GEN-LAST:event_jButtonGenerateReportActionPerformed
-
-    
-    private void saveHTMLReport() throws Exception {
-		JFileChooser fc = new JFileChooser();
-		fc.addChoosableFileFilter(new HTMLFilter());
-		String fileName;
-		FileOutputStream fos;
-		int nameLength;
-		int returnVal;
-		int lastOccurence;
-		
-		//Generate and finalise report
-		SolarReport report = new SolarReport();
-		report.addContent(parent.getResults(), parent.getTimeFrame());
-		report.Finalize();
-
-		//Get file
-		returnVal = fc.showDialog(new JFrame(), "Save");
-
-		//If file valid
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-			fileName = fc.getSelectedFile().getName();
-			nameLength = fileName.length();
-			lastOccurence = fileName.lastIndexOf('.');
-			
-			//JOptionPane.showMessageDialog(new JFrame(), fileName);
-			
-			//Determine whether to add .html or not
-			if(lastOccurence == -1){
-			fos = new FileOutputStream(fc.getSelectedFile()
-					+ ".html");
-			} else {
-				String extension = fileName.substring(lastOccurence, fileName.length());
-				
-				if (extension != null) {
-		            if (extension.compareTo(".html") == 0) {
-		            	fos = new FileOutputStream(fc.getSelectedFile());
-		            } else {
-		            	fos = new FileOutputStream(fc.getSelectedFile()
-		    					+ ".html");
-		            }
-		        } else {
-		        	fos = new FileOutputStream(fc.getSelectedFile()
-							+ ".html");
-		        }
-			}
-						
-			//output file
-			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
-			out.write(report.toString());
-			out.close();
-
-		}
-
-	}
-
-    
-
-	public void MarshallExample() throws Exception {
-		// =============================================================================================================
-        // Setup JAXB
-        // =============================================================================================================
- 
-        // Create a JAXB context passing in the class of the object we want to marshal/unmarshal
-        final JAXBContext context = JAXBContext.newInstance(SolarResult.class);
- 
-        // =============================================================================================================
-        // Marshalling OBJECT to XML
-        // =============================================================================================================
- 
-        // Create the marshaller, this is the nifty little thing that will actually transform the object into XML
-        final Marshaller marshaller = context.createMarshaller();
- 
-        // Create a stringWriter to hold the XML
-        final StringWriter stringWriter = new StringWriter();
- 
-        // Create the sample object we wish to transform into XML
-        final SolarResult result = parent.getResults();
- 
-        // Marshal the javaObject and write the XML to the stringWriter
-        marshaller.marshal(result, stringWriter);
- 
-        // Print out the contents of the stringWriter
-        //System.out.println(stringWriter.toString());
-        //JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
-        
-        FileOutputStream fos = new FileOutputStream("D:/actualSetup.xml");
-		OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8"); 
-		out.write(stringWriter.toString());
-		out.close();
- 
-        // =============================================================================================================
-        // Unmarshalling XML to OBJECT
-        // =============================================================================================================
- 
-        // Create the unmarshaller, this is the nifty little thing that will actually transform the XML back into an object
-        final Unmarshaller unmarshaller = context.createUnmarshaller();
- 
-        // Unmarshal the XML in the stringWriter back into an object
-        final SolarResult javaObject2 = (SolarResult) unmarshaller.unmarshal(new StringReader(stringWriter.toString()));
- 
-        // Print out the contents of the JavaObject we just unmarshalled from the XML
-        System.out.println(javaObject2.toString());
-        //JOptionPane.showMessageDialog(new JFrame(), javaObject2.getSolarSetup().getSetupDescription());
-	}
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGenerateReport;
