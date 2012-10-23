@@ -24,6 +24,7 @@ import com.anonymous.solar.shared.SolarResult;
 import com.anonymous.solar.shared.SolarResultException;
 import com.anonymous.solar.shared.SolarSetup;
 
+
 /**
  * Wizard Panel to display the results that come back from the server.
  * 
@@ -42,9 +43,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	 * Creates new form WizardFinish, with reference to parent
 	 */
 	public WizardResults(Wizard parent) {
+		this.parent = parent;
 		initComponents();
 		nameComponents();
-		this.parent = parent;
+		
 	}
 
 	/**
@@ -82,7 +84,6 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		// Comparison
 		jPanelComparison = new javax.swing.JPanel();
         jButonRemoveSetup = new javax.swing.JButton();
-        jComboBoxComparisonList = new javax.swing.JComboBox();
         jButonAddNewSetup1 = new javax.swing.JButton();
         jScrollPaneOuter = new javax.swing.JScrollPane();
         jSplitPaneGraphAndTable = new javax.swing.JSplitPane();
@@ -206,12 +207,6 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	            }
 	        });
 
-	        jComboBoxComparisonList.addActionListener(new java.awt.event.ActionListener() {
-	            public void actionPerformed(java.awt.event.ActionEvent evt) {
-	                jComboBoxComparisonListActionPerformed(evt);
-	            }
-	        });
-
 	        jButonAddNewSetup1.setText("Add Setup");
 	        jButonAddNewSetup1.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +227,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	                {null, null, null, null}
 	            },
 	            new String [] {
-	                "Title 1", "Title 2", "Title 3", "Title 4"
+	                "Setup Name", "Annual Savings", "Time on ROI", "Expected Bill (p/Mth)", "Power Output (p/Yr)"
 	            }
 	        ));
 	        jScrollPaneTableHolder.setViewportView(jTableComparison);
@@ -250,7 +245,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	            .addGap(0, 100, Short.MAX_VALUE)
 	        );
 
-	        jSplitPaneGraphAndTable.setLeftComponent(jPanelGraphHolder);
+	        //TODO
+	        jSplitPaneGraphAndTable.setTopComponent(jPanelGraphHolder);
+	        
+	        
 
 	        jScrollPaneOuter.setViewportView(jSplitPaneGraphAndTable);
 
@@ -264,20 +262,19 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	                    .addComponent(jScrollPaneOuter)
 	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	                        .addComponent(jButonAddNewSetup1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                        .addGroup(jPanelComparisonLayout.createSequentialGroup()
-	                            .addComponent(jComboBoxComparisonList, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        //.addGroup(jPanelComparisonLayout.createSequentialGroup()
+	                            //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                            .addComponent(jButonRemoveSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-	                .addContainerGap())
+	                //.addContainerGap())
 	        );
 	        jPanelComparisonLayout.setVerticalGroup(
 	            jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(jPanelComparisonLayout.createSequentialGroup()
 	                .addGap(10, 10, 10)
 	                .addComponent(jButonAddNewSetup1)
-	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                .addGroup(jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                    .addComponent(jComboBoxComparisonList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    //.addComponent(jComboBoxComparisonList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                    .addComponent(jButonRemoveSetup))
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 	                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
@@ -303,15 +300,43 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	
 	private void jButonAddNewSetup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonAddNewSetup1ActionPerformed
         // TODO add your handling code here:
+		SolarSetup setup = FileService.LoadSetup();
+		SolarCalculator calculatorSOAP = new SolarCalculatorService().getSolarCalculatorPort();
+		SolarResult resultToAdd = calculatorSOAP.calculateAllResults(setup, parent.getTimeFrame());
+		
+		
+		
+		if(setup != null){
+			resultList.add(resultToAdd);
+			updateTable();
+		}
     }//GEN-LAST:event_jButonAddNewSetup1ActionPerformed
+	
+	private void updateTable() {
+
+		int size = resultList.size();
+		int count = 0;
+		Object[][] resultData = new Object[size][6];
+
+		for (SolarResult result : resultList) {
+			resultData[count][0] = result.getSolarSetup().getSetupName();
+			resultData[count][1] =  result.getCumulativeYearlySavings(parent.getTimeFrame());
+			resultData[count][2] =  result.getInitialSystemCost();
+			resultData[count][3] =  result.getYearlySavings(10);
+			resultData[count][4] = result.getYearlyPowerGenerated(parent.getTimeFrame());
+			count++;
+		}
+
+		jTableComparison.setModel(new javax.swing.table.DefaultTableModel(resultData, new String[] { "Name", "Cumulative Savings",
+				"Initial Cost", "Yearly Savings", "Pow Generated"}));
+
+	}
 
     private void jButonRemoveSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonRemoveSetupActionPerformed
         // TODO add your handling code here:
+    	resultList.remove(jTableComparison.getSelectedRow());
+    	updateTable();
     }//GEN-LAST:event_jButonRemoveSetupActionPerformed
-
-    private void jComboBoxComparisonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxComparisonListActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxComparisonListActionPerformed
 
 	private javax.swing.JPanel jPanelGraph;
 	private javax.swing.JPanel jPanelGraphResults;
@@ -323,7 +348,6 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	//
 	private javax.swing.JButton jButonAddNewSetup1;
     private javax.swing.JButton jButonRemoveSetup;
-    private javax.swing.JComboBox jComboBoxComparisonList;
     private javax.swing.JInternalFrame jInternalFrame1;
     
     private javax.swing.JPanel jPanelComparison;
@@ -344,6 +368,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private javax.swing.JScrollPane jScrollPaneHardware;
 	private javax.swing.JTable jTableHardware;
 	
+	protected ArrayList<SolarResult> resultList = new ArrayList<SolarResult>();
 
 
     private javax.swing.JTable jTableComparison;
@@ -384,6 +409,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			jPanelGraph.add(new org.jfree.chart.ChartPanel(new ResultChart(results).getChartPanel()),
 					BorderLayout.CENTER);
 
+			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(new ComparisonChart(results).getChartPanel()));
+			
+			
+			
 			setResultsTable(results);
 
 			// results = calculator.calculateDailySavings(results, 1);
