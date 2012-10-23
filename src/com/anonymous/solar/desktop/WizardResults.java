@@ -80,10 +80,15 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		jTable1 = new javax.swing.JTable();
 		
 		// Comparison
-		jPanelSetupComparison = new javax.swing.JPanel();
-		jPanelSetupComparison1 = new javax.swing.JPanel();
-		jPanelSetupComparison2 = new javax.swing.JPanel();
-		jScrollPaneSetupComparison = new javax.swing.JScrollPane();
+		jPanelComparison = new javax.swing.JPanel();
+        jButonRemoveSetup = new javax.swing.JButton();
+        jComboBoxComparisonList = new javax.swing.JComboBox();
+        jButonAddNewSetup1 = new javax.swing.JButton();
+        jScrollPaneOuter = new javax.swing.JScrollPane();
+        jSplitPaneGraphAndTable = new javax.swing.JSplitPane();
+        jScrollPaneTableHolder = new javax.swing.JScrollPane();
+        jTableComparison = new javax.swing.JTable();
+        jPanelGraphHolder = new javax.swing.JPanel();
 		
 
 		jTabbedPaneResults.setName("TabResults"); // NOI18N
@@ -194,26 +199,92 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		jTabbedPaneResults.addTab("Hardware Efficiency Loss", jPanelHardwareEfficiencyLoss);
 		
 		//TODO
-		
-		javax.swing.GroupLayout jPanelSetupComparisonLayout = new javax.swing.GroupLayout(jPanelSetupComparison);
-		jPanelSetupComparison.setLayout(jPanelSetupComparisonLayout);
-		jPanelSetupComparisonLayout.setHorizontalGroup(jPanelSetupComparisonLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-						jPanelSetupComparisonLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPaneSetupComparison, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-						.addContainerGap()));
-		jPanelSetupComparisonLayout.setVerticalGroup(jPanelSetupComparisonLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-						jPanelSetupComparisonLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPaneSetupComparison, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-						.addContainerGap()));
-		
-		jPanelSetupComparison1.setBackground(Color.BLUE);
-		jPanelSetupComparison.add(jPanelSetupComparison1);
-		jPanelSetupComparison2.setBackground(Color.RED);
-		jPanelSetupComparison.add(jPanelSetupComparison2);
-		jTabbedPaneResults.addTab("Compare Setups", jPanelSetupComparison);
-		
+		 jButonRemoveSetup.setText("Remove");
+	        jButonRemoveSetup.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButonRemoveSetupActionPerformed(evt);
+	            }
+	        });
+
+	        jComboBoxComparisonList.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jComboBoxComparisonListActionPerformed(evt);
+	            }
+	        });
+
+	        jButonAddNewSetup1.setText("Add Setup");
+	        jButonAddNewSetup1.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                jButonAddNewSetup1ActionPerformed(evt);
+	            }
+	        });
+
+	        jScrollPaneOuter.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+	        jSplitPaneGraphAndTable.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+	        jSplitPaneGraphAndTable.setEnabled(false);
+
+	        jTableComparison.setModel(new javax.swing.table.DefaultTableModel(
+	            new Object [][] {
+	                {null, null, null, null},
+	                {null, null, null, null},
+	                {null, null, null, null},
+	                {null, null, null, null}
+	            },
+	            new String [] {
+	                "Title 1", "Title 2", "Title 3", "Title 4"
+	            }
+	        ));
+	        jScrollPaneTableHolder.setViewportView(jTableComparison);
+
+	        jSplitPaneGraphAndTable.setBottomComponent(jScrollPaneTableHolder);
+
+	        javax.swing.GroupLayout jPanelGraphHolderLayout = new javax.swing.GroupLayout(jPanelGraphHolder);
+	        jPanelGraphHolder.setLayout(jPanelGraphHolderLayout);
+	        jPanelGraphHolderLayout.setHorizontalGroup(
+	            jPanelGraphHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGap(0, 572, Short.MAX_VALUE)
+	        );
+	        jPanelGraphHolderLayout.setVerticalGroup(
+	            jPanelGraphHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGap(0, 100, Short.MAX_VALUE)
+	        );
+
+	        jSplitPaneGraphAndTable.setLeftComponent(jPanelGraphHolder);
+
+	        jScrollPaneOuter.setViewportView(jSplitPaneGraphAndTable);
+
+	        javax.swing.GroupLayout jPanelComparisonLayout = new javax.swing.GroupLayout(jPanelComparison);
+	        jPanelComparison.setLayout(jPanelComparisonLayout);
+	        jPanelComparisonLayout.setHorizontalGroup(
+	            jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComparisonLayout.createSequentialGroup()
+	                .addContainerGap(17, Short.MAX_VALUE)
+	                .addGroup(jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addComponent(jScrollPaneOuter)
+	                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                        .addComponent(jButonAddNewSetup1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGroup(jPanelComparisonLayout.createSequentialGroup()
+	                            .addComponent(jComboBoxComparisonList, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                            .addComponent(jButonRemoveSetup, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+	                .addContainerGap())
+	        );
+	        jPanelComparisonLayout.setVerticalGroup(
+	            jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(jPanelComparisonLayout.createSequentialGroup()
+	                .addGap(10, 10, 10)
+	                .addComponent(jButonAddNewSetup1)
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(jPanelComparisonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(jComboBoxComparisonList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(jButonRemoveSetup))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+	                .addContainerGap())
+	        );
+
+	        jTabbedPaneResults.addTab("Compare", jPanelComparison);
 		
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
@@ -229,6 +300,18 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private void nameComponents() {
 		
 	}
+	
+	private void jButonAddNewSetup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonAddNewSetup1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButonAddNewSetup1ActionPerformed
+
+    private void jButonRemoveSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonRemoveSetupActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButonRemoveSetupActionPerformed
+
+    private void jComboBoxComparisonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxComparisonListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxComparisonListActionPerformed
 
 	private javax.swing.JPanel jPanelGraph;
 	private javax.swing.JPanel jPanelGraphResults;
@@ -237,10 +320,20 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	
-	private javax.swing.JPanel jPanelSetupComparison;
-	private javax.swing.JPanel jPanelSetupComparison1;
-	private javax.swing.JPanel jPanelSetupComparison2;
-	private javax.swing.JScrollPane jScrollPaneSetupComparison;
+	//
+	private javax.swing.JButton jButonAddNewSetup1;
+    private javax.swing.JButton jButonRemoveSetup;
+    private javax.swing.JComboBox jComboBoxComparisonList;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    
+    private javax.swing.JPanel jPanelComparison;
+    
+    private javax.swing.JPanel jPanelGraphHolder;
+    
+    private javax.swing.JScrollPane jScrollPaneOuter;
+    private javax.swing.JScrollPane jScrollPaneTableHolder;
+    private javax.swing.JSplitPane jSplitPaneGraphAndTable;
+	//
 	
 	private javax.swing.JTabbedPane jTabbedPaneResults;
 	private javax.swing.JTable jTable1;
@@ -250,6 +343,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	
 	private javax.swing.JScrollPane jScrollPaneHardware;
 	private javax.swing.JTable jTableHardware;
+	
+
+
+    private javax.swing.JTable jTableComparison;
 
 	// End of variables declaration//GEN-END:variables
 
