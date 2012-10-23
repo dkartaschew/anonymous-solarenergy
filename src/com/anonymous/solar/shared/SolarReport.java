@@ -180,9 +180,9 @@ public class SolarReport {
 				+ "<th>Savings</th>\n" 
 				+ "</tr>\n");
 		
-		for(int i = 0; i < timeFrame; i++){
+		for(int i = 1; i <= timeFrame; i++){
 			addContent("<tr>\n" 
-					+ "<td>Year " + i + 1 + "</td>\n"
+					+ "<td>Year " + i + "</td>\n"
 					+ "<td>" + String.format("$%,.2f", result.getYearlySavings(i)) + "</td>\n"
 					+ "</tr>\n");
 		}
