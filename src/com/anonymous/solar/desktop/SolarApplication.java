@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -159,155 +160,33 @@ public class SolarApplication extends javax.swing.JFrame {
 		}
 	}
 
-	private void loadConfiguration(File file) throws Exception {
-
-		FileInputStream fis = null;
-		fis = new FileInputStream(file);
-		String xml = "";
-
-		int content;
-		while ((content = fis.read()) != -1) {
-			// convert to char and display it
-			xml += (char) content;
-		}
-		fis.close();
-
-		final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
-
-		// =============================================================================================================
-		// Unmarshalling XML to OBJECT
-		// =============================================================================================================
-
-		// Create the unmarshaller, this is the nifty little thing that will
-		// actually transform the XML back into an object
-		final Unmarshaller unmarshaller = context.createUnmarshaller();
-
-		// Unmarshal the XML in the stringWriter back into an object
-		final SolarSetup setup = (SolarSetup) unmarshaller
-				.unmarshal(new StringReader(xml));
-
-		// Print out the contents of the JavaObject we just unmarshalled from
-		// the XML
-		//JOptionPane.showMessageDialog(new JFrame(), setup.toString());
-		// JOptionPane.showMessageDialog(new JFrame(),
-		// javaObject2.getSolarSetup().getSetupDescription());
-
-		Wizard wizard = (Wizard) this.getContentPane().getComponent(0);
-		wizard.setSetup(setup);
-		
-	}
-
-	private void saveConfiguration() throws Exception {
-		JFileChooser fc = new JFileChooser();
-		fc.addChoosableFileFilter(new SSUFilter());
-		int returnVal;
-		String fileName;
-		FileOutputStream fos;
-		int nameLength;
-		int lastOccurence;
-
-		// =============================================================================================================
-		// Setup JAXB
-		// =============================================================================================================
-
-		// Create a JAXB context passing in the class of the object we want to
-		// marshal/unmarshal
-		final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
-
-		// =============================================================================================================
-		// Marshalling OBJECT to XML
-		// =============================================================================================================
-
-		// Create the marshaller, this is the nifty little thing that will
-		// actually transform the object into XML
-		final Marshaller marshaller = context.createMarshaller();
-
-		// Create a stringWriter to hold the XML
-		final StringWriter stringWriter = new StringWriter();
-
-		// Create the sample object we wish to transform into XML
-		Wizard abc = (Wizard) this.getContentPane().getComponent(0);
-		SolarSetup setup = abc.getSetup();
-
-		// Marshal the javaObject and write the XML to the stringWriter
-		marshaller.marshal(setup, stringWriter);
-
-		// Print out the contents of the stringWriter
-		// System.out.println(stringWriter.toString());
-		// JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
-
-		returnVal = fc.showDialog(new JFrame(), "Save");
-
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-			fileName = fc.getSelectedFile().getName();
-			nameLength = fileName.length();
-			lastOccurence = fileName.lastIndexOf('.');
-			
-			//JOptionPane.showMessageDialog(new JFrame(), fileName);
-			
-			//Determine whether to add .html or not
-			if(lastOccurence == -1){
-			fos = new FileOutputStream(fc.getSelectedFile()
-					+ ".ssu");
-			} else {
-				String extension = fileName.substring(lastOccurence, fileName.length());
-				
-				if (extension != null) {
-		            if (extension.compareTo(".ssu") == 0) {
-		            	fos = new FileOutputStream(fc.getSelectedFile());
-		            } else {
-		            	fos = new FileOutputStream(fc.getSelectedFile()
-		    					+ ".ssu");
-		            }
-		        } else {
-		        	fos = new FileOutputStream(fc.getSelectedFile()
-							+ ".ssu");
-		        }
-			}
-			
-
-			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
-			out.write(stringWriter.toString());
-			out.close();
-
-		}
-		
-		
-
-	}
-
 	private void menuFileExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
 		confirmExit();
 	}// GEN-LAST:event_menuFileExitActionPerformed
 
-	private void menuFileLoadConfigActionPerformed(
-			java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
-		JFileChooser fc = new JFileChooser();
-		fc.addChoosableFileFilter(new SSUFilter());
-
-		int returnVal = fc.showDialog(new JFrame(), "Attach");
-
-		File file = fc.getSelectedFile();
-
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			try {
-				loadConfiguration(file);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	private void menuFileLoadConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
+	
+		Wizard wizard = (Wizard) this.getContentPane().getComponent(0);
+		SolarSetup setup = FileService.LoadSetup();
+		
+		if(setup != null){
+			wizard.setSetup(setup);
 		}
+		
 	}// GEN-LAST:event_menuFileExitActionPerformed
 
-	private void menuFileSaveConfigActionPerformed(
-			java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
+	private void menuFileSaveConfigActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuFileExitActionPerformed
+		
+		// Create the sample object we wish to transform into XML
+		Wizard abc = (Wizard) this.getContentPane().getComponent(0);
+		SolarSetup setup = abc.getSetup();
+		
 		try {
-			saveConfiguration();
+			FileService.SaveSetup(setup);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), "An error occured while saving this file");
 		}
+		
 	}// GEN-LAST:event_menuFileExitActionPerformed
 
 	private void menuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_menuHelpAboutActionPerformed

@@ -108,12 +108,12 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSaveConfigurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveConfigurationActionPerformed
-        // TODO add your handling code here:
+    	SolarSetup setup = parent.getSetup();
+    	
     	try {
-    		saveConfiguration();
+			FileService.SaveSetup(setup);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), "An error occured while trying saving this file!");
 		}
     }//GEN-LAST:event_jButtonSaveConfigurationActionPerformed
 
@@ -125,54 +125,6 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
 			e.printStackTrace();
 		}
     }//GEN-LAST:event_jButtonGenerateReportActionPerformed
-    
-    private void saveConfiguration() throws Exception {
-		JFileChooser fc = new JFileChooser();
-		fc.addChoosableFileFilter(new SSUFilter());
-		int returnVal;
-
-		// =============================================================================================================
-		// Setup JAXB
-		// =============================================================================================================
-
-		// Create a JAXB context passing in the class of the object we want to
-		// marshal/unmarshal
-		final JAXBContext context = JAXBContext.newInstance(SolarSetup.class);
-
-		// =============================================================================================================
-		// Marshalling OBJECT to XML
-		// =============================================================================================================
-
-		// Create the marshaller, this is the nifty little thing that will
-		// actually transform the object into XML
-		final Marshaller marshaller = context.createMarshaller();
-
-		// Create a stringWriter to hold the XML
-		final StringWriter stringWriter = new StringWriter();
-
-		// Create the sample object we wish to transform into XML
-		SolarSetup setup = parent.getSetup();
-
-		// Marshal the javaObject and write the XML to the stringWriter
-		marshaller.marshal(setup, stringWriter);
-
-		// Print out the contents of the stringWriter
-		// System.out.println(stringWriter.toString());
-		// JOptionPane.showMessageDialog(new JFrame(), stringWriter.toString());
-
-		returnVal = fc.showDialog(new JFrame(), "Save");
-
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-			FileOutputStream fos = new FileOutputStream(fc.getSelectedFile()
-					+ ".ssu");
-			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
-			out.write(stringWriter.toString());
-			out.close();
-
-		}
-
-	}
 
     
     private void saveHTMLReport() throws Exception {
