@@ -392,7 +392,7 @@ public class SolarResult {
 	 * 								  being passed
 	 */
 	private void SolarSetupExceptionCheck(SolarSetup solarSetup) throws SolarResultException {
-		if (solarSetup.getInverter() == null) {
+		if (solarSetup.getInverter().toString().compareTo(new SolarInverter().toString()) == 0) {
 			throw new SolarResultException("You cannot have a null inverter");
 		}
 		if (solarSetup.getSolarPanels() == null) {

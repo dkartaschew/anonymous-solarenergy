@@ -186,7 +186,7 @@ public class CustomerDataTest {
 	
 	@Test(expected = SolarPanelException.class)
 	public void testSetAnnualTariffIncreaseNegative1() throws SolarPanelException {
-		data.setAnnualTariffIncrease(-1.00);
+		data.setAnnualTariffIncrease(-101.00);
 		assertTrue("Annual tariff increase is not set", data.getAnnualTariffIncrease().doubleValue() == testData);
 	}
 	
@@ -234,8 +234,8 @@ public class CustomerDataTest {
 	}
 	
 	@Test(expected = SolarPanelException.class)
-	public void testSetAnnualTariffIncreaseNegative() throws SolarPanelException {
-		data.setAnnualTariffIncrease(-1.00);
+	public void testSetAnnualTariffIncreaseNegativeBeyond100() throws SolarPanelException {
+		data.setAnnualTariffIncrease(-101.00);
 		assertTrue("Annual tariff increase is not set", data.getAnnualTariffIncrease().doubleValue() == testData);
 	}
 

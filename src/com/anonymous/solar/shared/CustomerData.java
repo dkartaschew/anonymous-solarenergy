@@ -277,7 +277,7 @@ public class CustomerData {
 	 * 
 	 */
 	public void setAnnualTariffIncrease(Double newAnnualTariff) throws SolarPanelException{
-		if(newAnnualTariff == null || newAnnualTariff < 0){
+		if(newAnnualTariff == null || newAnnualTariff < -100 || newAnnualTariff > 100){
 			throw new SolarPanelException();
 		}
 		annualTariffIncrease = newAnnualTariff;

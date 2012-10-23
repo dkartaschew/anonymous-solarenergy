@@ -43,7 +43,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupName() {
-		assertTrue("Default Solar Name is valid", instance.getSetupName() == null);
+		assertTrue("Default Solar Name is valid", instance.getSetupName().compareTo(" ") == 0);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupDescription() {
-		assertTrue("Default Description is valid", instance.getSetupDescription() == null);
+		assertTrue("Default Description is valid", instance.getSetupDescription().compareTo(" ") == 0);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupLength() {
-		assertTrue("Default wire length is valid", instance.getWireLength() == null);
+		assertTrue("Default wire length is valid", instance.getWireLength() == 0);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupEff() {
-		assertTrue("Default wire efficiency is valid", instance.getWireEfficiency() == null);
+		assertTrue("Default wire efficiency is valid", instance.getWireEfficiency() == 99);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupInverter() {
-		assertTrue("Default Solar Inverter is valid", instance.getInverter() == null);
+		assertTrue("Default Solar Inverter is valid", instance.getInverter().toString().compareTo(new SolarInverter().toString()) == 0);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class SolarSetupTest {
 	 */
 	@Test
 	public final void testSolarSetupLocation() {
-		assertTrue("Default Solar Panels count is valid", instance.getLocationInformation() == null);
+		assertTrue("Default Solar Panels count is valid", instance.getLocationInformation().toString() == null);
 	}
 
 	/**
