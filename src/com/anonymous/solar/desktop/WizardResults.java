@@ -234,7 +234,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 	        jSplitPaneGraphAndTable.setBottomComponent(jScrollPaneTableHolder);
 
-	        javax.swing.GroupLayout jPanelGraphHolderLayout = new javax.swing.GroupLayout(jPanelGraphHolder);
+	        /*javax.swing.GroupLayout jPanelGraphHolderLayout = new javax.swing.GroupLayout(jPanelGraphHolder);
 	        jPanelGraphHolder.setLayout(jPanelGraphHolderLayout);
 	        jPanelGraphHolderLayout.setHorizontalGroup(
 	            jPanelGraphHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +243,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	        jPanelGraphHolderLayout.setVerticalGroup(
 	            jPanelGraphHolderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGap(0, 100, Short.MAX_VALUE)
-	        );
+	        );*/
 
 	        //TODO
 	        jSplitPaneGraphAndTable.setTopComponent(jPanelGraphHolder);
@@ -334,8 +334,10 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
     private void jButonRemoveSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonRemoveSetupActionPerformed
         // TODO add your handling code here:
-    	resultList.remove(jTableComparison.getSelectedRow());
-    	updateTable();
+    	if(jTableComparison.getSelectedRow() != -1) {
+	    	resultList.remove(jTableComparison.getSelectedRow());
+	    	updateTable();
+    	}
     }//GEN-LAST:event_jButonRemoveSetupActionPerformed
 
 	private javax.swing.JPanel jPanelGraph;
@@ -409,7 +411,11 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 			jPanelGraph.add(new org.jfree.chart.ChartPanel(new ResultChart(results).getChartPanel()),
 					BorderLayout.CENTER);
 
-			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(new ComparisonChart(results).getChartPanel()));
+			//jPanelGraphHolder.setLayout(new BorderLayout());
+			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(new ComparisonChart(results).getChartPanel(),
+					500,250,100,50,600,250,true,true,true,true,true,true));//,
+					//BorderLayout.CENTER);
+			//jPanelGraphHolder.getComponent(0)
 			
 			
 			
