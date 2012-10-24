@@ -623,8 +623,8 @@ public class SolarCalculator {
 
 		// at very first month of system no changes occur to the original values
 		if (currentMonth == 0 && currentYear == 0) {
-			// newResultDetails.setInverterEfficiency(solarSetup.getInverter().getInverterEfficiency());
-			newResultDetails.setInverterEfficiency(100.00);
+			newResultDetails.setInverterEfficiency(solarSetup.getInverter().getInverterEfficiency());
+			//newResultDetails.setInverterEfficiency(100.00);
 			newResultDetails.setInverterOutput(solarSetup.getInverter().getInverterWattage());
 
 		} else {
