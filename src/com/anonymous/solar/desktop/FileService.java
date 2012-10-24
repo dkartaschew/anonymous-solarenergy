@@ -1,4 +1,5 @@
 package com.anonymous.solar.desktop;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -240,6 +241,9 @@ public class FileService {
 		FileOutputStream fos;
 		int nameLength;
 		int lastOccurence;
+		String addon = "";
+		
+		
 
 		// =============================================================================================================
 		// Setup JAXB
@@ -314,7 +318,7 @@ public class FileService {
 	 * @param reportHTML - content to save to the file
 	 * @throws Exception
 	 */
-	public static void saveHTMLReport(String reportHTML) throws Exception {
+	public static String saveHTMLReport(String reportHTML) throws Exception {
 		JFileChooser fc = new JFileChooser();
 		fc.addChoosableFileFilter(new HTMLFilter());
 		String fileName;
@@ -322,6 +326,7 @@ public class FileService {
 		int nameLength;
 		int returnVal;
 		int lastOccurence;
+		String addon = "";
 
 		//Get file
 		returnVal = fc.showDialog(new JFrame(), "Save");
@@ -339,6 +344,7 @@ public class FileService {
 			if(lastOccurence == -1){
 			fos = new FileOutputStream(fc.getSelectedFile()
 					+ ".html");
+					addon = ".html";
 			} else {
 				String extension = fileName.substring(lastOccurence, fileName.length());
 				
@@ -348,10 +354,12 @@ public class FileService {
 		            } else {
 		            	fos = new FileOutputStream(fc.getSelectedFile()
 		    					+ ".html");
+		            	addon = ".html";
 		            }
 		        } else {
 		        	fos = new FileOutputStream(fc.getSelectedFile()
 							+ ".html");
+		        	addon = ".html";
 		        }
 			}
 						
@@ -359,8 +367,13 @@ public class FileService {
 			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 			out.write(reportHTML);
 			out.close();
-
+			
+			
+			
+			
+			
 		}
 
+		return fc.getSelectedFile().getPath() + addon;
 	}
 }

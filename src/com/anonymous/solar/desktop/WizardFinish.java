@@ -4,7 +4,10 @@
  */
 package com.anonymous.solar.desktop;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -125,10 +128,14 @@ public class WizardFinish extends javax.swing.JPanel implements WizardPanel {
     		report.addContent(parent.getResults(), parent.getTimeFrame());
     		report.Finalize();
     		
-			FileService.saveHTMLReport(report.toString());
+    		String htmlFilePath = FileService.saveHTMLReport(report.toString());
+    		File htmlFile = new File(htmlFilePath);
+    		Desktop.getDesktop().browse(htmlFile.toURI());
+			Desktop.getDesktop().open(htmlFile);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(new JFrame(), "An error occured while trying to save the report! :" + e.getCause());
 		}
+    	
     }//GEN-LAST:event_jButtonGenerateReportActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

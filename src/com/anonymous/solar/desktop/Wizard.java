@@ -4,6 +4,9 @@
 package com.anonymous.solar.desktop;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,13 +90,12 @@ public class Wizard extends javax.swing.JPanel {
 		initComponents();
 		jButtonBack.setVisible(false);
 		initWizardPanels();
-		try {
-			//MarshallExample();
-			//DomXmlExample(GetTestData());
-			//LoadTestData();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
+
+		// if a web browser is the default HTML handler, this might work too
+		
+
 		
 	}
 	
