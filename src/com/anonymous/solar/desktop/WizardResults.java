@@ -416,7 +416,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	private javax.swing.JScrollPane jScrollPaneHardware;
 	private javax.swing.JTable jTableHardware;
 	
-	protected ArrayList<SolarResult> resultList = new ArrayList<SolarResult>();
+	protected ArrayList<SolarResult> resultList;
 
 
     private javax.swing.JTable jTableComparison;
@@ -433,7 +433,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 	public boolean callbackStart() {
 		SolarSetup global = parent.getSetup();
 		SolarResult results = parent.getResults();
-		
+		resultList = new ArrayList<SolarResult>();
 		
 		
 		String output = "";
