@@ -308,6 +308,24 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		
 		if(setup != null){
 			resultList.add(resultToAdd);
+			//comparisonChart.addDataset(resultToAdd);
+			
+			jPanelGraphHolder.removeAll();
+			jPanelGraphHolder.revalidate();
+			
+			comparisonChart = new ComparisonChart(resultToAdd);
+			for(SolarResult result:resultList) {
+				if(result != resultToAdd) {
+					comparisonChart.addDataset(result);
+				}
+			}
+			
+			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(comparisonChart.getChartPanel(),
+					500,250,100,50,600,250,true,true,true,true,true,true));
+			
+			jPanelGraphHolder.repaint();
+			//jPanelGraphHolder.revalidate();
+			
 			updateTable();
 		}
     }//GEN-LAST:event_jButonAddNewSetup1ActionPerformed
@@ -335,8 +353,35 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     private void jButonRemoveSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButonRemoveSetupActionPerformed
         // TODO add your handling code here:
     	if(jTableComparison.getSelectedRow() != -1) {
+    		
+    		comparisonChart.removeDataset((String) jTableComparison.getValueAt(jTableComparison.getSelectedRow(), 0));
 	    	resultList.remove(jTableComparison.getSelectedRow());
+	    	
+	    	//
+	    	jPanelGraphHolder.removeAll();
+			jPanelGraphHolder.revalidate();
+			
+			
+			boolean first = true;
+			for(SolarResult result:resultList) {
+				if(first){
+					comparisonChart = new ComparisonChart(result);
+					first = false;
+				}else{
+					comparisonChart.addDataset(result);
+				}
+			}
+			//comparisonChart.removeDataset((String)jTableComparison.getValueAt(jTableComparison.getSelectedRow(), 0));
+			
+			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(comparisonChart.getChartPanel(),
+					500,250,100,50,600,250,true,true,true,true,true,true));
+			
+			jPanelGraphHolder.repaint();
+	    	//	    	
+	    	
 	    	updateTable();
+	    	
+	    	
     	}
     }//GEN-LAST:event_jButonRemoveSetupActionPerformed
 
@@ -355,6 +400,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
     private javax.swing.JPanel jPanelComparison;
     
     private javax.swing.JPanel jPanelGraphHolder;
+    private ComparisonChart	comparisonChart;
     
     private javax.swing.JScrollPane jScrollPaneOuter;
     private javax.swing.JScrollPane jScrollPaneTableHolder;
@@ -388,6 +434,8 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 		SolarSetup global = parent.getSetup();
 		SolarResult results = parent.getResults();
 		
+		
+		
 		String output = "";
 		String output2 = "";
 		if (results == null 
@@ -412,8 +460,7 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 					BorderLayout.CENTER);
 
 			//jPanelGraphHolder.setLayout(new BorderLayout());
-			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(new ComparisonChart(results).getChartPanel(),
-					500,250,100,50,600,250,true,true,true,true,true,true));//,
+			//,
 					//BorderLayout.CENTER);
 			//jPanelGraphHolder.getComponent(0)
 			
@@ -467,6 +514,18 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 			jTextAreaConfirmationDetails.setText(output2);
 
+			try {
+			comparisonChart = new ComparisonChart(results);
+	
+			resultList.add(results);
+
+			//comparisonChart.addDataset(results);
+			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(comparisonChart.getChartPanel(),
+					500,250,100,50,600,250,true,true,true,true,true,true));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(results.getResultsDetailsList().size());
+			}
 		
 		return true;
 	}
