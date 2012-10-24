@@ -606,6 +606,26 @@ public class Wizard extends javax.swing.JPanel {
 	public Integer getTimeFrame(){
 		return timeFrame;
 	}
+	
+	
+	public void loadSetup(SolarSetup setup){
+		int index = 0;
+		
+		this.setup = setup;
+		
+		for(JPanel panel:panels){
+			setWizardPanel(index);
+			setSideBarButton(index);
+			wizardIndex = index;
+			index++;
+			
+		}
+		
+		setWizardPanel(index - 3);
+		wizardIndex = index - 3;
+		
+		
+	}
 
 
 }

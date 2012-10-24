@@ -170,7 +170,7 @@ public class SolarApplication extends javax.swing.JFrame {
 		SolarSetup setup = FileService.LoadSetup();
 		
 		if(setup != null){
-			wizard.setSetup(setup);
+			wizard.loadSetup(setup);
 		}
 		
 	}// GEN-LAST:event_menuFileExitActionPerformed
