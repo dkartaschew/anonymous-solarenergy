@@ -26,13 +26,20 @@ public class ComparisonChart{
 	
 	private SolarResult solarResult;
 	private JFreeChart resultChart;
+	private ArrayList<SolarResult> resultsStored;
 	private XYSeriesCollection resultDataset;
 	
 	private ArrayList<XYSeries> dataSeriesList;
 	
+	/*public ComparisonChart() {
+		solarResult = new SolarResult();
+		dataSeriesList = new ArrayList<XYSeries>();
+	}*/
+	
 	public ComparisonChart(SolarResult solResult) {
 		this.solarResult = solResult;
 		dataSeriesList = new ArrayList<XYSeries>();
+		resultsStored = new ArrayList<SolarResult>();
 		
 		addDataset(solResult);
 	}
@@ -63,6 +70,7 @@ public class ComparisonChart{
 	 * @param resultToAdd the SolarResult object to add
 	 */
 	public void addDataset(SolarResult resultToAdd) {	
+		resultsStored.add(resultToAdd);
 		updateDataset(resultToAdd);
 		
 		createDataSet();
@@ -103,9 +111,16 @@ public class ComparisonChart{
 	 * 
 	 * @param index The index of the dataset to remove
 	 */
-	public void removeDataset(int index) {
-		dataSeriesList.remove(index);
+	public void removeDataset(String nameOfSetup) {
+		int indexOfObject = 0;
+		for (int i = 0; i < resultsStored.size(); i++) {
+			if ((resultsStored.get(i).getSolarSetup().getSetupName().compareTo(nameOfSetup)) == 0) {
+				indexOfObject = i;
+			}
+		}
 		
+		dataSeriesList.remove(indexOfObject);
+		resultsStored.remove(indexOfObject);
 		createDataSet();
 	}
 	
