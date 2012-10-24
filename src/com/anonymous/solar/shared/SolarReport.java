@@ -12,17 +12,17 @@ public class SolarReport {
 	
 	public SolarReport(){
 		//Add starting elements from <body> -> content div
-		reportHTML = "<body onload=\"\" " +  getBodyCSS() + ">\n";
-		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">\n";
-		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >\n";
+		reportHTML = "<body onload=\"\" " +  getBodyCSS() + ">";
+		reportHTML += "<div id=\"wrapper\" " + getWrapperCSS() + ">";
+		reportHTML += "<div id=\"head\" " + getHeadCSS() + " >";
 		
 		reportHTML += "<img border=\"0\" src=\"http://us.123rf.com/400wm/400/400/coliap/coliap1110"
 				   + "/coliap111001390/10959841-solar-energy-panel-with-sun-and-leaves-alternative"
 				   +"-energy-icon.jpg\" alt=\"Leaf\" width=\"100\" height=\"100\">";
-		reportHTML += "ANONYMOUS SOLAR ENERGY REPORT\n";
-		reportHTML += "<button onclick=\"load()\" style=\"float:right\">Print</button></div>\n";
+		reportHTML += "ANONYMOUS SOLAR ENERGY REPORT";
+		reportHTML += "<button onclick=\"load()\" style=\"float:right\">Print</button></div>";
 		
-		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >\n";
+		reportHTML += "<div id=\"pageBody\" " + getPageBodyCSS() + " >";
 	}
 	
 	
@@ -37,18 +37,18 @@ public class SolarReport {
 		
 		String header = "";
 		
-		header +="<head>\n";
+		header +="<head>";
 		//additional head stuff
-		header += "<script>\n";
-		header += "\tfunction load()\n";
-		header += "\t{\n";
-		//header += "\tprint();\n";
+		header += "<script>";
+		header += "\tfunction load()";
+		header += "\t{";
+		//header += "\tprint();";
 		
-		header += "\tprint();\n";
+		header += "\tprint();";
 		
-		header += "\t}\n";
-		header += "</script>\n";
-		header += "</head>\n";
+		header += "\t}";
+		header += "</script>";
+		header += "</head>";
 		
 		reportHTML = header + reportHTML;
 	}
@@ -59,12 +59,12 @@ public class SolarReport {
 	private void addFooter(){
 		
 		String footer = "";
-		footer += "</div>\n";
-		footer += "</div>\n";
-		footer += "<div id=\"footer\" " + getFooterCSS() + ">\n"; 
+		footer += "</div>";
+		footer += "</div>";
+		footer += "<div id=\"footer\" " + getFooterCSS() + ">"; 
 		
 		footer += "This is an Anonymous Solar Energy Report ";
-		footer += "</div>\n</body>\n";
+		footer += "</div></body>";
 		
 		reportHTML = reportHTML + footer;
 	}
@@ -81,10 +81,10 @@ public class SolarReport {
 		addHeader();
 		addFooter();
 
-		String htmlStart = "<!DOCTYPE html>\n";
-		htmlStart += "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
+		String htmlStart = "<!DOCTYPE html>";
+		htmlStart += "<html>";
 		
-		reportHTML = htmlStart + reportHTML + "</html>\n";
+		reportHTML = htmlStart + reportHTML + "</html>";
 		finalized = true;	
 		
 		
@@ -106,7 +106,7 @@ public class SolarReport {
 			throw new SolarReportException("Error: Report Finalized");
 		}
 		
-		reportHTML += input + "\n";
+		reportHTML += input + "";
 		
 	}
 	
@@ -116,10 +116,10 @@ public class SolarReport {
 	 * @param content - add content that relates to the title (to right of title, float left)
 	 * @throws SolarReportException
 	 */
-	public void addContent(String title, String content) throws SolarReportException{
+	private void addContent(String title, String content) throws SolarReportException{
 		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
 		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
-		addContent("<br />\n<br />\n");
+		addContent("<br /><br />");
 	}
 	
 	/**
@@ -128,22 +128,10 @@ public class SolarReport {
 	 * @param content - numeric double content to add to report (to right of title, float left)
 	 * @throws SolarReportException
 	 */
-	public void addContent(String title, Double content) throws SolarReportException{
+	private void addContent(String title, Double content) throws SolarReportException{
 		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
 		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
-		addContent("<br />\n<br />\n");
-	}
-	
-	/**
-	 * Add a simple title and title-detail to the report, where the title-detail is a double
-	 * @param title - title of the page (left)
-	 * @param content - numeric integer content to add to report (to right of title, float left)
-	 * @throws SolarReportException
-	 */
-	public void addContent(String title, Integer content) throws SolarReportException{
-		addContent("<span style=\"float:left; width:200px;padding:5px;clear:left;margin:2px;\">" + title + "</span>");
-		addContent("<span style=\"float:left; width:700px;padding:5px;margin:2px;\">" + content + "</span>");
-		addContent("<br />\n<br />\n");
+		addContent("<br /><br />");
 	}
 	
 	/**
@@ -175,16 +163,16 @@ public class SolarReport {
 		addContent("<h4 style=\"clear:left\">Yearly Savings</h4>");
 		addContent("<table style=\"margin-top: 1em;clear: both;width:40%;color:Black;\">");
 
-		addContent("<tr>\n" 
-				+ "<th>Year</th>\n" 
-				+ "<th>Savings</th>\n" 
-				+ "</tr>\n");
+		addContent("<tr>" 
+				+ "<th>Year</th>" 
+				+ "<th>Savings</th>" 
+				+ "</tr>");
 		
 		for(int i = 1; i <= timeFrame; i++){
-			addContent("<tr>\n" 
-					+ "<td>Year " + i + "</td>\n"
-					+ "<td>" + String.format("$%,.2f", result.getYearlySavings(i)) + "</td>\n"
-					+ "</tr>\n");
+			addContent("<tr>" 
+					+ "<td>Year " + i + "</td>"
+					+ "<td>" + String.format("$%,.2f", result.getYearlySavings(i)) + "</td>"
+					+ "</tr>");
 		}
 
 		addContent(table + "</table>");
@@ -197,7 +185,7 @@ public class SolarReport {
 	 * @param setup - the solar result to add
 	 * @throws SolarReportException
 	 */
-	public void addContent(SolarSetup setup) throws SolarReportException{	
+	private void addContent(SolarSetup setup) throws SolarReportException{	
 		
 		//Title Details
 		addContent("<div style=\"background-color:#CFF\">");
@@ -225,7 +213,7 @@ public class SolarReport {
 
 	}
 	
-	public void addContent(LocationData location) throws SolarReportException{
+	private void addContent(LocationData location) throws SolarReportException{
 		
 		addContent("<b>Location: </b>", location.getLocationName());
 		addContent("<b>Longitude: </b>", location.getLongitude());
@@ -237,7 +225,7 @@ public class SolarReport {
 	 * @param panels
 	 * @throws SolarReportException
 	 */
-	public void addContent(ArrayList<SolarPanels> panels) throws SolarReportException{
+	private void addContent(ArrayList<SolarPanels> panels) throws SolarReportException{
 		//Table heading
 		addContent("<table cellspacing=\"0\" " + getTableCSS() + ">" 
 		+ "<tr>"
@@ -278,7 +266,7 @@ public class SolarReport {
 	 * @param inverter - inverter to add into the report
 	 * @throws SolarReportException
 	 */
-	public void addContent(SolarInverter inverter) throws SolarReportException{
+	private void addContent(SolarInverter inverter) throws SolarReportException{
 		//Table heading
 		addContent("<table cellspacing=\"0\" " + getTableCSS() + ">" 
 		+ "<tr>"
@@ -307,7 +295,7 @@ public class SolarReport {
 	 * @param details - Customer details to add to report
 	 * @throws SolarReportException
 	 */
-	public void addContent(CustomerData details) throws SolarReportException{
+	private void addContent(CustomerData details) throws SolarReportException{
 		//Table heading
 		addContent("<table cellspacing=\"0\" " + getTableCSS() + " >" 
 		+ "<tr>"
@@ -343,9 +331,6 @@ public class SolarReport {
 		return reportHTML;
 	}
 	
-	public void addContent(){
-		
-	}
 	
 	
 	
