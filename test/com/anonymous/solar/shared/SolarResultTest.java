@@ -32,6 +32,9 @@ public class SolarResultTest {
 		resultInstance = new SolarResult(setupInstance);
 	}
 	
+	/*
+	 * Tests exception is thrown when inverter is null
+	 */
 	@Test(expected = SolarResultException.class)
 	public void nullInverter() throws SolarResultException, SolarSetupException  {
 		setupInstance = new SolarSetup();
@@ -47,6 +50,10 @@ public class SolarResultTest {
 		setupInstance = new SolarSetup();
 		setupInstance.setInverter(testInverter);
 		resultInstance = new SolarResult(setupInstance);
+	}
+	
+	public void getSolarSetupTest() throws SolarResultException {
+		
 	}
 
 }

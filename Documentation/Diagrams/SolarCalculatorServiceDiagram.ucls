@@ -1,0 +1,208 @@
+<class-diagram version="1.0.10" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" 
+    name="com.anonymous.solar.desktop.WizardResults.MyTableCellRenderer" project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/desktop/WizardResults.java" binary="false">    
+    <position height="51" width="184" x="15" y="-384"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.desktop.WizardResults" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/desktop/WizardResults.java" 
+    binary="false">    
+    <position height="51" width="224" x="228" y="-351"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" 
+    name="com.anonymous.solar.desktop.WizardResults.HardwareTableCellRenderer" project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/desktop/WizardResults.java" binary="false">    
+    <position height="51" width="201" x="4" y="-313"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.shared.SolarSetup" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/shared/SolarSetup.java" 
+    binary="false">    
+    <position height="51" width="180" x="502" y="-358"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.shared.SolarResult" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/shared/SolarResult.java" 
+    binary="false">    
+    <position height="51" width="280" x="157" y="-215"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.shared.ResultsDetails" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/shared/ResultsDetails.java" 
+    binary="false">    
+    <position height="51" width="153" x="492" y="-254"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.client.LocationObjectFactory" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/client/LocationObjectFactory.java" binary="false">    
+    <position height="51" width="321" x="415" y="-71"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.client.SolarCalculator" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/client/SolarCalculator.java" 
+    binary="false">    
+    <position height="51" width="195" x="2" y="-128"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.client.SolarCalculatorService" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/client/SolarCalculatorService.java" binary="false">    
+    <position height="51" width="177" x="115" y="-41"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.server.SolarCalculator" 
+    project="anonymous-solarenergy" file="/anonymous-solarenergy/src/com/anonymous/solar/server/SolarCalculator.java" 
+    binary="false">    
+    <position height="52" width="244" x="27" y="85"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" corner="BOTTOM_RIGHT" language="java" 
+    name="com.anonymous.solar.server.SolarCalculatorSOAPServerServlet" project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/server/SolarCalculatorSOAPServerServlet.java" binary="false">    
+    <position height="51" width="286" x="522" y="135"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.server.SolarCalculatorSOAPHandler" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/server/SolarCalculatorSOAPHandler.java" binary="false">    
+    <position height="51" width="364" x="309" y="24"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.server.SolarCalculatorAdapter" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/server/SolarCalculatorAdapter.java" binary="false">    
+    <position height="51" width="224" x="260" y="184"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.client.CalculateAllResults" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/client/CalculateAllResults.java" binary="false">    
+    <position height="52" width="147" x="675" y="-235"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="15" corner="BOTTOM_RIGHT" language="java" name="com.anonymous.solar.client.CalculateAllResultsResponse" 
+    project="anonymous-solarenergy" 
+    file="/anonymous-solarenergy/src/com/anonymous/solar/client/CalculateAllResultsResponse.java" binary="false">    
+    <position height="51" width="191" x="527" y="-170"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <nesting id="16">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </nesting>  
+  <association id="17">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="18" name="solarCalculatorAdapter"/>      
+      <multiplicity id="19" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="20">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <association id="21">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="22" name="solarSetup"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="25" name="solarCalculator"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="28" name="_return"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="31" name="arg0"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="34" name="resultDetailsList"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="37" name="soapHandler"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
