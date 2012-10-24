@@ -200,55 +200,104 @@ public class ResultsDetails {
 	}
 
 	/**
-	 * This method sets the income(savings generated) by the system
+	 * This method returns the income by the system
 	 * for the month
 	 * 
-	 * @return - a double that represents the income for 
+	 * @return - a double that represents the income for the month
 	 */
 	public double getIncome() {
 		return income;
 	}
 
 	/**
+	 * This method sets the income for the system for the month
 	 * 
-	 * @param newIncome
+	 * @param newIncome - represents the new income for the month
 	 */
 	public void setIncome(double newIncome) {
 		income = newIncome;
 	}
 
+	/**
+	 * This method returns the return on investemnt so far for the solar system
+	 * 
+	 * @return - a double that represents the return on investment for the system so far
+	 */
 	public double getROI() {
 		return ROI;
 	}
 
+	/**
+	 * This method sets the return on investment for the solar system so far
+	 * 
+	 * @param newROI - represents the new return on investment for the month
+	 */
 	public void setROI(double newROI) {
 		ROI = newROI;
 	}
 
+	/**
+	 * This method returns the daylight hours for the month
+	 * 
+	 * @return - a double that represents the total daylight hours of the month
+	 */
 	public double getDaylightHours() {
 		return daylightHours;
 	}
 
+	/**
+	 * This method sets the daylight hours for the month
+	 * 
+	 * @param newDaylightHours - represents the new daylight hours for the month
+	 */
 	public void setDaylightHours(double newDaylightHours) {
 		daylightHours = newDaylightHours;
 	}
 	
+	/**
+	 * This method returns whether the inverter has been replaced this month
+	 * 
+	 * @return a boolean representing if the inverter has been replaced this month
+	 */
 	public boolean getInverterReplaced() {
 		return inverterReplaced;
 	}
 	
+	/**
+	 * This method sets whether the inverter has been replaced this month or not
+	 * 
+	 * @param isInverterReplaced - represents if the inverter has been replaced
+	 */
 	public void setInverterReplaced(boolean isInverterReplaced) {
 		inverterReplaced = isInverterReplaced;
 	}
 	
+	/**
+	 * This method returns the solar panel banks that needed to be replaced
+	 * this month.
+	 * 
+	 * @return - an ArrayList<SolarPanels> representing the banks that were replaced
+	 * 			 this month
+	 */
 	public ArrayList<SolarPanels> getBanksReplaced() {
 		return (ArrayList<SolarPanels>)banksReplaced;
 	}
 	
+	/**
+	 * This method sets the solar panel banks that have been replaced this month.
+	 * 
+	 * @param newBanksReplaced - represents the banks that were replaced this month
+	 */
 	public void setBanksReplaced(ArrayList<SolarPanels> newBanksReplaced) {
 		banksReplaced = newBanksReplaced;
 	}
 	
+	/**
+	 * This method returns whether banks have been replaced this month
+	 * 
+	 * @return - a boolean representing if any solar panel banks have been
+	 * 			 replaced this month
+	 */
 	public boolean isBanksReplaced() {
 		if (banksReplaced.size() > 0) {
 			return true;
@@ -257,10 +306,20 @@ public class ResultsDetails {
 		return false;
 	}
 
+	/**
+	 * This method returns a double representing the expected utility bill for the month
+	 * 
+	 * @return - a double that represents the expected utility bill for the month
+	 */
 	public Double getExpectedUtilityBill() {
 		return expectedUtilityBill;
 	}
 
+	/**
+	 * This method sets the expected utility bill for the month
+	 * 
+	 * @param expectedUtilityBill - represents the expected utility bill for the month
+	 */
 	public void setExpectedUtilityBill(Double expectedUtilityBill) {
 		this.expectedUtilityBill = expectedUtilityBill;
 	}
