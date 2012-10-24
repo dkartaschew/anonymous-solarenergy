@@ -516,10 +516,19 @@ public class WizardResults extends javax.swing.JPanel implements WizardPanel {
 
 			try {
 			comparisonChart = new ComparisonChart(results);
-	
-			resultList.add(results);
+			for(SolarResult result: resultList){
+				if(result != results){
+					comparisonChart.addDataset(result);
+				}
+			}
+			//resultList.clear();
+			if(resultList.isEmpty()){
+				resultList.add(results);
+				updateTable();
+			}
 
 			//comparisonChart.addDataset(results);
+			jPanelGraphHolder.removeAll();
 			jPanelGraphHolder.add(new org.jfree.chart.ChartPanel(comparisonChart.getChartPanel(),
 					500,250,100,50,600,250,true,true,true,true,true,true));
 			} catch (Exception e) {
