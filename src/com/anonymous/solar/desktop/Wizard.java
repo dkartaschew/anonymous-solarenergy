@@ -622,8 +622,9 @@ public class Wizard extends javax.swing.JPanel {
 		}
 		
 		setWizardPanel(index - 3);
+		setSideBarButton(index - 3);
 		wizardIndex = index - 3;
-		
+		jButtonBack.setVisible(true);
 		
 	}
 
